@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #0f172a;
+  background: #f7f7fb;
+}
+
+body {
+  background: radial-gradient(circle at 10% 20%, #fff2e5, #f7f7fb 35%),
+    radial-gradient(circle at 90% 10%, #fef3f5, #f7f7fb 30%),
+    radial-gradient(circle at 50% 80%, #eef6ff, #f7f7fb 30%);
+  min-height: 100vh;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
