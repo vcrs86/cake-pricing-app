@@ -403,7 +403,7 @@ highlightNote: "This value is calculated from costs, labor time, and selected ma
       locked: "Locked — not part of today’s calculation",
     },
     formHelper: "Update any field and press Calculate price to lock in the numbers.",
-    languageToggle: {
+        languageToggle: {
       label: "Language",
     },
   },
