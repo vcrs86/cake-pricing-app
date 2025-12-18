@@ -27,12 +27,7 @@ const DEFAULT_STATE: CalculatorFormState = {
   figures3d: "0",
 };
 
-const DEFAULT_INGREDIENTS: Ingredient[] = [
-  buildIngredient({ id: "flour", name: "Harina todo uso", unit: "g", packageSize: 1000, packageCost: 3.8 }),
-  buildIngredient({ id: "sugar", name: "Azúcar", unit: "g", packageSize: 1000, packageCost: 2.6 }),
-  buildIngredient({ id: "butter", name: "Mantequilla", unit: "g", packageSize: 454, packageCost: 4.5 }),
-  buildIngredient({ id: "eggs", name: "Huevos", unit: "unit", packageSize: 12, packageCost: 4.2 }),
-];
+const DEFAULT_INGREDIENTS: Ingredient[] = [];
 
 export default function HomePage() {
   const { copy, language, setLanguage } = useLanguage();
@@ -40,10 +35,7 @@ export default function HomePage() {
   const [values, setValues] = useState<CalculatorFormState>(DEFAULT_STATE);
   const [hasCalculated, setHasCalculated] = useState<boolean>(false);
   const [ingredients, setIngredients] = useState<Ingredient[]>(DEFAULT_INGREDIENTS);
-  const [recipeLines, setRecipeLines] = useState<RecipeLineInput[]>([
-    { id: "line-1", ingredientId: DEFAULT_INGREDIENTS[0].id, quantity: "300" },
-    { id: "line-2", ingredientId: DEFAULT_INGREDIENTS[2].id, quantity: "200" },
-  ]);
+  const [recipeLines, setRecipeLines] = useState<RecipeLineInput[]>([]);
 
   const selectedSize = useMemo(
     () => CAKE_SIZES.find((size) => size.id === values.cakeSize) ?? CAKE_SIZES[0],
