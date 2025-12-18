@@ -48,60 +48,53 @@ const hasAnyCost = pricing.baseCost > 0;
         </div>
       </div>
 
-      <div className="space-y-2">
-  {pricing.ingredientsCost > 0 ? (
-    <Row
-      label={copy.resultCard.rows.ingredients}
-      value={`$${pricing.ingredientsCost.toFixed(2)}`}
-    />
-  ) : null}
+      {hasAnyCost ? (
+  <div className="space-y-2">
+    {hasIngredients ? (
+      <Row
+        label={copy.resultCard.rows.ingredients}
+        value={`$${pricing.ingredientsCost.toFixed(2)}`}
+      />
+    ) : null}
 
-  {pricing.decorationAndLabor > 0 ? (
     <Row
       label={`${copy.resultCard.rows.decoration} (x${pricing.complexityMultiplier.toFixed(2)})`}
       value={`$${pricing.decorationAndLabor.toFixed(2)}`}
     />
-  ) : null}
 
-  {pricing.laborCost > 0 ? (
     <Row
       label={copy.resultCard.rows.laborOnly}
       value={`$${pricing.laborCost.toFixed(2)}`}
     />
-  ) : null}
 
-  {pricing.extrasCost + pricing.deliveryFee > 0 ? (
     <Row
       label={copy.resultCard.rows.extrasDelivery}
       value={`$${(pricing.extrasCost + pricing.deliveryFee).toFixed(2)}`}
     />
-  ) : null}
 
-  {pricing.baseCost > 0 ? (
     <Row
       label={copy.resultCard.rows.baseCost}
       value={`$${pricing.baseCost.toFixed(2)}`}
     />
-  ) : null}
 
-  {pricing.profitAmount > 0 ? (
     <Row
       label={copy.resultCard.rows.profit}
       value={`$${pricing.profitAmount.toFixed(2)}`}
     />
-  ) : null}
 
-  {(pricing.suggestedMinimum > 0 || pricing.recommendedPrice > 0) ? (
-    <>
-      <hr className="my-3 border-dashed" />
-      <Row
-        label={copy.resultCard.rows.suggested}
-        value={`$${pricing.suggestedMinimum.toFixed(2)}`}
-      />
-      <Row
-        label={copy.resultCard.rows.recommended}
-        value={`$${pricing.recommendedPrice.toFixed(2)}`}
-      />
+    <hr className="my-3 border-dashed" />
+
+    <Row
+      label={copy.resultCard.rows.suggested}
+      value={`$${pricing.suggestedMinimum.toFixed(2)}`}
+    />
+
+    <Row
+      label={copy.resultCard.rows.recommended}
+      value={`$${pricing.recommendedPrice.toFixed(2)}`}
+    />
+  </div>
+) : null}
     </>
   ) : null}
 
