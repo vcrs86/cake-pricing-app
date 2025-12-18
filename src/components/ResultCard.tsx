@@ -16,7 +16,8 @@ export function ResultCard({
   servings?: number;
 }) {
   const { copy } = useLanguage();
-
+const hasIngredients = pricing.ingredientsCost > 0;
+const hasAnyCost = pricing.baseCost > 0;
   return (
     <section className="rounded-2xl bg-white/90 p-5 shadow-card ring-1 ring-brand-cream backdrop-blur sm:p-6">
       <div className="mb-5 flex items-center justify-between gap-3">
