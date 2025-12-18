@@ -3,14 +3,15 @@
 @tailwind utilities;
 
 :root {
-  color: #0f172a;
-  background: #fdf5ed;
+  color: #1f2933;
+  background: #fbf7f3;
 }
 
 body {
-  background: radial-gradient(circle at 12% 18%, #ffe9d6, #fdf5ed 36%),
-    radial-gradient(circle at 88% 12%, #ffe8ec, #fdf5ed 34%),
-    radial-gradient(circle at 55% 78%, #f7f2ff, #fdf5ed 32%);
+  background:
+    radial-gradient(circle at 15% 20%, #fdeee2 0%, #fbf7f3 38%),
+    radial-gradient(circle at 85% 15%, #fde6ec 0%, #fbf7f3 36%),
+    radial-gradient(circle at 60% 80%, #f3f0fb 0%, #fbf7f3 40%);
   min-height: 100vh;
 }
 
