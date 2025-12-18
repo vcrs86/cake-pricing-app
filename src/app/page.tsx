@@ -8,6 +8,7 @@ import { ProFeatures } from "@/components/ProFeatures";
 import { CAKE_SIZES, calculatePricing } from "@/lib/pricing";
 import { useMemo, useState } from "react";
 import { buildIngredient, calculateRecipeCost, type Ingredient, type RecipeLine } from "@/lib/ingredients";
+import { useLanguage } from "@/lib/i18n";
 
 const DEFAULT_STATE: CalculatorFormState = {
   cakeSize: CAKE_SIZES[1].id,
@@ -27,13 +28,14 @@ const DEFAULT_STATE: CalculatorFormState = {
 };
 
 const DEFAULT_INGREDIENTS: Ingredient[] = [
-  buildIngredient({ id: "flour", name: "All-purpose flour", unit: "g", packageSize: 1000, packageCost: 3.8 }),
-  buildIngredient({ id: "sugar", name: "Caster sugar", unit: "g", packageSize: 1000, packageCost: 2.6 }),
-  buildIngredient({ id: "butter", name: "Unsalted butter", unit: "g", packageSize: 454, packageCost: 4.5 }),
-  buildIngredient({ id: "eggs", name: "Eggs", unit: "unit", packageSize: 12, packageCost: 4.2 }),
+  buildIngredient({ id: "flour", name: "Harina todo uso", unit: "g", packageSize: 1000, packageCost: 3.8 }),
+  buildIngredient({ id: "sugar", name: "Azúcar", unit: "g", packageSize: 1000, packageCost: 2.6 }),
+  buildIngredient({ id: "butter", name: "Mantequilla", unit: "g", packageSize: 454, packageCost: 4.5 }),
+  buildIngredient({ id: "eggs", name: "Huevos", unit: "unit", packageSize: 12, packageCost: 4.2 }),
 ];
 
 export default function HomePage() {
+  const { copy, language, setLanguage } = useLanguage();
   const [mode, setMode] = useState<"basic" | "advanced">("basic");
   const [values, setValues] = useState<CalculatorFormState>(DEFAULT_STATE);
   const [hasCalculated, setHasCalculated] = useState<boolean>(false);
@@ -184,26 +186,45 @@ export default function HomePage() {
       <section className="rounded-3xl bg-gradient-to-br from-brand-cream via-white to-brand-peach/30 p-7 shadow-card ring-1 ring-slate-100 backdrop-blur sm:p-10">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
           <div className="space-y-3">
-            <p className="text-xs uppercase tracking-wide text-slate-500">MVP, made for decorators</p>
-            <h1 className="text-3xl font-black text-brand-slate sm:text-4xl">Cake Pricing Calculator</h1>
+            <p className="text-xs uppercase tracking-wide text-slate-500">{copy.general.tagline}</p>
+            <h1 className="text-3xl font-black text-brand-slate sm:text-4xl">{copy.general.appTitle}</h1>
             <p className="max-w-2xl text-sm leading-relaxed text-slate-600">
-              Switch between a quick Basic quote and an ingredient-level Advanced view. Pricing logic lives in
-              <code className="mx-1 rounded bg-slate-100 px-1">src/lib/pricing.ts</code> and ingredient math in
-              <code className="mx-1 rounded bg-slate-100 px-1">src/lib/ingredients.ts</code> so you can tweak formulas easily.
+              {copy.general.tagline}{" "}
+              <code className="mx-1 rounded bg-slate-100 px-1">src/lib/pricing.ts</code>{" "}
+              <code className="mx-1 rounded bg-slate-100 px-1">src/lib/ingredients.ts</code>.
             </p>
           </div>
-          <div className="flex items-center gap-3 self-start rounded-full bg-brand-peach/50 px-4 py-2 text-xs font-semibold text-brand-slate shadow-sm ring-1 ring-white/60">
-            📱 Mobile friendly
+          <div className="flex flex-col items-end gap-3 self-start">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-slate-600 ring-1 ring-brand-peach/60">
+              <span>{copy.languageToggle.label}</span>
+              <button
+                type="button"
+                onClick={() => setLanguage("es")}
+                className={`rounded-full px-2 py-1 text-xs font-bold ${language === "es" ? "bg-brand-rose text-brand-slate shadow" : "hover:bg-slate-100"}`}
+              >
+                ES
+              </button>
+              <button
+                type="button"
+                onClick={() => setLanguage("en")}
+                className={`rounded-full px-2 py-1 text-xs font-bold ${language === "en" ? "bg-brand-rose text-brand-slate shadow" : "hover:bg-slate-100"}`}
+              >
+                EN
+              </button>
+            </div>
+            <div className="flex items-center gap-3 self-start rounded-full bg-brand-peach/50 px-4 py-2 text-xs font-semibold text-brand-slate shadow-sm ring-1 ring-white/60">
+              📱 {copy.general.mobileFriendly}
+            </div>
           </div>
         </div>
       </section>
 
       <section className="rounded-3xl border border-slate-100 bg-gradient-to-r from-brand-cream via-white to-brand-peach/30 p-6 shadow-card backdrop-blur sm:flex sm:items-center sm:justify-between sm:p-7">
         <div className="space-y-2">
-          <p className="text-xs uppercase tracking-wide text-slate-500">Download</p>
-          <h2 className="text-lg font-bold text-brand-slate">Grab the full project as a ZIP</h2>
+          <p className="text-xs uppercase tracking-wide text-slate-500">{copy.download.label}</p>
+          <h2 className="text-lg font-bold text-brand-slate">{copy.download.title}</h2>
           <p className="max-w-3xl text-sm leading-relaxed text-slate-600">
-            Use this button to download <code className="rounded bg-slate-100 px-1">cake-pricing-app.zip</code> directly—no terminal commands needed. It includes all source files, configs, and assets so you can run it locally or deploy to Vercel.
+            {copy.download.description}
           </p>
         </div>
         <a
@@ -211,17 +232,16 @@ export default function HomePage() {
           href="/cake-pricing-app.zip"
           download
         >
-          ⬇️ Download project ZIP
+          {copy.download.button}
         </a>
       </section>
 
       <section className="rounded-3xl border border-slate-100 bg-white/80 p-6 shadow-card backdrop-blur sm:flex sm:items-center sm:justify-between sm:p-7">
         <div className="space-y-2">
-          <p className="text-xs uppercase tracking-wide text-slate-500">Choose your view</p>
-          <h2 className="text-lg font-bold text-brand-slate">Basic or Advanced mode</h2>
+          <p className="text-xs uppercase tracking-wide text-slate-500">{copy.modes.label}</p>
+          <h2 className="text-lg font-bold text-brand-slate">{copy.modes.title}</h2>
           <p className="max-w-3xl text-sm leading-relaxed text-slate-600">
-            Basic is perfect for quick quotes with a single ingredient total. Advanced unlocks ingredient-by-quantity pricing,
-            extras, delivery, and setup while keeping PRO features visible but locked.
+            {copy.modes.description}
           </p>
         </div>
         <div className="mt-4 inline-flex rounded-full border border-slate-200 bg-white p-1 text-sm font-semibold text-brand-slate shadow-sm sm:mt-0">
@@ -232,7 +252,7 @@ export default function HomePage() {
             }`}
             onClick={() => handleModeChange("basic")}
           >
-            Basic (calm)
+            {copy.modes.basic}
           </button>
           <button
             type="button"
@@ -241,7 +261,7 @@ export default function HomePage() {
             }`}
             onClick={() => handleModeChange("advanced")}
           >
-            Advanced (detailed)
+            {copy.modes.advanced}
           </button>
         </div>
       </section>
@@ -266,11 +286,8 @@ export default function HomePage() {
         </section>
       ) : (
         <section className="rounded-3xl border border-dashed border-slate-200 bg-slate-50 p-5 text-sm text-slate-600 shadow-inner">
-          <p className="font-semibold text-brand-slate">Quick quotes without the fuss</p>
-          <p className="mt-1">
-            Basic mode hides ingredient-by-ingredient inputs. Enter a single ingredient total below and switch to Advanced any
-            time to build recipes, add delivery fees, or capture setup hours.
-          </p>
+          <p className="font-semibold text-brand-slate">{copy.basicIntro.title}</p>
+          <p className="mt-1">{copy.basicIntro.body}</p>
         </section>
       )}
 
@@ -286,17 +303,17 @@ export default function HomePage() {
         <div className="lg:col-span-1 space-y-3">
           <ResultCard pricing={pricing} servings={selectedSize.servings} />
           <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-xs leading-relaxed text-slate-600">
-            <p className="font-semibold text-brand-slate">How ingredient costs are calculated</p>
+            <p className="font-semibold text-brand-slate">{copy.recipeInfo.title}</p>
             <ul className="mt-2 space-y-1 list-disc pl-4">
-              <li>Each ingredient stores a package size and cost. Cost per base unit is auto-calculated.</li>
-              <li>Recipe cost multiplies the unit cost by the quantity you use for this cake.</li>
-              <li>Decoration complexity multiplies decoration materials + extras + labor so ornate work is covered.</li>
+              {copy.recipeInfo.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
           </div>
           <ProFeatures />
           {!hasCalculated ? (
             <p className="text-xs text-slate-500">
-              Update any field and press <strong>Calculate price</strong> to lock in the numbers.
+              {copy.recipeInfo.cta}
             </p>
           ) : null}
         </div>
