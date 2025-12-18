@@ -115,6 +115,43 @@ export default function HomePage() {
     setIngredients((prev) => [...prev, ingredient]);
   };
 
+  const handleUpdateIngredient = (
+    id: string,
+    patch: Partial<Pick<Ingredient, "name" | "unit" | "packageSize" | "packageCost">>
+  ) => {
+    setIngredients((prev) =>
+      prev.map((ingredient) =>
+        ingredient.id === id
+          ? buildIngredient({
+              ...ingredient,
+              ...patch,
+              packageSize: patch.packageSize ?? ingredient.packageSize,
+              packageCost: patch.packageCost ?? ingredient.packageCost,
+            })
+          : ingredient
+      )
+    );
+  };
+
+  const handleDeleteIngredient = (id: string) => {
+    setIngredients((prev) => {
+      const remaining = prev.filter((ingredient) => ingredient.id !== id);
+      const fallbackId = remaining[0]?.id ?? "";
+
+      setRecipeLines((lines) => {
+        if (!fallbackId) {
+          return lines.filter((line) => line.ingredientId !== id);
+        }
+
+        return lines.map((line) =>
+          line.ingredientId === id ? { ...line, ingredientId: fallbackId } : line
+        );
+      });
+
+      return remaining;
+    });
+  };
+
   const handleAddLine = () => {
     const defaultIngredient = ingredients[0]?.id ?? "";
     setRecipeLines((prev) => [
@@ -211,7 +248,12 @@ export default function HomePage() {
 
       {mode === "advanced" ? (
         <section className="space-y-4">
-          <IngredientManager ingredients={ingredients} onAdd={handleAddIngredient} />
+          <IngredientManager
+            ingredients={ingredients}
+            onAdd={handleAddIngredient}
+            onUpdate={handleUpdateIngredient}
+            onDelete={handleDeleteIngredient}
+          />
           <RecipeBuilder
             ingredients={ingredients}
             lines={recipeLines}
