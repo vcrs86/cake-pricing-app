@@ -4,13 +4,13 @@
 
 :root {
   color: #0f172a;
-  background: #f7f7fb;
+  background: #fdf5ed;
 }
 
 body {
-  background: radial-gradient(circle at 10% 20%, #fff2e5, #f7f7fb 35%),
-    radial-gradient(circle at 90% 10%, #fef3f5, #f7f7fb 30%),
-    radial-gradient(circle at 50% 80%, #eef6ff, #f7f7fb 30%);
+  background: radial-gradient(circle at 12% 18%, #ffe9d6, #fdf5ed 36%),
+    radial-gradient(circle at 88% 12%, #ffe8ec, #fdf5ed 34%),
+    radial-gradient(circle at 55% 78%, #f7f2ff, #fdf5ed 32%);
   min-height: 100vh;
 }
 
