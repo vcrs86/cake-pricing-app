@@ -48,30 +48,69 @@ export function ResultCard({
       </div>
 
       <div className="space-y-2">
-        {pricing.ingredientsCost > 0 ? (
-  <Row
-    label={copy.resultCard.rows.ingredients}
-    value={`$${pricing.ingredientsCost.toFixed(2)}`}
-  />
-) : null}
-        <Row
-          label={`${copy.resultCard.rows.decoration} (x${pricing.complexityMultiplier.toFixed(2)})`}
-          value={`$${pricing.decorationAndLabor.toFixed(2)}`}
-        />
-        <Row label={copy.resultCard.rows.laborOnly} value={`$${pricing.laborCost.toFixed(2)}`} />
-        <Row label={copy.resultCard.rows.extrasDelivery} value={`$${(pricing.extrasCost + pricing.deliveryFee).toFixed(2)}`} />
-        <Row label={copy.resultCard.rows.baseCost} value={`$${pricing.baseCost.toFixed(2)}`} />
-        <Row label={copy.resultCard.rows.profit} value={`$${pricing.profitAmount.toFixed(2)}`} />
-        <hr className="my-3 border-dashed" />
-        <Row label={copy.resultCard.rows.suggested} value={`$${pricing.suggestedMinimum.toFixed(2)}`} />
-        <Row label={copy.resultCard.rows.recommended} value={`$${pricing.recommendedPrice.toFixed(2)}`} />
-        {pricing.pricePerServing ? (
-          <Row
-            label={copy.resultCard.rows.perServing}
-            value={`$${pricing.pricePerServing.toFixed(2)}`}
-          />
-        ) : null}
-      </div>
+  {pricing.ingredientsCost > 0 ? (
+    <Row
+      label={copy.resultCard.rows.ingredients}
+      value={`$${pricing.ingredientsCost.toFixed(2)}`}
+    />
+  ) : null}
+
+  {pricing.decorationAndLabor > 0 ? (
+    <Row
+      label={`${copy.resultCard.rows.decoration} (x${pricing.complexityMultiplier.toFixed(2)})`}
+      value={`$${pricing.decorationAndLabor.toFixed(2)}`}
+    />
+  ) : null}
+
+  {pricing.laborCost > 0 ? (
+    <Row
+      label={copy.resultCard.rows.laborOnly}
+      value={`$${pricing.laborCost.toFixed(2)}`}
+    />
+  ) : null}
+
+  {pricing.extrasCost + pricing.deliveryFee > 0 ? (
+    <Row
+      label={copy.resultCard.rows.extrasDelivery}
+      value={`$${(pricing.extrasCost + pricing.deliveryFee).toFixed(2)}`}
+    />
+  ) : null}
+
+  {pricing.baseCost > 0 ? (
+    <Row
+      label={copy.resultCard.rows.baseCost}
+      value={`$${pricing.baseCost.toFixed(2)}`}
+    />
+  ) : null}
+
+  {pricing.profitAmount > 0 ? (
+    <Row
+      label={copy.resultCard.rows.profit}
+      value={`$${pricing.profitAmount.toFixed(2)}`}
+    />
+  ) : null}
+
+  {(pricing.suggestedMinimum > 0 || pricing.recommendedPrice > 0) ? (
+    <>
+      <hr className="my-3 border-dashed" />
+      <Row
+        label={copy.resultCard.rows.suggested}
+        value={`$${pricing.suggestedMinimum.toFixed(2)}`}
+      />
+      <Row
+        label={copy.resultCard.rows.recommended}
+        value={`$${pricing.recommendedPrice.toFixed(2)}`}
+      />
+    </>
+  ) : null}
+
+  {pricing.pricePerServing ? (
+    <Row
+      label={copy.resultCard.rows.perServing}
+      value={`$${pricing.pricePerServing.toFixed(2)}`}
+    />
+  ) : null}
+</div>
       <p className="mt-4 text-xs leading-relaxed text-slate-500">
         {copy.resultCard.footer}
         <code className="ml-1 rounded bg-slate-100 px-1 py-0.5">src/lib/pricing.ts</code>.
