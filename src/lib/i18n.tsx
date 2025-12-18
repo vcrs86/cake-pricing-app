@@ -408,7 +408,6 @@ highlightNote: "This value is calculated from costs, labor time, and selected ma
     },
   },
 };
-
 type LanguageContextValue = {
   language: Language;
   setLanguage: (lang: Language) => void;
