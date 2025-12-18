@@ -293,8 +293,7 @@ highlightNote: "Este valor se calcula a partir de costos, tiempo de trabajo y ma
     ingredientManager: {
       badge: "Ingredient price list",
       title: "Base costs by package",
-      helper: ingredientManager: {
-  helper: "Los ingredientes son editables y deben reflejar tus costos reales.",
+      helper: "Los ingredientes son editables y deben reflejar tus costos reales.",
       name: "Name",
       placeholder: "Butter",
       unit: "Unit",
