@@ -265,7 +265,6 @@ highlightNote: "Este valor se calcula a partir de costos, tiempo de trabajo y ma
       label: "Idioma",
     },
   },
-};
   en: {
    general: {
   appTitle: "Professional cake pricing",
