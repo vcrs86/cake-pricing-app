@@ -12,12 +12,12 @@ import { useLanguage } from "@/lib/i18n";
 
 const DEFAULT_STATE: CalculatorFormState = {
   cakeSize: CAKE_SIZES[1].id,
-  basicIngredientsCost: "45",
-  decorationCost: "20",
-  hoursWorked: "4",
-  hourlyRate: "30",
-  setupHours: "1",
-  setupRate: "30",
+  basicIngredientsCost: "0",
+  decorationCost: "0",
+  hoursWorked: "0",
+  hourlyRate: "0",
+  setupHours: "0",
+  setupRate: "0",
   profitMargin: "30",
   deliveryFee: "0",
   decorationComplexity: "intermediate",
