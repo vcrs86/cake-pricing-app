@@ -34,7 +34,7 @@ export function ResultCard({
         ) : null}
       </div>
 
-      <div className="mb-4 rounded-2xl border border-brand-peach/60 bg-gradient-to-r from-brand-cream via-white to-brand-peach/40 p-4 shadow-inner">
+      <div className="mb-6 rounded-2xl border border-brand-peach/60 bg-gradient-to-r from-brand-cream via-white to-brand-peach/40 p-4 shadow-inner">
         <div className="flex items-center justify-between gap-3">
           <div>
             <p className="text-xs uppercase tracking-wide text-slate-500">{copy.resultCard.highlightLabel}</p>
