@@ -58,9 +58,11 @@ export default function HomePage() {
   );
 
   const ingredientCost =
-    mode === "advanced"
-      ? recipeCost.total
-      : Number(values.basicIngredientsCost) || 0;
+  mode === "advanced"
+    ? ingredients.length === 0
+      ? 0
+      : recipeCost.total
+    : Number(values.basicIngredientsCost) || 0;
 
   const decorationExtrasTotal =
     mode === "advanced"
