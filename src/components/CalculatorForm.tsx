@@ -2,6 +2,7 @@
 
 import { CAKE_SIZES, type CakeSize, type ComplexityLevel } from "@/lib/pricing";
 import { useMemo } from "react";
+import { useLanguage } from "@/lib/i18n";
 
 type FormState = {
   cakeSize: string;
@@ -31,20 +32,21 @@ const numberInputClasses =
   "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-800 shadow-sm focus:border-brand-rose focus:outline-none focus:ring-2 focus:ring-brand-rose/50";
 
 export function CalculatorForm({ mode, values, onChange, onSubmit }: CalculatorFormProps) {
+  const { copy } = useLanguage();
   const sizeOptions: CakeSize[] = useMemo(() => CAKE_SIZES, []);
   const isBasic = mode === "basic";
 
   const complexityOptions = isBasic
     ? [
-        { value: "basic", label: "Basic" },
-        { value: "intermediate", label: "Intermediate (+10%)" },
-        { value: "advanced", label: "Advanced (+25%)" },
+        { value: "basic", label: copy.calculatorForm.complexityOptions.basic },
+        { value: "intermediate", label: copy.calculatorForm.complexityOptions.intermediate },
+        { value: "advanced", label: copy.calculatorForm.complexityOptions.advanced },
       ]
     : [
-        { value: "basic", label: "Basic" },
-        { value: "intermediate", label: "Intermediate (+10%)" },
-        { value: "advanced", label: "Advanced (+25%)" },
-        { value: "very_complex", label: "Very complex (+40%)" },
+        { value: "basic", label: copy.calculatorForm.complexityOptions.basic },
+        { value: "intermediate", label: copy.calculatorForm.complexityOptions.intermediate },
+        { value: "advanced", label: copy.calculatorForm.complexityOptions.advanced },
+        { value: "very_complex", label: copy.calculatorForm.complexityOptions.veryComplex },
       ];
 
   return (
@@ -57,28 +59,28 @@ export function CalculatorForm({ mode, values, onChange, onSubmit }: CalculatorF
     >
       {isBasic ? (
         <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card sm:p-6">
-          <h2 className="mb-4 text-lg font-bold text-brand-slate">Ingredients (quick total)</h2>
+          <h2 className="mb-4 text-lg font-bold text-brand-slate">{copy.calculatorForm.quickIngredients}</h2>
           <p className="mb-3 text-sm text-slate-600">
-            Enter a rough total for ingredients. Switch to Advanced mode to price each ingredient by quantity.
+            {copy.calculatorForm.quickIngredientsHelper}
           </p>
           <div className="max-w-sm">
             <Field
-              label="Ingredient cost"
+              label={copy.calculatorForm.ingredientCost}
               prefix="$"
               inputMode="decimal"
               value={values.basicIngredientsCost}
               onChange={(value) => onChange("basicIngredientsCost", value)}
-              help="Use the latest shopping list subtotal or a quick estimate."
+              help={copy.calculatorForm.quickHelp}
             />
           </div>
         </div>
       ) : null}
 
       <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card sm:p-6">
-        <h2 className="mb-4 text-lg font-bold text-brand-slate">Core project details</h2>
+        <h2 className="mb-4 text-lg font-bold text-brand-slate">{copy.calculatorForm.coreDetails}</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
-            <label className="mb-2 block text-sm font-semibold text-slate-700">Cake size</label>
+            <label className="mb-2 block text-sm font-semibold text-slate-700">{copy.calculatorForm.cakeSize}</label>
             <div className="rounded-xl border border-slate-200 bg-white shadow-sm">
               <select
                 className="w-full rounded-xl bg-white px-4 py-3 text-sm font-semibold text-slate-800 focus:border-brand-rose focus:outline-none"
@@ -96,47 +98,47 @@ export function CalculatorForm({ mode, values, onChange, onSubmit }: CalculatorF
 
           {!isBasic ? (
             <Field
-              label="Decoration materials (non-ingredients)"
+              label={copy.calculatorForm.decorationCost}
               prefix="$"
               inputMode="decimal"
               value={values.decorationCost}
               onChange={(value) => onChange("decorationCost", value)}
-              help="Fondant sheets, buttercream, boxes, boards — anything not tracked as an ingredient above."
+              help={copy.calculatorForm.decorationCostHelp}
             />
           ) : null}
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <Field
-            label="Hours for baking/decorating"
+            label={copy.calculatorForm.hoursWorked}
             suffix="hrs"
             inputMode="decimal"
             value={values.hoursWorked}
             onChange={(value) => onChange("hoursWorked", value)}
           />
           <Field
-            label="Hourly rate"
+            label={copy.calculatorForm.hourlyRate}
             prefix="$"
             inputMode="decimal"
             value={values.hourlyRate}
             onChange={(value) => onChange("hourlyRate", value)}
           />
           <Field
-            label="Decoration complexity"
+            label={copy.calculatorForm.complexity}
             value={values.decorationComplexity}
             onChange={(value) => onChange("decorationComplexity", value)}
             isSelect
             options={complexityOptions}
-            help="Applies a multiplier to decoration costs and labor to reflect intricacy."
+            help={copy.calculatorForm.complexityHelp}
           />
         </div>
       </div>
 
       <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card sm:p-6">
-        <h2 className="mb-4 text-lg font-bold text-brand-slate">Optional extras</h2>
+        <h2 className="mb-4 text-lg font-bold text-brand-slate">{copy.calculatorForm.extras}</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Field
-            label="Cake topper"
+            label={copy.calculatorForm.cakeTopper}
             prefix="$"
             inputMode="decimal"
             value={values.cakeTopper}
@@ -144,7 +146,7 @@ export function CalculatorForm({ mode, values, onChange, onSubmit }: CalculatorF
           />
           {isBasic ? null : (
             <Field
-              label="Sugar flowers"
+              label={copy.calculatorForm.sugarFlowers}
               prefix="$"
               inputMode="decimal"
               value={values.sugarFlowers}
@@ -152,7 +154,7 @@ export function CalculatorForm({ mode, values, onChange, onSubmit }: CalculatorF
             />
           )}
           <Field
-            label="Flowers"
+            label={copy.calculatorForm.freshFlowers}
             prefix="$"
             inputMode="decimal"
             value={values.freshFlowers}
@@ -160,7 +162,7 @@ export function CalculatorForm({ mode, values, onChange, onSubmit }: CalculatorF
           />
           {isBasic ? null : (
             <Field
-              label="3D figures"
+              label={copy.calculatorForm.figures3d}
               prefix="$"
               inputMode="decimal"
               value={values.figures3d}
@@ -169,30 +171,30 @@ export function CalculatorForm({ mode, values, onChange, onSubmit }: CalculatorF
           )}
         </div>
         {isBasic ? (
-          <p className="mt-2 text-xs text-slate-500">Switch to Advanced for sugar flowers and 3D figure tracking.</p>
+          <p className="mt-2 text-xs text-slate-500">{copy.calculatorForm.extrasHint}</p>
         ) : null}
       </div>
 
       {!isBasic ? (
         <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card sm:p-6">
-          <h2 className="mb-4 text-lg font-bold text-brand-slate">Additional services</h2>
+          <h2 className="mb-4 text-lg font-bold text-brand-slate">{copy.calculatorForm.additionalServices}</h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <Field
-              label="On-site setup hours"
+              label={copy.calculatorForm.setupHours}
               suffix="hrs"
               inputMode="decimal"
               value={values.setupHours}
               onChange={(value) => onChange("setupHours", value)}
             />
             <Field
-              label="Setup hourly rate"
+              label={copy.calculatorForm.setupRate}
               prefix="$"
               inputMode="decimal"
               value={values.setupRate}
               onChange={(value) => onChange("setupRate", value)}
             />
             <Field
-              label="Delivery fee"
+              label={copy.calculatorForm.deliveryFee}
               prefix="$"
               inputMode="decimal"
               value={values.deliveryFee}
@@ -204,7 +206,7 @@ export function CalculatorForm({ mode, values, onChange, onSubmit }: CalculatorF
 
       <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card sm:p-6">
         <label className="mb-2 flex items-center justify-between text-sm font-semibold text-slate-700">
-          <span>Profit margin</span>
+          <span>{copy.calculatorForm.profitMargin}</span>
           <span className="text-xs font-medium text-slate-500">{values.profitMargin || "0"}%</span>
         </label>
         <input
@@ -216,14 +218,14 @@ export function CalculatorForm({ mode, values, onChange, onSubmit }: CalculatorF
           onChange={(e) => onChange("profitMargin", e.target.value)}
           className="w-full accent-brand-rose"
         />
-        <p className="mt-1 text-xs text-slate-500">Commonly 20-40% depending on complexity and demand.</p>
+        <p className="mt-1 text-xs text-slate-500">{copy.calculatorForm.profitNote}</p>
       </div>
 
       <button
         type="submit"
         className="flex w-full items-center justify-center gap-2 rounded-xl bg-brand-slate px-4 py-3 text-sm font-semibold text-white shadow-card transition hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0"
       >
-        Calculate price
+        {copy.calculatorForm.submit}
       </button>
     </form>
   );
