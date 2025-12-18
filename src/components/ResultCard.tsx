@@ -48,7 +48,12 @@ export function ResultCard({
       </div>
 
       <div className="space-y-2">
-        <Row label={copy.resultCard.rows.ingredients} value={`$${pricing.ingredientsCost.toFixed(2)}`} />
+        {pricing.ingredientsCost > 0 ? (
+  <Row
+    label={copy.resultCard.rows.ingredients}
+    value={`$${pricing.ingredientsCost.toFixed(2)}`}
+  />
+) : null}
         <Row
           label={`${copy.resultCard.rows.decoration} (x${pricing.complexityMultiplier.toFixed(2)})`}
           value={`$${pricing.decorationAndLabor.toFixed(2)}`}
