@@ -3,7 +3,7 @@
 import { CAKE_SIZES, type CakeSize, type ComplexityLevel } from "@/lib/pricing";
 import { useMemo } from "react";
 import { useLanguage } from "@/lib/i18n";
-
+import { Clock } from "lucide-react";
 type FormState = {
   cakeSize: string;
   basicIngredientsCost: string;
@@ -77,7 +77,10 @@ export function CalculatorForm({ mode, values, onChange, onSubmit }: CalculatorF
       ) : null}
 
       <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card sm:p-6">
-        <h2 className="mb-4 text-lg font-bold text-brand-slate">{copy.calculatorForm.coreDetails}</h2>
+        <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-brand-slate">
+  <Clock className="h-5 w-5 text-brand-rose/80" />
+  {copy.calculatorForm.coreDetails}
+</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <label className="mb-2 block text-sm font-semibold text-slate-700">{copy.calculatorForm.cakeSize}</label>
