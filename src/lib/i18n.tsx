@@ -379,26 +379,26 @@ highlightNote: "This value is calculated from costs, labor time, and selected ma
       ],
       cta: "Update any field and press Calculate price to lock in the numbers.",
     },
-    proFeatures: {
+        proFeatures: {
       title: "PRO features — coming soon",
       preview: "Preview only. These costs are not part of the calculation yet.",
       cards: [
         {
           title: "Electricity / oven energy cost",
-          description: "Bake time × oven power × cost per kWh."
+          description: "Bake time × oven power × cost per kWh.",
         },
         {
           title: "Monthly operational expenses",
-          description: "Spread rent, utilities, marketing, internet/phone, and accounting across orders."
+          description: "Spread rent, utilities, marketing, internet/phone, and accounting across orders.",
         },
         {
           title: "Save presets and reports",
-          description: "Store go-to recipes, export quotes, and run profitability snapshots."
+          description: "Store go-to recipes, export quotes, and run profitability snapshots.",
         },
         {
           title: "Advanced fee rules",
-          description: "Rush fees, delivery distance bands, and seasonal surcharges."
-        }
+          description: "Rush fees, delivery distance bands, and seasonal surcharges.",
+        },
       ],
       locked: "Locked — not part of today’s calculation",
     },
