@@ -125,12 +125,11 @@ type Copy = {
 
 const translations: Record<Language, Copy> = {
   es: {
-    general: {
-      appTitle: "Calculadora de Precios para Pasteles",
-      tagline:
-        "Alterna entre un cálculo rápido o un desglose avanzado por ingrediente. La lógica está lista para personalizarse.",
-      mobileFriendly: "Diseñada para móvil",
-    },
+   general: {
+  appTitle: "Calcula el precio profesional de tu pastel",
+  tagline: "Una herramienta de cálculo pensada para decoradoras que trabajan con costos reales.",
+  mobileFriendly: "Optimizada para móvil",
+},
     download: {
       label: "Descarga",
       title: "Obtén el proyecto completo en ZIP",
@@ -145,15 +144,15 @@ const translations: Record<Language, Copy> = {
         "Básico es ideal para cotizaciones rápidas con un total único de ingredientes. Avanzado habilita precios por cantidad, extras, entrega y montaje, manteniendo las funciones PRO bloqueadas.",
       basic: "Básico (sereno)",
       advanced: "Avanzado (detallado)",
-    },
     basicIntro: {
-      title: "Cotizaciones rápidas sin complicaciones",
-      body: "El modo Básico oculta los ingredientes uno a uno. Ingresa un total único y cambia a Avanzado en cualquier momento para recetas, entrega o montaje.",
-    },
+  title: "Cálculo simplificado",
+  body: "Usa un total general de ingredientes o cambia a Avanzado para un desglose detallado.",
+},
     ingredientManager: {
       badge: "Lista de precios de ingredientes",
       title: "Costos base por paquete",
-      helper: "Todos los ingredientes son editables. Ajusta nombre, unidad, tamaño y precio según tus compras reales.",
+      ingredientManager: {
+  helper: "Los ingredientes son editables y deben reflejar tus costos reales.",
       name: "Nombre",
       placeholder: "Mantequilla",
       unit: "Unidad",
@@ -186,10 +185,10 @@ const translations: Record<Language, Copy> = {
       cakeSize: "Tamaño del pastel",
       decorationCost: "Materiales de decoración (no ingredientes)",
       decorationCostHelp: "Fondant, buttercream, cajas, bases y otros insumos no listados arriba.",
-      hoursWorked: "Horas para hornear/decorar",
-      hourlyRate: "Tarifa por hora",
-      complexity: "Complejidad de decoración",
-      complexityHelp: "Multiplica materiales + extras + mano de obra según el nivel de detalle.",
+      hoursWorked: "Horas de trabajo",
+hourlyRate: "Tarifa por hora",
+      complexity: "Nivel de complejidad",
+complexityHelp: "Ajuste aplicado según el nivel de detalle del diseño.",
       extras: "Extras opcionales",
       cakeTopper: "Cake topper",
       sugarFlowers: "Flores de azúcar",
@@ -201,8 +200,8 @@ const translations: Record<Language, Copy> = {
       setupRate: "Tarifa de montaje",
       deliveryFee: "Entrega",
       profitMargin: "Margen de ganancia",
-      profitNote: "Comúnmente 20-40% según complejidad y demanda.",
-      submit: "Mostrar mi precio de pastel",
+profitNote: "Define el porcentaje aplicado sobre el costo total.",
+      submit: "Calcular precio",
       complexityOptions: {
         basic: "Básico",
         intermediate: "Intermedio (+10%)",
@@ -214,8 +213,8 @@ const translations: Record<Language, Copy> = {
       badge: "Tu cotización",
       title: "Precio listo para compartir",
       servings: "porciones",
-      highlightLabel: "Total para celebrar",
-      highlightNote: "Incluye un colchón suave del 7% para ajustes de último momento.",
+      highlightLabel: "Precio recomendado",
+highlightNote: "Este valor se calcula a partir de costos, tiempo de trabajo y margen definido.",
       rows: {
         ingredients: "Ingredientes",
         decoration: "Decoración y mano de obra",
@@ -268,12 +267,11 @@ const translations: Record<Language, Copy> = {
     },
   },
   en: {
-    general: {
-      appTitle: "Cake Pricing Calculator",
-      tagline:
-        "Switch between a quick quote or advanced ingredient breakdown. The pricing logic stays easy to tweak.",
-      mobileFriendly: "Mobile friendly",
-    },
+   general: {
+  appTitle: "Professional cake pricing",
+  tagline: "A pricing tool built for decorators who work with real costs.",
+  mobileFriendly: "Mobile optimized",
+},
     download: {
       label: "Download",
       title: "Grab the full project as a ZIP",
@@ -289,14 +287,15 @@ const translations: Record<Language, Copy> = {
       basic: "Basic (calm)",
       advanced: "Advanced (detailed)",
     },
-    basicIntro: {
-      title: "Quick quotes without the fuss",
-      body: "Basic mode hides ingredient-by-ingredient inputs. Enter a single total and switch to Advanced any time for recipes, delivery, or setup work.",
-    },
+ basicIntro: {
+  title: "Simplified calculation",
+  body: "Use a single ingredient total or switch to Advanced for a detailed breakdown.",
+},
     ingredientManager: {
       badge: "Ingredient price list",
       title: "Base costs by package",
-      helper: "Every ingredient is editable. Adjust name, unit, size, and price to match your real costs.",
+      helper: ingredientManager: {
+  helper: "Los ingredientes son editables y deben reflejar tus costos reales.",
       name: "Name",
       placeholder: "Butter",
       unit: "Unit",
@@ -329,10 +328,10 @@ const translations: Record<Language, Copy> = {
       cakeSize: "Cake size",
       decorationCost: "Decoration materials (non-ingredients)",
       decorationCostHelp: "Fondant sheets, buttercream, boxes, boards — anything not tracked above.",
-      hoursWorked: "Hours for baking/decorating",
-      hourlyRate: "Hourly rate",
-      complexity: "Decoration complexity",
-      complexityHelp: "Applies a multiplier to materials + extras + labor to reflect intricacy.",
+      hoursWorked: "Labor hours",
+hourlyRate: "Hourly rate",
+      complexity: "Complexity level",
+complexityHelp: "Adjustment applied based on design detail level.",
       extras: "Optional extras",
       cakeTopper: "Cake topper",
       sugarFlowers: "Sugar flowers",
@@ -344,8 +343,8 @@ const translations: Record<Language, Copy> = {
       setupRate: "Setup hourly rate",
       deliveryFee: "Delivery fee",
       profitMargin: "Profit margin",
-      profitNote: "Commonly 20-40% depending on complexity and demand.",
-      submit: "Show my cake price",
+profitNote: "Percentage applied over total cost.",
+      submit: "Calculate price",
       complexityOptions: {
         basic: "Basic",
         intermediate: "Intermediate (+10%)",
@@ -357,8 +356,8 @@ const translations: Record<Language, Copy> = {
       badge: "Your quote",
       title: "Ready-to-share pricing",
       servings: "servings",
-      highlightLabel: "Celebration-ready total",
-      highlightNote: "Includes a gentle 7% cushion for last-minute tweaks.",
+      highlightLabel: "Recommended price",
+highlightNote: "This value is calculated from costs, labor time, and selected margin.",
       rows: {
         ingredients: "Ingredients",
         decoration: "Decoration & labor",
