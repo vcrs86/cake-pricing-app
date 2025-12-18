@@ -1,6 +1,6 @@
 import { type PricingBreakdown } from "@/lib/pricing";
 import { useLanguage } from "@/lib/i18n";
-
+import { Sparkles } from "lucide-react";
 const Row = ({ label, value }: { label: string; value: string }) => (
   <div className="flex items-center justify-between text-sm font-medium text-slate-700">
     <span>{label}</span>
@@ -22,7 +22,10 @@ export function ResultCard({
       <div className="mb-5 flex items-center justify-between gap-3">
         <div className="space-y-1">
           <p className="text-xs uppercase tracking-wide text-slate-500">{copy.resultCard.badge}</p>
-          <h2 className="text-xl font-bold text-brand-slate">{copy.resultCard.title}</h2>
+          <h2 className="flex items-center gap-2 text-xl font-semibold">
+  <Sparkles className="w-4 h-4 text-brand-rose/70" />
+  {copy.resultCard.title}
+</h2>
         </div>
         {servings ? (
           <span className="rounded-full bg-brand-rose/30 px-3 py-1 text-xs font-semibold text-brand-slate">
