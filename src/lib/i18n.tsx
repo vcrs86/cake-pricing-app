@@ -122,7 +122,6 @@ type Copy = {
     label: string;
   };
 };
-
 const translations: Record<Language, Copy> = {
   es: {
     general: {
