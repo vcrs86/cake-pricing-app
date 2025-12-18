@@ -379,7 +379,7 @@ highlightNote: "This value is calculated from costs, labor time, and selected ma
       ],
       cta: "Update any field and press Calculate price to lock in the numbers.",
     },
-        proFeatures: {
+          proFeatures: {
       title: "PRO features — coming soon",
       preview: "Preview only. These costs are not part of the calculation yet.",
       cards: [
