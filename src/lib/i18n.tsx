@@ -261,10 +261,11 @@ highlightNote: "Este valor se calcula a partir de costos, tiempo de trabajo y ma
       locked: "Bloqueado — fuera del cálculo actual",
     },
     formHelper: "Cambia cualquier campo y presiona Calcular precio para fijar los números.",
-    languageToggle: {
+      languageToggle: {
       label: "Idioma",
     },
   },
+};
   en: {
    general: {
   appTitle: "Professional cake pricing",
