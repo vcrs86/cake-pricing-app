@@ -180,34 +180,34 @@ export default function HomePage() {
   };
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-6xl flex-col gap-6 px-4 pb-10 pt-10 sm:px-6 lg:px-10">
-      <section className="rounded-3xl bg-white/80 p-6 shadow-card ring-1 ring-slate-100 backdrop-blur sm:p-10">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-          <div className="space-y-2">
-            <p className="text-xs uppercase tracking-wide text-slate-500">MVP, mobile-first</p>
+    <main className="mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-4 pb-12 pt-10 sm:px-6 lg:px-10">
+      <section className="rounded-3xl bg-gradient-to-br from-brand-cream via-white to-brand-peach/30 p-7 shadow-card ring-1 ring-slate-100 backdrop-blur sm:p-10">
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+          <div className="space-y-3">
+            <p className="text-xs uppercase tracking-wide text-slate-500">MVP, made for decorators</p>
             <h1 className="text-3xl font-black text-brand-slate sm:text-4xl">Cake Pricing Calculator</h1>
-            <p className="max-w-2xl text-sm text-slate-600">
+            <p className="max-w-2xl text-sm leading-relaxed text-slate-600">
               Switch between a quick Basic quote and an ingredient-level Advanced view. Pricing logic lives in
-              <code className="rounded bg-slate-100 px-1">src/lib/pricing.ts</code> and ingredient math in
-              <code className="rounded bg-slate-100 px-1">src/lib/ingredients.ts</code> so you can tweak formulas easily.
+              <code className="mx-1 rounded bg-slate-100 px-1">src/lib/pricing.ts</code> and ingredient math in
+              <code className="mx-1 rounded bg-slate-100 px-1">src/lib/ingredients.ts</code> so you can tweak formulas easily.
             </p>
           </div>
-          <div className="flex items-center gap-3 self-start rounded-full bg-brand-rose/20 px-4 py-2 text-xs font-semibold text-brand-slate">
+          <div className="flex items-center gap-3 self-start rounded-full bg-brand-peach/50 px-4 py-2 text-xs font-semibold text-brand-slate shadow-sm ring-1 ring-white/60">
             📱 Mobile friendly
           </div>
         </div>
       </section>
 
-      <section className="rounded-3xl border border-slate-100 bg-gradient-to-r from-brand-rose/10 via-white to-brand-rose/10 p-5 shadow-card backdrop-blur sm:flex sm:items-center sm:justify-between sm:p-6">
-        <div className="space-y-1">
+      <section className="rounded-3xl border border-slate-100 bg-gradient-to-r from-brand-cream via-white to-brand-peach/30 p-6 shadow-card backdrop-blur sm:flex sm:items-center sm:justify-between sm:p-7">
+        <div className="space-y-2">
           <p className="text-xs uppercase tracking-wide text-slate-500">Download</p>
           <h2 className="text-lg font-bold text-brand-slate">Grab the full project as a ZIP</h2>
-          <p className="max-w-3xl text-sm text-slate-600">
+          <p className="max-w-3xl text-sm leading-relaxed text-slate-600">
             Use this button to download <code className="rounded bg-slate-100 px-1">cake-pricing-app.zip</code> directly—no terminal commands needed. It includes all source files, configs, and assets so you can run it locally or deploy to Vercel.
           </p>
         </div>
         <a
-          className="mt-4 inline-flex items-center justify-center rounded-full bg-brand-slate px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-slate/90 sm:mt-0"
+          className="mt-4 inline-flex items-center justify-center rounded-full bg-brand-slate px-4 py-2 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-brand-slate/90 sm:mt-0"
           href="/cake-pricing-app.zip"
           download
         >
@@ -215,11 +215,11 @@ export default function HomePage() {
         </a>
       </section>
 
-      <section className="rounded-3xl border border-slate-100 bg-white/70 p-5 shadow-card backdrop-blur sm:flex sm:items-center sm:justify-between sm:p-6">
-        <div className="space-y-1">
+      <section className="rounded-3xl border border-slate-100 bg-white/80 p-6 shadow-card backdrop-blur sm:flex sm:items-center sm:justify-between sm:p-7">
+        <div className="space-y-2">
           <p className="text-xs uppercase tracking-wide text-slate-500">Choose your view</p>
           <h2 className="text-lg font-bold text-brand-slate">Basic or Advanced mode</h2>
-          <p className="max-w-3xl text-sm text-slate-600">
+          <p className="max-w-3xl text-sm leading-relaxed text-slate-600">
             Basic is perfect for quick quotes with a single ingredient total. Advanced unlocks ingredient-by-quantity pricing,
             extras, delivery, and setup while keeping PRO features visible but locked.
           </p>
@@ -232,7 +232,7 @@ export default function HomePage() {
             }`}
             onClick={() => handleModeChange("basic")}
           >
-            Basic (default)
+            Basic (calm)
           </button>
           <button
             type="button"
@@ -241,7 +241,7 @@ export default function HomePage() {
             }`}
             onClick={() => handleModeChange("advanced")}
           >
-            Advanced
+            Advanced (detailed)
           </button>
         </div>
       </section>
