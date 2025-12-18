@@ -15,10 +15,7 @@ const config: Config = {
     "brand-slate": "#1f2933",
     "brand-ink": "#111827"
   },
-  boxShadow: {
-    card: "0 10px 30px rgba(0,0,0,0.08)",
-  },
-},
+  
       boxShadow: {
         card: "0 10px 30px rgba(0,0,0,0.08)",
       },
