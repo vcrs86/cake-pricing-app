@@ -2,6 +2,7 @@
 
 import { type Ingredient, type RecipeLineCost, type UnitType } from "@/lib/ingredients";
 import { useMemo } from "react";
+import { useLanguage } from "@/lib/i18n";
 
 export type RecipeLineInput = {
   id: string;
@@ -28,27 +29,28 @@ export function RecipeBuilder({
   lineCosts,
   totalCost,
 }: RecipeBuilderProps) {
+  const { copy } = useLanguage();
   const ingredientLookup = useMemo(() => new Map(ingredients.map((i) => [i.id, i])), [ingredients]);
 
   return (
     <div className="space-y-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-card sm:p-6">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-xs uppercase tracking-wide text-slate-500">Recipe cost calculator</p>
-          <h2 className="text-lg font-bold text-brand-slate">Quantity-based costs per cake</h2>
+          <p className="text-xs uppercase tracking-wide text-slate-500">{copy.recipeBuilder.badge}</p>
+          <h2 className="text-lg font-bold text-brand-slate">{copy.recipeBuilder.title}</h2>
         </div>
         <button
           type="button"
           onClick={onAddLine}
           className="rounded-full bg-brand-rose/15 px-3 py-1 text-xs font-semibold text-brand-slate shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
         >
-          + Add ingredient
+          {copy.recipeBuilder.addLine}
         </button>
       </div>
 
       {lines.length === 0 ? (
         <p className="rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-600">
-          Add ingredients from your list and enter the quantity used for this cake.
+          {copy.recipeBuilder.empty}
         </p>
       ) : (
         <div className="space-y-3">
@@ -63,16 +65,16 @@ export function RecipeBuilder({
               >
                 <div className="sm:col-span-4">
                   <label className="space-y-1 text-xs font-semibold text-slate-600">
-                    <span>Ingredient</span>
+                    <span>{copy.recipeBuilder.ingredient}</span>
                     <select
                       className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-800 shadow-sm focus:border-brand-rose focus:outline-none"
                       value={line.ingredientId}
                       onChange={(event) => onChangeLine(line.id, { ingredientId: event.target.value })}
                     >
-                      <option value="">Select ingredient</option>
+                      <option value="">{copy.recipeBuilder.ingredient}</option>
                       {ingredients.map((option) => (
                         <option key={option.id} value={option.id}>
-                          {option.name} (${option.costPerUnit.toFixed(4)} per {option.unit})
+                          {option.name} (${option.costPerUnit.toFixed(4)} {copy.recipeBuilder.per} {option.unit})
                         </option>
                       ))}
                     </select>
@@ -81,7 +83,7 @@ export function RecipeBuilder({
 
                 <div className="sm:col-span-3">
                   <NumberInput
-                    label="Quantity"
+                    label={copy.recipeBuilder.quantity}
                     value={line.quantity}
                     onChange={(value) => onChangeLine(line.id, { quantity: value })}
                     suffix={ingredient ? unitLabel(ingredient.unit) : undefined}
@@ -90,7 +92,7 @@ export function RecipeBuilder({
 
                 <div className="sm:col-span-3">
                   <div className="space-y-1 text-xs font-semibold text-slate-600">
-                    <span>Cost for this ingredient</span>
+                    <span>{copy.recipeBuilder.lineCost}</span>
                     <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50 px-3 py-3 text-sm font-bold text-brand-slate">
                       {lineCost ? `$${lineCost.cost.toFixed(2)}` : "--"}
                     </div>
@@ -103,7 +105,7 @@ export function RecipeBuilder({
                     onClick={() => onRemoveLine(line.id)}
                     className="text-sm font-semibold text-brand-rose underline decoration-brand-rose/40 decoration-2 underline-offset-4"
                   >
-                    Remove
+                    {copy.recipeBuilder.remove}
                   </button>
                 </div>
               </div>
@@ -113,7 +115,7 @@ export function RecipeBuilder({
       )}
 
       <div className="flex items-center justify-between rounded-xl bg-slate-50 px-4 py-3 text-sm font-semibold text-brand-slate">
-        <span>Total ingredient cost for this recipe</span>
+        <span>{copy.recipeBuilder.total}</span>
         <span>${totalCost.toFixed(2)}</span>
       </div>
     </div>
@@ -151,18 +153,5 @@ function NumberInput({
 }
 
 function unitLabel(unit: UnitType) {
-  switch (unit) {
-    case "g":
-      return "grams";
-    case "ml":
-      return "ml";
-    case "unit":
-      return "unit";
-    case "oz":
-      return "oz";
-    case "lb":
-      return "lb";
-    default:
-      return unit;
-  }
+  return unit;
 }
