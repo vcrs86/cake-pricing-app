@@ -3,7 +3,7 @@
 import { type Ingredient, type RecipeLineCost, type UnitType } from "@/lib/ingredients";
 import { useMemo } from "react";
 import { useLanguage } from "@/lib/i18n";
-
+import { ListChecks } from "lucide-react";
 export type RecipeLineInput = {
   id: string;
   ingredientId: string;
@@ -37,7 +37,10 @@ export function RecipeBuilder({
       <div className="flex items-center justify-between">
         <div>
           <p className="text-xs uppercase tracking-wide text-slate-500">{copy.recipeBuilder.badge}</p>
-          <h2 className="text-lg font-bold text-brand-slate">{copy.recipeBuilder.title}</h2>
+          <h2 className="flex items-center gap-2 text-lg font-semibold">
+  <ListChecks className="h-5 w-5 text-brand-rose/80" />
+  {copy.recipeBuilder.title}
+</h2>
         </div>
         <button
           type="button"
