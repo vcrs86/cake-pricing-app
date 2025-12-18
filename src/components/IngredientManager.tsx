@@ -49,7 +49,7 @@ export function IngredientManager({ ingredients, onAdd, onUpdate, onDelete }: In
         <div>
           <p className="text-xs uppercase tracking-wide text-slate-500">{copy.ingredientManager.badge}</p>
           <h2 className="flex items-center gap-2 text-lg font-semibold">
-  <Package className="h-4 w-4 text-slate-500" />
+  <Package className="h-5 w-5 text-brand-rose/80" />
   {copy.ingredientManager.title}
 </h2>
         </div>
