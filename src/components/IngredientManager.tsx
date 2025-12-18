@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { buildIngredient, type Ingredient, type UnitType } from "@/lib/ingredients";
+import { useLanguage } from "@/lib/i18n";
 
 const unitOptions: UnitType[] = ["g", "ml", "unit", "oz", "lb"];
 
@@ -16,6 +17,7 @@ export type IngredientManagerProps = {
 };
 
 export function IngredientManager({ ingredients, onAdd, onUpdate, onDelete }: IngredientManagerProps) {
+  const { copy } = useLanguage();
   const [name, setName] = useState("Butter");
   const [unit, setUnit] = useState<UnitType>("g");
   const [packageSize, setPackageSize] = useState("454");
@@ -43,21 +45,20 @@ export function IngredientManager({ ingredients, onAdd, onUpdate, onDelete }: In
 
   return (
     <div className="space-y-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-card sm:p-6">
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-xs uppercase tracking-wide text-slate-500">Ingredient price list</p>
-          <h2 className="text-lg font-bold text-brand-slate">Base costs by package</h2>
+          <p className="text-xs uppercase tracking-wide text-slate-500">{copy.ingredientManager.badge}</p>
+          <h2 className="text-lg font-bold text-brand-slate">{copy.ingredientManager.title}</h2>
         </div>
-        <div className="text-xs text-slate-500 text-right">
-          Cost per unit is auto-calculated.<br />
-          All rows are yours to edit or delete—use your real costs.
+        <div className="text-xs text-slate-500 text-left sm:text-right">
+          {copy.ingredientManager.helper}
         </div>
       </div>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-5">
-        <InputField label="Name" value={name} onChange={setName} placeholder="Butter" className="sm:col-span-2" />
+        <InputField label={copy.ingredientManager.name} value={name} onChange={setName} placeholder={copy.ingredientManager.placeholder} className="sm:col-span-2" />
         <div className="space-y-1">
-          <label className="text-xs font-semibold text-slate-600">Unit</label>
+          <label className="text-xs font-semibold text-slate-600">{copy.ingredientManager.unit}</label>
           <select
             className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-800 shadow-sm focus:border-brand-rose focus:outline-none"
             value={unit}
@@ -71,13 +72,13 @@ export function IngredientManager({ ingredients, onAdd, onUpdate, onDelete }: In
           </select>
         </div>
         <InputField
-          label="Package size"
+          label={copy.ingredientManager.packageSize}
           value={packageSize}
           onChange={setPackageSize}
           inputMode="decimal"
           suffix={unit}
         />
-        <InputField label="Package cost" value={packageCost} onChange={setPackageCost} inputMode="decimal" prefix="$" />
+        <InputField label={copy.ingredientManager.packageCost} value={packageCost} onChange={setPackageCost} inputMode="decimal" prefix="$" />
         <div className="flex items-end">
           <button
             type="button"
@@ -85,7 +86,7 @@ export function IngredientManager({ ingredients, onAdd, onUpdate, onDelete }: In
             disabled={!canSave}
             className="w-full rounded-xl bg-brand-slate px-4 py-2 text-sm font-semibold text-white shadow-card transition hover:-translate-y-0.5 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Add ingredient
+            {copy.ingredientManager.addButton}
           </button>
         </div>
       </div>
@@ -94,19 +95,19 @@ export function IngredientManager({ ingredients, onAdd, onUpdate, onDelete }: In
         <table className="min-w-full divide-y divide-slate-200 text-sm">
           <thead className="bg-slate-50 text-left text-xs uppercase tracking-wide text-slate-500">
             <tr>
-              <th className="px-3 py-2 font-semibold">Ingredient</th>
-              <th className="px-3 py-2 font-semibold">Unit</th>
-              <th className="px-3 py-2 font-semibold">Package</th>
-              <th className="px-3 py-2 font-semibold">Cost</th>
-              <th className="px-3 py-2 font-semibold">Cost per unit</th>
-              <th className="px-3 py-2 font-semibold text-right">Actions</th>
+              <th className="px-3 py-2 font-semibold">{copy.ingredientManager.name}</th>
+              <th className="px-3 py-2 font-semibold">{copy.ingredientManager.unit}</th>
+              <th className="px-3 py-2 font-semibold">{copy.ingredientManager.packageSize}</th>
+              <th className="px-3 py-2 font-semibold">{copy.ingredientManager.packageCost}</th>
+              <th className="px-3 py-2 font-semibold">{copy.ingredientManager.costPerUnit}</th>
+              <th className="px-3 py-2 font-semibold text-right">{copy.ingredientManager.actions}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
             {ingredients.length === 0 ? (
               <tr>
                 <td colSpan={6} className="px-3 py-4 text-center text-slate-500">
-                  Add your first ingredient to start building recipes.
+                  {copy.ingredientManager.empty}
                 </td>
               </tr>
             ) : (
@@ -161,7 +162,7 @@ export function IngredientManager({ ingredients, onAdd, onUpdate, onDelete }: In
                       onClick={() => onDelete(ingredient.id)}
                       className="text-xs font-semibold text-brand-rose underline decoration-brand-rose/40 decoration-2 underline-offset-4"
                     >
-                      Delete
+                      {copy.ingredientManager.delete}
                     </button>
                   </td>
                 </tr>
