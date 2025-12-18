@@ -8,9 +8,14 @@ const unitOptions: UnitType[] = ["g", "ml", "unit", "oz", "lb"];
 export type IngredientManagerProps = {
   ingredients: Ingredient[];
   onAdd: (ingredient: Ingredient) => void;
+  onUpdate: (
+    id: string,
+    patch: Partial<Pick<Ingredient, "name" | "unit" | "packageSize" | "packageCost">>
+  ) => void;
+  onDelete: (id: string) => void;
 };
 
-export function IngredientManager({ ingredients, onAdd }: IngredientManagerProps) {
+export function IngredientManager({ ingredients, onAdd, onUpdate, onDelete }: IngredientManagerProps) {
   const [name, setName] = useState("Butter");
   const [unit, setUnit] = useState<UnitType>("g");
   const [packageSize, setPackageSize] = useState("454");
@@ -43,7 +48,10 @@ export function IngredientManager({ ingredients, onAdd }: IngredientManagerProps
           <p className="text-xs uppercase tracking-wide text-slate-500">Ingredient price list</p>
           <h2 className="text-lg font-bold text-brand-slate">Base costs by package</h2>
         </div>
-        <div className="text-xs text-slate-500">Cost per unit is auto-calculated.</div>
+        <div className="text-xs text-slate-500 text-right">
+          Cost per unit is auto-calculated.<br />
+          All rows are yours to edit or delete—use your real costs.
+        </div>
       </div>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-5">
@@ -91,24 +99,70 @@ export function IngredientManager({ ingredients, onAdd }: IngredientManagerProps
               <th className="px-3 py-2 font-semibold">Package</th>
               <th className="px-3 py-2 font-semibold">Cost</th>
               <th className="px-3 py-2 font-semibold">Cost per unit</th>
+              <th className="px-3 py-2 font-semibold text-right">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
             {ingredients.length === 0 ? (
               <tr>
-                <td colSpan={5} className="px-3 py-4 text-center text-slate-500">
+                <td colSpan={6} className="px-3 py-4 text-center text-slate-500">
                   Add your first ingredient to start building recipes.
                 </td>
               </tr>
             ) : (
               ingredients.map((ingredient) => (
                 <tr key={ingredient.id} className="hover:bg-slate-50">
-                  <td className="px-3 py-2 font-semibold text-slate-800">{ingredient.name}</td>
-                  <td className="px-3 py-2 text-slate-600">{ingredient.unit}</td>
-                  <td className="px-3 py-2 text-slate-600">{ingredient.packageSize.toLocaleString()}</td>
-                  <td className="px-3 py-2 text-slate-600">${ingredient.packageCost.toFixed(2)}</td>
+                  <td className="px-3 py-2 font-semibold text-slate-800">
+                    <input
+                      className="w-full rounded-lg border border-slate-200 bg-white px-2 py-1 text-sm font-semibold text-slate-800 shadow-inner focus:border-brand-rose focus:outline-none"
+                      value={ingredient.name}
+                      onChange={(event) => onUpdate(ingredient.id, { name: event.target.value })}
+                    />
+                  </td>
+                  <td className="px-3 py-2 text-slate-600">
+                    <select
+                      className="w-full rounded-lg border border-slate-200 bg-white px-2 py-1 text-sm font-semibold text-slate-800 shadow-inner focus:border-brand-rose focus:outline-none"
+                      value={ingredient.unit}
+                      onChange={(event) => onUpdate(ingredient.id, { unit: event.target.value as UnitType })}
+                    >
+                      {unitOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                  <td className="px-3 py-2 text-slate-600">
+                    <input
+                      className="w-full rounded-lg border border-slate-200 bg-white px-2 py-1 text-sm font-semibold text-slate-800 shadow-inner focus:border-brand-rose focus:outline-none"
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      value={ingredient.packageSize}
+                      onChange={(event) => onUpdate(ingredient.id, { packageSize: Number(event.target.value) })}
+                    />
+                  </td>
+                  <td className="px-3 py-2 text-slate-600">
+                    <input
+                      className="w-full rounded-lg border border-slate-200 bg-white px-2 py-1 text-sm font-semibold text-slate-800 shadow-inner focus:border-brand-rose focus:outline-none"
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      value={ingredient.packageCost}
+                      onChange={(event) => onUpdate(ingredient.id, { packageCost: Number(event.target.value) })}
+                    />
+                  </td>
                   <td className="px-3 py-2 font-semibold text-brand-slate">
                     ${ingredient.costPerUnit.toFixed(4)} / {ingredient.unit}
+                  </td>
+                  <td className="px-3 py-2 text-right">
+                    <button
+                      type="button"
+                      onClick={() => onDelete(ingredient.id)}
+                      className="text-xs font-semibold text-brand-rose underline decoration-brand-rose/40 decoration-2 underline-offset-4"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))
