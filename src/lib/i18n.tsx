@@ -243,19 +243,19 @@ highlightNote: "Este valor se calcula a partir de costos, tiempo de trabajo y ma
       cards: [
         {
           title: "Costo de energía del horno",
-          description: "Tiempo de horneado × potencia del horno × costo por kWh."
+          description: "Tiempo de horneado × potencia del horno × costo por kWh.",
         },
         {
           title: "Gastos operativos mensuales",
-          description: "Reparte renta, servicios, marketing, internet/teléfono y contabilidad."
+          description: "Reparte renta, servicios, marketing, internet/teléfono y contabilidad.",
         },
         {
           title: "Guardar presets y reportes",
-          description: "Conserva recetas frecuentes, exporta cotizaciones y revisa rentabilidad."
+          description: "Conserva recetas frecuentes, exporta cotizaciones y revisa rentabilidad.",
         },
         {
           title: "Reglas de tarifas avanzadas",
-          description: "Recargos urgentes, rangos de entrega por distancia y ajustes estacionales."
+          description: "Recargos urgentes, rangos de entrega por distancia y ajustes estacionales.",
         }
       ],
       locked: "Bloqueado — fuera del cálculo actual",
