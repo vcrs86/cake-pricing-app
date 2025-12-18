@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { buildIngredient, type Ingredient, type UnitType } from "@/lib/ingredients";
 import { useLanguage } from "@/lib/i18n";
-
+import { Package } from "lucide-react";
 const unitOptions: UnitType[] = ["g", "ml", "unit", "oz", "lb"];
 
 export type IngredientManagerProps = {
@@ -48,7 +48,10 @@ export function IngredientManager({ ingredients, onAdd, onUpdate, onDelete }: In
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-xs uppercase tracking-wide text-slate-500">{copy.ingredientManager.badge}</p>
-          <h2 className="text-lg font-bold text-brand-slate">{copy.ingredientManager.title}</h2>
+          <h2 className="flex items-center gap-2 text-lg font-semibold">
+  <Package className="h-4 w-4 text-slate-500" />
+  {copy.ingredientManager.title}
+</h2>
         </div>
         <div className="text-xs text-slate-500 text-left sm:text-right">
           {copy.ingredientManager.helper}
