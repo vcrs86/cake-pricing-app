@@ -7,12 +7,18 @@ const config: Config = {
     "./src/styles/**/*.{css}",
   ],
   theme: {
-    extend: {
-      colors: {
-        "brand-gold": "#f4c95d",
-        "brand-rose": "#f4a7a0",
-        "brand-slate": "#1f2933"
-      },
+   extend: {
+  colors: {
+    "brand-cream": "#fbf7f3",
+    "brand-peach": "#f6e7df",
+    "brand-rose": "#d7a6b6",
+    "brand-slate": "#1f2933",
+    "brand-ink": "#111827"
+  },
+  boxShadow: {
+    card: "0 10px 30px rgba(0,0,0,0.08)",
+  },
+},
       boxShadow: {
         card: "0 10px 30px rgba(0,0,0,0.08)",
       },
