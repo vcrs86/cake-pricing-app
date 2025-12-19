@@ -1,5 +1,6 @@
 import { type PricingBreakdown } from "@/lib/pricing";
 import { useLanguage } from "@/lib/i18n";
+import { useState } from "react";
 import { Sparkles } from "lucide-react";
 
 const Row = ({ label, value }: { label: string; value: string }) => (
@@ -17,7 +18,7 @@ export function ResultCard({
   servings?: number;
 }) {
   const { copy } = useLanguage();
-
+const [photo, setPhoto] = useState<string | null>(null);
   const hasIngredients = pricing.ingredientsCost > 0;
   const hasAnyCost = pricing.baseCost > 0;
 
