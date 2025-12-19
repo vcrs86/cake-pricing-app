@@ -17,10 +17,11 @@ export function ResultCard({
   pricing: PricingBreakdown;
   servings?: number;
 }) {
-  const { copy } = useLanguage();
+const { copy } = useLanguage();
 const [photo, setPhoto] = useState<string | null>(null);
-  const hasIngredients = pricing.ingredientsCost > 0;
-  const hasAnyCost = pricing.baseCost > 0;
+
+const hasIngredients = pricing.ingredientsCost > 0;
+const hasAnyCost = pricing.baseCost > 0;
 
   return (
     <section className="rounded-2xl bg-white/90 p-5 shadow-card ring-1 ring-brand-cream backdrop-blur sm:p-6">
