@@ -9,7 +9,7 @@ import { CAKE_SIZES, calculatePricing } from "@/lib/pricing";
 import { useMemo, useState } from "react";
 import { buildIngredient, calculateRecipeCost, type Ingredient, type RecipeLine } from "@/lib/ingredients";
 import { useLanguage } from "@/lib/i18n";
-
+import { QuotePreviewCard } from "@/components/QuotePreviewCard";
 const DEFAULT_STATE: CalculatorFormState = {
   cakeSize: CAKE_SIZES[1].id,
   basicIngredientsCost: "0",
@@ -296,6 +296,13 @@ export default function HomePage() {
         </div>
         <div className="lg:col-span-1 space-y-3">
           <ResultCard pricing={pricing} servings={selectedSize.servings} />
+          <QuotePreviewCard
+  finalPrice={pricing.recommendedPrice}
+  servings={selectedSize.servings}
+  deliveryFee={pricing.deliveryFee}
+  imageUrl={undefined} // luego lo conectamos
+  message="Para reservar la fecha debe abonarse el 50%. Pagos vía Zelle, CashApp o efectivo."
+/>
           <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-xs leading-relaxed text-slate-600">
             <p className="font-semibold text-brand-slate">{copy.recipeInfo.title}</p>
             <ul className="mt-2 space-y-1 list-disc pl-4">
