@@ -2,7 +2,7 @@ import { type PricingBreakdown } from "@/lib/pricing";
 import { useLanguage } from "@/lib/i18n";
 import { useState } from "react";
 import { Sparkles } from "lucide-react";
-
+import { QuotePreviewCard } from "./QuotePreviewCard";
 const Row = ({ label, value }: { label: string; value: string }) => (
   <div className="flex items-center justify-between text-sm font-medium text-slate-700">
     <span>{label}</span>
