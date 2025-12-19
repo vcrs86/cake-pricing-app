@@ -16,9 +16,12 @@ export function QuotePreviewCard({
   message,
 }: QuotePreviewProps) {
   const { copy } = useLanguage();
-if (!finalPrice || finalPrice <= 0) return null;
+
+  // ⛔️ Regla CLAVE: si no hay precio, no se muestra nada
+  if (!finalPrice || finalPrice <= 0) return null;
+
   return (
-    <section className="print:shadow-none mx-auto max-w-md rounded-3xl border border-slate-200 bg-white p-6 shadow-lg">
+    <section className="mt-6 mx-auto max-w-md rounded-3xl border border-slate-200 bg-white p-6 shadow-lg print:shadow-none">
       {imageUrl ? (
         <img
           src={imageUrl}
@@ -28,7 +31,7 @@ if (!finalPrice || finalPrice <= 0) return null;
       ) : null}
 
       <h3 className="text-xl font-black text-brand-slate">
-        Cotización de pastel
+        Presupuesto de pastel
       </h3>
 
       <p className="mt-1 text-sm text-slate-500">
