@@ -45,7 +45,7 @@ export function ResultCard({
         ) : null}
       </div>
 
-      {/* PRECIO DESTACADO */}
+      {/* PRECIO RECOMENDADO */}
       <div className="mb-6 rounded-2xl border border-brand-peach/60 bg-gradient-to-r from-brand-cream via-white to-brand-peach/40 p-4 shadow-inner">
         <p className="text-xs uppercase tracking-wide text-slate-500">
           {copy.resultCard.highlightLabel}
@@ -58,12 +58,11 @@ export function ResultCard({
         </p>
       </div>
 
-      {/* FOTO DEL PASTEL */}
+      {/* FOTO */}
       <div className="mb-6 space-y-2">
         <label className="block text-sm font-semibold text-slate-700">
           📷 Foto del pastel (opcional)
         </label>
-
         <input
           type="file"
           accept="image/*"
@@ -75,11 +74,10 @@ export function ResultCard({
             reader.onload = () => setPhoto(reader.result as string);
             reader.readAsDataURL(file);
           }}
-          className="block w-full text-sm text-slate-600"
         />
       </div>
 
-      {/* PRESUPUESTO PARA EL CLIENTE */}
+      {/* 👉 TARJETA DEL CLIENTE (ESTA ES LA CLAVE) */}
       <QuotePreviewCard
         finalPrice={pricing.recommendedPrice}
         servings={servings}
@@ -88,7 +86,7 @@ export function ResultCard({
         message="Para reservar la fecha del pastel debe abonarse el 50%. El saldo restante se paga antes de la entrega."
       />
 
-      {/* DESGLOSE INTERNO (SOLO DECORADORA) */}
+      {/* DESGLOSE INTERNO */}
       {hasAnyCost ? (
         <div className="mt-6 space-y-2">
           {hasIngredients ? (
@@ -134,19 +132,8 @@ export function ResultCard({
             label={copy.resultCard.rows.recommended}
             value={`$${pricing.recommendedPrice.toFixed(2)}`}
           />
-
-          {pricing.pricePerServing ? (
-            <Row
-              label={copy.resultCard.rows.perServing}
-              value={`$${pricing.pricePerServing.toFixed(2)}`}
-            />
-          ) : null}
         </div>
       ) : null}
-
-      <p className="mt-4 text-xs leading-relaxed text-slate-500">
-        {copy.resultCard.footer}
-      </p>
     </section>
   );
 }
