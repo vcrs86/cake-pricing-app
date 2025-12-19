@@ -18,10 +18,10 @@ export type IngredientManagerProps = {
 
 export function IngredientManager({ ingredients, onAdd, onUpdate, onDelete }: IngredientManagerProps) {
   const { copy } = useLanguage();
-  const [name, setName] = useState("Butter");
-  const [unit, setUnit] = useState<UnitType>("g");
-  const [packageSize, setPackageSize] = useState("454");
-  const [packageCost, setPackageCost] = useState("4.5");
+  const [name, setName] = useState("");
+  const [unit, setUnit] = useState<UnitType>("");
+  const [packageSize, setPackageSize] = useState("");
+  const [packageCost, setPackageCost] = useState("");
 
   const canSave = useMemo(
     () => name.trim().length > 1 && Number(packageSize) > 0 && Number(packageCost) >= 0,
