@@ -19,7 +19,7 @@ export type IngredientManagerProps = {
 export function IngredientManager({ ingredients, onAdd, onUpdate, onDelete }: IngredientManagerProps) {
   const { copy } = useLanguage();
   const [name, setName] = useState("");
-  const [unit, setUnit] = useState<UnitType>("");
+  const [unit, setUnit] = useState<UnitType>("g");
   const [packageSize, setPackageSize] = useState("");
   const [packageCost, setPackageCost] = useState("");
 
