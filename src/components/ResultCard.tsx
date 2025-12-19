@@ -90,6 +90,49 @@ const [photo, setPhoto] = useState<string | null>(null);
     />
   </div>
 ) : null}
+      <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg print:shadow-none">
+  <div className="mb-4 text-center">
+    <h3 className="text-2xl font-black text-brand-slate">
+      Presupuesto de pastel
+    </h3>
+    <p className="text-sm text-slate-500">
+      {servings ? `${servings} porciones` : "Cotización personalizada"}
+    </p>
+  </div>
+
+  {photo ? (
+    <div className="mb-4 overflow-hidden rounded-xl">
+      <img
+        src={photo}
+        alt="Foto del pastel"
+        className="h-48 w-full object-cover"
+      />
+    </div>
+  ) : null}
+
+  <div className="space-y-2 text-sm">
+    <div className="flex justify-between">
+      <span>Precio total</span>
+      <span className="font-bold">
+        ${pricing.recommendedPrice.toFixed(2)}
+      </span>
+    </div>
+
+    {pricing.pricePerServing ? (
+      <div className="flex justify-between text-slate-600">
+        <span>Precio por porción</span>
+        <span>
+          ${pricing.pricePerServing.toFixed(2)}
+        </span>
+      </div>
+    ) : null}
+  </div>
+
+  <div className="mt-4 rounded-xl bg-slate-50 p-3 text-xs text-slate-600">
+    Este presupuesto incluye ingredientes, decoración y mano de obra.
+    El precio puede ajustarse según cambios en el diseño final.
+  </div>
+</div>
       {hasAnyCost ? (
         <div className="space-y-2">
           {hasIngredients ? (
