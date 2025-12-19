@@ -29,19 +29,24 @@ export function IngredientManager({ ingredients, onAdd, onUpdate, onDelete }: In
   );
 
   const handleAdd = () => {
-    if (!canSave) return;
-    const ingredient = buildIngredient({
-      id: crypto.randomUUID(),
-      name,
-      unit,
-      packageSize: Number(packageSize),
-      packageCost: Number(packageCost),
-    });
-    onAdd(ingredient);
-    setName("");
-    setPackageSize("");
-    setPackageCost("");
-  };
+  if (!canSave) return;
+
+  const ingredient = buildIngredient({
+    id: crypto.randomUUID(),
+    name,
+    unit,
+    packageSize: Number(packageSize),
+    packageCost: Number(packageCost),
+  });
+
+  onAdd(ingredient);
+
+  // 🔹 limpiar inputs después de agregar
+  setName("");
+  setPackageSize("");
+  setPackageCost("");
+  setUnit("g"); // o la unidad que prefieras como default
+};
 
   return (
     <div className="space-y-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-card sm:p-6">
