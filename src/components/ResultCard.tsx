@@ -90,15 +90,13 @@ const [photo, setPhoto] = useState<string | null>(null);
     />
   </div>
 ) : null}
-      <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg print:shadow-none">
-  <div className="mb-4 text-center">
-    <h3 className="text-2xl font-black text-brand-slate">
-      Presupuesto de pastel
-    </h3>
-    <p className="text-sm text-slate-500">
-      {servings ? `${servings} porciones` : "Cotización personalizada"}
-    </p>
-  </div>
+<QuotePreviewCard
+  finalPrice={pricing.recommendedPrice}
+  servings={servings}
+  deliveryFee={pricing.deliveryFee}
+  imageUrl={photo || undefined}
+  message="Para reservar la fecha del pastel debe abonarse el 50%. El saldo restante se paga antes de la entrega."
+/>
 
   {photo ? (
     <div className="mb-4 overflow-hidden rounded-xl">
