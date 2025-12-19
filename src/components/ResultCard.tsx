@@ -58,7 +58,38 @@ const [photo, setPhoto] = useState<string | null>(null);
           </div>
         </div>
       </div>
+<div className="mb-6 space-y-2">
+  <label className="block text-sm font-semibold text-slate-700">
+    📷 Foto del pastel (opcional)
+  </label>
 
+  <input
+    type="file"
+    accept="image/*"
+    onChange={(e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = () => setPhoto(reader.result as string);
+      reader.readAsDataURL(file);
+    }}
+    className="block w-full text-sm text-slate-600
+      file:mr-4 file:rounded-full file:border-0
+      file:bg-brand-slate file:px-4 file:py-2
+      file:text-sm file:font-semibold file:text-white
+      hover:file:bg-brand-slate/90"
+  />
+</div>
+{photo ? (
+  <div className="mb-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+    <img
+      src={photo}
+      alt="Foto del pastel"
+      className="h-56 w-full object-cover"
+    />
+  </div>
+) : null}
       {hasAnyCost ? (
         <div className="space-y-2">
           {hasIngredients ? (
