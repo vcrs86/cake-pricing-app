@@ -16,7 +16,7 @@ export function QuotePreviewCard({
   message,
 }: QuotePreviewProps) {
   const { copy } = useLanguage();
-
+if (!finalPrice || finalPrice <= 0) return null;
   return (
     <section className="print:shadow-none mx-auto max-w-md rounded-3xl border border-slate-200 bg-white p-6 shadow-lg">
       {imageUrl ? (
