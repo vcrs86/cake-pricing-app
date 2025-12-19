@@ -3,6 +3,7 @@ import { useLanguage } from "@/lib/i18n";
 import { useState } from "react";
 import { Sparkles } from "lucide-react";
 import { QuotePreviewCard } from "./QuotePreviewCard";
+
 const Row = ({ label, value }: { label: string; value: string }) => (
   <div className="flex items-center justify-between text-sm font-medium text-slate-700">
     <span>{label}</span>
@@ -17,14 +18,15 @@ export function ResultCard({
   pricing: PricingBreakdown;
   servings?: number;
 }) {
-const { copy } = useLanguage();
-const [photo, setPhoto] = useState<string | null>(null);
+  const { copy } = useLanguage();
+  const [photo, setPhoto] = useState<string | null>(null);
 
-const hasIngredients = pricing.ingredientsCost > 0;
-const hasAnyCost = pricing.baseCost > 0;
+  const hasIngredients = pricing.ingredientsCost > 0;
+  const hasAnyCost = pricing.baseCost > 0;
 
   return (
     <section className="rounded-2xl bg-white/90 p-5 shadow-card ring-1 ring-brand-cream backdrop-blur sm:p-6">
+      {/* HEADER */}
       <div className="mb-5 flex items-center justify-between gap-3">
         <div className="space-y-1">
           <p className="text-xs uppercase tracking-wide text-slate-500">
@@ -43,97 +45,52 @@ const hasAnyCost = pricing.baseCost > 0;
         ) : null}
       </div>
 
+      {/* PRECIO DESTACADO */}
       <div className="mb-6 rounded-2xl border border-brand-peach/60 bg-gradient-to-r from-brand-cream via-white to-brand-peach/40 p-4 shadow-inner">
-        <div className="flex items-center justify-between gap-3">
-          <div>
-            <p className="text-xs uppercase tracking-wide text-slate-500">
-              {copy.resultCard.highlightLabel}
-            </p>
-            <p className="text-3xl font-black text-brand-slate sm:text-4xl">
-              ${pricing.recommendedPrice.toFixed(2)}
-            </p>
-            <p className="text-xs text-slate-500">{copy.resultCard.highlightNote}</p>
-          </div>
-          <div className="text-3xl" aria-hidden>
-            🎂
-          </div>
-        </div>
+        <p className="text-xs uppercase tracking-wide text-slate-500">
+          {copy.resultCard.highlightLabel}
+        </p>
+        <p className="text-3xl font-black text-brand-slate sm:text-4xl">
+          ${pricing.recommendedPrice.toFixed(2)}
+        </p>
+        <p className="text-xs text-slate-500">
+          {copy.resultCard.highlightNote}
+        </p>
       </div>
-<div className="mb-6 space-y-2">
-  <label className="block text-sm font-semibold text-slate-700">
-    📷 Foto del pastel (opcional)
-  </label>
 
-  <input
-    type="file"
-    accept="image/*"
-    onChange={(e) => {
-      const file = e.target.files?.[0];
-      if (!file) return;
+      {/* FOTO DEL PASTEL */}
+      <div className="mb-6 space-y-2">
+        <label className="block text-sm font-semibold text-slate-700">
+          📷 Foto del pastel (opcional)
+        </label>
 
-      const reader = new FileReader();
-      reader.onload = () => setPhoto(reader.result as string);
-      reader.readAsDataURL(file);
-    }}
-    className="block w-full text-sm text-slate-600
-      file:mr-4 file:rounded-full file:border-0
-      file:bg-brand-slate file:px-4 file:py-2
-      file:text-sm file:font-semibold file:text-white
-      hover:file:bg-brand-slate/90"
-  />
-</div>
-{photo ? (
-  <div className="mb-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-    <img
-      src={photo}
-      alt="Foto del pastel"
-      className="h-56 w-full object-cover"
-    />
-  </div>
-) : null}
-<QuotePreviewCard
-  finalPrice={pricing.recommendedPrice}
-  servings={servings}
-  deliveryFee={pricing.deliveryFee}
-  imageUrl={photo || undefined}
-  message="Para reservar la fecha del pastel debe abonarse el 50%. El saldo restante se paga antes de la entrega."
-/>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (!file) return;
 
-  {photo ? (
-    <div className="mb-4 overflow-hidden rounded-xl">
-      <img
-        src={photo}
-        alt="Foto del pastel"
-        className="h-48 w-full object-cover"
+            const reader = new FileReader();
+            reader.onload = () => setPhoto(reader.result as string);
+            reader.readAsDataURL(file);
+          }}
+          className="block w-full text-sm text-slate-600"
+        />
+      </div>
+
+      {/* PRESUPUESTO PARA EL CLIENTE */}
+      <QuotePreviewCard
+        finalPrice={pricing.recommendedPrice}
+        servings={servings}
+        deliveryFee={pricing.deliveryFee}
+        imageUrl={photo || undefined}
+        message="Para reservar la fecha del pastel debe abonarse el 50%. El saldo restante se paga antes de la entrega."
       />
-    </div>
-  ) : null}
 
-  <div className="space-y-2 text-sm">
-    <div className="flex justify-between">
-      <span>Precio total</span>
-      <span className="font-bold">
-        ${pricing.recommendedPrice.toFixed(2)}
-      </span>
-    </div>
-
-    {pricing.pricePerServing ? (
-      <div className="flex justify-between text-slate-600">
-        <span>Precio por porción</span>
-        <span>
-          ${pricing.pricePerServing.toFixed(2)}
-        </span>
-      </div>
-    ) : null}
-  </div>
-
-  <div className="mt-4 rounded-xl bg-slate-50 p-3 text-xs text-slate-600">
-    Este presupuesto incluye ingredientes, decoración y mano de obra.
-    El precio puede ajustarse según cambios en el diseño final.
-  </div>
-</div>
+      {/* DESGLOSE INTERNO (SOLO DECORADORA) */}
       {hasAnyCost ? (
-        <div className="space-y-2">
+        <div className="mt-6 space-y-2">
           {hasIngredients ? (
             <Row
               label={copy.resultCard.rows.ingredients}
@@ -189,7 +146,6 @@ const hasAnyCost = pricing.baseCost > 0;
 
       <p className="mt-4 text-xs leading-relaxed text-slate-500">
         {copy.resultCard.footer}
-        <code className="ml-1 rounded bg-slate-100 px-1 py-0.5">src/lib/pricing.ts</code>.
       </p>
     </section>
   );
