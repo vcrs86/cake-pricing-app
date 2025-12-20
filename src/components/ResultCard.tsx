@@ -74,6 +74,15 @@ export function ResultCard({
             reader.readAsDataURL(file);
           }}
         />
+        {photo ? (
+  <div className="mt-4 overflow-hidden rounded-2xl border border-slate-200">
+    <img
+      src={photo}
+      alt="Vista previa del pastel"
+      className="h-56 w-full object-cover"
+    />
+  </div>
+) : null}
       </div>
 
       {/* BOTÓN DE IMPRESIÓN (SOLO SI HAY FOTO) */}
