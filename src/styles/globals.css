@@ -44,11 +44,18 @@ input[type="number"] {
 }
 @media print {
   body * {
-    display: none;
+    visibility: hidden;
   }
 
   .quote-print,
   .quote-print * {
-    display: block;
+    visibility: visible;
+  }
+
+  .quote-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
   }
 }
