@@ -298,7 +298,6 @@ export default function HomePage() {
           <ResultCard pricing={pricing} servings={selectedSize.servings} />
           <QuotePreviewCard
   finalPrice={pricing.recommendedPrice}
-  servings={servings}
   deliveryFee={pricing.deliveryFee}
   message="Para reservar la fecha del pastel debe abonarse el 50%. El saldo restante se paga antes de la entrega."
 />
