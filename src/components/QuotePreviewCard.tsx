@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { useLanguage } from "@/lib/i18n";
 
 type QuotePreviewProps = {
@@ -17,7 +18,15 @@ export function QuotePreviewCard({
 }: QuotePreviewProps) {
   const { copy } = useLanguage();
 
-  // ⛔️ Regla CLAVE: si no hay precio, no se muestra nada
+  // 🔒 BLOQUEO DEFINITIVO: solo se permite 1 render en toda la app
+  const hasRendered = useRef(false);
+
+  if (hasRendered.current) return null;
+
+  useEffect(() => {
+    hasRendered.current = true;
+  }, []);
+
   if (!finalPrice || finalPrice <= 0) return null;
 
   return (
@@ -31,7 +40,7 @@ export function QuotePreviewCard({
       ) : null}
 
       <h3 className="text-xl font-black text-brand-slate">
-        Presupuesto de pastel — TARJETA ÚNICA
+        Presupuesto de pastel
       </h3>
 
       <p className="mt-1 text-sm text-slate-500">
