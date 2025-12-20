@@ -312,9 +312,7 @@ export default function HomePage() {
             </p>
           ) : null}
         </div>
-      </section>
-      {/* === RESUMEN INVISIBLE PARA PDF (NO SE VE EN PANTALLA) === */}
-
+     
 </div>
     </main>
   );
