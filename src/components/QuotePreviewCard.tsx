@@ -21,7 +21,7 @@ export function QuotePreviewCard({
   if (!finalPrice || finalPrice <= 0) return null;
 
   return (
-    <section className="mt-6 mx-auto max-w-md rounded-3xl border border-slate-200 bg-white p-6 shadow-lg print:shadow-none">
+    <section className="quote-print mt-6 mx-auto max-w-md rounded-3xl border border-slate-200 bg-white p-6 shadow-lg print:shadow-none">
       {imageUrl ? (
         <img
           src={imageUrl}
