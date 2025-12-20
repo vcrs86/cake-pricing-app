@@ -79,13 +79,7 @@ export function ResultCard({
 
       {/* 👉 TARJETA DEL CLIENTE (ESTA ES LA CLAVE) */}
       {photo ? (
-  <QuotePreviewCard
-    finalPrice={pricing.recommendedPrice}
-    servings={servings}
-    deliveryFee={pricing.deliveryFee}
-    imageUrl={photo}
-    message="Para reservar la fecha del pastel debe abonarse el 50%. El saldo restante se paga antes de la entrega."
-  />
+  
 ) : null}
 <button
   onClick={() => window.print()}
