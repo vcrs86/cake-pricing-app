@@ -85,7 +85,12 @@ export function ResultCard({
         imageUrl={photo || undefined}
         message="Para reservar la fecha del pastel debe abonarse el 50%. El saldo restante se paga antes de la entrega."
       />
-
+<button
+  onClick={() => window.print()}
+  className="mt-4 w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-semibold text-white"
+>
+  📄 Descargar / Imprimir presupuesto
+</button>
       {/* DESGLOSE INTERNO */}
       {hasAnyCost ? (
         <div className="mt-6 space-y-2">
