@@ -313,6 +313,58 @@ export default function HomePage() {
           ) : null}
         </div>
       </section>
+      {/* === RESUMEN INVISIBLE PARA PDF (NO SE VE EN PANTALLA) === */}
+<div id="pdf-summary" style={{ display: "none" }}>
+  <div
+    style={{
+      padding: "24px",
+      fontFamily: "Arial, sans-serif",
+      maxWidth: "600px",
+      margin: "0 auto",
+      border: "1px solid #e5e7eb",
+      borderRadius: "12px",
+    }}
+  >
+    <h2 style={{ fontSize: "20px", fontWeight: "700", marginBottom: "8px" }}>
+      Presupuesto de pastel
+    </h2>
+
+    <p style={{ fontSize: "14px", marginBottom: "12px" }}>
+      {selectedSize.servings} porciones
+    </p>
+
+    {/*
+      FOTO
+      (solo se muestra si existe)
+    */}
+    {/* @ts-ignore */}
+    {document?.querySelector("img[alt='Vista previa del pastel']") ? (
+      <img
+        src={
+          // @ts-ignore
+          document.querySelector("img[alt='Vista previa del pastel']").src
+        }
+        alt="Foto del pastel"
+        style={{
+          width: "100%",
+          height: "220px",
+          objectFit: "cover",
+          borderRadius: "10px",
+          marginBottom: "16px",
+        }}
+      />
+    ) : null}
+
+    <div style={{ fontSize: "16px", fontWeight: "700", marginBottom: "8px" }}>
+      Total: ${pricing.recommendedPrice.toFixed(2)}
+    </div>
+
+    <p style={{ fontSize: "12px", color: "#555" }}>
+      Para reservar la fecha del pastel debe abonarse el 50%. El saldo restante se
+      paga antes de la entrega.
+    </p>
+  </div>
+</div>
     </main>
   );
 }
