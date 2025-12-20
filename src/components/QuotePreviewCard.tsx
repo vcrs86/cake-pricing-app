@@ -31,7 +31,7 @@ export function QuotePreviewCard({
       ) : null}
 
       <h3 className="text-xl font-black text-brand-slate">
-        Presupuesto de pastel
+        Presupuesto de pastel — TARJETA ÚNICA
       </h3>
 
       <p className="mt-1 text-sm text-slate-500">
