@@ -78,13 +78,15 @@ export function ResultCard({
       </div>
 
       {/* 👉 TARJETA DEL CLIENTE (ESTA ES LA CLAVE) */}
-      <QuotePreviewCard
-        finalPrice={pricing.recommendedPrice}
-        servings={servings}
-        deliveryFee={pricing.deliveryFee}
-        imageUrl={photo || undefined}
-        message="Para reservar la fecha del pastel debe abonarse el 50%. El saldo restante se paga antes de la entrega."
-      />
+      {photo ? (
+  <QuotePreviewCard
+    finalPrice={pricing.recommendedPrice}
+    servings={servings}
+    deliveryFee={pricing.deliveryFee}
+    imageUrl={photo}
+    message="Para reservar la fecha del pastel debe abonarse el 50%. El saldo restante se paga antes de la entrega."
+  />
+) : null}
 <button
   onClick={() => window.print()}
   className="mt-4 w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-semibold text-white"
