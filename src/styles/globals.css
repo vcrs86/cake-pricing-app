@@ -42,3 +42,13 @@ input[type="number"] {
     margin: 20mm;
   }
 }
+@media print {
+  body * {
+    display: none;
+  }
+
+  .quote-print,
+  .quote-print * {
+    display: block;
+  }
+}
