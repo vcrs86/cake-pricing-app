@@ -297,25 +297,47 @@ export default function HomePage() {
         <div className="lg:col-span-1 space-y-3">
           <ResultCard pricing={pricing} servings={selectedSize.servings} />
           <button
-  onClick={async () => {
-    const html2pdf = (await import("html2pdf.js")).default;
-    const element = document.getElementById("pdf-summary");
-    if (!element) return;
+  onClick={() => {
+    const content = document.getElementById("pdf-summary");
+    if (!content) return;
 
-    html2pdf()
-      .set({
-        margin: 10,
-        filename: "presupuesto-pastel.pdf",
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-      })
-      .from(element)
-      .save();
+    const win = window.open("", "_blank");
+    if (!win) return;
+
+    win.document.write(`
+      <html>
+        <head>
+          <title>Presupuesto de pastel</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              padding: 24px;
+            }
+            img {
+              width: 100%;
+              height: 220px;
+              object-fit: cover;
+              border-radius: 12px;
+              margin-bottom: 16px;
+            }
+          </style>
+        </head>
+        <body>
+          ${content.innerHTML}
+        </body>
+      </html>
+    `);
+
+    win.document.close();
+    win.focus();
+
+    setTimeout(() => {
+      win.print();
+    }, 300);
   }}
   className="mt-4 w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-semibold text-white"
 >
-  📄 Descargar presupuesto
+  📄 Descargar / Imprimir presupuesto
 </button>
           <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-xs leading-relaxed text-slate-600">
             <p className="font-semibold text-brand-slate">{copy.recipeInfo.title}</p>
