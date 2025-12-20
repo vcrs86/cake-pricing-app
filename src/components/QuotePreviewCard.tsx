@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { useLanguage } from "@/lib/i18n";
 
 type QuotePreviewProps = {
@@ -17,15 +16,6 @@ export function QuotePreviewCard({
   message,
 }: QuotePreviewProps) {
   const { copy } = useLanguage();
-
-  // 🔒 BLOQUEO DEFINITIVO: solo se permite 1 render en toda la app
-  const hasRendered = useRef(false);
-
-  if (hasRendered.current) return null;
-
-  useEffect(() => {
-    hasRendered.current = true;
-  }, []);
 
   if (!finalPrice || finalPrice <= 0) return null;
 
