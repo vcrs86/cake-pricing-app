@@ -296,17 +296,7 @@ export default function HomePage() {
         </div>
         <div className="lg:col-span-1 space-y-3">
           <ResultCard pricing={pricing} servings={selectedSize.servings} />
-          <QuotePreviewCard
-  finalPrice={pricing.recommendedPrice}
-  deliveryFee={pricing.deliveryFee}
-  message="Para reservar la fecha del pastel debe abonarse el 50%. El saldo restante se paga antes de la entrega."
-/>
-<button
-  onClick={() => window.print()}
-  className="mt-4 w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-semibold text-white"
->
-  📄 Descargar / Imprimir presupuesto
-</button>
+          
           <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-xs leading-relaxed text-slate-600">
             <p className="font-semibold text-brand-slate">{copy.recipeInfo.title}</p>
             <ul className="mt-2 space-y-1 list-disc pl-4">
