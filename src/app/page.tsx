@@ -379,24 +379,7 @@ export default function HomePage() {
       FOTO
       (solo se muestra si existe)
     */}
-    {/* @ts-ignore */}
-    {document?.querySelector("img[alt='Vista previa del pastel']") ? (
-      <img
-        src={
-          // @ts-ignore
-          document.querySelector("img[alt='Vista previa del pastel']").src
-        }
-        alt="Foto del pastel"
-        style={{
-          width: "100%",
-          height: "220px",
-          objectFit: "cover",
-          borderRadius: "10px",
-          marginBottom: "16px",
-        }}
-      />
-    ) : null}
-
+  
     <div style={{ fontSize: "16px", fontWeight: "700", marginBottom: "8px" }}>
       Total: ${pricing.recommendedPrice.toFixed(2)}
     </div>
