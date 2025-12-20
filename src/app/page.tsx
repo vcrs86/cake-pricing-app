@@ -296,49 +296,7 @@ export default function HomePage() {
         </div>
         <div className="lg:col-span-1 space-y-3">
           <ResultCard pricing={pricing} servings={selectedSize.servings} />
-          <button
-  onClick={() => {
-    const content = document.getElementById("pdf-summary");
-    if (!content) return;
-
-    const win = window.open("", "_blank");
-    if (!win) return;
-
-    win.document.write(`
-      <html>
-        <head>
-          <title>Presupuesto de pastel</title>
-          <style>
-            body {
-              font-family: Arial, sans-serif;
-              padding: 24px;
-            }
-            img {
-              width: 100%;
-              height: 220px;
-              object-fit: cover;
-              border-radius: 12px;
-              margin-bottom: 16px;
-            }
-          </style>
-        </head>
-        <body>
-          ${content.innerHTML}
-        </body>
-      </html>
-    `);
-
-    win.document.close();
-    win.focus();
-
-    setTimeout(() => {
-      win.print();
-    }, 300);
-  }}
-  className="mt-4 w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-semibold text-white"
->
-  📄 Descargar / Imprimir presupuesto
-</button>
+          
           <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-xs leading-relaxed text-slate-600">
             <p className="font-semibold text-brand-slate">{copy.recipeInfo.title}</p>
             <ul className="mt-2 space-y-1 list-disc pl-4">
