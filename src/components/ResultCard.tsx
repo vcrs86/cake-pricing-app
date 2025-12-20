@@ -2,7 +2,6 @@ import { type PricingBreakdown } from "@/lib/pricing";
 import { useLanguage } from "@/lib/i18n";
 import { useState } from "react";
 import { Sparkles } from "lucide-react";
-import { QuotePreviewCard } from "./QuotePreviewCard";
 
 const Row = ({ label, value }: { label: string; value: string }) => (
   <div className="flex items-center justify-between text-sm font-medium text-slate-700">
@@ -77,17 +76,19 @@ export function ResultCard({
         />
       </div>
 
-      {/* 👉 TARJETA DEL CLIENTE (ESTA ES LA CLAVE) */}
+      {/* BOTÓN DE IMPRESIÓN (SOLO SI HAY FOTO) */}
       {photo ? (
-<button
-  onClick={() => window.print()}
-  className="mt-4 w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-semibold text-white"
->
-  📄 Descargar / Imprimir presupuesto
-</button>
+        <button
+          onClick={() => window.print()}
+          className="mb-6 w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-semibold text-white"
+        >
+          📄 Descargar / Imprimir presupuesto
+        </button>
+      ) : null}
+
       {/* DESGLOSE INTERNO */}
       {hasAnyCost ? (
-        <div className="mt-6 space-y-2">
+        <div className="space-y-2">
           {hasIngredients ? (
             <Row
               label={copy.resultCard.rows.ingredients}
