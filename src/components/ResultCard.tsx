@@ -79,8 +79,6 @@ export function ResultCard({
 
       {/* 👉 TARJETA DEL CLIENTE (ESTA ES LA CLAVE) */}
       {photo ? (
-  
-) : null}
 <button
   onClick={() => window.print()}
   className="mt-4 w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-semibold text-white"
