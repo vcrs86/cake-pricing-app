@@ -313,7 +313,6 @@ export default function HomePage() {
           ) : null}
         </div>
      
-</div>
     </main>
   );
 }
