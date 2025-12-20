@@ -305,6 +305,7 @@ export default function HomePage() {
               ))}
             </ul>
           </div>
+          
           <ProFeatures />
           {!hasCalculated ? (
             <p className="text-xs text-slate-500">
@@ -312,7 +313,7 @@ export default function HomePage() {
             </p>
           ) : null}
         </div>
-     
+     </section>
     </main>
   );
 }
