@@ -328,6 +328,14 @@ export default function HomePage() {
           {/* === TARJETA CLIENTE (VISTA LIMPIA) === */}
 {pricing.recommendedPrice > 0 ? (
   <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg">
+    {clientPhoto ? (
+      <img
+        src={clientPhoto}
+        alt="Foto del pastel"
+        className="mb-4 h-48 w-full rounded-xl object-cover"
+      />
+    ) : null}
+
     <h3 className="text-xl font-black text-brand-slate">
       Presupuesto de pastel
     </h3>
@@ -336,13 +344,25 @@ export default function HomePage() {
       {selectedSize.servings} porciones
     </p>
 
-    <div className="mt-4 flex justify-between text-lg font-bold">
-      <span>Total</span>
-      <span>${pricing.recommendedPrice.toFixed(2)}</span>
+    <div className="mt-4 rounded-2xl bg-brand-cream/40 p-4 text-center">
+      <p className="text-xs uppercase tracking-wide text-slate-500">
+        Total
+      </p>
+      <p className="text-3xl font-black text-brand-slate">
+        ${pricing.recommendedPrice.toFixed(2)}
+      </p>
     </div>
 
-    <div className="mt-4 rounded-xl bg-slate-50 p-3 text-xs text-slate-600">
+    {pricing.deliveryFee > 0 ? (
+      <div className="mt-3 flex justify-between text-sm text-slate-600">
+        <span>Delivery</span>
+        <span>${pricing.deliveryFee.toFixed(2)}</span>
+      </div>
+    ) : null}
+
+    <div className="mt-4 rounded-xl bg-slate-50 p-3 text-xs text-slate-600 leading-relaxed">
       Para reservar la fecha del pastel debe abonarse el 50%.
+      El saldo restante se paga antes de la entrega.
     </div>
   </div>
 ) : null}
