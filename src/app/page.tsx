@@ -296,7 +296,27 @@ export default function HomePage() {
         </div>
         <div className="lg:col-span-1 space-y-3">
           <ResultCard pricing={pricing} servings={selectedSize.servings} />
-          
+          {/* === TARJETA CLIENTE (VISTA LIMPIA) === */}
+{pricing.recommendedPrice > 0 ? (
+  <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg">
+    <h3 className="text-xl font-black text-brand-slate">
+      Presupuesto de pastel
+    </h3>
+
+    <p className="mt-1 text-sm text-slate-500">
+      {selectedSize.servings} porciones
+    </p>
+
+    <div className="mt-4 flex justify-between text-lg font-bold">
+      <span>Total</span>
+      <span>${pricing.recommendedPrice.toFixed(2)}</span>
+    </div>
+
+    <div className="mt-4 rounded-xl bg-slate-50 p-3 text-xs text-slate-600">
+      Para reservar la fecha del pastel debe abonarse el 50%.
+    </div>
+  </div>
+) : null}
           <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-xs leading-relaxed text-slate-600">
             <p className="font-semibold text-brand-slate">{copy.recipeInfo.title}</p>
             <ul className="mt-2 space-y-1 list-disc pl-4">
