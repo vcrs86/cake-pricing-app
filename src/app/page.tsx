@@ -36,6 +36,7 @@ export default function HomePage() {
   const [hasCalculated, setHasCalculated] = useState<boolean>(false);
   const [ingredients, setIngredients] = useState<Ingredient[]>(DEFAULT_INGREDIENTS);
   const [recipeLines, setRecipeLines] = useState<RecipeLineInput[]>([]);
+  const [clientPhoto, setClientPhoto] = useState<string | null>(null);
 
   const selectedSize = useMemo(
     () => CAKE_SIZES.find((size) => size.id === values.cakeSize) ?? CAKE_SIZES[0],
@@ -296,6 +297,13 @@ export default function HomePage() {
         </div>
         <div className="lg:col-span-1 space-y-3">
           <ResultCard pricing={pricing} servings={selectedSize.servings} />
+          {clientPhoto ? (
+  <img
+    src={clientPhoto}
+    alt="Foto del pastel"
+    className="mb-4 h-48 w-full rounded-xl object-cover"
+  />
+) : null}
           {/* === TARJETA CLIENTE (VISTA LIMPIA) === */}
 {pricing.recommendedPrice > 0 ? (
   <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg">
