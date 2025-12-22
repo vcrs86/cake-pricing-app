@@ -318,13 +318,7 @@ export default function HomePage() {
     }}
   />
 </div>
-          {clientPhoto ? (
-  <img
-    src={clientPhoto}
-    alt="Foto del pastel"
-    className="mb-4 h-48 w-full rounded-xl object-cover"
-  />
-) : null}
+          
           {/* === TARJETA CLIENTE (VISTA LIMPIA) === */}
 {pricing.recommendedPrice > 0 ? (
   <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg">
@@ -332,7 +326,7 @@ export default function HomePage() {
       <img
         src={clientPhoto}
         alt="Foto del pastel"
-        className="mb-4 h-48 w-full rounded-xl object-cover"
+        className="mb-4 aspect-square w-full rounded-xl object-cover"
       />
     ) : null}
 
