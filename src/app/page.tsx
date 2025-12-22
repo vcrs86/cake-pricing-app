@@ -297,6 +297,27 @@ export default function HomePage() {
         </div>
         <div className="lg:col-span-1 space-y-3">
           <ResultCard pricing={pricing} servings={selectedSize.servings} />
+          {/* === SELECTOR DE FOTO PARA TARJETA CLIENTE === */}
+<div className="mt-4 space-y-2">
+  <label className="block text-sm font-semibold text-slate-700">
+    📷 Foto del pastel (opcional)
+  </label>
+
+  <input
+    type="file"
+    accept="image/*"
+    onChange={(e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        setClientPhoto(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }}
+  />
+</div>
           {clientPhoto ? (
   <img
     src={clientPhoto}
