@@ -18,7 +18,7 @@ export function ResultCard({
   servings?: number;
 }) {
   const { copy } = useLanguage();
-  const [photo, setPhoto] = useState<string | null>(null);
+  
 
   const hasIngredients = pricing.ingredientsCost > 0;
   const hasAnyCost = pricing.baseCost > 0;
@@ -56,44 +56,6 @@ export function ResultCard({
           {copy.resultCard.highlightNote}
         </p>
       </div>
-
-      {/* FOTO */}
-      <div className="mb-6 space-y-2">
-        <label className="block text-sm font-semibold text-slate-700">
-          📷 Foto del pastel (opcional)
-        </label>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => {
-            const file = e.target.files?.[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = () => setPhoto(reader.result as string);
-            reader.readAsDataURL(file);
-          }}
-        />
-        {photo ? (
-  <div className="mt-4 overflow-hidden rounded-2xl border border-slate-200">
-    <img
-      src={photo}
-      alt="Vista previa del pastel"
-      className="h-56 w-full object-cover"
-    />
-  </div>
-) : null}
-      </div>
-
-      {/* BOTÓN DE IMPRESIÓN (SOLO SI HAY FOTO) */}
-      {photo ? (
-        <button
-          onClick={() => window.print()}
-          className="mb-6 w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-semibold text-white"
-        >
-          📄 Descargar / Imprimir presupuesto
-        </button>
-      ) : null}
 
       {/* DESGLOSE INTERNO */}
       {hasAnyCost ? (
