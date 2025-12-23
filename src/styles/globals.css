@@ -59,3 +59,28 @@ input[type="number"] {
     width: 100%;
   }
 }
+/* =========================
+   IMPRESIÓN LIMPIA
+   ========================= */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .quote-print,
+  .quote-print * {
+    visibility: visible;
+  }
+
+  .quote-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    page-break-inside: avoid;
+  }
+
+  @page {
+    margin: 16mm;
+  }
+}
