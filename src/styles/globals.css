@@ -15,7 +15,7 @@ body {
   min-height: 100vh;
 }
 
-/* Quitar flechas de inputs number */
+/* Inputs number */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -27,32 +27,36 @@ input[type="number"] {
 }
 
 /* =================================================
-   IMPRESIÓN LIMPIA – UNA SOLA HOJA (FINAL)
+   IMPRESIÓN REALMENTE LIMPIA – UNA SOLA HOJA
    ================================================= */
 @media print {
+  /* 🔥 Reset TOTAL para impresión */
   html,
   body {
     margin: 0;
     padding: 0;
+    height: auto !important;
+    min-height: auto !important;
     background: white !important;
   }
 
-  /* Oculta todo */
+  /* ❌ Oculta TODO */
   body * {
-    visibility: hidden;
+    display: none !important;
   }
 
-  /* Muestra SOLO la tarjeta del cliente */
+  /* ✅ Muestra SOLO la tarjeta cliente */
   .quote-print,
   .quote-print * {
-    visibility: visible;
+    display: block !important;
   }
 
-  /* Contenedor de impresión */
+  /* Contenedor */
   .quote-print {
-    position: relative;
     margin: 0 auto;
     max-width: 420px;
+    page-break-after: avoid;
+    page-break-before: avoid;
     page-break-inside: avoid;
     break-inside: avoid;
   }
@@ -60,6 +64,7 @@ input[type="number"] {
   /* Imagen controlada */
   .quote-print img {
     max-height: 220px;
+    width: 100%;
     object-fit: cover;
   }
 
