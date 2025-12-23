@@ -356,12 +356,7 @@ export default function HomePage() {
         className="mb-4 aspect-square w-full rounded-xl object-cover"
       />
     ) : null}
-    <button
-  onClick={() => window.print()}
-  className="mt-4 w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-semibold text-white"
->
-  📄 Descargar / Imprimir presupuesto
-</button>
+    
 
     <h3 className="text-xl font-black text-brand-slate">
       Presupuesto de pastel
@@ -394,6 +389,12 @@ export default function HomePage() {
 ) : null}
   </div>
 ) : null}
+          <button
+  onClick={() => window.print()}
+  className="mt-4 w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-semibold text-white"
+>
+  📄 Descargar / Imprimir presupuesto
+</button>
           {/* === MENSAJES PREDEFINIDOS (FREE) === */}
 <div className="space-y-2">
   <p className="text-xs font-semibold text-slate-600">
