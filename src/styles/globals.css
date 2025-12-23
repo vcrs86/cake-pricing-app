@@ -30,33 +30,30 @@ input[type="number"] {
    IMPRESIÓN REALMENTE LIMPIA – UNA SOLA HOJA
    ================================================= */
 @media print {
-  /* 🔥 Reset TOTAL para impresión */
   html,
   body {
     margin: 0;
     padding: 0;
+    background: white !important;
     height: auto !important;
     min-height: auto !important;
-    background: white !important;
   }
 
-  /* ❌ Oculta TODO */
-  body * {
+  /* 🔑 Oculta TODO menos la tarjeta cliente */
+  body *:not(.quote-print):not(.quote-print *) {
     display: none !important;
   }
 
-  /* ✅ Muestra SOLO la tarjeta cliente */
+  /* Asegura visibilidad */
   .quote-print,
   .quote-print * {
     display: block !important;
   }
 
-  /* Contenedor */
+  /* Contenedor de impresión */
   .quote-print {
     margin: 0 auto;
     max-width: 420px;
-    page-break-after: avoid;
-    page-break-before: avoid;
     page-break-inside: avoid;
     break-inside: avoid;
   }
@@ -68,7 +65,6 @@ input[type="number"] {
     object-fit: cover;
   }
 
-  /* Página */
   @page {
     size: A4;
     margin: 15mm;
