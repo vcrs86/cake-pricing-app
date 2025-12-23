@@ -403,6 +403,23 @@ export default function HomePage() {
     ))}
   </div>
 </div>
+          {/* === MENSAJE PERSONALIZADO (PRO – BLOQUEADO) === */}
+<div className="space-y-1">
+  <label className="text-xs font-semibold text-slate-600">
+    Mensaje personalizado (PRO)
+  </label>
+
+  <textarea
+    value={clientMessage}
+    disabled
+    rows={3}
+    className="w-full resize-none rounded-xl border border-slate-300 bg-slate-100 p-3 text-xs text-slate-500 cursor-not-allowed"
+  />
+
+  <p className="text-[10px] text-slate-400">
+    Disponible en versión PRO
+  </p>
+</div>
           <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-xs leading-relaxed text-slate-600">
             <p className="font-semibold text-brand-slate">{copy.recipeInfo.title}</p>
             <ul className="mt-2 space-y-1 list-disc pl-4">
