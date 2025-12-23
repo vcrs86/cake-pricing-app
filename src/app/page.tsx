@@ -46,6 +46,7 @@ export default function HomePage() {
   const [clientMessage, setClientMessage] = useState(
   "Para reservar la fecha del pastel debe abonarse el 50%."
 );
+  const [isPro, setIsPro] = useState(false);
 
   const selectedSize = useMemo(
     () => CAKE_SIZES.find((size) => size.id === values.cakeSize) ?? CAKE_SIZES[0],
@@ -413,16 +414,30 @@ export default function HomePage() {
   </label>
 
   <textarea
-    value={clientMessage}
-    disabled
-    rows={3}
-    className="w-full resize-none rounded-xl border border-slate-300 bg-slate-100 p-3 text-xs text-slate-500 cursor-not-allowed"
-  />
+  value={clientMessage}
+  onChange={(e) => setClientMessage(e.target.value)}
+  disabled={!isPro}
+  rows={3}
+  className={`w-full resize-none rounded-xl border p-3 text-sm ${
+    isPro
+      ? "border-brand-rose bg-white text-slate-700"
+      : "border-slate-300 bg-slate-100 text-slate-600 cursor-not-allowed"
+  }`}
+/>
 
-  <p className="text-[10px] text-slate-400">
-    Disponible en versión PRO
-  </p>
+  <p className="mt-1 text-[10px] text-slate-400">
+  {isPro
+    ? "Mensaje editable (PRO activo)"
+    : "Edición disponible en versión PRO"}
+</p>
 </div>
+          <button
+  type="button"
+  onClick={() => setIsPro((prev) => !prev)}
+  className="mt-2 text-[10px] underline text-slate-400"
+>
+  (DEV) Alternar PRO
+</button>
           <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-xs leading-relaxed text-slate-600">
             <p className="font-semibold text-brand-slate">{copy.recipeInfo.title}</p>
             <ul className="mt-2 space-y-1 list-disc pl-4">
