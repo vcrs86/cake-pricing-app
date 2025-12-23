@@ -348,7 +348,7 @@ export default function HomePage() {
           
           {/* === TARJETA CLIENTE (VISTA LIMPIA) === */}
 {pricing.recommendedPrice > 0 ? (
-  <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg">
+  <div className="quote-print mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg">
     {clientPhoto ? (
       <img
         src={clientPhoto}
@@ -356,6 +356,12 @@ export default function HomePage() {
         className="mb-4 aspect-square w-full rounded-xl object-cover"
       />
     ) : null}
+    <button
+  onClick={() => window.print()}
+  className="mt-4 w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-semibold text-white"
+>
+  📄 Descargar / Imprimir presupuesto
+</button>
 
     <h3 className="text-xl font-black text-brand-slate">
       Presupuesto de pastel
