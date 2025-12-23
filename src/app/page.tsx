@@ -297,6 +297,29 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
           <p className="mt-1">{copy.basicIntro.body}</p>
         </section>
       )}
+      <div className="flex gap-2 rounded-2xl bg-slate-100 p-2">
+  <button
+    onClick={() => setActiveTab("calculator")}
+    className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
+      activeTab === "calculator"
+        ? "bg-white shadow text-brand-slate"
+        : "text-slate-500 hover:bg-white/60"
+    }`}
+  >
+    🧮 Calculadora
+  </button>
+
+  <button
+    onClick={() => setActiveTab("client")}
+    className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
+      activeTab === "client"
+        ? "bg-white shadow text-brand-slate"
+        : "text-slate-500 hover:bg-white/60"
+    }`}
+  >
+    🎨 Vista cliente
+  </button>
+</div>
 
       <section className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
