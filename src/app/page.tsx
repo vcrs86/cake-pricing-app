@@ -352,10 +352,10 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
       reader.readAsDataURL(file);
     }}
   />
-</div>
-        </div>
-      </section>
-      ) : null}
+  </div>
+ </div>
+</section>
+) : null}
 
           {/* MENSAJE PARA EL CLIENTE (FREE – SOLO LECTURA) */}
 <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
