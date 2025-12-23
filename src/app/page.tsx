@@ -348,7 +348,8 @@ export default function HomePage() {
           
           {/* === TARJETA CLIENTE (VISTA LIMPIA) === */}
 {pricing.recommendedPrice > 0 ? (
-  <div className="quote-print mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg">
+  <div className="quote-print mt-6 rounded-3xl border border-slate-200 bg-white p-5 shadow-lg max-w-[420px] mx-auto">
+  
     {clientPhoto ? (
       <img
         src={clientPhoto}
