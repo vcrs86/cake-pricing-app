@@ -352,10 +352,10 @@ export default function HomePage() {
   
     {clientPhoto ? (
       <img
-        src={clientPhoto}
-        alt="Foto del pastel"
-        className="mb-4 aspect-square w-full rounded-xl object-cover"
-      />
+  src={clientPhoto}
+  alt="Foto del pastel"
+  className="mb-3 aspect-square w-full max-h-[220px] rounded-xl object-cover"
+/>
     ) : null}
     
 
