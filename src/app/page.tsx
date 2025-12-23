@@ -327,19 +327,22 @@ export default function HomePage() {
     }}
   />
 </div>
-          {/* MENSAJE PARA EL CLIENTE */}
-<div className="rounded-2xl border border-slate-200 bg-white p-4">
-  <label className="mb-1 block text-sm font-semibold text-slate-700">
+          {/* MENSAJE PARA EL CLIENTE (FREE – SOLO LECTURA) */}
+<div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+  <label className="mb-1 block text-sm font-semibold text-slate-600">
     ✏️ Mensaje para el cliente
   </label>
 
   <textarea
     value={clientMessage}
-    onChange={(e) => setClientMessage(e.target.value)}
+    disabled
     rows={3}
-    className="w-full rounded-xl border border-slate-300 p-3 text-sm text-slate-700 focus:border-brand-rose focus:outline-none"
-    placeholder="Escribe aquí tus condiciones, pagos, tiempos, etc."
+    className="w-full resize-none rounded-xl border border-slate-300 bg-slate-100 p-3 text-sm text-slate-600 cursor-not-allowed"
   />
+
+  <p className="mt-1 text-[10px] text-slate-400">
+    Edición disponible en versión PRO
+  </p>
 </div>
           
           {/* === TARJETA CLIENTE (VISTA LIMPIA) === */}
