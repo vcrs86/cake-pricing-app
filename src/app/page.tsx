@@ -421,11 +421,37 @@ export default function HomePage() {
 >
   📄 Descargar / Imprimir presupuesto
 </button>
+          <button
+  onClick={() => {
+    const content = document.getElementById("print-only");
+    if (!content) return;
+
+    const win = window.open("", "_blank");
+    if (!win) return;
+
+    win.document.write(`
+      <html>
+        <head>
+          <title>Presupuesto</title>
+        </head>
+        <body>
+          ${content.innerHTML}
+        </body>
+      </html>
+    `);
+
+    win.document.close();
+    win.focus();
+  }}
+  className="mt-2 w-full rounded-xl border border-brand-slate px-4 py-3 text-sm font-semibold text-brand-slate"
+>
+  💾 Abrir vista PDF
+</button>
           {/* === CONTENIDO SOLO PARA IMPRESIÓN === */}
 <div id="print-only" style={{ display: "none" }}>
   <div style={{
     fontFamily: "Arial, sans-serif",
-    maxWidth: "420px",
+    maxWidth: "380px",
     margin: "0 auto",
     padding: "16px"
   }}>
