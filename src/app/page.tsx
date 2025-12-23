@@ -321,40 +321,44 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
   </button>
 </div>
       {activeTab === "calculator" ? (
-      <section className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2">
-          <CalculatorForm
-            mode={mode}
-            values={values}
-            onChange={(field, value) => setValues((prev) => ({ ...prev, [field]: value }))}
-            onSubmit={() => setHasCalculated(true)}
-          />
-        </div>
-        <div className="lg:col-span-1 space-y-3">
-          <ResultCard pricing={pricing} servings={selectedSize.servings} />
-          {/* === SELECTOR DE FOTO PARA TARJETA CLIENTE === */}
-<div className="mt-4 space-y-2">
-  <label className="block text-sm font-semibold text-slate-700">
-    📷 Foto del pastel (opcional)
-  </label>
+  <section className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+    <div className="lg:col-span-2">
+      <CalculatorForm
+        mode={mode}
+        values={values}
+        onChange={(field, value) =>
+          setValues((prev) => ({ ...prev, [field]: value }))
+        }
+        onSubmit={() => setHasCalculated(true)}
+      />
+    </div>
 
-  <input
-    type="file"
-    accept="image/*"
-    onChange={(e) => {
-      const file = e.target.files?.[0];
-      if (!file) return;
+    <div className="lg:col-span-1 space-y-3">
+      <ResultCard pricing={pricing} servings={selectedSize.servings} />
 
-      const reader = new FileReader();
-      reader.onload = () => {
-        setClientPhoto(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }}
-  />
-  </div>
- </div>
-</section>
+      {/* === SELECTOR DE FOTO PARA TARJETA CLIENTE === */}
+      <div className="mt-4 space-y-2">
+        <label className="block text-sm font-semibold text-slate-700">
+          📷 Foto del pastel (opcional)
+        </label>
+
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = () => {
+              setClientPhoto(reader.result as string);
+            };
+            reader.readAsDataURL(file);
+          }}
+        />
+      </div>
+    </div>
+  </section>
 ) : null}
 
           {/* MENSAJE PARA EL CLIENTE (FREE – SOLO LECTURA) */}
