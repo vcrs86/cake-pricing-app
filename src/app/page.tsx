@@ -37,6 +37,9 @@ export default function HomePage() {
   const [ingredients, setIngredients] = useState<Ingredient[]>(DEFAULT_INGREDIENTS);
   const [recipeLines, setRecipeLines] = useState<RecipeLineInput[]>([]);
   const [clientPhoto, setClientPhoto] = useState<string | null>(null);
+  const [clientMessage, setClientMessage] = useState(
+  "Para reservar la fecha del pastel debe abonarse el 50%."
+);
 
   const selectedSize = useMemo(
     () => CAKE_SIZES.find((size) => size.id === values.cakeSize) ?? CAKE_SIZES[0],
@@ -318,6 +321,20 @@ export default function HomePage() {
     }}
   />
 </div>
+          {/* MENSAJE PARA EL CLIENTE */}
+<div className="rounded-2xl border border-slate-200 bg-white p-4">
+  <label className="mb-1 block text-sm font-semibold text-slate-700">
+    ✏️ Mensaje para el cliente
+  </label>
+
+  <textarea
+    value={clientMessage}
+    onChange={(e) => setClientMessage(e.target.value)}
+    rows={3}
+    className="w-full rounded-xl border border-slate-300 p-3 text-sm text-slate-700 focus:border-brand-rose focus:outline-none"
+    placeholder="Escribe aquí tus condiciones, pagos, tiempos, etc."
+  />
+</div>
           
           {/* === TARJETA CLIENTE (VISTA LIMPIA) === */}
 {pricing.recommendedPrice > 0 ? (
@@ -354,10 +371,11 @@ export default function HomePage() {
       </div>
     ) : null}
 
-    <div className="mt-4 rounded-xl bg-slate-50 p-3 text-xs text-slate-600 leading-relaxed">
-      Para reservar la fecha del pastel debe abonarse el 50%.
-      El saldo restante se paga antes de la entrega.
-    </div>
+    {clientMessage ? (
+  <div className="mt-4 rounded-xl bg-slate-50 p-3 text-xs text-slate-600">
+    {clientMessage}
+  </div>
+) : null}
   </div>
 ) : null}
           <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-xs leading-relaxed text-slate-600">
