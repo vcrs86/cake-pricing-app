@@ -320,7 +320,7 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
     🎨 Vista cliente
   </button>
 </div>
-
+      {activeTab === "calculator" ? (
       <section className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
           <CalculatorForm
@@ -353,6 +353,10 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
     }}
   />
 </div>
+        </div>
+      </section>
+      ) : null}
+
           {/* MENSAJE PARA EL CLIENTE (FREE – SOLO LECTURA) */}
 <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
   <label className="mb-1 block text-sm font-semibold text-slate-600">
