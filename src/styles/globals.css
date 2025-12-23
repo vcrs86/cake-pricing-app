@@ -27,37 +27,8 @@ input[type="number"] {
 /* =========================
    Estilos para impresión
    ========================= */
-@media print {
-  body {
-    background: white !important;
-  }
 
-  /* Quita sombras al imprimir */
-  .print\:shadow-none {
-    box-shadow: none !important;
-  }
 
-  /* Evita márgenes raros */
-  @page {
-    margin: 20mm;
-  }
-}
-@media print {
-  body * {
-    visibility: hidden;
-  }
-
-  .quote-print,
-  .quote-print * {
-    visibility: visible;
-  }
-
-  .quote-print {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-  }
 }
 /* =========================
    IMPRESIÓN LIMPIA
@@ -82,5 +53,42 @@ input[type="number"] {
 
   @page {
     margin: 16mm;
+  }
+}
+/* =========================
+   IMPRESIÓN LIMPIA – UNA SOLA HOJA
+   ========================= */
+@media print {
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    background: white !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  .quote-print,
+  .quote-print * {
+    visibility: visible;
+  }
+
+  .quote-print {
+    position: relative;
+    margin: 0 auto;
+    max-width: 420px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .quote-print img {
+    max-height: 220px !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 15mm;
   }
 }
