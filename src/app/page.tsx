@@ -391,11 +391,87 @@ export default function HomePage() {
   </div>
 ) : null}
           <button
-  onClick={() => window.print()}
+  onClick={() => {
+    const content = document.getElementById("print-only");
+    if (!content) return;
+
+    const printWindow = window.open("", "_blank");
+    if (!printWindow) return;
+
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>Presupuesto</title>
+        </head>
+        <body>
+          ${content.innerHTML}
+        </body>
+      </html>
+    `);
+
+    printWindow.document.close();
+    printWindow.focus();
+
+    setTimeout(() => {
+      printWindow.print();
+      printWindow.close();
+    }, 300);
+  }}
   className="mt-4 w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-semibold text-white"
 >
   📄 Descargar / Imprimir presupuesto
 </button>
+          {/* === CONTENIDO SOLO PARA IMPRESIÓN === */}
+<div id="print-only" style={{ display: "none" }}>
+  <div style={{
+    fontFamily: "Arial, sans-serif",
+    maxWidth: "420px",
+    margin: "0 auto",
+    padding: "16px"
+  }}>
+    {clientPhoto ? (
+      <img
+        src={clientPhoto}
+        alt="Foto del pastel"
+        style={{
+          width: "100%",
+          aspectRatio: "1 / 1",
+          objectFit: "cover",
+          borderRadius: "12px",
+          marginBottom: "12px"
+        }}
+      />
+    ) : null}
+
+    <h2 style={{ fontSize: "20px", fontWeight: "700" }}>
+      Presupuesto de pastel
+    </h2>
+
+    <p style={{ fontSize: "14px", marginBottom: "8px" }}>
+      {selectedSize.servings} porciones
+    </p>
+
+    <p style={{ fontSize: "28px", fontWeight: "800", margin: "12px 0" }}>
+      ${pricing.recommendedPrice.toFixed(2)}
+    </p>
+
+    {pricing.deliveryFee > 0 ? (
+      <p style={{ fontSize: "14px" }}>
+        Delivery: ${pricing.deliveryFee.toFixed(2)}
+      </p>
+    ) : null}
+
+    {clientMessage ? (
+      <p style={{
+        fontSize: "12px",
+        marginTop: "12px",
+        color: "#555"
+      }}>
+        {clientMessage}
+      </p>
+    ) : null}
+  </div>
+</div>
           {/* === MENSAJES PREDEFINIDOS (FREE) === */}
 <div className="space-y-2">
   <p className="text-xs font-semibold text-slate-600">
