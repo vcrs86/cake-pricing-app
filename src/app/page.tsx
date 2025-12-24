@@ -391,10 +391,8 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
   alt="Foto del pastel"
   className="mb-3 aspect-square w-full max-h-[220px] rounded-xl object-cover"
 />
-    </div>
-    ) : null}
+) : null}
     
-
     <h3 className="text-xl font-black text-brand-slate">
       Presupuesto de pastel
     </h3>
@@ -420,10 +418,11 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
     ) : null}
 
     {clientMessage ? (
-  <div className="mt-4 rounded-xl bg-slate-50 p-3 text-xs text-slate-600">
-    {clientMessage}
-  </div>
-) : null}
+      <div className="mt-4 rounded-xl bg-slate-50 p-3 text-xs text-slate-600">
+        {clientMessage}
+      </div>
+    ) : null}
+    
   </div>
 ) : null}
           <button
@@ -599,9 +598,9 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
               {copy.recipeInfo.cta}
             </p>
           ) : null}
-              ) : null}
-        </div>
+        
      </section>
+  ) : null}
     </main>
   );
 }
