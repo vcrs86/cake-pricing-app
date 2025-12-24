@@ -1,4 +1,5 @@
 import { useLanguage } from "@/lib/i18n";
+import { BRANDING } from "@/lib/branding";
 
 type QuotePreviewProps = {
   finalPrice: number;
@@ -21,7 +22,10 @@ export function QuotePreviewCard({
 
   return (
     <section className="quote-print mt-6 mx-auto max-w-md rounded-3xl border border-slate-200 bg-white p-6 shadow-lg print:shadow-none">
-      {imageUrl ? (
+      <p className="mb-2 text-center text-xs font-semibold uppercase tracking-wide text-slate-400">
+  {BRANDING.businessName}
+</p>
+        {imageUrl ? (
         <img
           src={imageUrl}
           alt="Cake preview"
