@@ -362,7 +362,7 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
   </section>
 ) : null}
 {activeTab === "client" ? (
-  <section className="space-y-4"></section>
+  <section className="space-y-4">
           {/* MENSAJE PARA EL CLIENTE (FREE – SOLO LECTURA) */}
 <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
   <label className="mb-1 block text-sm font-semibold text-slate-600">
