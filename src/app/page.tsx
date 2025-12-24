@@ -361,8 +361,8 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
     </div>
   </section>
 ) : null}
-      // ⬆️ FIN BLOQUE CALCULATOR
 {activeTab === "client" ? (
+  <section className="space-y-4"
           {/* MENSAJE PARA EL CLIENTE (FREE – SOLO LECTURA) */}
 <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
   <label className="mb-1 block text-sm font-semibold text-slate-600">
@@ -391,6 +391,7 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
   alt="Foto del pastel"
   className="mb-3 aspect-square w-full max-h-[220px] rounded-xl object-cover"
 />
+    </div>
     ) : null}
     
 
