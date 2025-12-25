@@ -384,7 +384,11 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
           
           {/* === TARJETA CLIENTE (VISTA LIMPIA) === */}
 {pricing.recommendedPrice > 0 ? (
-  <div className="quote-print mt-6 rounded-3xl border border-slate-200 bg-white p-5 shadow-lg max-w-[420px] mx-auto">
+  <div className="quote-print relative mt-6 rounded-3xl border border-slate-200 bg-white p-5 shadow-lg max-w-[420px] mx-auto">
+    {/* BADGE PLAN — SOLO VISUAL */}
+<div className="absolute right-3 top-3 rounded-full bg-slate-100 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-slate-600">
+  FREE
+</div>
     {BRANDING.logoUrl ? (
   <div className="mb-3 flex justify-center">
     <img
