@@ -365,7 +365,13 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
 {activeTab === "client" ? (
   <section className="space-y-4">
           {/* MENSAJE PARA EL CLIENTE (FREE – SOLO LECTURA) */}
-<div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+<div className="relative rounded-2xl border border-slate-200 bg-slate-50 p-4">
+  {/* OVERLAY PRO — SOLO VISUAL */}
+<div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-2xl bg-white/60">
+  <div className="rounded-full bg-slate-900 px-4 py-2 text-[11px] font-bold uppercase tracking-wide text-white shadow">
+    Disponible en PRO
+  </div>
+</div>
   <label className="mb-1 block text-sm font-semibold text-slate-600">
     ✏️ Mensaje para el cliente
   </label>
