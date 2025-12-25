@@ -545,6 +545,17 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
         {clientMessage}
       </p>
     ) : null}
+    {/* FOOTER LEGAL — SOLO PDF */}
+<div className="mt-4 hidden border-t border-slate-200 pt-3 text-[10px] leading-snug text-slate-500 print:block">
+  <p>
+    Para reservar la fecha se requiere un abono del 50%. Los precios pueden variar
+    según cambios en el diseño final, ingredientes o servicios adicionales.
+  </p>
+  <p className="mt-1">
+    Esta cotización es válida por 7 días y no constituye un contrato hasta
+    confirmación por escrito.
+  </p>
+</div>
   </div>
 </div>
           {/* === MENSAJES PREDEFINIDOS (FREE) === */}
