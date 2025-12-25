@@ -16,8 +16,9 @@ export function ProFeatures() {
       </div>
 
       <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-        {copy.proFeatures.cards.map((card) => (
-          <LockedTile key={card.title} title={card.title} description={card.description} />
+        {copy.proFeatures.cards.map(
+          (card: { title: string; description: string }) => (
+             <LockedTile key={card.title} title={card.title} description={card.description} />
         ))}
       </div>
     </div>
