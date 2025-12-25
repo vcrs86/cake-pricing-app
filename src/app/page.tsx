@@ -321,29 +321,18 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
   >
     🎨 Vista cliente
   </button>
+
+  <button
+    onClick={() => setActiveTab("brand")}
+    className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
+      activeTab === "brand"
+        ? "bg-white shadow text-brand-slate"
+        : "text-slate-500 hover:bg-white/60"
+    }`}
+  >
+    🏷️ Mi marca
+  </button>
 </div>
-      <button
-  onClick={() => setActiveTab("brand")}
-  className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
-    activeTab === "brand"
-      ? "bg-white shadow text-brand-slate"
-      : "text-slate-500 hover:bg-white/60"
-  }`}
->
-  🏷️ Mi marca
-</button>
-      {activeTab === "calculator" ? (
-  <section className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-    <div className="lg:col-span-2">
-      <CalculatorForm
-        mode={mode}
-        values={values}
-        onChange={(field, value) =>
-          setValues((prev) => ({ ...prev, [field]: value }))
-        }
-        onSubmit={() => setHasCalculated(true)}
-      />
-    </div>
 
     <div className="lg:col-span-1 space-y-3">
       <ResultCard pricing={pricing} servings={selectedSize.servings} />
