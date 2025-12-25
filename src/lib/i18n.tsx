@@ -295,7 +295,7 @@ const translations: Record<Language, any> = {
 type LanguageContextValue = {
   language: Language;
   setLanguage: (lang: Language) => void;
-  copy: Copy;
+  copy: any;
 };
 
 const LanguageContext = createContext<LanguageContextValue | undefined>(undefined);
