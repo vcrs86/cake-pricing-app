@@ -126,7 +126,7 @@ type Copy = {
     label: string;
   };
 };
-const translations: Record<Language, Copy> = {
+const translations: Record<Language, any> = {
   es: {
     general: {
       appTitle: "Calcula el precio profesional de tu pastel",
