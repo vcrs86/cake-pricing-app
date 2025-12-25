@@ -426,6 +426,48 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
   className="mb-3 aspect-square w-full max-h-[220px] rounded-xl object-cover"
 />
 ) : null}
+    {activeTab === "brand" ? (
+  <section className="space-y-4 max-w-md mx-auto">
+    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow">
+      <h3 className="mb-1 text-lg font-bold text-brand-slate">
+        Mi marca
+      </h3>
+
+      <p className="mb-4 text-sm text-slate-500">
+        Personaliza cómo se verá tu marca en las cotizaciones.
+      </p>
+
+      {/* NOMBRE */}
+      <div className="mb-4">
+        <label className="mb-1 block text-sm font-semibold text-slate-600">
+          Nombre del negocio
+        </label>
+        <input
+          type="text"
+          value={BRANDING.businessName}
+          disabled
+          className="w-full rounded-xl border border-slate-300 bg-slate-100 p-3 text-sm text-slate-600 cursor-not-allowed"
+        />
+      </div>
+
+      {/* LOGO */}
+      <div>
+        <label className="mb-1 block text-sm font-semibold text-slate-600">
+          Logo
+        </label>
+
+        <div className="flex h-32 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-400">
+          Logo no configurado
+        </div>
+      </div>
+
+      {/* BLOQUEO PRO */}
+      <div className="mt-4 rounded-xl bg-slate-900/90 p-3 text-center text-xs font-bold uppercase tracking-wide text-white">
+        Disponible en PRO
+      </div>
+    </div>
+  </section>
+) : null}
     
     <h3 className="text-xl font-black text-brand-slate">
   {copy.client.quoteTitle}
