@@ -128,6 +128,9 @@ const translations: Record<Language, Copy> = {
       appTitle: "Calcula el precio profesional de tu pastel",
       tagline: "Una herramienta de cálculo pensada para decoradoras que trabajan con costos reales.",
       mobileFriendly: "Optimizada para móvil",
+      client: {
+  quoteTitle: "Presupuesto de pastel",
+},
     },
     download: {
       label: "Descarga",
@@ -269,6 +272,9 @@ const translations: Record<Language, Copy> = {
       appTitle: "Professional cake pricing",
       tagline: "A pricing tool built for decorators who work with real costs.",
       mobileFriendly: "Mobile optimized",
+      client: {
+  quoteTitle: "Cake quote",
+},
     },
     download: {
       label: "Download",
