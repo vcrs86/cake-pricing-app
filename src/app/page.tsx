@@ -322,6 +322,16 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
     🎨 Vista cliente
   </button>
 </div>
+      <button
+  onClick={() => setActiveTab("brand")}
+  className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
+    activeTab === "brand"
+      ? "bg-white shadow text-brand-slate"
+      : "text-slate-500 hover:bg-white/60"
+  }`}
+>
+  🏷️ Mi marca
+</button>
       {activeTab === "calculator" ? (
   <section className="grid grid-cols-1 gap-6 lg:grid-cols-3">
     <div className="lg:col-span-2">
