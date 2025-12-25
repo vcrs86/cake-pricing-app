@@ -10,6 +10,7 @@ import { useMemo, useState } from "react";
 import { buildIngredient, calculateRecipeCost, type Ingredient, type RecipeLine } from "@/lib/ingredients";
 import { useLanguage } from "@/lib/i18n";
 import { QuotePreviewCard } from "@/components/QuotePreviewCard";
+import { BRANDING } from "@/lib/branding";
 const DEFAULT_STATE: CalculatorFormState = {
   cakeSize: CAKE_SIZES[1].id,
   basicIngredientsCost: "0",
