@@ -600,7 +600,7 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
           <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-xs leading-relaxed text-slate-600">
             <p className="font-semibold text-brand-slate">{copy.recipeInfo.title}</p>
             <ul className="mt-2 space-y-1 list-disc pl-4">
-              {copy.recipeInfo.items.map((item) => (
+              {copy.recipeInfo.items.map((item: string) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
