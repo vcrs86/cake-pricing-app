@@ -385,6 +385,9 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
           {/* === TARJETA CLIENTE (VISTA LIMPIA) === */}
 {pricing.recommendedPrice > 0 ? (
   <div className="quote-print mt-6 rounded-3xl border border-slate-200 bg-white p-5 shadow-lg max-w-[420px] mx-auto">
+    <p className="mb-2 text-center text-xs font-semibold uppercase tracking-wide text-slate-400">
+  {BRANDING.businessName}
+</p>
   
     {clientPhoto ? (
       <img
