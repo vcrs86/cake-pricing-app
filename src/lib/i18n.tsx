@@ -4,139 +4,16 @@ import { createContext, useContext, useMemo, useState, type ReactNode } from "re
 
 type Language = "es" | "en";
 
-type Copy = {
-  client: {
-    quoteTitle: string;
-  };
-};
-  general: {
-    appTitle: string;
-    tagline: string;
-    mobileFriendly: string;
-  };
-  download: {
-    label: string;
-    title: string;
-    description: string;
-    button: string;
-  };
-  modes: {
-    label: string;
-    title: string;
-    description: string;
-    basic: string;
-    advanced: string;
-  };
-  basicIntro: {
-    title: string;
-    body: string;
-  };
-  ingredientManager: {
-    badge: string;
-    title: string;
-    helper: string;
-    name: string;
-    placeholder: string;
-    unit: string;
-    packageSize: string;
-    packageCost: string;
-    addButton: string;
-    empty: string;
-    costPerUnit: string;
-    actions: string;
-    delete: string;
-  };
-  recipeBuilder: {
-    badge: string;
-    title: string;
-    addLine: string;
-    empty: string;
-    per: string;
-    ingredient: string;
-    quantity: string;
-    lineCost: string;
-    remove: string;
-    total: string;
-  };
-  calculatorForm: {
-    quickIngredients: string;
-    quickIngredientsHelper: string;
-    ingredientCost: string;
-    quickHelp: string;
-    coreDetails: string;
-    cakeSize: string;
-    decorationCost: string;
-    decorationCostHelp: string;
-    hoursWorked: string;
-    hourlyRate: string;
-    complexity: string;
-    complexityHelp: string;
-    extras: string;
-    cakeTopper: string;
-    sugarFlowers: string;
-    freshFlowers: string;
-    figures3d: string;
-    extrasHint: string;
-    additionalServices: string;
-    setupHours: string;
-    setupRate: string;
-    deliveryFee: string;
-    profitMargin: string;
-    profitNote: string;
-    submit: string;
-    complexityOptions: {
-      basic: string;
-      intermediate: string;
-      advanced: string;
-      veryComplex: string;
-    };
-  };
-  resultCard: {
-    badge: string;
-    title: string;
-    servings: string;
-    highlightLabel: string;
-    highlightNote: string;
-    rows: {
-      ingredients: string;
-      decoration: string;
-      laborOnly: string;
-      extrasDelivery: string;
-      baseCost: string;
-      profit: string;
-      suggested: string;
-      recommended: string;
-      perServing: string;
-    };
-    footer: string;
-  };
-  recipeInfo: {
-    title: string;
-    items: string[];
-    cta: string;
-  };
-  proFeatures: {
-    title: string;
-    preview: string;
-    cards: { title: string; description: string }[];
-    locked: string;
-  };
-  formHelper: string;
-  languageToggle: {
-    label: string;
-  };
-};
 const translations: Record<Language, any> = {
   es: {
     general: {
       appTitle: "Calcula el precio profesional de tu pastel",
       tagline: "Una herramienta de cálculo pensada para decoradoras que trabajan con costos reales.",
       mobileFriendly: "Optimizada para móvil",
-      client: {
-  quoteTitle: "Presupuesto de pastel",
-},
     },
-  
+    client: {
+  quoteTitle: "Presupuesto de pastel",
+},  
     download: {
       label: "Descarga",
       title: "Obtén el proyecto completo en ZIP",
@@ -277,11 +154,10 @@ const translations: Record<Language, any> = {
       appTitle: "Professional cake pricing",
       tagline: "A pricing tool built for decorators who work with real costs.",
       mobileFriendly: "Mobile optimized",
-      client: {
-  quoteTitle: "Cake quote",
-},
     },
-    
+    client: {
+  quoteTitle: "Cake quote",
+},    
     download: {
       label: "Download",
       title: "Get the full project ZIP",
