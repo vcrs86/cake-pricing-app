@@ -47,7 +47,7 @@ export default function HomePage() {
   const [clientMessage, setClientMessage] = useState(
   "Para reservar la fecha del pastel debe abonarse el 50%."
 );
-  const [activeTab, setActiveTab] = useState<"calculator" | "client">("calculator");
+  const [activeTab, setActiveTab] = useState<"calculator" | "client" | "brand">("calculator");
   const [businessName, setBusinessName] = useState("Amaretto Cakes");
 const [businessLogo, setBusinessLogo] = useState<string | null>(null);
   const [isPro, setIsPro] = useState(false);
