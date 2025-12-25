@@ -408,8 +408,8 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
 ) : null}
     
     <h3 className="text-xl font-black text-brand-slate">
-      Presupuesto de pastel
-    </h3>
+  {copy.client.quoteTitle}
+</h3>
 
     <p className="mt-1 text-sm text-slate-500">
       {selectedSize.servings} porciones
