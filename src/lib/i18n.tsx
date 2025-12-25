@@ -5,6 +5,10 @@ import { createContext, useContext, useMemo, useState, type ReactNode } from "re
 type Language = "es" | "en";
 
 type Copy = {
+  client: {
+    quoteTitle: string;
+  };
+};
   general: {
     appTitle: string;
     tagline: string;
