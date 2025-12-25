@@ -426,7 +426,6 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
         Personaliza cómo se verá tu marca en las cotizaciones.
       </p>
 
-      {/* NOMBRE */}
       <div className="mb-4">
         <label className="mb-1 block text-sm font-semibold text-slate-600">
           Nombre del negocio
@@ -439,7 +438,6 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
         />
       </div>
 
-      {/* LOGO */}
       <div>
         <label className="mb-1 block text-sm font-semibold text-slate-600">
           Logo
@@ -450,13 +448,13 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
         </div>
       </div>
 
-      {/* BLOQUEO PRO */}
       <div className="mt-4 rounded-xl bg-slate-900/90 p-3 text-center text-xs font-bold uppercase tracking-wide text-white">
         Disponible en PRO
       </div>
     </div>
   </section>
 ) : null}
+    
     
     <h3 className="text-xl font-black text-brand-slate">
   {copy.client.quoteTitle}
