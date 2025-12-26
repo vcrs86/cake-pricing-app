@@ -13,7 +13,11 @@ const translations: Record<Language, any> = {
     },
     client: {
   quoteTitle: "Presupuesto de pastel",
-},  
+  servingsLabel: "porciones",
+  totalLabel: "Total",
+  deliveryLabel: "Delivery",
+},
+  
     download: {
       label: "Descarga",
       title: "Obtén el proyecto completo en ZIP",
