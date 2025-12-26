@@ -189,38 +189,54 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
     }
   };
   
-  return (
+   return (
     <main className="no-print mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-4 pb-12 pt-10 sm:px-6 lg:px-10">
       {/* HERO */}
       <section className="rounded-3xl bg-gradient-to-br from-brand-cream via-white to-brand-peach/30 p-7 shadow-card ring-1 ring-slate-100 backdrop-blur sm:p-10">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
           <div className="space-y-3">
-            <p className="text-xs uppercase tracking-wide text-slate-500">{copy.general.tagline}</p>
-            <h1 className="text-3xl font-black text-brand-slate sm:text-4xl">{copy.general.appTitle}</h1>
+            <p className="text-xs uppercase tracking-wide text-slate-500">
+              {copy.general.tagline}
+            </p>
+
+            <h1 className="text-3xl font-black text-brand-slate sm:text-4xl">
+              {copy.general.appTitle}
+            </h1>
+
             <p className="max-w-2xl text-sm leading-relaxed text-slate-600">
               {copy.general.tagline}{" "}
-              <code className="mx-1 rounded bg-slate-100 px-1">src/lib/pricing.ts</code>{" "}
-              <code className="mx-1 rounded bg-slate-100 px-1">src/lib/ingredients.ts</code>.
+              <code className="mx-1 rounded bg-slate-100 px-1">
+                src/lib/pricing.ts
+              </code>{" "}
+              <code className="mx-1 rounded bg-slate-100 px-1">
+                src/lib/ingredients.ts
+              </code>.
             </p>
           </div>
 
           <div className="flex flex-col items-end gap-3 self-start">
             <div className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-slate-600 ring-1 ring-brand-peach/60">
               <span>{copy.languageToggle.label}</span>
+
               <button
                 type="button"
                 onClick={() => setLanguage("es")}
                 className={`rounded-full px-2 py-1 text-xs font-bold ${
-                  language === "es" ? "bg-brand-rose text-brand-slate shadow" : "hover:bg-slate-100"
+                  language === "es"
+                    ? "bg-brand-rose text-brand-slate shadow"
+                    : "hover:bg-slate-100"
                 }`}
               >
                 ES
               </button>
+
               <button
                 type="button"
                 onClick={() => setLanguage("en")}
                 className={`rounded-full px-2 py-1 text-xs font-bold ${
-                  language === "en" ? "bg-brand-rose text-brand-slate shadow" : "hover:bg-slate-100"
+                  language === "en"
+                    ? "bg-brand-rose text-brand-slate shadow"
+                    : "hover:bg-slate-100"
                 }`}
               >
                 EN
