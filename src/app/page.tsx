@@ -304,36 +304,39 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
 
       {/* TABS */}
       <div className="flex gap-2 rounded-2xl bg-slate-100 p-2">
-        <button
-          type="button"
-          onClick={() => setActiveTab("calculator")}
-          className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
-            activeTab === "calculator" ? "bg-white shadow text-brand-slate" : "text-slate-500 hover:bg-white/60"
-          }`}
-        >
-          🧮 Calculadora
-        </button>
+  <button
+    onClick={() => setActiveTab("calculator")}
+    className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
+      activeTab === "calculator"
+        ? "bg-white shadow text-brand-slate"
+        : "text-slate-500 hover:bg-white/60"
+    }`}
+  >
+    🧮 Calculadora
+  </button>
 
-        <button
-          type="button"
-          onClick={() => setActiveTab("client")}
-          className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
-            activeTab === "client" ? "bg-white shadow text-brand-slate" : "text-slate-500 hover:bg-white/60"
-          }`}
-        >
-          🎨 Vista cliente
-        </button>
+  <button
+    onClick={() => setActiveTab("client")}
+    className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
+      activeTab === "client"
+        ? "bg-white shadow text-brand-slate"
+        : "text-slate-500 hover:bg-white/60"
+    }`}
+  >
+    🎨 Vista cliente
+  </button>
 
-        <button
-          type="button"
-          onClick={() => setActiveTab("brand")}
-          className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
-            activeTab === "brand" ? "bg-white shadow text-brand-slate" : "text-slate-500 hover:bg-white/60"
-          }`}
-        >
-          🏷️ Mi marca
-        </button>
-      </div>
+  <button
+    onClick={() => setActiveTab("brand")}
+    className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
+      activeTab === "brand"
+        ? "bg-white shadow text-brand-slate"
+        : "text-slate-500 hover:bg-white/60"
+    }`}
+  >
+    🏷️ Mi marca
+  </button>
+</div>
 
       {/* CALCULATOR TAB */}
       {activeTab === "calculator" ? (
