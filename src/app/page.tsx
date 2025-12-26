@@ -188,7 +188,7 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
       }));
     }
   };
-  
+  console.log("BEFORE RETURN OK");
   return (
     <main className="no-print mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-4 pb-12 pt-10 sm:px-6 lg:px-10">
       {/* HERO */}
