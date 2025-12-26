@@ -189,8 +189,9 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
       }));
     }
   };
-  return (
+    return (
     <main className="no-print mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-4 pb-12 pt-10 sm:px-6 lg:px-10">
+      {/* HERO */}
       <section className="rounded-3xl bg-gradient-to-br from-brand-cream via-white to-brand-peach/30 p-7 shadow-card ring-1 ring-slate-100 backdrop-blur sm:p-10">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
           <div className="space-y-3">
@@ -202,24 +203,30 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
               <code className="mx-1 rounded bg-slate-100 px-1">src/lib/ingredients.ts</code>.
             </p>
           </div>
+
           <div className="flex flex-col items-end gap-3 self-start">
             <div className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-slate-600 ring-1 ring-brand-peach/60">
               <span>{copy.languageToggle.label}</span>
               <button
                 type="button"
                 onClick={() => setLanguage("es")}
-                className={`rounded-full px-2 py-1 text-xs font-bold ${language === "es" ? "bg-brand-rose text-brand-slate shadow" : "hover:bg-slate-100"}`}
+                className={`rounded-full px-2 py-1 text-xs font-bold ${
+                  language === "es" ? "bg-brand-rose text-brand-slate shadow" : "hover:bg-slate-100"
+                }`}
               >
                 ES
               </button>
               <button
                 type="button"
                 onClick={() => setLanguage("en")}
-                className={`rounded-full px-2 py-1 text-xs font-bold ${language === "en" ? "bg-brand-rose text-brand-slate shadow" : "hover:bg-slate-100"}`}
+                className={`rounded-full px-2 py-1 text-xs font-bold ${
+                  language === "en" ? "bg-brand-rose text-brand-slate shadow" : "hover:bg-slate-100"
+                }`}
               >
                 EN
               </button>
             </div>
+
             <div className="flex items-center gap-3 self-start rounded-full bg-brand-peach/50 px-4 py-2 text-xs font-semibold text-brand-slate shadow-sm ring-1 ring-white/60">
               📱 {copy.general.mobileFriendly}
             </div>
@@ -227,14 +234,14 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
         </div>
       </section>
 
+      {/* DOWNLOAD */}
       <section className="rounded-3xl border border-slate-100 bg-gradient-to-r from-brand-cream via-white to-brand-peach/30 p-6 shadow-card backdrop-blur sm:flex sm:items-center sm:justify-between sm:p-7">
         <div className="space-y-2">
           <p className="text-xs uppercase tracking-wide text-slate-500">{copy.download.label}</p>
           <h2 className="text-lg font-bold text-brand-slate">{copy.download.title}</h2>
-          <p className="max-w-3xl text-sm leading-relaxed text-slate-600">
-            {copy.download.description}
-          </p>
+          <p className="max-w-3xl text-sm leading-relaxed text-slate-600">{copy.download.description}</p>
         </div>
+
         <a
           className="mt-4 inline-flex items-center justify-center rounded-full bg-brand-slate px-4 py-2 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-brand-slate/90 sm:mt-0"
           href="/cake-pricing-app.zip"
@@ -244,14 +251,14 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
         </a>
       </section>
 
+      {/* MODE */}
       <section className="rounded-3xl border border-slate-100 bg-white/80 p-6 shadow-card backdrop-blur sm:flex sm:items-center sm:justify-between sm:p-7">
         <div className="space-y-2">
           <p className="text-xs uppercase tracking-wide text-slate-500">{copy.modes.label}</p>
           <h2 className="text-lg font-bold text-brand-slate">{copy.modes.title}</h2>
-          <p className="max-w-3xl text-sm leading-relaxed text-slate-600">
-            {copy.modes.description}
-          </p>
+          <p className="max-w-3xl text-sm leading-relaxed text-slate-600">{copy.modes.description}</p>
         </div>
+
         <div className="mt-4 inline-flex rounded-full border border-slate-200 bg-white p-1 text-sm font-semibold text-brand-slate shadow-sm sm:mt-0">
           <button
             type="button"
@@ -274,14 +281,10 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
         </div>
       </section>
 
+      {/* ADVANCED HELPERS */}
       {mode === "advanced" ? (
         <section className="space-y-4">
-          <IngredientManager
-            ingredients={ingredients}
-            onAdd={handleAddIngredient}
-            onUpdate={handleUpdateIngredient}
-            onDelete={handleDeleteIngredient}
-          />
+          <IngredientManager ingredients={ingredients} onAdd={handleAddIngredient} onUpdate={handleUpdateIngredient} onDelete={handleDeleteIngredient} />
           <RecipeBuilder
             ingredients={ingredients}
             lines={recipeLines}
@@ -298,382 +301,350 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
           <p className="mt-1">{copy.basicIntro.body}</p>
         </section>
       )}
+
+      {/* TABS */}
       <div className="flex gap-2 rounded-2xl bg-slate-100 p-2">
-  <button
-    onClick={() => setActiveTab("calculator")}
-    className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
-      activeTab === "calculator"
-        ? "bg-white shadow text-brand-slate"
-        : "text-slate-500 hover:bg-white/60"
-    }`}
-  >
-    🧮 Calculadora
-  </button>
+        <button
+          type="button"
+          onClick={() => setActiveTab("calculator")}
+          className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
+            activeTab === "calculator" ? "bg-white shadow text-brand-slate" : "text-slate-500 hover:bg-white/60"
+          }`}
+        >
+          🧮 Calculadora
+        </button>
 
-  <button
-    onClick={() => setActiveTab("client")}
-    className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
-      activeTab === "client"
-        ? "bg-white shadow text-brand-slate"
-        : "text-slate-500 hover:bg-white/60"
-    }`}
-  >
-    🎨 Vista cliente
-  </button>
+        <button
+          type="button"
+          onClick={() => setActiveTab("client")}
+          className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
+            activeTab === "client" ? "bg-white shadow text-brand-slate" : "text-slate-500 hover:bg-white/60"
+          }`}
+        >
+          🎨 Vista cliente
+        </button>
 
-  <button
-    onClick={() => setActiveTab("brand")}
-    className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
-      activeTab === "brand"
-        ? "bg-white shadow text-brand-slate"
-        : "text-slate-500 hover:bg-white/60"
-    }`}
-  >
-    🏷️ Mi marca
-  </button>
-</div>
-
-    <div className="lg:col-span-1 space-y-3">
-      <ResultCard pricing={pricing} servings={selectedSize.servings} />
-
-      {/* === SELECTOR DE FOTO PARA TARJETA CLIENTE === */}
-      <div className="mt-4 space-y-2">
-        <label className="block text-sm font-semibold text-slate-700">
-          📷 Foto del pastel (opcional)
-        </label>
-
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => {
-            const file = e.target.files?.[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = () => {
-              setClientPhoto(reader.result as string);
-            };
-            reader.readAsDataURL(file);
-          }}
-        />
+        <button
+          type="button"
+          onClick={() => setActiveTab("brand")}
+          className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
+            activeTab === "brand" ? "bg-white shadow text-brand-slate" : "text-slate-500 hover:bg-white/60"
+          }`}
+        >
+          🏷️ Mi marca
+        </button>
       </div>
-    </div>
-  </section>
-) : null}
-{activeTab === "client" ? (
-  <section className="space-y-4">
+
+      {/* CALCULATOR TAB */}
+      {activeTab === "calculator" ? (
+        <section className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+          <div className="lg:col-span-2">
+            <CalculatorForm
+              mode={mode}
+              values={values}
+              onChange={(field, value) => setValues((prev) => ({ ...prev, [field]: value }))}
+              onSubmit={() => setHasCalculated(true)}
+            />
+          </div>
+
+          <div className="lg:col-span-1 space-y-3">
+            <ResultCard pricing={pricing} servings={selectedSize.servings} />
+
+            <div className="mt-4 space-y-2">
+              <label className="block text-sm font-semibold text-slate-700">📷 Foto del pastel (opcional)</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (!file) return;
+                  const reader = new FileReader();
+                  reader.onload = () => setClientPhoto(reader.result as string);
+                  reader.readAsDataURL(file);
+                }}
+              />
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {/* CLIENT TAB */}
+      {activeTab === "client" ? (
+        <section className="space-y-4">
           {/* MENSAJE PARA EL CLIENTE (FREE – SOLO LECTURA) */}
-<div className="relative rounded-2xl border border-slate-200 bg-slate-50 p-4">
-  {/* OVERLAY PRO — SOLO VISUAL */}
-<div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-2xl bg-white/60">
-  <div className="rounded-full bg-slate-900 px-4 py-2 text-[11px] font-bold uppercase tracking-wide text-white shadow">
-    Disponible en PRO
-  </div>
-</div>
-  <label className="mb-1 block text-sm font-semibold text-slate-600">
-    ✏️ Mensaje para el cliente
-  </label>
+          <div className="relative rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-2xl bg-white/60">
+              <div className="rounded-full bg-slate-900 px-4 py-2 text-[11px] font-bold uppercase tracking-wide text-white shadow">
+                Disponible en PRO
+              </div>
+            </div>
 
-  <textarea
-    value={clientMessage}
-    disabled
-    rows={3}
-    className="w-full resize-none rounded-xl border border-slate-300 bg-slate-100 p-3 text-sm text-slate-600 cursor-not-allowed"
-  />
+            <label className="mb-1 block text-sm font-semibold text-slate-600">✏️ Mensaje para el cliente</label>
+            <textarea
+              value={clientMessage}
+              disabled
+              rows={3}
+              className="w-full resize-none rounded-xl border border-slate-300 bg-slate-100 p-3 text-sm text-slate-600 cursor-not-allowed"
+            />
+            <p className="mt-1 text-[10px] text-slate-400">Edición disponible en versión PRO</p>
+          </div>
 
-  <p className="mt-1 text-[10px] text-slate-400">
-    Edición disponible en versión PRO
-  </p>
-</div>
-          
-          {/* === TARJETA CLIENTE (VISTA LIMPIA) === */}
-{pricing.recommendedPrice > 0 ? (
-  <div className="quote-print relative mt-6 rounded-3xl border border-slate-200 bg-white p-5 shadow-lg max-w-[420px] mx-auto">
-    {/* BADGE PLAN — SOLO VISUAL */}
-<div className="absolute right-3 top-3 rounded-full bg-slate-100 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-slate-600">
-  FREE
-</div>
-    {BRANDING.logoUrl ? (
-  <div className="mb-3 flex justify-center">
-    <img
-      src={BRANDING.logoUrl}
-      alt={BRANDING.businessName}
-      className="h-10 object-contain print:h-8"
-    />
-  </div>
-) : (
-  <p className="mb-2 text-center text-xs font-semibold uppercase tracking-wide text-slate-400">
-    {BRANDING.businessName}
-  </p>
-)}
-  
-    {clientPhoto ? (
-      <img
-  src={clientPhoto}
-  alt="Foto del pastel"
-  className="mb-3 aspect-square w-full max-h-[220px] rounded-xl object-cover"
-/>
-) : null}
-    {activeTab === "brand" ? (
-  <section className="space-y-4 max-w-md mx-auto">
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow">
-      <h3 className="mb-1 text-lg font-bold text-brand-slate">
-        Mi marca
-      </h3>
+          {/* TARJETA CLIENTE */}
+          {pricing.recommendedPrice > 0 ? (
+            <div className="quote-print relative mt-6 rounded-3xl border border-slate-200 bg-white p-5 shadow-lg max-w-[420px] mx-auto">
+              <div className="absolute right-3 top-3 rounded-full bg-slate-100 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-slate-600">
+                FREE
+              </div>
 
-      <p className="mb-4 text-sm text-slate-500">
-        Personaliza cómo se verá tu marca en las cotizaciones.
-      </p>
+              {BRANDING.logoUrl ? (
+                <div className="mb-3 flex justify-center">
+                  <img
+                    src={BRANDING.logoUrl}
+                    alt={BRANDING.businessName}
+                    className="h-10 object-contain print:h-8"
+                  />
+                </div>
+              ) : (
+                <p className="mb-2 text-center text-xs font-semibold uppercase tracking-wide text-slate-400">
+                  {BRANDING.businessName}
+                </p>
+              )}
 
-      <div className="mb-4">
-        <label className="mb-1 block text-sm font-semibold text-slate-600">
-          Nombre del negocio
-        </label>
-        <input
-          type="text"
-          value={BRANDING.businessName}
-          disabled
-          className="w-full rounded-xl border border-slate-300 bg-slate-100 p-3 text-sm text-slate-600 cursor-not-allowed"
-        />
-      </div>
+              {clientPhoto ? (
+                <img
+                  src={clientPhoto}
+                  alt="Foto del pastel"
+                  className="mb-3 aspect-square w-full max-h-[220px] rounded-xl object-cover"
+                />
+              ) : null}
 
-      <div>
-        <label className="mb-1 block text-sm font-semibold text-slate-600">
-          Logo
-        </label>
+              <h3 className="text-xl font-black text-brand-slate">{copy.client.quoteTitle}</h3>
 
-        <div className="flex h-32 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-400">
-          Logo no configurado
-        </div>
-      </div>
+              <p className="mt-1 text-sm text-slate-500">{selectedSize.servings} porciones</p>
 
-      <div className="mt-4 rounded-xl bg-slate-900/90 p-3 text-center text-xs font-bold uppercase tracking-wide text-white">
-        Disponible en PRO
-      </div>
-    </div>
-  </section>
-) : null}
-    
-    
-    <h3 className="text-xl font-black text-brand-slate">
-  {copy.client.quoteTitle}
-</h3>
+              <div className="mt-4 rounded-2xl bg-brand-cream/40 p-4 text-center">
+                <p className="text-xs uppercase tracking-wide text-slate-500">Total</p>
+                <p className="text-3xl font-black text-brand-slate">${pricing.recommendedPrice.toFixed(2)}</p>
+              </div>
 
-    <p className="mt-1 text-sm text-slate-500">
-      {selectedSize.servings} porciones
-    </p>
+              {pricing.deliveryFee > 0 ? (
+                <div className="mt-3 flex justify-between text-sm text-slate-600">
+                  <span>Delivery</span>
+                  <span>${pricing.deliveryFee.toFixed(2)}</span>
+                </div>
+              ) : null}
 
-    <div className="mt-4 rounded-2xl bg-brand-cream/40 p-4 text-center">
-      <p className="text-xs uppercase tracking-wide text-slate-500">
-        Total
-      </p>
-      <p className="text-3xl font-black text-brand-slate">
-        ${pricing.recommendedPrice.toFixed(2)}
-      </p>
-    </div>
+              {clientMessage ? (
+                <div className="mt-4 rounded-xl bg-slate-50 p-3 text-xs text-slate-600">{clientMessage}</div>
+              ) : null}
 
-    {pricing.deliveryFee > 0 ? (
-      <div className="mt-3 flex justify-between text-sm text-slate-600">
-        <span>Delivery</span>
-        <span>${pricing.deliveryFee.toFixed(2)}</span>
-      </div>
-    ) : null}
+              {/* FOOTER LEGAL — SOLO PDF */}
+              <div className="mt-4 hidden border-t border-slate-200 pt-3 text-[10px] leading-snug text-slate-500 print:block">
+                <p>
+                  Para reservar la fecha se requiere un abono del 50%. Los precios pueden variar según cambios en el diseño final, ingredientes o servicios adicionales.
+                </p>
+                <p className="mt-1">
+                  Esta cotización es válida por 7 días y no constituye un contrato hasta confirmación por escrito.
+                </p>
+              </div>
+            </div>
+          ) : null}
 
-    {clientMessage ? (
-      <div className="mt-4 rounded-xl bg-slate-50 p-3 text-xs text-slate-600">
-        {clientMessage}
-      </div>
-    ) : null}
-    
-  </div>
-) : null}
+          {/* BOTONES PRINT */}
           <button
-  onClick={() => {
-    const content = document.getElementById("print-only");
-    if (!content) return;
+            type="button"
+            onClick={() => {
+              const content = document.getElementById("print-only");
+              if (!content) return;
 
-    const printWindow = window.open("", "_blank");
-    if (!printWindow) return;
+              const printWindow = window.open("", "_blank");
+              if (!printWindow) return;
 
-    printWindow.document.write(`
-      <html>
-        <head>
-          <title>Presupuesto</title>
-        </head>
-        <body>
-          ${content.innerHTML}
-        </body>
-      </html>
-    `);
+              printWindow.document.write(`
+                <html>
+                  <head><title>Presupuesto</title></head>
+                  <body>${content.innerHTML}</body>
+                </html>
+              `);
 
-    printWindow.document.close();
-    printWindow.focus();
+              printWindow.document.close();
+              printWindow.focus();
 
-    setTimeout(() => {
-      printWindow.print();
-      printWindow.close();
-    }, 300);
-  }}
-  className="mt-4 w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-semibold text-white"
->
-  📄 Descargar / Imprimir presupuesto
-</button>
+              setTimeout(() => {
+                printWindow.print();
+                printWindow.close();
+              }, 300);
+            }}
+            className="mt-4 w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-semibold text-white"
+          >
+            📄 Descargar / Imprimir presupuesto
+          </button>
+
           <button
-  onClick={() => {
-    const content = document.getElementById("print-only");
-    if (!content) return;
+            type="button"
+            onClick={() => {
+              const content = document.getElementById("print-only");
+              if (!content) return;
 
-    const win = window.open("", "_blank");
-    if (!win) return;
+              const win = window.open("", "_blank");
+              if (!win) return;
 
-    win.document.write(`
-      <html>
-        <head>
-          <title>Presupuesto</title>
-        </head>
-        <body>
-          ${content.innerHTML}
-        </body>
-      </html>
-    `);
+              win.document.write(`
+                <html>
+                  <head><title>Presupuesto</title></head>
+                  <body>${content.innerHTML}</body>
+                </html>
+              `);
 
-    win.document.close();
-    win.focus();
-  }}
-  className="mt-2 w-full rounded-xl border border-brand-slate px-4 py-3 text-sm font-semibold text-brand-slate"
->
-  💾 Abrir vista PDF
-</button>
-          {/* === CONTENIDO SOLO PARA IMPRESIÓN === */}
-<div id="print-only" style={{ display: "none" }}>
-  <div style={{
-    fontFamily: "Arial, sans-serif",
-    maxWidth: "380px",
-    margin: "0 auto",
-    padding: "16px"
-  }}>
-    {clientPhoto ? (
-      <img
-        src={clientPhoto}
-        alt="Foto del pastel"
-        style={{
-          width: "100%",
-          aspectRatio: "1 / 1",
-          objectFit: "cover",
-          borderRadius: "12px",
-          marginBottom: "12px"
-        }}
-      />
-    ) : null}
+              win.document.close();
+              win.focus();
+            }}
+            className="mt-2 w-full rounded-xl border border-brand-slate px-4 py-3 text-sm font-semibold text-brand-slate"
+          >
+            💾 Abrir vista PDF
+          </button>
 
-    <h2 style={{ fontSize: "20px", fontWeight: "700" }}>
-      Presupuesto de pastel
-    </h2>
+          {/* CONTENIDO SOLO PARA IMPRESIÓN */}
+          <div id="print-only" style={{ display: "none" }}>
+            <div
+              style={{
+                fontFamily: "Arial, sans-serif",
+                maxWidth: "380px",
+                margin: "0 auto",
+                padding: "16px",
+              }}
+            >
+              {clientPhoto ? (
+                <img
+                  src={clientPhoto}
+                  alt="Foto del pastel"
+                  style={{
+                    width: "100%",
+                    aspectRatio: "1 / 1",
+                    objectFit: "cover",
+                    borderRadius: "12px",
+                    marginBottom: "12px",
+                  }}
+                />
+              ) : null}
 
-    <p style={{ fontSize: "14px", marginBottom: "8px" }}>
-      {selectedSize.servings} porciones
-    </p>
+              <h2 style={{ fontSize: "20px", fontWeight: "700" }}>Presupuesto de pastel</h2>
 
-    <p style={{ fontSize: "28px", fontWeight: "800", margin: "12px 0" }}>
-      ${pricing.recommendedPrice.toFixed(2)}
-    </p>
+              <p style={{ fontSize: "14px", marginBottom: "8px" }}>{selectedSize.servings} porciones</p>
 
-    {pricing.deliveryFee > 0 ? (
-      <p style={{ fontSize: "14px" }}>
-        Delivery: ${pricing.deliveryFee.toFixed(2)}
-      </p>
-    ) : null}
+              <p style={{ fontSize: "28px", fontWeight: "800", margin: "12px 0" }}>
+                ${pricing.recommendedPrice.toFixed(2)}
+              </p>
 
-    {clientMessage ? (
-      <p style={{
-        fontSize: "12px",
-        marginTop: "12px",
-        color: "#555"
-      }}>
-        {clientMessage}
-      </p>
-    ) : null}
-    {/* FOOTER LEGAL — SOLO PDF */}
-<div className="mt-4 hidden border-t border-slate-200 pt-3 text-[10px] leading-snug text-slate-500 print:block">
-  <p>
-    Para reservar la fecha se requiere un abono del 50%. Los precios pueden variar
-    según cambios en el diseño final, ingredientes o servicios adicionales.
-  </p>
-  <p className="mt-1">
-    Esta cotización es válida por 7 días y no constituye un contrato hasta
-    confirmación por escrito.
-  </p>
-</div>
-  </div>
-</div>
-          {/* === MENSAJES PREDEFINIDOS (FREE) === */}
-<div className="space-y-2">
-  <p className="text-xs font-semibold text-slate-600">
-    Mensajes rápidos:
-  </p>
+              {pricing.deliveryFee > 0 ? (
+                <p style={{ fontSize: "14px" }}>Delivery: ${pricing.deliveryFee.toFixed(2)}</p>
+              ) : null}
 
-  <div className="flex flex-wrap gap-2">
-    {CLIENT_MESSAGE_PRESETS.map((msg) => (
-      <button
-        key={msg}
-        type="button"
-        onClick={() => setClientMessage(msg)}
-        className="rounded-full border border-slate-300 bg-white px-3 py-1 text-xs text-slate-700 hover:bg-slate-100"
-      >
-        {msg}
-      </button>
-    ))}
-  </div>
-</div>
-          {/* === MENSAJE PERSONALIZADO (PRO – BLOQUEADO) === */}
-<div className="space-y-1">
-  <label className="text-xs font-semibold text-slate-600">
-    Mensaje personalizado (PRO)
-  </label>
+              {clientMessage ? (
+                <p style={{ fontSize: "12px", marginTop: "12px", color: "#555" }}>{clientMessage}</p>
+              ) : null}
 
-  <textarea
-  value={clientMessage}
-  onChange={(e) => setClientMessage(e.target.value)}
-  disabled={!isPro}
-  rows={3}
-  className={`w-full resize-none rounded-xl border p-3 text-sm ${
-    isPro
-      ? "border-brand-rose bg-white text-slate-700"
-      : "border-slate-300 bg-slate-100 text-slate-600 cursor-not-allowed"
-  }`}
-/>
+              <div style={{ borderTop: "1px solid #e5e7eb", paddingTop: "10px", marginTop: "14px", fontSize: "10px", color: "#6b7280", lineHeight: 1.35 }}>
+                <p>
+                  Para reservar la fecha se requiere un abono del 50%. Los precios pueden variar según cambios en el diseño final, ingredientes o servicios adicionales.
+                </p>
+                <p style={{ marginTop: "6px" }}>
+                  Esta cotización es válida por 7 días y no constituye un contrato hasta confirmación por escrito.
+                </p>
+              </div>
+            </div>
+          </div>
 
-  <p className="mt-1 text-[10px] text-slate-400">
-  {isPro
-    ? "Mensaje editable (PRO activo)"
-    : "Edición disponible en versión PRO"}
-</p>
-</div>
+          {/* MENSAJES PREDEFINIDOS (FREE) */}
+          <div className="space-y-2">
+            <p className="text-xs font-semibold text-slate-600">Mensajes rápidos:</p>
+            <div className="flex flex-wrap gap-2">
+              {CLIENT_MESSAGE_PRESETS.map((msg) => (
+                <button
+                  key={msg}
+                  type="button"
+                  onClick={() => setClientMessage(msg)}
+                  className="rounded-full border border-slate-300 bg-white px-3 py-1 text-xs text-slate-700 hover:bg-slate-100"
+                >
+                  {msg}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* MENSAJE PERSONALIZADO (PRO – BLOQUEADO) */}
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-slate-600">Mensaje personalizado (PRO)</label>
+            <textarea
+              value={clientMessage}
+              onChange={(e) => setClientMessage(e.target.value)}
+              disabled={!isPro}
+              rows={3}
+              className={`w-full resize-none rounded-xl border p-3 text-sm ${
+                isPro
+                  ? "border-brand-rose bg-white text-slate-700"
+                  : "border-slate-300 bg-slate-100 text-slate-600 cursor-not-allowed"
+              }`}
+            />
+            <p className="mt-1 text-[10px] text-slate-400">
+              {isPro ? "Mensaje editable (PRO activo)" : "Edición disponible en versión PRO"}
+            </p>
+          </div>
+
           <button
-  type="button"
-  onClick={() => setIsPro((prev) => !prev)}
-  className="mt-2 text-[10px] underline text-slate-400"
->
-  (DEV) Alternar PRO
-</button>
+            type="button"
+            onClick={() => setIsPro((prev) => !prev)}
+            className="mt-2 text-[10px] underline text-slate-400"
+          >
+            (DEV) Alternar PRO
+          </button>
+
           <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-xs leading-relaxed text-slate-600">
             <p className="font-semibold text-brand-slate">{copy.recipeInfo.title}</p>
-            <ul className="mt-2 space-y-1 list-disc pl-4">
+            <ul className="mt-2 list-disc space-y-1 pl-4">
               {copy.recipeInfo.items.map((item: string) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
           </div>
-          
+
           <ProFeatures />
-          {!hasCalculated ? (
-            <p className="text-xs text-slate-500">
-              {copy.recipeInfo.cta}
-            </p>
-          ) : null}
-        
-     </section>
-  ) : null}
+
+          {!hasCalculated ? <p className="text-xs text-slate-500">{copy.recipeInfo.cta}</p> : null}
+        </section>
+      ) : null}
+
+      {/* BRAND TAB */}
+      {activeTab === "brand" ? (
+        <section className="mx-auto max-w-md space-y-4">
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow">
+            <h3 className="mb-1 text-lg font-bold text-brand-slate">Mi marca</h3>
+            <p className="mb-4 text-sm text-slate-500">Personaliza cómo se verá tu marca en las cotizaciones.</p>
+
+            <div className="mb-4">
+              <label className="mb-1 block text-sm font-semibold text-slate-600">Nombre del negocio</label>
+              <input
+                type="text"
+                value={BRANDING.businessName}
+                disabled
+                className="w-full rounded-xl border border-slate-300 bg-slate-100 p-3 text-sm text-slate-600 cursor-not-allowed"
+              />
+            </div>
+
+            <div>
+              <label className="mb-1 block text-sm font-semibold text-slate-600">Logo</label>
+              <div className="flex h-32 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-400">
+                Logo no configurado
+              </div>
+            </div>
+
+            <div className="mt-4 rounded-xl bg-slate-900/90 p-3 text-center text-xs font-bold uppercase tracking-wide text-white">
+              Disponible en PRO
+            </div>
+          </div>
+        </section>
+      ) : null}
     </main>
   );
 }
+ 
