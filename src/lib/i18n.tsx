@@ -161,7 +161,11 @@ const translations: Record<Language, any> = {
     },
     client: {
   quoteTitle: "Cake quote",
-},    
+  servingsLabel: "servings",
+  totalLabel: "Total",
+  deliveryLabel: "Delivery",
+},
+        
     download: {
       label: "Download",
       title: "Get the full project ZIP",
