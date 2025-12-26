@@ -439,7 +439,7 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
 
               <h3 className="text-xl font-black text-brand-slate">{copy.client.quoteTitle}</h3>
 
-              <p className="mt-1 text-sm text-slate-500">{selectedSize.servings} {copy.client.servingsLabel}<p>
+              <p className="mt-1 text-sm text-slate-500">{selectedSize.servings} {copy.client.servingsLabel}</p>
 
               <div className="mt-4 rounded-2xl bg-brand-cream/40 p-4 text-center">
                 <p className="text-xs uppercase tracking-wide text-slate-500">
