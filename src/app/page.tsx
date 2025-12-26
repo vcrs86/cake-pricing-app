@@ -530,9 +530,12 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
                 />
               ) : null}
 
-              <h2 style={{ fontSize: "20px", fontWeight: "700" }}>Presupuesto de pastel</h2>
+              <h2 style={{ fontSize: "20px", fontWeight: "700" }}>
+  {copy.client.quoteTitle}
+</h2>
 
-              <p style={{ fontSize: "14px", marginBottom: "8px" }}>{selectedSize.servings} porciones</p>
+              <p style={{ fontSize: "14px", marginBottom: "8px" }}>{selectedSize.servings} {copy.client.servingsLabel}
+</p>
 
               <p style={{ fontSize: "28px", fontWeight: "800", margin: "12px 0" }}>
                 ${pricing.recommendedPrice.toFixed(2)}
