@@ -420,16 +420,18 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
 
               <h3 className="text-xl font-black text-brand-slate">{copy.client.quoteTitle}</h3>
 
-              <p className="mt-1 text-sm text-slate-500">{selectedSize.servings} porciones</p>
+              <p className="mt-1 text-sm text-slate-500">{selectedSize.servings} {copy.client.servingsLabel}
 
               <div className="mt-4 rounded-2xl bg-brand-cream/40 p-4 text-center">
-                <p className="text-xs uppercase tracking-wide text-slate-500">Total</p>
+                <p className="text-xs uppercase tracking-wide text-slate-500">
+  {copy.client.totalLabel}
+</p>
                 <p className="text-3xl font-black text-brand-slate">${pricing.recommendedPrice.toFixed(2)}</p>
               </div>
 
               {pricing.deliveryFee > 0 ? (
                 <div className="mt-3 flex justify-between text-sm text-slate-600">
-                  <span>Delivery</span>
+                  <span>{copy.client.deliveryLabel}</span>
                   <span>${pricing.deliveryFee.toFixed(2)}</span>
                 </div>
               ) : null}
