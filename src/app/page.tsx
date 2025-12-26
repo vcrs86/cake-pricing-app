@@ -187,6 +187,7 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
           prev.decorationComplexity === "very_complex" ? "advanced" : prev.decorationComplexity,
       }));
     }
+  };
   
   return (
     <main className="no-print mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-4 pb-12 pt-10 sm:px-6 lg:px-10">
@@ -422,7 +423,7 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
 
               <h3 className="text-xl font-black text-brand-slate">{copy.client.quoteTitle}</h3>
 
-              <p className="mt-1 text-sm text-slate-500">{selectedSize.servings} {copy.client.servingsLabel}
+              <p className="mt-1 text-sm text-slate-500">{selectedSize.servings} {copy.client.servingsLabel}<p>
 
               <div className="mt-4 rounded-2xl bg-brand-cream/40 p-4 text-center">
                 <p className="text-xs uppercase tracking-wide text-slate-500">
