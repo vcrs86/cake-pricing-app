@@ -399,7 +399,8 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
               rows={3}
               className="w-full resize-none rounded-xl border border-slate-300 bg-slate-100 p-3 text-sm text-slate-600 cursor-not-allowed"
             />
-            <p className="mt-1 text-[10px] text-slate-400">Edición disponible en versión PRO</p>
+            <p className="mt-1 text-[10px] text-slate-400">{copy.client.clientMessageLocked}
+</p>
           </div>
 
           {/* TARJETA CLIENTE */}
