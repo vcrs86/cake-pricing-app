@@ -17,6 +17,12 @@ const translations: Record<Language, any> = {
   totalLabel: "Total",
   deliveryLabel: "Delivery",
   quickMessages: "Mensajes rápidos:",
+      quickMessagePresets: [
+  "Para reservar la fecha del pastel debe abonarse el 50%.",
+  "Pagos vía Zelle, CashApp o efectivo.",
+  "El pedido debe confirmarse con al menos 72 horas de anticipación.",
+  "No se realizan devoluciones una vez confirmado el pedido.",
+],
 },
   
     download: {
@@ -184,6 +190,12 @@ brand: {
   totalLabel: "Total",
   deliveryLabel: "Delivery",
   quickMessages: "Quick messages:",
+      quickMessagePresets: [
+  "A 50% deposit is required to reserve the cake date.",
+  "Payments via Zelle, CashApp, or cash.",
+  "Orders must be confirmed at least 72 hours in advance.",
+  "No refunds once the order is confirmed.",
+],
 },
         
     download: {
