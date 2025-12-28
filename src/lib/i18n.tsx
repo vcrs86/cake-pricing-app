@@ -48,13 +48,14 @@ const translations: Record<Language, any> = {
     "Para reservar la fecha del pastel debe abonarse el 50%.",
     "Pagos vía Zelle, CashApp o efectivo.",
     "El pedido debe confirmarse con al menos 72 horas de anticipación.",
-    "No se realizan devoluciones una vez confirmado el pedido."
-  ]
-        legalNote1:
-  "Para reservar la fecha se requiere un abono del 50%. Los precios pueden variar según cambios en el diseño final, ingredientes o servicios adicionales.",
-legalNote2:
-  "Esta cotización es válida por 7 días y no constituye un contrato hasta confirmación por escrito.",
-      },
+    "No se realizan devoluciones una vez confirmado el pedido.",
+  ],
+
+  legalNote1:
+    "Para reservar la fecha se requiere un abono del 50%. Los precios pueden variar según cambios en el diseño final, ingredientes o servicios adicionales.",
+
+  legalNote2:
+    "Esta cotización es válida por 7 días y no constituye un contrato hasta confirmación por escrito.",
 },
   
     download: {
