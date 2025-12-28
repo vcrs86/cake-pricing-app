@@ -23,7 +23,6 @@ const translations: Record<Language, any> = {
   "El pedido debe confirmarse con al menos 72 horas de anticipación.",
   "No se realizan devoluciones una vez confirmado el pedido.",
 ],
-      client: {
   quoteTitle: "Presupuesto de pastel",
   servingsLabel: "porciones",
   totalLabel: "Total",
@@ -50,7 +49,6 @@ const translations: Record<Language, any> = {
     "El pedido debe confirmarse con al menos 72 horas de anticipación.",
     "No se realizan devoluciones una vez confirmado el pedido.",
   ],
-
   legalNote1:
     "Para reservar la fecha se requiere un abono del 50%. Los precios pueden variar según cambios en el diseño final, ingredientes o servicios adicionales.",
 
@@ -229,7 +227,6 @@ brand: {
   "Orders must be confirmed at least 72 hours in advance.",
   "No refunds once the order is confirmed.",
 ],
-      client: {
   quoteTitle: "Cake Quote",
   servingsLabel: "servings",
   totalLabel: "Total",
