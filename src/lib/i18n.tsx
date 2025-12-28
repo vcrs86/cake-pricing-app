@@ -224,6 +224,34 @@ brand: {
   "Orders must be confirmed at least 72 hours in advance.",
   "No refunds once the order is confirmed.",
 ],
+      client: {
+  quoteTitle: "Cake quote",
+  servingsLabel: "servings",
+  totalLabel: "Total",
+  deliveryLabel: "Delivery",
+
+  proBadge: "Available in PRO",
+  freeBadge: "FREE",
+
+  clientMessageLabel: "Client message",
+  clientMessageLocked: "Editing available in PRO version",
+
+  cakePhotoLabel: "Cake photo (optional)",
+
+  printButton: "Download / Print quote",
+  openPdfButton: "Open PDF view",
+
+  quickMessagesTitle: "Quick messages",
+  customMessageLabel: "Custom message (PRO)",
+  devTogglePro: "(DEV) Toggle PRO",
+
+  quickMessagePresets: [
+    "A 50% deposit is required to reserve the cake date.",
+    "Payments via Zelle, CashApp or cash.",
+    "Orders must be confirmed at least 72 hours in advance.",
+    "No refunds once the order is confirmed."
+  ]
+},
 },
         
     download: {
