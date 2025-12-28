@@ -456,13 +456,9 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
 
               {/* FOOTER LEGAL — SOLO PDF */}
               <div className="mt-4 hidden border-t border-slate-200 pt-3 text-[10px] leading-snug text-slate-500 print:block">
-                <p>
-                  Para reservar la fecha se requiere un abono del 50%. Los precios pueden variar según cambios en el diseño final, ingredientes o servicios adicionales.
-                </p>
-                <p className="mt-1">
-                  Esta cotización es válida por 7 días y no constituye un contrato hasta confirmación por escrito.
-                </p>
-              </div>
+  <p>{copy.client.legalNote1}</p>
+  <p className="mt-1">{copy.client.legalNote2}</p>
+</div>
             </div>
           ) : null}
 
@@ -562,14 +558,19 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
                 <p style={{ fontSize: "12px", marginTop: "12px", color: "#555" }}>{clientMessage}</p>
               ) : null}
 
-              <div style={{ borderTop: "1px solid #e5e7eb", paddingTop: "10px", marginTop: "14px", fontSize: "10px", color: "#6b7280", lineHeight: 1.35 }}>
-                <p>
-                  Para reservar la fecha se requiere un abono del 50%. Los precios pueden variar según cambios en el diseño final, ingredientes o servicios adicionales.
-                </p>
-                <p style={{ marginTop: "6px" }}>
-                  Esta cotización es válida por 7 días y no constituye un contrato hasta confirmación por escrito.
-                </p>
-              </div>
+              <div
+  style={{
+    borderTop: "1px solid #e5e7eb",
+    paddingTop: "10px",
+    marginTop: "14px",
+    fontSize: "10px",
+    color: "#6b7280",
+    lineHeight: 1.35,
+  }}
+>
+  <p>{copy.client.legalNote1}</p>
+  <p style={{ marginTop: "6px" }}>{copy.client.legalNote2}</p>
+</div>
             </div>
           </div>
 
