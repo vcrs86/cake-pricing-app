@@ -388,7 +388,7 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
           <div className="relative rounded-2xl border border-slate-200 bg-slate-50 p-4">
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-2xl bg-white/60">
               <div className="rounded-full bg-slate-900 px-4 py-2 text-[11px] font-bold uppercase tracking-wide text-white shadow">
-                Disponible en PRO
+                {copy.client.proBadge}
               </div>
             </div>
 
