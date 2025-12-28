@@ -151,6 +151,24 @@ const translations: Record<Language, any> = {
     languageToggle: {
       label: "Idioma",
     },
+    clientMessages: {
+  preset1: "Para reservar la fecha del pastel debe abonarse el 50%.",
+  preset2: "Pagos vía Zelle, CashApp o efectivo.",
+  preset3: "El pedido debe confirmarse con al menos 72 horas de anticipación.",
+  preset4: "No se realizan devoluciones una vez confirmado el pedido.",
+  quickLabel: "Mensajes rápidos:",
+  customLabel: "Mensaje personalizado (PRO)",
+  proOnly: "Disponible en PRO",
+  proEditOnly: "Edición disponible en versión PRO",
+  devToggle: "(DEV) Alternar PRO",
+},
+brand: {
+  title: "Mi marca",
+  description: "Personaliza cómo se verá tu marca en las cotizaciones.",
+  businessName: "Nombre del negocio",
+  logo: "Logo",
+  logoEmpty: "Logo no configurado",
+},
   },
 
   en: {
