@@ -28,12 +28,7 @@ const DEFAULT_STATE: CalculatorFormState = {
 };
 
 const DEFAULT_INGREDIENTS: Ingredient[] = [];
-const CLIENT_MESSAGE_PRESETS = [
-  "Para reservar la fecha del pastel debe abonarse el 50%.",
-  "Pagos vía Zelle, CashApp o efectivo.",
-  "El pedido debe confirmarse con al menos 72 horas de anticipación.",
-  "No se realizan devoluciones una vez confirmado el pedido.",
-];
+
 
 export default function HomePage() {
   const { copy, language, setLanguage } = useLanguage();
@@ -579,7 +574,9 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
 
           {/* MENSAJES PREDEFINIDOS (FREE) */}
           <div className="space-y-2">
-            <p className="text-xs font-semibold text-slate-600">Mensajes rápidos:</p>
+            <p className="text-xs font-semibold text-slate-600">
+  {copy.client.quickMessages}
+</p>
             <div className="flex flex-wrap gap-2">
               {CLIENT_MESSAGE_PRESETS.map((msg) => (
                 <button
