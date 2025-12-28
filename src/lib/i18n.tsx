@@ -16,6 +16,7 @@ const translations: Record<Language, any> = {
   servingsLabel: "porciones",
   totalLabel: "Total",
   deliveryLabel: "Delivery",
+  quickMessages: "Mensajes rápidos:",
 },
   
     download: {
@@ -182,6 +183,7 @@ brand: {
   servingsLabel: "servings",
   totalLabel: "Total",
   deliveryLabel: "Delivery",
+  quickMessages: "Quick messages:",
 },
         
     download: {
