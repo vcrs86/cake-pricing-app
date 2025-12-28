@@ -255,6 +255,10 @@ brand: {
     "Orders must be confirmed at least 72 hours in advance.",
     "No refunds once the order is confirmed."
   ]
+        legalNote1:
+  "A 50% deposit is required to reserve the date. Prices may vary depending on final design changes, ingredients, or additional services.",
+legalNote2:
+  "This quote is valid for 7 days and does not constitute a contract until confirmed in writing.",
 },
 },
         
