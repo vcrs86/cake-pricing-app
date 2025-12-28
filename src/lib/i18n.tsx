@@ -316,6 +316,24 @@ brand: {
     languageToggle: {
       label: "Language",
     },
+    clientMessages: {
+  preset1: "To reserve the cake date, a 50% deposit is required.",
+  preset2: "Payments via Zelle, CashApp, or cash.",
+  preset3: "Orders must be confirmed at least 72 hours in advance.",
+  preset4: "No refunds once the order is confirmed.",
+  quickLabel: "Quick messages:",
+  customLabel: "Custom message (PRO)",
+  proOnly: "Available in PRO",
+  proEditOnly: "Editing available in PRO version",
+  devToggle: "(DEV) Toggle PRO",
+},
+brand: {
+  title: "My brand",
+  description: "Customize how your brand appears in quotes.",
+  businessName: "Business name",
+  logo: "Logo",
+  logoEmpty: "Logo not configured",
+},
   },
 };
 type LanguageContextValue = {
