@@ -578,7 +578,7 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
   {copy.client.quickMessages}
 </p>
             <div className="flex flex-wrap gap-2">
-              {CLIENT_MESSAGE_PRESETS.map((msg) => (
+              {copy.client.quickMessagePresets.map((msg) => (
                 <button
                   key={msg}
                   type="button"
