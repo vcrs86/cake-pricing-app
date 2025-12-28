@@ -23,6 +23,34 @@ const translations: Record<Language, any> = {
   "El pedido debe confirmarse con al menos 72 horas de anticipación.",
   "No se realizan devoluciones una vez confirmado el pedido.",
 ],
+      client: {
+  quoteTitle: "Presupuesto de pastel",
+  servingsLabel: "porciones",
+  totalLabel: "Total",
+  deliveryLabel: "Delivery",
+
+  proBadge: "Disponible en PRO",
+  freeBadge: "FREE",
+
+  clientMessageLabel: "Mensaje para el cliente",
+  clientMessageLocked: "Edición disponible en versión PRO",
+
+  cakePhotoLabel: "Foto del pastel (opcional)",
+
+  printButton: "Descargar / Imprimir presupuesto",
+  openPdfButton: "Abrir vista PDF",
+
+  quickMessagesTitle: "Mensajes rápidos",
+  customMessageLabel: "Mensaje personalizado (PRO)",
+  devTogglePro: "(DEV) Alternar PRO",
+
+  quickMessagePresets: [
+    "Para reservar la fecha del pastel debe abonarse el 50%.",
+    "Pagos vía Zelle, CashApp o efectivo.",
+    "El pedido debe confirmarse con al menos 72 horas de anticipación.",
+    "No se realizan devoluciones una vez confirmado el pedido."
+  ]
+},
 },
   
     download: {
