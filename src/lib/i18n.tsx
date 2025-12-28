@@ -230,7 +230,7 @@ brand: {
   "No refunds once the order is confirmed.",
 ],
       client: {
-  quoteTitle: "Cake quote",
+  quoteTitle: "Cake Quote",
   servingsLabel: "servings",
   totalLabel: "Total",
   deliveryLabel: "Delivery",
@@ -238,7 +238,7 @@ brand: {
   proBadge: "Available in PRO",
   freeBadge: "FREE",
 
-  clientMessageLabel: "Client message",
+  clientMessageLabel: "Message for the client",
   clientMessageLocked: "Editing available in PRO version",
 
   cakePhotoLabel: "Cake photo (optional)",
@@ -252,15 +252,16 @@ brand: {
 
   quickMessagePresets: [
     "A 50% deposit is required to reserve the cake date.",
-    "Payments via Zelle, CashApp or cash.",
+    "Payments via Zelle, CashApp, or cash.",
     "Orders must be confirmed at least 72 hours in advance.",
-    "No refunds once the order is confirmed."
-  ]
-        legalNote1:
-  "A 50% deposit is required to reserve the date. Prices may vary depending on final design changes, ingredients, or additional services.",
-legalNote2:
-  "This quote is valid for 7 days and does not constitute a contract until confirmed in writing.",
-},
+    "No refunds once the order is confirmed.",
+  ],
+
+  legalNote1:
+    "A 50% deposit is required to reserve the date. Prices may vary depending on final design changes, ingredients, or additional services.",
+
+  legalNote2:
+    "This quote is valid for 7 days and does not constitute a contract until confirmed in writing.",
 },
         
     download: {
