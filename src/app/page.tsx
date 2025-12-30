@@ -532,16 +532,16 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
             >
               {clientPhoto ? (
                 <img
-                  src={clientPhoto}
-                  alt="Foto del pastel"
-                  style={{
-                    width: "100%",
-                    aspectRatio: "1 / 1",
-                    objectFit: "cover",
-                    borderRadius: "12px",
-                    marginBottom: "12px",
-                  }}
-                />
+  src={clientPhoto}
+  alt={copy.client.cakePhotoAlt}
+  style={{
+    width: "100%",
+    aspectRatio: "1 / 1",
+    objectFit: "cover",
+    borderRadius: "12px",
+    marginBottom: "12px",
+  }}
+/>
               ) : null}
 
               <h2 style={{ fontSize: "20px", fontWeight: "700" }}>
