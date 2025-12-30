@@ -364,7 +364,9 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
             <ResultCard pricing={pricing} servings={selectedSize.servings} />
 
             <div className="mt-4 space-y-2">
-              <label className="block text-sm font-semibold text-slate-700">📷 Foto del pastel (opcional)</label>
+              <label className="block text-sm font-semibold text-slate-700">
+                📷 {copy.client.cakePhotoLabel}
+              </label>
               <input
                 type="file"
                 accept="image/*"
