@@ -430,10 +430,10 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
 
               {clientPhoto ? (
                 <img
-                  src={clientPhoto}
-                  alt="Foto del pastel"
-                  className="mb-3 aspect-square w-full max-h-[220px] rounded-xl object-cover"
-                />
+  src={clientPhoto}
+  alt={copy.client.cakePhotoAlt}
+  className="mb-3 aspect-square w-full max-h-[220px] rounded-xl object-cover"
+/>
               ) : null}
 
               <h3 className="text-xl font-black text-brand-slate">{copy.client.quoteTitle}</h3>
