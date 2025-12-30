@@ -608,8 +608,8 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
               }`}
             />
             <p className="mt-1 text-[10px] text-slate-400">
-              {isPro ? "Mensaje editable (PRO activo)" : "Edición disponible en versión PRO"}
-            </p>
+              {isPro ? copy.client.proEditActive : copy.client.clientMessageLocked}
+            </p>    
           </div>
 
           <button
@@ -660,7 +660,7 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
             </div>
 
             <div className="mt-4 rounded-xl bg-slate-900/90 p-3 text-center text-xs font-bold uppercase tracking-wide text-white">
-              Disponible en PRO
+              {copy.client.proBadge}
             </div>
           </div>
         </section>
