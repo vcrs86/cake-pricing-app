@@ -39,12 +39,6 @@ const translations: Record<Language, any> = {
   customMessageLabel: "Mensaje personalizado (PRO)",
   devTogglePro: "(DEV) Alternar PRO",
 
-  quickMessagePresets: [
-    "Para reservar la fecha del pastel debe abonarse el 50%.",
-    "Pagos vía Zelle, CashApp o efectivo.",
-    "El pedido debe confirmarse con al menos 72 horas de anticipación.",
-    "No se realizan devoluciones una vez confirmado el pedido.",
-  ],
   legalNote1:
     "Para reservar la fecha se requiere un abono del 50%. Los precios pueden variar según cambios en el diseño final, ingredientes o servicios adicionales.",
 
@@ -238,13 +232,6 @@ brand: {
   quickMessagesTitle: "Quick messages",
   customMessageLabel: "Custom message (PRO)",
   devTogglePro: "(DEV) Toggle PRO",
-
-  quickMessagePresets: [
-    "A 50% deposit is required to reserve the cake date.",
-    "Payments via Zelle, CashApp, or cash.",
-    "Orders must be confirmed at least 72 hours in advance.",
-    "No refunds once the order is confirmed.",
-  ],
 
   legalNote1:
     "A 50% deposit is required to reserve the date. Prices may vary depending on final design changes, ingredients, or additional services.",
