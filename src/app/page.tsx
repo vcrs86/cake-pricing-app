@@ -392,7 +392,9 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
               </div>
             </div>
 
-            <label className="mb-1 block text-sm font-semibold text-slate-600">✏️ Mensaje para el cliente</label>
+            <label className="mb-1 block text-sm font-semibold text-slate-600">
+              ✏️ {copy.client.clientMessageLabel}
+            </label>
             <textarea
               value={clientMessage}
               disabled
@@ -595,7 +597,9 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
 
           {/* MENSAJE PERSONALIZADO (PRO – BLOQUEADO) */}
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-600">Mensaje personalizado (PRO)</label>
+            <label className="text-xs font-semibold text-slate-600">
+              {copy.client.customMessageLabel}
+            </label>
             <textarea
               value={clientMessage}
               onChange={(e) => setClientMessage(e.target.value)}
