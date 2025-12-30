@@ -468,33 +468,33 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
 
           {/* BOTONES PRINT */}
           <button
-            type="button"
-            onClick={() => {
-              const content = document.getElementById("print-only");
-              if (!content) return;
+  type="button"
+  onClick={() => {
+    const content = document.getElementById("print-only");
+    if (!content) return;
 
-              const printWindow = window.open("", "_blank");
-              if (!printWindow) return;
+    const printWindow = window.open("", "_blank");
+    if (!printWindow) return;
 
-              printWindow.document.write(`
-                <html>
-                  <head><title>Presupuesto</title></head>
-                  <body>${content.innerHTML}</body>
-                </html>
-              `);
+    printWindow.document.write(`
+      <html>
+        <head><title>Presupuesto</title></head>
+        <body>${content.innerHTML}</body>
+      </html>
+    `);
 
-              printWindow.document.close();
-              printWindow.focus();
+    printWindow.document.close();
+    printWindow.focus();
 
-              setTimeout(() => {
-                printWindow.print();
-                printWindow.close();
-              }, 300);
-            }}
-            className="mt-4 w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-semibold text-white"
-          >
-            📄 Descargar / Imprimir presupuesto
-          </button>
+    setTimeout(() => {
+      printWindow.print();
+      printWindow.close();
+    }, 300);
+  }}
+  className="mt-4 w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-semibold text-white"
+>
+  📄 {copy.client.printButton}
+</button>
 
           <button
             type="button"
