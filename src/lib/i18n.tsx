@@ -223,11 +223,7 @@ brand: {
   "Orders must be confirmed at least 72 hours in advance.",
   "No refunds once the order is confirmed.",
 ],
-  quoteTitle: "Cake Quote",
-  servingsLabel: "servings",
-  totalLabel: "Total",
-  deliveryLabel: "Delivery",
-
+  
   proBadge: "Available in PRO",
   freeBadge: "FREE",
 
