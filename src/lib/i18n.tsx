@@ -31,7 +31,7 @@ const translations: Record<Language, any> = {
   clientMessageLocked: "Edición disponible en versión PRO",
 
   cakePhotoLabel: "Foto del pastel (opcional)",
-
+      cakePhotoAlt: "Foto del pastel",
   printButton: "Descargar / Imprimir presupuesto",
   openPdfButton: "Abrir vista PDF",
 
@@ -225,6 +225,7 @@ brand: {
   clientMessageLocked: "Editing available in PRO version",
 
   cakePhotoLabel: "Cake photo (optional)",
+      cakePhotoAlt: "Cake photo",
 
   printButton: "Download / Print quote",
   openPdfButton: "Open PDF view",
