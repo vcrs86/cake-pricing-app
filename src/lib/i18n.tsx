@@ -197,6 +197,11 @@ brand: {
   logo: "Logo",
   logoEmpty: "Logo no configurado",
 },
+    tabs: {
+  calculator: "Calculadora",
+  client: "Vista cliente",
+  brand: "Mi marca",
+},
   },
 
   en: {
@@ -390,6 +395,11 @@ brand: {
   businessName: "Business name",
   logo: "Logo",
   logoEmpty: "Logo not configured",
+},
+    tabs: {
+  calculator: "Calculator",
+  client: "Client view",
+  brand: "My brand",
 },
   },
 };
