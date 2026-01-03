@@ -322,7 +322,7 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
         : "text-slate-500 hover:bg-white/60"
     }`}
   >
-    🧮 Calculadora
+    🧮 {copy.tabs.calculator}
   </button>
 
   <button
@@ -333,7 +333,7 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
         : "text-slate-500 hover:bg-white/60"
     }`}
   >
-    🎨 Vista cliente
+    🎨 {copy.tabs.client}
   </button>
 
   <button
@@ -344,7 +344,7 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
         : "text-slate-500 hover:bg-white/60"
     }`}
   >
-    🏷️ Mi marca
+    🏷️ {copy.tabs.brand}
   </button>
 </div>
 
