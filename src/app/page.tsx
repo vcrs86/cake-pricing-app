@@ -517,7 +517,7 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
             }}
             className="mt-2 w-full rounded-xl border border-brand-slate px-4 py-3 text-sm font-semibold text-brand-slate"
           >
-            💾 Abrir vista PDF
+            💾 {copy.client.openPdfButton}
           </button>
 
           {/* CONTENIDO SOLO PARA IMPRESIÓN */}
