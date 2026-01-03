@@ -39,7 +39,7 @@ export default function HomePage() {
   const [recipeLines, setRecipeLines] = useState<RecipeLineInput[]>([]);
   const [clientPhoto, setClientPhoto] = useState<string | null>(null);
   const [clientMessage, setClientMessage] = useState(
-  "Para reservar la fecha del pastel debe abonarse el 50%."
+  copy.client.quickMessagePresets[0]
 );
   const [activeTab, setActiveTab] = useState<"calculator" | "client" | "brand">("calculator");
   const [businessName, setBusinessName] = useState("Amaretto Cakes");
