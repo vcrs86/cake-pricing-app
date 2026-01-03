@@ -6,7 +6,6 @@ import { RecipeBuilder, type RecipeLineInput } from "@/components/RecipeBuilder"
 import { ResultCard } from "@/components/ResultCard";
 import { ProFeatures } from "@/components/ProFeatures";
 import { CAKE_SIZES, calculatePricing } from "@/lib/pricing";
-import { useMemo, useState } from "react";
 import { buildIngredient, calculateRecipeCost, type Ingredient, type RecipeLine } from "@/lib/ingredients";
 import { useLanguage } from "@/lib/i18n";
 import { BRANDING } from "@/lib/branding";
