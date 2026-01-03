@@ -29,6 +29,7 @@ const translations: Record<Language, any> = {
 
   clientMessageLabel: "Mensaje para el cliente",
   clientMessageLocked: "Edición disponible en versión PRO",
+  proEditActive: "Mensaje editable (PRO activo)",
 
   cakePhotoLabel: "Foto del pastel (opcional)",
       cakePhotoAlt: "Foto del pastel",
@@ -228,6 +229,7 @@ brand: {
 
   clientMessageLabel: "Message for the client",
   clientMessageLocked: "Editing available in PRO version",
+  proEditActive: "Editable message (PRO active)",
 
   cakePhotoLabel: "Cake photo (optional)",
       cakePhotoAlt: "Cake photo",
