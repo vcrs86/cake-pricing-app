@@ -431,7 +431,7 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
               {clientPhoto ? (
                 <img
   src={clientPhoto}
-  alt={copy.client.cakePhotoAlt}
+  alt={copy.client.cakePhotoLabel}
   className="mb-3 aspect-square w-full max-h-[220px] rounded-xl object-cover"
 />
               ) : null}
@@ -614,7 +614,7 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
               }`}
             />
             <p className="mt-1 text-[10px] text-slate-400">
-              {isPro ? copy.client.proEditActive : copy.client.clientMessageLocked}
+              {isPro ? copy.client.customMessageLabel : copy.client.clientMessageLocked}
             </p>    
           </div>
 
