@@ -645,11 +645,11 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
       {activeTab === "brand" ? (
         <section className="mx-auto max-w-md space-y-4">
           <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow">
-            <h3 className="mb-1 text-lg font-bold text-brand-slate">Mi marca</h3>
-            <p className="mb-4 text-sm text-slate-500">Personaliza cómo se verá tu marca en las cotizaciones.</p>
+            <h3 className="mb-1 text-lg font-bold text-brand-slate">{copy.brand.title}</h3>
+            <p className="mb-4 text-sm text-slate-500">{copy.brand.description}</p>
 
             <div className="mb-4">
-              <label className="mb-1 block text-sm font-semibold text-slate-600">Nombre del negocio</label>
+              <label className="mb-1 block text-sm font-semibold text-slate-600">{copy.brand.businessName}</label>
               <input
                 type="text"
                 value={BRANDING.businessName}
@@ -659,9 +659,9 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
             </div>
 
             <div>
-              <label className="mb-1 block text-sm font-semibold text-slate-600">Logo</label>
+              <label className="mb-1 block text-sm font-semibold text-slate-600">{copy.brand.logo}</label>
               <div className="flex h-32 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-400">
-                Logo no configurado
+                {copy.brand.logoEmpty}
               </div>
             </div>
 
