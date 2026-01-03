@@ -623,7 +623,7 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
             onClick={() => setIsPro((prev) => !prev)}
             className="mt-2 text-[10px] underline text-slate-400"
           >
-            devTogglePro
+            {copy.client.devTogglePro}
           </button>
 
           <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-xs leading-relaxed text-slate-600">
