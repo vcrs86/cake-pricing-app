@@ -478,7 +478,7 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
 
     printWindow.document.write(`
       <html>
-        <head><title>Presupuesto</title></head>
+        <head><title>${copy.client.quoteTitle}</title></head>
         <body>${content.innerHTML}</body>
       </html>
     `);
