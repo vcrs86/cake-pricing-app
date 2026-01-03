@@ -10,6 +10,7 @@ import { useMemo, useState } from "react";
 import { buildIngredient, calculateRecipeCost, type Ingredient, type RecipeLine } from "@/lib/ingredients";
 import { useLanguage } from "@/lib/i18n";
 import { BRANDING } from "@/lib/branding";
+import { useMemo, useState, useEffect } from "react";
 const DEFAULT_STATE: CalculatorFormState = {
   cakeSize: CAKE_SIZES[1].id,
   basicIngredientsCost: "0",
@@ -41,6 +42,9 @@ export default function HomePage() {
   const [clientMessage, setClientMessage] = useState(
   copy.client.quickMessagePresets[0]
 );
+  useEffect(() => {
+  setClientMessage(copy.client.quickMessagePresets[0]);
+}, [language]);
   const [activeTab, setActiveTab] = useState<"calculator" | "client" | "brand">("calculator");
   const [businessName, setBusinessName] = useState("Amaretto Cakes");
 const [businessLogo, setBusinessLogo] = useState<string | null>(null);
