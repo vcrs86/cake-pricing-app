@@ -45,7 +45,7 @@ export default function HomePage() {
   setClientMessage(copy.client.quickMessagePresets[0]);
 }, [language]);
   const [activeTab, setActiveTab] = useState<"calculator" | "client" | "brand">("calculator");
-  const [businessName, setBusinessName] = useState("Amaretto Cakes");
+  const [businessName, setBusinessName] = useState(BRANDING.businessName);
 const [businessLogo, setBusinessLogo] = useState<string | null>(null);
   const [isPro, setIsPro] = useState(false);
 
