@@ -417,19 +417,19 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
                 {copy.client.freeBadge}
               </div>
 
-              {BRANDING.logoUrl ? (
-                <div className="mb-3 flex justify-center">
-                  <img
-                    src={BRANDING.logoUrl}
-                    alt={BRANDING.businessName}
-                    className="h-10 object-contain print:h-8"
-                  />
-                </div>
-              ) : (
-                <p className="mb-2 text-center text-xs font-semibold uppercase tracking-wide text-slate-400">
-                  {BRANDING.businessName}
-                </p>
-              )}
+              {businessLogo ? (
+  <div className="mb-3 flex justify-center">
+    <img
+      src={businessLogo}
+      alt={businessName}
+      className="h-10 object-contain print:h-8"
+    />
+  </div>
+) : (
+  <p className="mb-2 text-center text-xs font-semibold uppercase tracking-wide text-slate-400">
+    {businessName}
+  </p>
+)}
 
               {clientPhoto ? (
                 <img
