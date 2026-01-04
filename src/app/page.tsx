@@ -701,7 +701,7 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
       {copy.client.proBadge}
     </div>
   )}
-</div>
+          </div>
         </section>
       ) : null}
     </main>
