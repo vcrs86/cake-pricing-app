@@ -662,16 +662,46 @@ const [businessLogo, setBusinessLogo] = useState<string | null>(null);
             </div>
 
             <div>
-              <label className="mb-1 block text-sm font-semibold text-slate-600">{copy.brand.logo}</label>
-              <div className="flex h-32 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-400">
-                {copy.brand.logoEmpty}
-              </div>
-            </div>
+  <label className="mb-1 block text-sm font-semibold text-slate-600">
+    {copy.brand.logo}
+  </label>
 
-            <div className="mt-4 rounded-xl bg-slate-900/90 p-3 text-center text-xs font-bold uppercase tracking-wide text-white">
-              {copy.client.proBadge}
-            </div>
-          </div>
+  {businessLogo ? (
+    <div className="flex h-32 items-center justify-center rounded-xl border border-slate-200 bg-white">
+      <img
+        src={businessLogo}
+        alt={copy.brand.logo}
+        className="max-h-24 object-contain"
+      />
+    </div>
+  ) : (
+    <div className="flex h-32 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-400">
+      {copy.brand.logoEmpty}
+    </div>
+  )}
+
+  {isPro ? (
+    <input
+      type="file"
+      accept="image/*"
+      className="mt-2 block w-full text-xs"
+      onChange={(e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          setBusinessLogo(reader.result as string);
+        };
+        reader.readAsDataURL(file);
+      }}
+    />
+  ) : (
+    <div className="mt-4 rounded-xl bg-slate-900/90 p-3 text-center text-xs font-bold uppercase tracking-wide text-white">
+      {copy.client.proBadge}
+    </div>
+  )}
+</div>
         </section>
       ) : null}
     </main>
