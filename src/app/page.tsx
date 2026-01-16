@@ -108,27 +108,35 @@ export default function HomePage() {
     return map;
   }, [ingredients]);
 
-  // --- MOTOR DE CÁLCULO ---
     const lineCosts = useMemo(() => {
     return recipeLines.map((line) => {
       const ingredient = ingredientLookup.get(line.ingredientId);
-      if (!ingredient) return { lineId: line.id, total: 0 };
-
-      // --- CONEXIÓN INTELIGENTE ---
-      // Buscamos el precio usando todos los nombres posibles que Chat GPT suele usar
-      const precio = Number(ingredient.price || ingredient.packageCost || ingredient.cost || 0);
       
-      // Buscamos el tamaño del paquete usando todos los nombres posibles
-      const tamaño = Number(ingredient.baseQuantity || ingredient.packageSize || ingredient.quantity || 1);
+      // Si no hay ingrediente, enviamos datos vacíos pero con la estructura correcta
+      if (!ingredient) {
+        return { 
+          lineId: line.id, 
+          total: 0,
+          ingredientName: "",
+          unit: "g",
+          quantity: 0,
+          cost: 0 
+        };
+      }
 
-      const cantidadUsada = Number(line.quantity) || 0;
+      const qty = Number(line.quantity) || 0;
+      const price = Number(ingredient.price || (ingredient as any).packageCost || 0);
+      const size = Number(ingredient.baseQuantity || (ingredient as any).packageSize || 1);
+      const total = (qty / size) * price;
 
-      // FÓRMULA: (Gramos usados / Gramos del paquete) * Precio del paquete
-      const total = (cantidadUsada / (tamaño || 1)) * precio;
-
+      // Devolvemos el objeto EXACTAMENTE como lo pide el error de Vercel
       return {
         lineId: line.id,
         total: total,
+        ingredientName: ingredient.name,
+        unit: ingredient.unit,
+        quantity: qty,
+        cost: total // Vercel pide 'cost', así que le pasamos el mismo total
       };
     });
   }, [ingredientLookup, recipeLines]);
