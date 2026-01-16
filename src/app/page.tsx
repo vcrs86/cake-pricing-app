@@ -789,7 +789,8 @@ export default function HomePage() {
               }
               onDelete={handleDeleteIngredient}
               formatCurrency={formatCurrency}
-              copy={copy} // Esto pasará todas las traducciones de arriba al componente
+              copy={copy}
+              currency={currency}
             />
           </section>
 

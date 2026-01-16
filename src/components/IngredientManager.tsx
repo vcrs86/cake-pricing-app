@@ -14,9 +14,12 @@ export type IngredientManagerProps = {
     patch: Partial<Pick<Ingredient, "name" | "unit" | "packageSize" | "packageCost">>
   ) => void;
   onDelete: (id: string) => void;
+  copy:any;
+  currency: string;
+  formatCurrency: (value: number) => string;
 };
 
-export function IngredientManager({ ingredients, onAdd, onUpdate, onDelete }: IngredientManagerProps) {
+export function IngredientManager({ ingredients, onAdd, onUpdate, onDelete, copy, currency, formatCurrency }: IngredientManagerProps) {
   const { copy } = useLanguage();
   const [name, setName] = useState("");
   const [unit, setUnit] = useState<UnitType>("g");
@@ -162,8 +165,8 @@ export function IngredientManager({ ingredients, onAdd, onUpdate, onDelete }: In
                     />
                   </td>
                   <td className="px-3 py-2 font-semibold text-brand-slate">
-                    ${(Number(ingredient.costPerUnit) || 0).toFixed(4)}
-                  </td>
+  {formatCurrency(Number(ingredient.costPerUnit) || 0)} / {ingredient.unit}
+</td>
                   <td className="px-3 py-2 text-right">
                     <button
                       type="button"
