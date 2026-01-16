@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import { buildIngredient, type Ingredient, type UnitType } from "@/lib/ingredients";
-import { useLanguage } from "@/lib/i18n";
 import { Package } from "lucide-react";
 const unitOptions: UnitType[] = ["g", "ml", "unit", "oz", "lb"];
 
@@ -20,7 +19,7 @@ export type IngredientManagerProps = {
 };
 
 export function IngredientManager({ ingredients, onAdd, onUpdate, onDelete, copy, currency, formatCurrency }: IngredientManagerProps) {
-  const { copy } = useLanguage();
+  
   const [name, setName] = useState("");
   const [unit, setUnit] = useState<UnitType>("g");
   const [packageSize, setPackageSize] = useState("");
