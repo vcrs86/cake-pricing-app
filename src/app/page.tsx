@@ -618,23 +618,29 @@ export default function HomePage() {
   };
 
   const finalPricing = useMemo(() => {
-    // Usamos el total que acabamos de calcular arriba
-    const baseCost = totalIngredientsCost || 0;
+  // Precio base calculado por la app
+  let finalRecommended = pricing.recommendedPrice;
 
-    if (!isPro || !includeProCosts) {
-      return {
-        ...pricing, // Si tienes una variable pricing base
-        totalIngredientsCost: baseCost,
-        recommendedPrice: baseCost * 1.3, // Ejemplo: margen del 30%
-      };
-    }
+  // Si es PRO y se incluyen costos operativos, los sumamos
+  if (isPro && includeProCosts) {
+    finalRecommended += totalProOperationalCost;
+  }
 
-    return {
-      ...pricing,
-      totalIngredientsCost: baseCost,
-      recommendedPrice: baseCost + totalProOperationalCost,
-    };
-  }, [totalIngredientsCost, isPro, includeProCosts, totalProOperationalCost]);
+  return {
+    ...pricing,
+    recommendedPrice: finalRecommended,
+    perServing:
+      selectedSize.servings > 0
+        ? finalRecommended / selectedSize.servings
+        : 0,
+  };
+}, [
+  pricing,
+  isPro,
+  includeProCosts,
+  totalProOperationalCost,
+  selectedSize.servings,
+]);
 
   return (
     <main className="no-print mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-4 pb-12 pt-10 sm:px-6 lg:px-10">
