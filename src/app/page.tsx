@@ -820,8 +820,6 @@ export default function HomePage() {
               onAddLine={handleAddLine}
               onChangeLine={handleChangeLine}
               onRemoveLine={handleRemoveLine}
-              formatCurrency={formatCurrency}
-              copy={copy}
               lineCosts={lineCosts}
               totalCost={totalIngredientsCost}
             />
