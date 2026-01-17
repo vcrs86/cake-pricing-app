@@ -146,8 +146,6 @@ export default function HomePage() {
     return lineCosts.reduce((acc, curr) => acc + curr.total, 0);
   }, [lineCosts]);
 
-  const [calcState, setCalcState] =
-    useState<CalculatorFormState>(DEFAULT_STATE);
   const [showSavedRecipes, setShowSavedRecipes] = useState(false);
   const [editingQuoteId, setEditingQuoteId] = useState<string | null>(null);
   const [isEditingQuote, setIsEditingQuote] = useState(false);
