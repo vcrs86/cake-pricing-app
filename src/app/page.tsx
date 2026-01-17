@@ -1273,28 +1273,7 @@ export default function HomePage() {
       {/* CLIENT TAB */}
       {activeTab === "client" ? (
         <section className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
-          {/* MENSAJE PARA EL CLIENTE (FREE – SOLO LECTURA) */}
-          <div className="relative rounded-2xl border border-slate-200 bg-slate-50 p-4">
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-2xl bg-white/60">
-              <div className="rounded-full bg-slate-900 px-4 py-2 text-[11px] font-bold uppercase tracking-wide text-white shadow">
-                {copy.client.proBadge}
-              </div>
-            </div>
-
-            <label className="mb-1 block text-sm font-semibold text-slate-600">
-              ✏️ {copy.client.clientMessageLabel}
-            </label>
-            <textarea
-              value={clientMessage}
-              disabled
-              rows={3}
-              className="w-full resize-none rounded-xl border border-slate-300 bg-slate-100 p-3 text-sm text-slate-600 cursor-not-allowed"
-            />
-            <p className="mt-1 text-[10px] text-slate-400">
-              {copy.client.clientMessageLocked}
-            </p>
-          </div>
-
+          
           {/* TARJETA CLIENTE */}
           {pricing.recommendedPrice > 0 ? (
             <div className="quote-print relative mt-6 max-w-[420px] mx-auto rounded-3xl border border-white/60 bg-white/80 p-5 shadow-xl backdrop-blur-xl ring-1 ring-white/70 transition-all duration-300 hover:-translate-y-1">
