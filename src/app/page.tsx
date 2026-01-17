@@ -834,6 +834,7 @@ export default function HomePage() {
 
       {/* ADVANCED HELPERS */}
       {/* SAVED RECIPES (PRO) */}
+      {mode === "advanced" && (
       <button
         type="button"
         onClick={() => setShowSavedRecipes((prev) => !prev)}
@@ -842,8 +843,9 @@ export default function HomePage() {
         <span>📚 {copy.recipes.savedListTitle}</span>
         <span>{showSavedRecipes ? "▲" : "▼"}</span>
       </button>
+      )}
 
-      {showSavedRecipes && (
+      {mode === "advanced" && showSavedRecipes && (
         <div className="mt-3 space-y-4">
           {/* BARRA DE BÚSQUEDA (Solo si es Pro y tiene recetas) */}
           {isPro && savedRecipes.length > 0 && (
@@ -943,6 +945,7 @@ export default function HomePage() {
         </div>
       )}
       {/* SAVE RECIPE (PRO) */}
+      {mode === "advanced" && (
       <div className="rounded-2xl border border-dashed border-brand-rose/30 bg-brand-rose/10 p-5 space-y-3">
         <h3 className="text-sm font-bold text-brand-slate">
           💾 {copy.recipes.saveTitle}
@@ -992,6 +995,7 @@ export default function HomePage() {
           {isPro ? copy.recipes.saveButton : copy.recipes.proLocked}
         </button>
       </div>
+      )}
 
       {/* TABS */}
       <div className="flex gap-2 rounded-2xl bg-slate-100 p-2">
@@ -1060,6 +1064,8 @@ export default function HomePage() {
               servings={selectedSize.servings}
               formatCurrency={formatCurrency}
             />
+            {mode === "advanced" && (
+              <>
             {/* SAVE QUOTE (PRO) */}
             <div className="rounded-2xl border border-dashed border-brand-rose/30 bg-brand-rose/10 p-5 space-y-3">
               <h3 className="text-sm font-bold text-brand-slate">
@@ -1145,14 +1151,15 @@ export default function HomePage() {
                       className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 p-3"
                     >
                       <div>
+                    
                         <p className="text-sm font-semibold text-slate-700">
                           {quote.name}
                         </p>
                         <p className="text-xs text-slate-500">
                           {new Date(quote.createdAt).toLocaleDateString()}
                         </p>
-                      </div>
-
+                      </div> 
+                
                       <div className="flex gap-2">
                         {/* BOTÓN USAR */}
                         <button
@@ -1208,6 +1215,9 @@ export default function HomePage() {
                 </div>
               </div>
             )}
+              </>
+)}
+
 
             <div className="mt-4 space-y-2">
               <label className="block text-sm font-semibold text-slate-700">
