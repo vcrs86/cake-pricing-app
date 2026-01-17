@@ -135,10 +135,6 @@ export function ResultCard({
             value={formatCurrency(pricing.suggestedMinimum)}
           />
 
-          <Row
-            label={copy.resultCard.rows.recommended}
-            value={formatCurrency(pricing.recommendedPrice)}
-          />
         </div>
       ) : null}
     </section>
