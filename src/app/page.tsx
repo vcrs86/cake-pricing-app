@@ -242,7 +242,7 @@ export default function HomePage() {
 
   const [businessName, setBusinessName] = useState("");
   const [businessLogo, setBusinessLogo] = useState<string | null>(null);
-
+  const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
   const [isPro, setIsPro] = useState(false);
 
   // PRO – Energy cost (oven)
@@ -625,13 +625,17 @@ export default function HomePage() {
   }
 
   return {
-    ...pricing,
-    recommendedPrice: finalRecommended,
-    perServing:
-      selectedSize.servings > 0
-        ? finalRecommended / selectedSize.servings
-        : 0,
-  };
+  ...pricing,
+  recommendedPrice: finalRecommended,
+  perServing:
+    selectedSize.servings > 0
+      ? finalRecommended / selectedSize.servings
+      : 0,
+
+  // 👇 AÑADIDO PARA PUNTO 3
+  additionalCost:
+    isPro && includeProCosts ? totalProOperationalCost : 0,
+};
 }, [
   pricing,
   isPro,
@@ -1062,6 +1066,7 @@ export default function HomePage() {
             <ResultCard
               pricing={finalPricing}
               servings={selectedSize.servings}
+              perServing={finalPricing.perServing}
               formatCurrency={formatCurrency}
             />
             {mode === "advanced" && (
@@ -1223,17 +1228,44 @@ export default function HomePage() {
               <label className="block text-sm font-semibold text-slate-700">
                 📷 {copy.client.cakePhotoLabel}
               </label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  if (!file) return;
-                  const reader = new FileReader();
-                  reader.onload = () => setClientPhoto(reader.result as string);
-                  reader.readAsDataURL(file);
-                }}
-              />
+              <div className="space-y-2">
+  {/* Input REAL oculto */}
+  <input
+    id="client-photo-input"
+    type="file"
+    accept="image/*"
+    className="hidden"
+    onChange={(e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      setSelectedFileName(file.name);
+
+      const reader = new FileReader();
+      reader.onload = () => setClientPhoto(reader.result as string);
+      reader.readAsDataURL(file);
+    }}
+  />
+
+  {/* Botón visible */}
+  <button
+    type="button"
+    onClick={() =>
+      document.getElementById("client-photo-input")?.click()
+    }
+    className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+  >
+    📷 {copy.client.uploadButton}
+  </button>
+
+  {/* Texto traducible */}
+  <p className="text-xs text-slate-500">
+    {selectedFileName
+      ? `${copy.client.fileSelected}: ${selectedFileName}`
+      : copy.client.noFileSelected}
+  </p>
+</div>
+
             </div>
           </div>
         </section>
