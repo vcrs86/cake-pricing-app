@@ -1066,7 +1066,6 @@ export default function HomePage() {
             <ResultCard
               pricing={finalPricing}
               servings={selectedSize.servings}
-              perServing={finalPricing.perServing}
               formatCurrency={formatCurrency}
             />
             {mode === "advanced" && (
