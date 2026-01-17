@@ -68,7 +68,7 @@ export function ResultCard({
           ) : null}
 
           <Row
-            label={`${copy.resultCard.rows.decoration} (x${pricing.complexityMultiplier.toFixed(2)})`}
+            label={`${copy.resultCard.rows.decoration} (x${(Number(pricing.complexityMultiplier) || 0).toFixed(2)})`}
             value={formatCurrency(pricing.decorationAndLabor)}
           />
 

@@ -42,7 +42,7 @@ export function buildIngredient(params: {
     unit: params.unit,
     packageSize: toCurrency(safeSize),
     packageCost: toCurrency(safeCost),
-    costPerUnit: Number(costPerUnit.toFixed(4)),
+    costPerUnit: Number((Number(costPerUnit) || 0).toFixed(4)),
   };
 }
 

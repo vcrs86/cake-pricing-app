@@ -45,13 +45,13 @@ export function QuotePreviewCard({
         {deliveryFee && deliveryFee > 0 ? (
           <div className="flex justify-between">
             <span>Delivery</span>
-            <span>${deliveryFee.toFixed(2)}</span>
+            <span>${(Number(deliveryFee) || 0).toFixed(2)}</span>
           </div>
         ) : null}
 
         <div className="flex justify-between text-lg font-bold">
           <span>Total</span>
-          <span>${finalPrice.toFixed(2)}</span>
+          <span>${(Number(finalPrice) || 0).toFixed(2)}</span>
         </div>
       </div>
 

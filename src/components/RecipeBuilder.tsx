@@ -82,9 +82,17 @@ export function RecipeBuilder({
                       <option value="">{copy.recipeBuilder.ingredient}</option>
                       {ingredients.map((option) => {
                         // Buscamos el costo por unidad para mostrarlo en el menú
-                        const p = Number(option.price || (option as any).packageCost || 0);
-                        const s = Number(option.baseQuantity || (option as any).packageSize || 1);
-                        const cpu = p / s;
+                        const p = Number(
+  (option as any).packageCost ?? 0
+);
+
+const s = Number(
+  (option as any).packageSize ?? 1
+);
+
+const cpu = s > 0 ? p / s : 0;
+
+
                         
                         return (
                           <option key={option.id} value={option.id}>
@@ -115,11 +123,12 @@ export function RecipeBuilder({
                         if (!ingredient || !line.quantity) return "$0.00";
 
                         // Detectamos automáticamente si los campos se llaman price o packageCost
-                        const qty = parseFloat(line.quantity) || 0;
-                        const price = parseFloat(String(ingredient.price || (ingredient as any).packageCost || 0));
-                        const size = parseFloat(String(ingredient.baseQuantity || (ingredient as any).packageSize || 1));
+                        const qty = Number(line.quantity) || 0;
+const price = Number(ingredient.packageCost || 0);
+const size = Number(ingredient.packageSize || 1);
 
-                        const total = (qty / size) * price;
+const total = (qty / size) * price;
+
                         return `$${total.toFixed(2)}`;
                       })()}
                     </div>
