@@ -1260,19 +1260,22 @@ export default function HomePage() {
               <div className="absolute right-3 top-3 rounded-full bg-slate-100 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-slate-600">
                 {copy.client.freeBadge}
               </div>
-              {businessLogo ? (
-                <div className="mb-3 flex justify-center">
-                  <img
-                    src={businessLogo}
-                    alt={businessName || "Brand logo"}
-                    className="h-10 object-contain print:h-8"
-                  />
-                </div>
-              ) : businessName ? (
-                <p className="mb-2 text-center text-xs font-semibold uppercase tracking-wide text-slate-400">
-                  {businessName}
-                </p>
-              ) : null}
+              {businessLogo && (
+  <div className="mb-2 flex justify-center">
+    <img
+      src={businessLogo}
+      alt={businessName || "Brand logo"}
+      className="h-10 object-contain print:h-8"
+    />
+  </div>
+)}
+
+{businessName && (
+  <p className="mb-2 text-center text-xs font-semibold uppercase tracking-wide text-slate-400">
+    {businessName}
+  </p>
+)}
+
               {clientPhoto ? (
                 <img
                   src={clientPhoto}
