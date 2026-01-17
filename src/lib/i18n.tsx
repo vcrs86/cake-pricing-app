@@ -45,6 +45,9 @@ const translations: Record<Language, any> = {
 
   legalNote2:
     "Esta cotización es válida por 7 días y no constituye un contrato hasta confirmación por escrito.",
+    uploadButton: "Subir imagen",
+noFileSelected: "Ningún archivo seleccionado",
+fileSelected: "Archivo seleccionado",
 },
   
     download: {
@@ -355,6 +358,10 @@ pro: {
 
   legalNote2:
     "This quote is valid for 7 days and does not constitute a contract until confirmed in writing.",
+    uploadButton: "Upload image",
+noFileSelected: "No file selected",
+fileSelected: "File selected",
+
 },
         
     download: {
