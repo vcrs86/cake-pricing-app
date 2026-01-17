@@ -23,6 +23,18 @@ export function ResultCard({
   const hasIngredients = pricing.ingredientsCost > 0;
   const hasAnyCost = pricing.baseCost > 0;
 
+  // ✅ Precio por porción (seguro, sin tocar el tipo)
+  const perServing =
+    servings && servings > 0
+      ? pricing.recommendedPrice / servings
+      : 0;
+
+  // ✅ Costos adicionales PRO (si existen)
+  const additionalCost =
+    typeof (pricing as any).additionalCost === "number"
+      ? (pricing as any).additionalCost
+      : 0;
+
   return (
     <section className="relative overflow-hidden rounded-3xl bg-white/60 backdrop-blur-xl p-6 shadow-xl ring-1 ring-white/40 sm:p-7">
       {/* HEADER */}
@@ -49,10 +61,34 @@ export function ResultCard({
         <p className="text-xs uppercase tracking-wide text-slate-500">
           {copy.resultCard.highlightLabel}
         </p>
+
         <p className="text-3xl font-black">
           {formatCurrency(pricing.recommendedPrice)}
         </p>
-        <p className="text-xs text-slate-500">
+        {servings && pricing.recommendedPrice > 0 ? (
+  <p className="mt-1 text-sm text-slate-500">
+    {formatCurrency(pricing.recommendedPrice / servings)} / {servings}{" "}
+    {copy.general.servings}
+  </p>
+) : null}
+
+
+        {/* ✅ Precio por porción */}
+        {perServing > 0 && servings ? (
+          <p className="mt-1 text-sm text-slate-500">
+            {formatCurrency(perServing)} / {servings} {copy.general.servings}
+          </p>
+        ) : null}
+
+        {/* ✅ Indicador de costos adicionales */}
+        {additionalCost > 0 ? (
+          <div className="mt-3 flex justify-between text-sm text-slate-600">
+            <span>{copy.result.additionalCosts}</span>
+            <span>+{formatCurrency(additionalCost)}</span>
+          </div>
+        ) : null}
+
+        <p className="mt-2 text-xs text-slate-500">
           {copy.resultCard.highlightNote}
         </p>
       </div>
