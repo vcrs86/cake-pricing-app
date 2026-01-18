@@ -448,22 +448,23 @@ export default function HomePage() {
   }, [isPro, monthlyMarketing, ordersPerMonth]);
 
   const totalProOperationalCost = useMemo(() => {
-    if (!isPro || !includeProCosts) return 0;
+  if (!isPro || !includeProCosts) return 0;
 
-    return (
-      ovenEnergyCost +
-      rentCostPerOrder +
-      utilitiesCostPerOrder +
-      marketingCostPerOrder
-    );
-  }, [
-    isPro,
-    includeProCosts,
-    ovenEnergyCost,
-    rentCostPerOrder,
-    utilitiesCostPerOrder,
-    marketingCostPerOrder,
-  ]);
+  const safeEnergy = Number(ovenEnergyCost) || 0;
+  const safeRent = Number(rentCostPerOrder) || 0;
+  const safeUtilities = Number(utilitiesCostPerOrder) || 0;
+  const safeMarketing = Number(marketingCostPerOrder) || 0;
+
+  return safeEnergy + safeRent + safeUtilities + safeMarketing;
+}, [
+  isPro,
+  includeProCosts,
+  ovenEnergyCost,
+  rentCostPerOrder,
+  utilitiesCostPerOrder,
+  marketingCostPerOrder,
+]);
+
   const selectedSize = useMemo(
     () =>
       CAKE_SIZES.find((size) => size.id === values.cakeSize) ?? CAKE_SIZES[0],
