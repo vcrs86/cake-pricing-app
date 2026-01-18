@@ -241,7 +241,7 @@ export default function HomePage() {
   );
 
   const [activeTab, setActiveTab] = useState<
-    "calculator" | "client" | "brand" | "pro"
+    "calculator" | "client" | "pro"
   >("calculator");
 
   const [businessName, setBusinessName] = useState("");
@@ -1031,26 +1031,17 @@ export default function HomePage() {
         </button>
 
         <button
-          onClick={() => setActiveTab("brand")}
-          className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
-            activeTab === "brand"
-              ? "bg-white shadow text-brand-slate"
-              : "text-slate-500 hover:bg-white/60"
-          }`}
-        >
-          🏷️ {copy.tabs.brand}
-        </button>
+  onClick={() => setActiveTab("pro")}
+  className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
+    activeTab === "pro"
+      ? "bg-white shadow text-brand-slate"
+      : "text-slate-500 hover:bg-white/60"
+  }`}
+>
+  <span className="mr-1">✨</span>
+  ✨ {copy.tabs.pro}
+</button>
 
-        <button
-          onClick={() => setActiveTab("pro")}
-          className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
-            activeTab === "pro"
-              ? "bg-white shadow text-brand-slate"
-              : "text-slate-500 hover:bg-white/60"
-          }`}
-        >
-          🟣 {copy.tabs.pro}
-        </button>
       </div>
 
       {/* CALCULATOR TAB */}
