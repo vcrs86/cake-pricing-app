@@ -21,22 +21,30 @@ export function ResultCard({
   const { copy } = useLanguage();
 
   const hasIngredients = pricing.ingredientsCost > 0;
-  const hasAnyCost = pricing.baseCost > 0;
+  const hasAnyCost = pricing.baseCost > 0 || pricing.recommendedPrice > 0;
 
   // ✅ Precio por porción (seguro)
   const perServing =
-    servings && servings > 0
-      ? pricing.recommendedPrice / servings
-      : 0;
+    servings && servings > 0 ? pricing.recommendedPrice / servings : 0;
 
-  // ✅ Costos adicionales PRO (inyectados desde Home)
+  // ✅ Costos adicionales PRO (robusto: por si cambió el nombre)
+  const additionalCostRaw =
+    (pricing as any).additionalCost ??
+    (pricing as any).additionalCosts ??
+    (pricing as any).additionalCostsTotal ??
+    0;
+
   const additionalCost =
-    typeof (pricing as any).additionalCost === "number"
-      ? (pricing as any).additionalCost
-      : 0;
+    typeof additionalCostRaw === "number" ? additionalCostRaw : 0;
+
   // ✅ Precio sugerido FINAL (incluye PRO si aplica)
-const suggestedFinal =
-  pricing.suggestedMinimum + additionalCost;
+  const suggestedFinal = pricing.suggestedMinimum + additionalCost;
+
+  // ✅ Label seguro (sin depender de copy.result.additionalCosts)
+  const additionalCostLabel =
+    copy?.resultCard?.rows?.additionalCosts ||
+    copy?.pro?.includeCosts?.title ||
+    "Costos operativos (PRO)";
 
   return (
     <section className="relative overflow-hidden rounded-3xl bg-white/60 backdrop-blur-xl p-6 shadow-xl ring-1 ring-white/40 sm:p-7">
@@ -69,18 +77,18 @@ const suggestedFinal =
           {formatCurrency(pricing.recommendedPrice)}
         </p>
 
-        {/* Precio por porción */}
+        {/* ✅ Precio por porción */}
         {perServing > 0 && servings ? (
           <p className="mt-1 text-sm text-slate-500">
             {formatCurrency(perServing)} / {servings} {copy.general.servings}
           </p>
         ) : null}
 
-        {/* Indicador de costos PRO */}
+        {/* ✅ Indicador de por qué subió (si aplica) */}
         {additionalCost > 0 ? (
-          <div className="mt-3 flex justify-between text-sm text-slate-600">
-            <span>{copy.result.additionalCosts}</span>
-            <span>+{formatCurrency(additionalCost)}</span>
+          <div className="mt-3 flex items-center justify-between rounded-xl bg-white/70 px-3 py-2 text-sm text-slate-700 ring-1 ring-slate-200">
+            <span className="font-semibold">{additionalCostLabel}</span>
+            <span className="font-bold">+{formatCurrency(additionalCost)}</span>
           </div>
         ) : null}
 
@@ -116,10 +124,10 @@ const suggestedFinal =
             value={formatCurrency(pricing.extrasCost + pricing.deliveryFee)}
           />
 
-          {/* ✅ COSTOS OPERATIVOS PRO (NUEVO — CLAVE) */}
+          {/* ✅ Aquí mostramos el costo PRO dentro del desglose también */}
           {additionalCost > 0 ? (
             <Row
-              label={copy.result.additionalCosts}
+              label={additionalCostLabel}
               value={`+${formatCurrency(additionalCost)}`}
             />
           ) : null}
@@ -136,11 +144,11 @@ const suggestedFinal =
 
           <hr className="my-3 border-dashed" />
 
+          {/* ✅ SUGERIDO ya incluye PRO */}
           <Row
-  label={copy.resultCard.rows.suggested}
-  value={formatCurrency(suggestedFinal)}
-/>
-
+            label={copy.resultCard.rows.suggested}
+            value={formatCurrency(suggestedFinal)}
+          />
         </div>
       ) : null}
     </section>
