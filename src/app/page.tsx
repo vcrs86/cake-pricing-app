@@ -1575,89 +1575,91 @@ export default function HomePage() {
         </section>
       ) : null}
       {/* ===================== MI MARCA (PRO) ===================== */}
-{activeTab === "pro" && (
-  <div className="mx-auto max-w-md space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow">
+      {activeTab === "pro" && (
+  <div className="mx-auto max-w-md space-y-6">
 
-    <h3 className="mb-1 text-lg font-bold text-brand-slate">
-      🏷️ {copy.brand.title}
-    </h3>
+    {/* CARD 1 — MI MARCA */}
+    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow space-y-4">
+      <h3 className="text-lg font-bold text-brand-slate">
+        📦 {copy.brand.title}
+      </h3>
 
-    <p className="mb-4 text-sm text-slate-500">
-      {copy.brand.description}
-    </p>
+      <p className="text-sm text-slate-500">
+        {copy.brand.description}
+      </p>
 
-    {/* NOMBRE DE MARCA */}
-    <div className="mb-4">
-      <label className="mb-1 block text-sm font-semibold text-slate-600">
-        {copy.brand.businessName}
-      </label>
+      {/* NOMBRE DE MARCA */}
+      <div>
+        <label className="mb-1 block text-sm font-semibold text-slate-600">
+          {copy.brand.businessName}
+        </label>
 
-      <input
-        type="text"
-        value={businessName}
-        onChange={(e) => setBusinessName(e.target.value)}
-        placeholder={copy.brand.businessNamePlaceholder}
-        disabled={!isPro}
-        className={`w-full rounded-xl border p-3 text-sm ${
-          isPro
-            ? "border-brand-rose bg-white text-slate-700"
-            : "border-slate-300 bg-slate-100 text-slate-600 cursor-not-allowed"
-        }`}
-      />
-
-      {!isPro && (
-        <p className="mt-1 text-[11px] text-slate-400">
-          {copy.brand.proOnlyNote}
-        </p>
-      )}
-    </div>
-
-    {/* LOGO */}
-    <div>
-      <label className="mb-1 block text-sm font-semibold text-slate-600">
-        {copy.brand.logo}
-      </label>
-
-      {businessLogo ? (
-        <div className="flex h-32 items-center justify-center rounded-xl border border-slate-200 bg-white">
-          <img
-            src={businessLogo}
-            alt={copy.brand.logo}
-            className="max-h-24 object-contain"
-          />
-        </div>
-      ) : (
-        <div className="flex h-32 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-400">
-          {copy.brand.logoEmpty}
-        </div>
-      )}
-
-      {isPro ? (
         <input
-          type="file"
-          accept="image/*"
-          className="mt-2 block w-full text-xs"
-          onChange={(e) => {
-            const file = e.target.files?.[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = () => {
-              setBusinessLogo(reader.result as string);
-            };
-            reader.readAsDataURL(file);
-          }}
+          type="text"
+          value={businessName}
+          onChange={(e) => setBusinessName(e.target.value)}
+          placeholder={copy.brand.businessNamePlaceholder}
+          disabled={!isPro}
+          className={`w-full rounded-xl border p-3 text-sm ${
+            isPro
+              ? "border-brand-rose bg-white text-slate-700"
+              : "border-slate-300 bg-slate-100 text-slate-600 cursor-not-allowed"
+          }`}
         />
-      ) : (
-        <div className="mt-4 rounded-xl bg-slate-900/90 p-3 text-center text-xs font-bold uppercase tracking-wide text-white">
-          {copy.client.proBadge}
-        </div>
-      )}
+
+        {!isPro && (
+          <p className="mt-1 text-[11px] text-slate-400">
+            {copy.brand.proOnlyNote}
+          </p>
+        )}
+      </div>
+
+      {/* LOGO */}
+      <div>
+        <label className="mb-1 block text-sm font-semibold text-slate-600">
+          {copy.brand.logo}
+        </label>
+
+        {businessLogo ? (
+          <div className="flex h-32 items-center justify-center rounded-xl border border-slate-200 bg-white">
+            <img
+              src={businessLogo}
+              alt={copy.brand.logo}
+              className="max-h-24 object-contain"
+            />
+          </div>
+        ) : (
+          <div className="flex h-32 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-400">
+            {copy.brand.logoEmpty}
+          </div>
+        )}
+
+        {isPro ? (
+          <input
+            type="file"
+            accept="image/*"
+            className="mt-2 block w-full text-xs"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (!file) return;
+
+              const reader = new FileReader();
+              reader.onload = () => {
+                setBusinessLogo(reader.result as string);
+              };
+              reader.readAsDataURL(file);
+            }}
+          />
+        ) : (
+          <div className="mt-4 rounded-xl bg-slate-900/90 p-3 text-center text-xs font-bold uppercase tracking-wide text-white">
+            {copy.client.proBadge}
+          </div>
+        )}
+      </div>
     </div>
 
-  </div>
-)}
-      {/* PRO intro */}
+    {/* PRO INTRO + TOGGLE (se queda igual, solo agrupado) */}
+    <div className="space-y-4">
       <div className="rounded-3xl bg-white p-6 shadow-card ring-1 ring-brand-rose/20">
         <h3 className="text-2xl font-black text-brand-slate">
           ✨ {copy.pro.intro.title}
@@ -1681,7 +1683,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* PRO toggle */}
       <div className="rounded-3xl border border-dashed border-brand-rose/30 bg-brand-rose/5 p-5 text-center space-y-2">
         <p className="text-sm font-semibold text-brand-slate">
           🔒 {copy.pro.toggle.title}
@@ -1697,14 +1698,28 @@ export default function HomePage() {
         >
           🔓 Unlock CakePrice Pro
         </button>
-        <p className="text-xs text-slate-600">{copy.pro.toggle.note}</p>
+
+        <p className="text-xs text-slate-600">
+          {copy.pro.toggle.note}
+        </p>
       </div>
+    </div>
 
-      {/* ENERGY */}
-      {isPro && (
-        <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 space-y-4">
-          <h3 className="text-lg font-semibold">🔌 {copy.pro.energy.title}</h3>
+    {/* CARD 2 — COSTOS OPERATIVOS */}
+    {isPro && (
+      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow space-y-6">
+        <h3 className="text-lg font-bold text-brand-slate">
+          ⚙️ Costos Operativos
+        </h3>
 
+        {/* ENERGY */}
+        <div className="rounded-xl border bg-slate-50 p-4 space-y-4">
+          <h4 className="font-semibold">
+            🔌 {copy.pro.energy.title}
+          </h4>
+
+          {/* 🔴 BLOQUE ORIGINAL DE ENERGÍA — SIN CAMBIOS */}
+                    {/* 🔴 BLOQUE ORIGINAL DE ENERGÍA — SIN CAMBIOS */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label className="text-sm font-medium">
@@ -1748,12 +1763,12 @@ export default function HomePage() {
             {formatCurrency(ovenEnergyCost)}
           </div>
         </div>
-      )}
 
-      {/* RENT */}
-      {isPro && (
-        <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 space-y-4">
-          <h3 className="text-lg font-semibold">🏠 {copy.pro.rent.title}</h3>
+        {/* RENT */}
+        <div className="rounded-xl border bg-slate-50 p-4 space-y-4">
+          <h4 className="font-semibold">
+            🏠 {copy.pro.rent.title}
+          </h4>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
@@ -1802,14 +1817,12 @@ export default function HomePage() {
             {formatCurrency(rentCostPerOrder)}
           </div>
         </div>
-      )}
 
-      {/* UTILITIES */}
-      {isPro && (
-        <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 space-y-4">
-          <h3 className="text-lg font-semibold">
+        {/* UTILITIES */}
+        <div className="rounded-xl border bg-slate-50 p-4 space-y-4">
+          <h4 className="font-semibold">
             💧⚡🌐 {copy.pro.utilities.title}
-          </h3>
+          </h4>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
@@ -1833,7 +1846,9 @@ export default function HomePage() {
               <input
                 type="number"
                 value={
-                  utilityWorkDaysPerMonth === 0 ? "" : utilityWorkDaysPerMonth
+                  utilityWorkDaysPerMonth === 0
+                    ? ""
+                    : utilityWorkDaysPerMonth
                 }
                 onChange={(e) =>
                   setUtilityWorkDaysPerMonth(Number(e.target.value) || 0)
@@ -1849,7 +1864,9 @@ export default function HomePage() {
               <input
                 type="number"
                 value={
-                  utilityDaysUsedForOrder === 0 ? "" : utilityDaysUsedForOrder
+                  utilityDaysUsedForOrder === 0
+                    ? ""
+                    : utilityDaysUsedForOrder
                 }
                 onChange={(e) =>
                   setUtilityDaysUsedForOrder(Number(e.target.value) || 0)
@@ -1864,14 +1881,12 @@ export default function HomePage() {
             {formatCurrency(utilitiesCostPerOrder)}
           </div>
         </div>
-      )}
 
-      {/* MARKETING */}
-      {isPro && (
-        <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 space-y-4">
-          <h3 className="text-lg font-semibold">
+        {/* MARKETING */}
+        <div className="rounded-xl border bg-slate-50 p-4 space-y-4">
+          <h4 className="font-semibold">
             📣 {copy.pro.marketing.title}
-          </h3>
+          </h4>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
@@ -1895,7 +1910,9 @@ export default function HomePage() {
               <input
                 type="number"
                 value={ordersPerMonth === 0 ? "" : ordersPerMonth}
-                onChange={(e) => setOrdersPerMonth(Number(e.target.value) || 0)}
+                onChange={(e) =>
+                  setOrdersPerMonth(Number(e.target.value) || 0)
+                }
                 className="mt-1 w-full rounded-lg border px-3 py-2"
               />
             </div>
@@ -1906,16 +1923,16 @@ export default function HomePage() {
             {formatCurrency(marketingCostPerOrder)}
           </div>
         </div>
-      )}
 
-      {/* INCLUDE PRO COSTS */}
-      {isPro && (
-        <div className="mt-6 rounded-2xl border border-brand-rose/30 bg-brand-rose/10 p-5">
+        {/* INCLUDE PRO COSTS */}
+        <div className="rounded-xl border border-brand-rose/30 bg-brand-rose/10 p-4">
           <label className="flex items-start gap-3 cursor-pointer">
             <input
               type="checkbox"
               checked={includeProCosts}
-              onChange={(e) => setIncludeProCosts(e.target.checked)}
+              onChange={(e) =>
+                setIncludeProCosts(e.target.checked)
+              }
               className="mt-1 h-4 w-4 rounded border-slate-300 text-brand-slate focus:ring-brand-rose"
             />
             <div className="text-sm">
@@ -1928,7 +1945,10 @@ export default function HomePage() {
             </div>
           </label>
         </div>
-      )}
+      </div>
+    )}
+  </div>
+)}
     </main>
   );
 }
