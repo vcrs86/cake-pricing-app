@@ -1729,6 +1729,10 @@ const finalPricing = useMemo(() => {
           <h4 className="font-semibold">
             🔌 {copy.pro.energy.title}
           </h4>
+          <p className="text-xs text-slate-500 leading-relaxed">
+  {copy.pro.energy.energyHelp}
+</p>
+
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>

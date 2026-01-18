@@ -308,6 +308,8 @@ const translations: Record<Language, any> = {
         ovenHours: "Horas de uso",
         energyRate: "Costo por kWh ($)",
         result: "Costo estimado de energía",
+        energyHelp:
+    "kWh (kilowatt-hora) es la medida del consumo eléctrico. Por ejemplo, un horno de 3,000 W usado durante 1 hora consume 3 kWh. Ese consumo se multiplica por el costo de tu compañía eléctrica.",
       },
 
       rent: {
@@ -633,6 +635,8 @@ const translations: Record<Language, any> = {
         ovenHours: "Hours of use",
         energyRate: "Cost per kWh ($)",
         result: "Estimated energy cost",
+        energyHelp:
+    "kWh (kilowatt-hour) measures electricity usage. For example, a 3,000 W oven used for 1 hour consumes 3 kWh. This usage is multiplied by your electricity rate.",
       },
 
       rent: {
