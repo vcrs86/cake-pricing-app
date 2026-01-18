@@ -34,6 +34,9 @@ export function ResultCard({
     typeof (pricing as any).additionalCost === "number"
       ? (pricing as any).additionalCost
       : 0;
+  // ✅ Precio sugerido FINAL (incluye PRO si aplica)
+const suggestedFinal =
+  pricing.suggestedMinimum + additionalCost;
 
   return (
     <section className="relative overflow-hidden rounded-3xl bg-white/60 backdrop-blur-xl p-6 shadow-xl ring-1 ring-white/40 sm:p-7">
@@ -134,9 +137,10 @@ export function ResultCard({
           <hr className="my-3 border-dashed" />
 
           <Row
-            label={copy.resultCard.rows.suggested}
-            value={formatCurrency(pricing.suggestedMinimum)}
-          />
+  label={copy.resultCard.rows.suggested}
+  value={formatCurrency(suggestedFinal)}
+/>
+
         </div>
       ) : null}
     </section>
