@@ -621,19 +621,14 @@ export default function HomePage() {
     }
   };
 const finalPricing = useMemo(() => {
-  // helper ultra-seguro
   const safe = (n: any) => {
     const num = Number(n);
     return Number.isFinite(num) ? num : 0;
   };
 
-  // Precio base calculado por la app
   const baseRecommended = safe(pricing?.recommendedPrice);
-
-  // Costos PRO (ya calculados)
   const proOps = safe(totalProOperationalCost);
 
-  // Si es PRO y se incluyen costos operativos, los sumamos
   const finalRecommended =
     isPro && includeProCosts ? baseRecommended + proOps : baseRecommended;
 
@@ -642,14 +637,15 @@ const finalPricing = useMemo(() => {
   return {
     ...pricing,
 
-    // ✅ Garantizamos que siempre sea número finito
     recommendedPrice: safe(finalRecommended),
 
-    // ✅ perServing también protegido
-    perServing: servingsSafe > 0 ? safe(finalRecommended) / servingsSafe : 0,
+    perServing:
+      servingsSafe > 0 ? safe(finalRecommended) / servingsSafe : 0,
 
-    // ✅ adicional (PRO)
-    additionalCost: isPro && includeProCosts ? proOps : 0,
+    // 🔑 CLAVE: restauramos la estructura que ResultCard espera
+    result: {
+      additionalCosts: isPro && includeProCosts ? proOps : 0,
+    },
   };
 }, [
   pricing,
