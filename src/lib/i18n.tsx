@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
 
 type Language = "es" | "en";
 
@@ -8,48 +14,49 @@ const translations: Record<Language, any> = {
   es: {
     general: {
       appTitle: "Calcula el precio profesional de tu pastel",
-      tagline: "Una herramienta de cálculo pensada para decoradores que trabajan con costos reales.",
+      tagline:
+        "Una herramienta de cálculo pensada para decoradores que trabajan con costos reales.",
       mobileFriendly: "Optimizada para móvil",
     },
     client: {
-  quoteTitle: "Presupuesto de pastel",
-  servingsLabel: "porciones",
-  totalLabel: "Total",
-  deliveryLabel: "Delivery",
-  quickMessages: "Mensajes rápidos:",
+      quoteTitle: "Presupuesto de pastel",
+      servingsLabel: "porciones",
+      totalLabel: "Total",
+      deliveryLabel: "Delivery",
+      quickMessages: "Mensajes rápidos:",
       quickMessagePresets: [
-  "Para reservar la fecha del pastel debe abonarse el 50%.",
-  "Pagos vía Zelle, CashApp o efectivo.",
-  "El pedido debe confirmarse con al menos 72 horas de anticipación.",
-  "No se realizan devoluciones una vez confirmado el pedido.",
-],
-  
-  proBadge: "Disponible en PRO",
-  freeBadge: "FREE",
+        "Para reservar la fecha del pastel debe abonarse el 50%.",
+        "Pagos vía Zelle, CashApp o efectivo.",
+        "El pedido debe confirmarse con al menos 72 horas de anticipación.",
+        "No se realizan devoluciones una vez confirmado el pedido.",
+      ],
 
-  clientMessageLabel: "Mensaje para el cliente",
-  clientMessageLocked: "Edición disponible en versión PRO",
-  proEditActive: "Mensaje editable (PRO activo)",
+      proBadge: "Disponible en PRO",
+      freeBadge: "FREE",
 
-  cakePhotoLabel: "Foto del pastel (opcional)",
+      clientMessageLabel: "Mensaje para el cliente",
+      clientMessageLocked: "Edición disponible en versión PRO",
+      proEditActive: "Mensaje editable (PRO activo)",
+
+      cakePhotoLabel: "Foto del pastel (opcional)",
       cakePhotoAlt: "Foto del pastel",
-  printButton: "Descargar / Imprimir presupuesto",
-  openPdfButton: "Abrir vista PDF",
+      printButton: "Descargar / Imprimir presupuesto",
+      openPdfButton: "Abrir vista PDF",
 
-  quickMessagesTitle: "Mensajes rápidos",
-  customMessageLabel: "Mensaje personalizado (PRO)",
-  devTogglePro: "(DEV) Alternar PRO",
+      quickMessagesTitle: "Mensajes rápidos",
+      customMessageLabel: "Mensaje personalizado (PRO)",
+      devTogglePro: "(DEV) Alternar PRO",
 
-  legalNote1:
-    "Para reservar la fecha se requiere un abono del 50%. Los precios pueden variar según cambios en el diseño final, ingredientes o servicios adicionales.",
+      legalNote1:
+        "Para reservar la fecha se requiere un abono del 50%. Los precios pueden variar según cambios en el diseño final, ingredientes o servicios adicionales.",
 
-  legalNote2:
-    "Esta cotización es válida por 7 días y no constituye un contrato hasta confirmación por escrito.",
-    uploadButton: "Subir imagen",
-noFileSelected: "Ningún archivo seleccionado",
-fileSelected: "Archivo seleccionado",
-},
-  
+      legalNote2:
+        "Esta cotización es válida por 7 días y no constituye un contrato hasta confirmación por escrito.",
+      uploadButton: "Subir imagen",
+      noFileSelected: "Ningún archivo seleccionado",
+      fileSelected: "Archivo seleccionado",
+    },
+
     download: {
       label: "Descarga",
       title: "Obtén el proyecto completo en ZIP",
@@ -58,36 +65,37 @@ fileSelected: "Archivo seleccionado",
       button: "Descargar ZIP",
     },
     modes: {
-  label: "Modo de cálculo",
-  title: "Selecciona cómo deseas calcular",
-  description:
-    "Elige entre un cálculo rápido o uno detallado según el tipo de pedido.",
+      label: "Modo de cálculo",
+      title: "Selecciona cómo deseas calcular",
+      description:
+        "Elige entre un cálculo rápido o uno detallado según el tipo de pedido.",
 
-  basic: "Básico",
-  advanced: "Avanzado",
+      basic: "Básico",
+      advanced: "Avanzado",
 
-  basicTitle: "Cálculo simplificado",
-  basicDescription:
-    "Este modo utiliza un costo general estimado para ingredientes y extras. Es ideal para presupuestos rápidos, pedidos sencillos o cuando no necesitas un desglose detallado.",
+      basicTitle: "Cálculo simplificado",
+      basicDescription:
+        "Este modo utiliza un costo general estimado para ingredientes y extras. Es ideal para presupuestos rápidos, pedidos sencillos o cuando no necesitas un desglose detallado.",
 
-  advancedTitle: "Cálculo avanzado",
-  advancedDescription:
-    "Este modo permite un cálculo más preciso incluyendo ingredientes detallados, tiempo de trabajo, complejidad del diseño, extras y servicios adicionales. Recomendado para pedidos personalizados o de mayor valor.",
-},
+      advancedTitle: "Cálculo avanzado",
+      advancedDescription:
+        "Este modo permite un cálculo más preciso incluyendo ingredientes detallados, tiempo de trabajo, complejidad del diseño, extras y servicios adicionales. Recomendado para pedidos personalizados o de mayor valor.",
+    },
     currency: {
-  label: "Moneda",
-  options: {
-    usd: "USD – Estados Unidos",
-    eur: "EUR – Euro",
-    mxn: "MXN – México",
-    cop: "COP – Colombia",
-    ars: "ARS – Argentina",
-  },
-},
+      label: "Moneda",
+      options: {
+        usd: "USD – Estados Unidos",
+        eur: "EUR – Euro",
+        mxn: "MXN – México",
+        cop: "COP – Colombia",
+        ars: "ARS – Argentina",
+      },
+    },
     ingredientManager: {
       badge: "Ingredientes",
       title: "Costos base",
-      helper: "Los ingredientes son editables y deben reflejar tus costos reales.",
+      helper:
+        "Los ingredientes son editables y deben reflejar tus costos reales.",
       name: "Nombre",
       placeholder: "Mantequilla",
       unit: "Unidad",
@@ -112,37 +120,38 @@ fileSelected: "Archivo seleccionado",
       total: "Total de ingredientes",
     },
     recipes: {
-  saveTitle: "Guardar receta",
-  saveDescription: "Guarda esta receta para reutilizarla en futuros pedidos.",
-  recipeName: "Nombre de la receta",
-  recipePlaceholder: "Ej: Chocolate 20 porciones",
-  unnamed: "Receta sin nombre",
-  saveButton: "Guardar receta",
-  savedListTitle: "Recetas guardadas",
-  empty: "No tienes recetas guardadas todavía.",
-  use: "Usar",
-  edit: "Editar",
-  delete: "Eliminar",
-  confirmDelete: "¿Eliminar esta receta?",
-  proLocked: "Disponible solo en PRO",
-  searchPlaceholder: "Buscar receta por nombre...",
-  noResults: "No se encontraron recetas con ese nombre",
-},
+      saveTitle: "Guardar receta",
+      saveDescription:
+        "Guarda esta receta para reutilizarla en futuros pedidos.",
+      recipeName: "Nombre de la receta",
+      recipePlaceholder: "Ej: Chocolate 20 porciones",
+      unnamed: "Receta sin nombre",
+      saveButton: "Guardar receta",
+      savedListTitle: "Recetas guardadas",
+      empty: "No tienes recetas guardadas todavía.",
+      use: "Usar",
+      edit: "Editar",
+      delete: "Eliminar",
+      confirmDelete: "¿Eliminar esta receta?",
+      proLocked: "Disponible solo en PRO",
+      searchPlaceholder: "Buscar receta por nombre...",
+      noResults: "No se encontraron recetas con ese nombre",
+    },
     quotes: {
-  title: "Presupuestos guardados",
-  use: "Usar",
-  edit: "Editar",
-  delete: "Eliminar",
-  date: "Fecha",
-  empty: "Aún no has guardado presupuestos.",
-  saveTitle: "Guardar presupuesto",
-  saveDescrption: " Guarda este cálculo completo para reutilizarlo",
-  saveButton: " Guardar presupuesto",
-  listTitle: "Presupuestos guardados",
-  useQuote: "Usar",
-  editQuote: "Editar",
-  deleteQuote: "Eliminar",
-},
+      title: "Presupuestos guardados",
+      use: "Usar",
+      edit: "Editar",
+      delete: "Eliminar",
+      date: "Fecha",
+      empty: "Aún no has guardado presupuestos.",
+      saveTitle: "Guardar presupuesto",
+      saveDescrption: " Guarda este cálculo completo para reutilizarlo",
+      saveButton: " Guardar presupuesto",
+      listTitle: "Presupuestos guardados",
+      useQuote: "Usar",
+      editQuote: "Editar",
+      deleteQuote: "Eliminar",
+    },
     calculatorForm: {
       quickIngredients: "Ingredientes (total)",
       quickIngredientsHelper: "Usa un total rápido o cambia a Avanzado.",
@@ -232,94 +241,98 @@ fileSelected: "Archivo seleccionado",
       label: "Idioma",
     },
     clientMessages: {
-  preset1: "Para reservar la fecha del pastel debe abonarse el 50%.",
-  preset2: "Pagos vía Zelle, CashApp o efectivo.",
-  preset3: "El pedido debe confirmarse con al menos 72 horas de anticipación.",
-  preset4: "No se realizan devoluciones una vez confirmado el pedido.",
-  quickLabel: "Mensajes rápidos:",
-  customLabel: "Mensaje personalizado (PRO)",
-  proOnly: "Disponible en PRO",
-  proEditOnly: "Edición disponible en versión PRO",
-  devToggle: "(DEV) Alternar PRO",
-},
-brand: {
-  title: "Mi marca",
-  description: "Personaliza cómo se verá tu marca en las cotizaciones.",
-  businessName: "Nombre del negocio",
-  logo: "Logo",
-  logoEmpty: "Logo no configurado",
-  proOnlyNote: "Disponible solo en la version PRO",
-},
-    tabs: {
-  calculator: "Calculadora",
-  client: "Vista cliente",
-  brand: "Mi marca",
-  pro: "PRO",
-},
-pro: {
-  intro: {
-    title: "Versión PRO",
-    description:
-      "Diseñada para decoradores que quieren controlar sus costos reales y crecer su negocio.",
-    features: {
-      energy: "Cálculo de gasto de energía (horno, batidoras)",
-      rent: "Renta y utilities mensuales",
-      marketing: "Costos de marketing",
-      cloud: "Guardado automático en la nube",
+      preset1: "Para reservar la fecha del pastel debe abonarse el 50%.",
+      preset2: "Pagos vía Zelle, CashApp o efectivo.",
+      preset3:
+        "El pedido debe confirmarse con al menos 72 horas de anticipación.",
+      preset4: "No se realizan devoluciones una vez confirmado el pedido.",
+      quickLabel: "Mensajes rápidos:",
+      customLabel: "Mensaje personalizado (PRO)",
+      proOnly: "Disponible en PRO",
+      proEditOnly: "Edición disponible en versión PRO",
+      devToggle: "(DEV) Alternar PRO",
     },
-  
-    includesLabel: "Incluye:",
-    includesText: "guardado automático · pago único · sin login",
-  },
+    brand: {
+      title: "Mi marca",
+      description: "Personaliza cómo se verá tu marca en las cotizaciones.",
+      businessName: "Nombre del negocio",
+      logo: "Logo",
+      logoEmpty: "Logo no configurado",
+      proOnlyNote: "Disponible solo en la version PRO",
+    },
+    tabs: {
+      calculator: "Calculadora",
+      client: "Vista cliente",
+      brand: "Mi marca",
+      pro: "PRO",
+    },
+    pro: {
+      intro: {
+        title: "Versión PRO",
+        description:
+          "Diseñada para decoradores que quieren controlar sus costos reales y crecer su negocio.",
 
-  toggle: {
-    title: "Funciones disponibles al activar PRO",
-    active: "PRO ACTIVADO ✅",
-    inactive: "Activar PRO",
-    note:
-      "Próximamente: PRO Core y Business con reportes y reglas avanzadas.",
-  },
-  includeCosts: {
-  title: "Incluir costos operativos PRO en el precio final",
-  description:
-    "Energía, renta, utilities y marketing se sumarán al cálculo.",
-},
-  energy: {
-    title: "Costo de energía (horno)",
-    ovenKwh: "kWh del horno",
-    ovenHours: "Horas de uso",
-    energyRate: "Costo por kWh ($)",
-    result: "Costo estimado de energía",
-  },
+        features: {
+          energy: "Cálculo de gasto de energía (horno, batidoras)",
+          rent: "Renta y utilities mensuales",
+          marketing: "Costos de marketing",
+          cloud: "Guardado automático en la nube",
+        },
 
-  rent: {
-    title: "Costo de renta",
-    monthlyRent: "Renta mensual ($)",
-    workDays: "Días trabajados al mes",
-    daysUsed: "Días usados para este pedido",
-    result: "Costo de renta para este pedido",
-  },
+        includesLabel: "Incluye:",
+        includesText: "guardado automático · pago único · sin login",
 
-  utilities: {
-    title: "Costo de utilities",
-    monthlyUtilities: "Utilities mensuales ($)",
-    workDays: "Días trabajados al mes",
-    daysUsed: "Días usados para este pedido",
-    result: "Costo de utilities para este pedido",
-  },
+        extras: {
+          saveRecipes: "Guarda tus recetas y presupuestos",
+          accessQuotes: "Accede a tus cálculos guardados cuando los necesites",
+          brandCustomization: "Personaliza con tu marca y logo",
+        },
+      },
 
-  marketing: {
-    title: "Costo de marketing por pedido",
-    monthlyMarketing: "Marketing mensual ($)",
-    ordersPerMonth: "Pedidos promedio al mes",
-    result: "Marketing por pedido",
-  },
-  extras: {
-      saveRecipes: "Guarda tus recetas y presupuestos",
-      accessQuotes: "Accede a tus cálculos guardados cuando los necesites",
-      brandCustomization: "Personaliza con tu marca y logo",
-    }
-},
+      toggle: {
+        title: "Funciones disponibles al activar PRO",
+        active: "PRO ACTIVADO ✅",
+        inactive: "Activar PRO",
+        note: "Próximamente: PRO Core y Business con reportes y reglas avanzadas.",
+      },
+
+      includeCosts: {
+        title: "Incluir costos operativos PRO en el precio final",
+        description:
+          "Energía, renta, utilities y marketing se sumarán al cálculo.",
+      },
+
+      energy: {
+        title: "Costo de energía (horno)",
+        ovenKwh: "kWh del horno",
+        ovenHours: "Horas de uso",
+        energyRate: "Costo por kWh ($)",
+        result: "Costo estimado de energía",
+      },
+
+      rent: {
+        title: "Costo de renta",
+        monthlyRent: "Renta mensual ($)",
+        workDays: "Días trabajados al mes",
+        daysUsed: "Días usados para este pedido",
+        result: "Costo de renta para este pedido",
+      },
+
+      utilities: {
+        title: "Costo de utilities",
+        monthlyUtilities: "Utilities mensuales ($)",
+        workDays: "Días trabajados al mes",
+        daysUsed: "Días usados para este pedido",
+        result: "Costo de utilities para este pedido",
+      },
+
+      marketing: {
+        title: "Costo de marketing por pedido",
+        monthlyMarketing: "Marketing mensual ($)",
+        ordersPerMonth: "Pedidos promedio al mes",
+        result: "Marketing por pedido",
+      },
+    },
   },
 
   en: {
@@ -329,46 +342,45 @@ pro: {
       mobileFriendly: "Mobile optimized",
     },
     client: {
-  quoteTitle: "Cake quote",
-  servingsLabel: "servings",
-  totalLabel: "Total",
-  deliveryLabel: "Delivery",
-  quickMessages: "Quick messages:",
+      quoteTitle: "Cake quote",
+      servingsLabel: "servings",
+      totalLabel: "Total",
+      deliveryLabel: "Delivery",
+      quickMessages: "Quick messages:",
       quickMessagePresets: [
-  "A 50% deposit is required to reserve the cake date.",
-  "Payments via Zelle, CashApp, or cash.",
-  "Orders must be confirmed at least 72 hours in advance.",
-  "No refunds once the order is confirmed.",
-],
-  
-  proBadge: "Available in PRO",
-  freeBadge: "FREE",
+        "A 50% deposit is required to reserve the cake date.",
+        "Payments via Zelle, CashApp, or cash.",
+        "Orders must be confirmed at least 72 hours in advance.",
+        "No refunds once the order is confirmed.",
+      ],
 
-  clientMessageLabel: "Message for the client",
-  clientMessageLocked: "Editing available in PRO version",
-  proEditActive: "Editable message (PRO active)",
+      proBadge: "Available in PRO",
+      freeBadge: "FREE",
 
-  cakePhotoLabel: "Cake photo (optional)",
+      clientMessageLabel: "Message for the client",
+      clientMessageLocked: "Editing available in PRO version",
+      proEditActive: "Editable message (PRO active)",
+
+      cakePhotoLabel: "Cake photo (optional)",
       cakePhotoAlt: "Cake photo",
 
-  printButton: "Download / Print quote",
-  openPdfButton: "Open PDF view",
+      printButton: "Download / Print quote",
+      openPdfButton: "Open PDF view",
 
-  quickMessagesTitle: "Quick messages",
-  customMessageLabel: "Custom message (PRO)",
-  devTogglePro: "(DEV) Toggle PRO",
+      quickMessagesTitle: "Quick messages",
+      customMessageLabel: "Custom message (PRO)",
+      devTogglePro: "(DEV) Toggle PRO",
 
-  legalNote1:
-    "A 50% deposit is required to reserve the date. Prices may vary depending on final design changes, ingredients, or additional services.",
+      legalNote1:
+        "A 50% deposit is required to reserve the date. Prices may vary depending on final design changes, ingredients, or additional services.",
 
-  legalNote2:
-    "This quote is valid for 7 days and does not constitute a contract until confirmed in writing.",
-    uploadButton: "Upload image",
-noFileSelected: "No file selected",
-fileSelected: "File selected",
+      legalNote2:
+        "This quote is valid for 7 days and does not constitute a contract until confirmed in writing.",
+      uploadButton: "Upload image",
+      noFileSelected: "No file selected",
+      fileSelected: "File selected",
+    },
 
-},
-        
     download: {
       label: "Download",
       title: "Get the full project ZIP",
@@ -376,32 +388,32 @@ fileSelected: "File selected",
       button: "Download ZIP",
     },
     modes: {
-  label: "Calculation mode",
-  title: "Choose how you want to calculate",
-  description:
-    "Select between a quick estimate or a detailed calculation depending on the order.",
+      label: "Calculation mode",
+      title: "Choose how you want to calculate",
+      description:
+        "Select between a quick estimate or a detailed calculation depending on the order.",
 
-  basic: "Basic",
-  advanced: "Advanced",
+      basic: "Basic",
+      advanced: "Advanced",
 
-  basicTitle: "Simplified calculation",
-  basicDescription:
-    "This mode uses a general estimated cost for ingredients and extras. It’s ideal for quick quotes, simple orders, or when a detailed breakdown is not needed.",
+      basicTitle: "Simplified calculation",
+      basicDescription:
+        "This mode uses a general estimated cost for ingredients and extras. It’s ideal for quick quotes, simple orders, or when a detailed breakdown is not needed.",
 
-  advancedTitle: "Advanced calculation",
-  advancedDescription:
-    "This mode provides a more accurate calculation by including detailed ingredients, working time, design complexity, extras, and additional services. Recommended for custom or higher-value orders.",
-},
+      advancedTitle: "Advanced calculation",
+      advancedDescription:
+        "This mode provides a more accurate calculation by including detailed ingredients, working time, design complexity, extras, and additional services. Recommended for custom or higher-value orders.",
+    },
     currency: {
-  label: "Currency",
-  options: {
-    usd: "USD – United States",
-    eur: "EUR – Euro",
-    mxn: "MXN – Mexico",
-    cop: "COP – Colombia",
-    ars: "ARS – Argentina",
-  },
-},
+      label: "Currency",
+      options: {
+        usd: "USD – United States",
+        eur: "EUR – Euro",
+        mxn: "MXN – Mexico",
+        cop: "COP – Colombia",
+        ars: "ARS – Argentina",
+      },
+    },
     ingredientManager: {
       badge: "Ingredients",
       title: "Base costs",
@@ -430,42 +442,42 @@ fileSelected: "File selected",
       total: "Total ingredients",
     },
     recipes: {
-  saveTitle: "Save recipe",
-  saveDescription:
-    "Save this recipe to reuse it for future orders or pricing calculations.",
-  recipeName: "Recipe name",
-  recipePlaceholder: "e.g. Chocolate cake – 20 servings",
-  unnamed: "Untitled recipe",
+      saveTitle: "Save recipe",
+      saveDescription:
+        "Save this recipe to reuse it for future orders or pricing calculations.",
+      recipeName: "Recipe name",
+      recipePlaceholder: "e.g. Chocolate cake – 20 servings",
+      unnamed: "Untitled recipe",
 
-  saveButton: "Save recipe",
+      saveButton: "Save recipe",
 
-  savedListTitle: "Saved recipes",
-  empty: "You don’t have any saved recipes yet.",
+      savedListTitle: "Saved recipes",
+      empty: "You don’t have any saved recipes yet.",
 
-  use: "Use",
-  edit: "Edit",
-  delete: "Delete",
-  confirmDelete: "Are you sure you want to delete this recipe?",
+      use: "Use",
+      edit: "Edit",
+      delete: "Delete",
+      confirmDelete: "Are you sure you want to delete this recipe?",
 
-  proLocked: "Available in PRO only",
-  searchPlaceholder: "Search recipe by name...",
-  noResults: "No recipes found with that name",
-},
+      proLocked: "Available in PRO only",
+      searchPlaceholder: "Search recipe by name...",
+      noResults: "No recipes found with that name",
+    },
     quotes: {
-  title: "Saved quotes",
-  use: "Use",
-  edit: "Edit",
-  delete: "Delete",
-  date: "Date",
-  empty: "You haven’t saved any quotes yet.",
-  saveTitle: "Save quote",
-  saveDescription: "Save this full calculation to reuse or edit it later",
-  saveButton: "Save quote",
-  listTitle: " Saved quotes",
-  useQuote: "Use",
-  editQuote: "Edit",
-  deleteQuote: "Delete",
-},
+      title: "Saved quotes",
+      use: "Use",
+      edit: "Edit",
+      delete: "Delete",
+      date: "Date",
+      empty: "You haven’t saved any quotes yet.",
+      saveTitle: "Save quote",
+      saveDescription: "Save this full calculation to reuse or edit it later",
+      saveButton: "Save quote",
+      listTitle: " Saved quotes",
+      useQuote: "Use",
+      editQuote: "Edit",
+      deleteQuote: "Delete",
+    },
     calculatorForm: {
       quickIngredients: "Ingredients (total)",
       quickIngredientsHelper: "Quick estimate or Advanced mode.",
@@ -555,102 +567,109 @@ fileSelected: "File selected",
       label: "Language",
     },
     clientMessages: {
-  preset1: "To reserve the cake date, a 50% deposit is required.",
-  preset2: "Payments via Zelle, CashApp, or cash.",
-  preset3: "Orders must be confirmed at least 72 hours in advance.",
-  preset4: "No refunds once the order is confirmed.",
-  quickLabel: "Quick messages:",
-  customLabel: "Custom message (PRO)",
-  proOnly: "Available in PRO",
-  proEditOnly: "Editing available in PRO version",
-  devToggle: "(DEV) Toggle PRO",
-},
-brand: {
-  title: "My brand",
-  description: "Customize how your brand appears in quotes.",
-  businessName: "Business name",
-  logo: "Logo",
-  logoEmpty: "Logo not configured",
-  proOnlyNote: "Available in the PRO version",
-},
-    tabs: {
-  calculator: "Calculator",
-  client: "Client view",
-  brand: "My brand",
-  pro: "PRO"
-},
-  pro: {
-  intro: {
-    title: "PRO Version",
-    description:
-      "Designed for cake decorators who want to control their real costs and grow their business.",
-    features: {
-      energy: "Energy cost calculation (oven, mixers)",
-      rent: "Rent and monthly utilities",
-      marketing: "Marketing costs",
-      cloud: "Automatic cloud saving",
+      preset1: "To reserve the cake date, a 50% deposit is required.",
+      preset2: "Payments via Zelle, CashApp, or cash.",
+      preset3: "Orders must be confirmed at least 72 hours in advance.",
+      preset4: "No refunds once the order is confirmed.",
+      quickLabel: "Quick messages:",
+      customLabel: "Custom message (PRO)",
+      proOnly: "Available in PRO",
+      proEditOnly: "Editing available in PRO version",
+      devToggle: "(DEV) Toggle PRO",
     },
-    includesLabel: "Includes:",
-    includesText: "auto save · one-time payment · no login",
-  },
+    brand: {
+      title: "My brand",
+      description: "Customize how your brand appears in quotes.",
+      businessName: "Business name",
+      logo: "Logo",
+      logoEmpty: "Logo not configured",
+      proOnlyNote: "Available in the PRO version",
+    },
+    tabs: {
+      calculator: "Calculator",
+      client: "Client view",
+      brand: "My brand",
+      pro: "PRO",
+    },
+    pro: {
+      intro: {
+        title: "PRO Version",
+        description:
+          "Designed for cake decorators who want to control their real costs and grow their business.",
 
-  toggle: {
-    title: "Features available when PRO is activated",
-    active: "PRO ACTIVATED ✅",
-    inactive: "Activate PRO",
-    note:
-      "Coming soon: PRO Core and Business with reports and advanced rules.",
-  },
-    includeCosts: {
-  title: "Include PRO operational costs in the final price",
-  description:
-    "Energy, rent, utilities and marketing will be added to the calculation.",
-},
-  energy: {
-    title: "Energy cost (oven)",
-    ovenKwh: "Oven kWh",
-    ovenHours: "Hours of use",
-    energyRate: "Cost per kWh ($)",
-    result: "Estimated energy cost",
-  },
+        features: {
+          energy: "Energy cost calculation (oven, mixers)",
+          rent: "Rent and monthly utilities",
+          marketing: "Marketing costs",
+          cloud: "Automatic cloud saving",
+        },
 
-  rent: {
-    title: "Rent cost",
-    monthlyRent: "Monthly rent ($)",
-    workDays: "Working days per month",
-    daysUsed: "Days used for this order",
-    result: "Rent cost for this order",
-  },
+        includesLabel: "Includes:",
+        includesText: "auto save · one-time payment · no login",
 
-  utilities: {
-    title: "Utilities cost",
-    monthlyUtilities: "Monthly utilities ($)",
-    workDays: "Working days per month",
-    daysUsed: "Days used for this order",
-    result: "Utilities cost for this order",
-  },
+        extras: {
+          saveRecipes: "Save recipes and quotes",
+          accessQuotes: "Access your saved calculations anytime",
+          brandCustomization: "Customize with your brand and logo",
+        },
+      },
 
-  marketing: {
-    title: "Marketing cost per order",
-    monthlyMarketing: "Monthly marketing ($)",
-    ordersPerMonth: "Average orders per month",
-    result: "Marketing per order",
-  },
-  extras: {
-      saveRecipes: "Save recipes and quotes",
-      accessQuotes: "Access your saved calculations anytime",
-      brandCustomization: "Customize with your brand and logo",
-    }
-},
+      toggle: {
+        title: "Features available when PRO is activated",
+        active: "PRO ACTIVATED ✅",
+        inactive: "Activate PRO",
+        note: "Coming soon: PRO Core and Business with reports and advanced rules.",
+      },
+
+      includeCosts: {
+        title: "Include PRO operational costs in the final price",
+        description:
+          "Energy, rent, utilities and marketing will be added to the calculation.",
+      },
+
+      energy: {
+        title: "Energy cost (oven)",
+        ovenKwh: "Oven kWh",
+        ovenHours: "Hours of use",
+        energyRate: "Cost per kWh ($)",
+        result: "Estimated energy cost",
+      },
+
+      rent: {
+        title: "Rent cost",
+        monthlyRent: "Monthly rent ($)",
+        workDays: "Working days per month",
+        daysUsed: "Days used for this order",
+        result: "Rent cost for this order",
+      },
+
+      utilities: {
+        title: "Utilities cost",
+        monthlyUtilities: "Monthly utilities ($)",
+        workDays: "Working days per month",
+        daysUsed: "Days used for this order",
+        result: "Utilities cost for this order",
+      },
+
+      marketing: {
+        title: "Marketing cost per order",
+        monthlyMarketing: "Monthly marketing ($)",
+        ordersPerMonth: "Average orders per month",
+        result: "Marketing per order",
+      },
+    },
   },
 };
+
 type LanguageContextValue = {
   language: Language;
   setLanguage: (lang: Language) => void;
   copy: any;
 };
 
-const LanguageContext = createContext<LanguageContextValue | undefined>(undefined);
+const LanguageContext = createContext<LanguageContextValue | undefined>(
+  undefined,
+);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>("es");
@@ -661,10 +680,14 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       setLanguage,
       copy: translations[language],
     }),
-    [language]
+    [language],
   );
 
-  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
+  return (
+    <LanguageContext.Provider value={value}>
+      {children}
+    </LanguageContext.Provider>
+  );
 }
 
 export function useLanguage() {
