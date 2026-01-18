@@ -1039,7 +1039,7 @@ export default function HomePage() {
   }`}
 >
   <span className="mr-1">✨</span>
-  ✨ {copy.tabs.pro}
+  {copy.tabs.pro}
 </button>
 
       </div>
