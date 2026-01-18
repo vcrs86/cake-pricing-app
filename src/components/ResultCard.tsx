@@ -146,9 +146,11 @@ export function ResultCard({
 
           {/* ✅ SUGERIDO ya incluye PRO */}
           <Row
-            label={copy.resultCard.rows.suggested}
-            value={formatCurrency(suggestedFinal)}
-          />
+  label={copy.resultCard.rows.suggested}
+  value={formatCurrency(
+    pricing.suggestedMinimum + additionalCost
+  )}
+/>
         </div>
       ) : null}
     </section>
