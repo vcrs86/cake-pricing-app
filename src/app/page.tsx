@@ -69,27 +69,28 @@ type SavedQuote = {
 export default function HomePage() {
   const { copy, language, setLanguage } = useLanguage();
   const formatCurrency = (value: number) => {
-    const localeMap: Record<string, string> = {
-      USD: "en-US",
-      EUR: "es-ES",
-      MXN: "es-MX",
-      COP: "es-CO",
-      ARS: "es-AR",
-    };
+  const safeValue = Number.isFinite(Number(value)) ? Number(value) : 0;
 
-    const locale = localeMap[currency] || "en-US";
-
-    const formatted = new Intl.NumberFormat(locale, {
-      style: "currency",
-      currency,
-      currencyDisplay: "symbol",
-      minimumFractionDigits: currency === "COP" ? 0 : 2,
-      maximumFractionDigits: currency === "COP" ? 0 : 2,
-    }).format(value);
-
-    return `${currency} ${formatted}`;
+  const localeMap: Record<string, string> = {
+    USD: "en-US",
+    EUR: "es-ES",
+    MXN: "es-MX",
+    COP: "es-CO",
+    ARS: "es-AR",
   };
 
+  const locale = localeMap[currency] || "en-US";
+
+  const formatted = new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency,
+    currencyDisplay: "symbol",
+    minimumFractionDigits: currency === "COP" ? 0 : 2,
+    maximumFractionDigits: currency === "COP" ? 0 : 2,
+  }).format(safeValue);
+
+  return `${currency} ${formatted}`;
+};
   const proCopy = copy.pro;
   const [mode, setMode] = useState<"basic" | "advanced">("basic");
   const [values, setValues] = useState<CalculatorFormState>(DEFAULT_STATE);
