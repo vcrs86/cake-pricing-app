@@ -65,14 +65,7 @@ export function ResultCard({
         <p className="text-3xl font-black">
           {formatCurrency(pricing.recommendedPrice)}
         </p>
-        {servings && pricing.recommendedPrice > 0 ? (
-  <p className="mt-1 text-sm text-slate-500">
-    {formatCurrency(pricing.recommendedPrice / servings)} / {servings}{" "}
-    {copy.general.servings}
-  </p>
-) : null}
-
-
+        
         {/* ✅ Precio por porción */}
         {perServing > 0 && servings ? (
           <p className="mt-1 text-sm text-slate-500">
