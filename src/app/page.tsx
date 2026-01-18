@@ -108,25 +108,29 @@ export default function HomePage() {
     return map;
   }, [ingredients]);
 
-    const lineCosts = useMemo(() => {
+  const lineCosts = useMemo(() => {
     return recipeLines.map((line) => {
       const ingredient = ingredientLookup.get(line.ingredientId);
-      
+
       // Si no hay ingrediente, enviamos datos vacíos pero con la estructura correcta
       if (!ingredient) {
-        return { 
-          lineId: line.id, 
+        return {
+          lineId: line.id,
           total: 0,
           ingredientName: "",
           unit: "g",
           quantity: 0,
-          cost: 0 
+          cost: 0,
         };
       }
 
       const qty = Number(line.quantity) || 0;
-      const price = Number(ingredient.price || (ingredient as any).packageCost || 0);
-      const size = Number(ingredient.baseQuantity || (ingredient as any).packageSize || 1);
+      const price = Number(
+        ingredient.price || (ingredient as any).packageCost || 0,
+      );
+      const size = Number(
+        ingredient.baseQuantity || (ingredient as any).packageSize || 1,
+      );
       const total = (qty / size) * price;
 
       // Devolvemos el objeto EXACTAMENTE como lo pide el error de Vercel
@@ -136,7 +140,7 @@ export default function HomePage() {
         ingredientName: ingredient.name,
         unit: ingredient.unit,
         quantity: qty,
-        cost: total // Vercel pide 'cost', así que le pasamos el mismo total
+        cost: total, // Vercel pide 'cost', así que le pasamos el mismo total
       };
     });
   }, [ingredientLookup, recipeLines]);
@@ -616,33 +620,32 @@ export default function HomePage() {
   };
 
   const finalPricing = useMemo(() => {
-  // Precio base calculado por la app
-  let finalRecommended = pricing.recommendedPrice;
+    // Precio base calculado por la app
+    let finalRecommended = pricing.recommendedPrice;
 
-  // Si es PRO y se incluyen costos operativos, los sumamos
-  if (isPro && includeProCosts) {
-    finalRecommended += totalProOperationalCost;
-  }
+    // Si es PRO y se incluyen costos operativos, los sumamos
+    if (isPro && includeProCosts) {
+      finalRecommended += totalProOperationalCost;
+    }
 
-  return {
-  ...pricing,
-  recommendedPrice: finalRecommended,
-  perServing:
-    selectedSize.servings > 0
-      ? finalRecommended / selectedSize.servings
-      : 0,
+    return {
+      ...pricing,
+      recommendedPrice: finalRecommended,
+      perServing:
+        selectedSize.servings > 0
+          ? finalRecommended / selectedSize.servings
+          : 0,
 
-  // 👇 AÑADIDO PARA PUNTO 3
-  additionalCost:
-    isPro && includeProCosts ? totalProOperationalCost : 0,
-};
-}, [
-  pricing,
-  isPro,
-  includeProCosts,
-  totalProOperationalCost,
-  selectedSize.servings,
-]);
+      // 👇 AÑADIDO PARA PUNTO 3
+      additionalCost: isPro && includeProCosts ? totalProOperationalCost : 0,
+    };
+  }, [
+    pricing,
+    isPro,
+    includeProCosts,
+    totalProOperationalCost,
+    selectedSize.servings,
+  ]);
 
   return (
     <main className="no-print mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-4 pb-12 pt-10 sm:px-6 lg:px-10">
@@ -839,14 +842,14 @@ export default function HomePage() {
       {/* ADVANCED HELPERS */}
       {/* SAVED RECIPES (PRO) */}
       {mode === "advanced" && (
-      <button
-        type="button"
-        onClick={() => setShowSavedRecipes((prev) => !prev)}
-        className="flex w-full items-center justify-between rounded-xl bg-slate-100 px-4 py-3 text-sm font-semibold text-brand-slate hover:bg-slate-200 transition"
-      >
-        <span>📚 {copy.recipes.savedListTitle}</span>
-        <span>{showSavedRecipes ? "▲" : "▼"}</span>
-      </button>
+        <button
+          type="button"
+          onClick={() => setShowSavedRecipes((prev) => !prev)}
+          className="flex w-full items-center justify-between rounded-xl bg-slate-100 px-4 py-3 text-sm font-semibold text-brand-slate hover:bg-slate-200 transition"
+        >
+          <span>📚 {copy.recipes.savedListTitle}</span>
+          <span>{showSavedRecipes ? "▲" : "▼"}</span>
+        </button>
       )}
 
       {mode === "advanced" && showSavedRecipes && (
@@ -950,55 +953,57 @@ export default function HomePage() {
       )}
       {/* SAVE RECIPE (PRO) */}
       {mode === "advanced" && (
-      <div className="rounded-2xl border border-dashed border-brand-rose/30 bg-brand-rose/10 p-5 space-y-3">
-        <h3 className="text-sm font-bold text-brand-slate">
-          💾 {copy.recipes.saveTitle}
-        </h3>
+        <div className="rounded-2xl border border-dashed border-brand-rose/30 bg-brand-rose/10 p-5 space-y-3">
+          <h3 className="text-sm font-bold text-brand-slate">
+            💾 {copy.recipes.saveTitle}
+          </h3>
 
-        <p className="text-xs text-slate-600">{copy.recipes.saveDescription}</p>
+          <p className="text-xs text-slate-600">
+            {copy.recipes.saveDescription}
+          </p>
 
-        <label className="block text-sm font-semibold text-slate-700">
-          {copy.recipes.recipeName}
-        </label>
+          <label className="block text-sm font-semibold text-slate-700">
+            {copy.recipes.recipeName}
+          </label>
 
-        <input
-          type="text"
-          value={recipeName}
-          onChange={(e) => setRecipeName(e.target.value)}
-          placeholder={copy.recipes.recipePlaceholder}
-          disabled={!isPro}
-          className={`w-full rounded-lg border px-3 py-2 text-sm ${
-            isPro
-              ? "border-brand-rose bg-white text-slate-700"
-              : "border-slate-300 bg-slate-100 text-slate-600 cursor-not-allowed"
-          }`}
-        />
+          <input
+            type="text"
+            value={recipeName}
+            onChange={(e) => setRecipeName(e.target.value)}
+            placeholder={copy.recipes.recipePlaceholder}
+            disabled={!isPro}
+            className={`w-full rounded-lg border px-3 py-2 text-sm ${
+              isPro
+                ? "border-brand-rose bg-white text-slate-700"
+                : "border-slate-300 bg-slate-100 text-slate-600 cursor-not-allowed"
+            }`}
+          />
 
-        <button
-          type="button"
-          disabled={!isPro}
-          onClick={() => {
-            const newRecipe = {
-              id: crypto.randomUUID(),
-              name: recipeName || copy.recipes.unnamed,
-              cakeSize: values.cakeSize,
-              ingredients,
-              recipeLines,
-              createdAt: new Date().toISOString(),
-            };
+          <button
+            type="button"
+            disabled={!isPro}
+            onClick={() => {
+              const newRecipe = {
+                id: crypto.randomUUID(),
+                name: recipeName || copy.recipes.unnamed,
+                cakeSize: values.cakeSize,
+                ingredients,
+                recipeLines,
+                createdAt: new Date().toISOString(),
+              };
 
-            setSavedRecipes((prev) => [newRecipe, ...prev]);
-            setRecipeName("");
-          }}
-          className={`w-full rounded-xl px-4 py-3 text-sm font-semibold transition ${
-            isPro
-              ? "bg-brand-slate text-white hover:-translate-y-0.5 hover:shadow-lg"
-              : "bg-slate-300 text-slate-500 cursor-not-allowed"
-          }`}
-        >
-          {isPro ? copy.recipes.saveButton : copy.recipes.proLocked}
-        </button>
-      </div>
+              setSavedRecipes((prev) => [newRecipe, ...prev]);
+              setRecipeName("");
+            }}
+            className={`w-full rounded-xl px-4 py-3 text-sm font-semibold transition ${
+              isPro
+                ? "bg-brand-slate text-white hover:-translate-y-0.5 hover:shadow-lg"
+                : "bg-slate-300 text-slate-500 cursor-not-allowed"
+            }`}
+          >
+            {isPro ? copy.recipes.saveButton : copy.recipes.proLocked}
+          </button>
+        </div>
       )}
 
       {/* TABS */}
@@ -1070,201 +1075,200 @@ export default function HomePage() {
             />
             {mode === "advanced" && (
               <>
-            {/* SAVE QUOTE (PRO) */}
-            <div className="rounded-2xl border border-dashed border-brand-rose/30 bg-brand-rose/10 p-5 space-y-3">
-              <h3 className="text-sm font-bold text-brand-slate">
-                💾 {copy.quotes.saveTitle}
-              </h3>
+                {/* SAVE QUOTE (PRO) */}
+                <div className="rounded-2xl border border-dashed border-brand-rose/30 bg-brand-rose/10 p-5 space-y-3">
+                  <h3 className="text-sm font-bold text-brand-slate">
+                    💾 {copy.quotes.saveTitle}
+                  </h3>
 
-              <input
-                type="text"
-                value={quoteName}
-                onChange={(e) => setQuoteName(e.target.value)}
-                placeholder="Ej: Cumpleaños 20 porciones"
-                disabled={!isPro}
-                className={`w-full rounded-lg border px-3 py-2 text-sm ${
-                  isPro
-                    ? "border-brand-rose bg-white"
-                    : "border-slate-300 bg-slate-100 cursor-not-allowed"
-                }`}
-              />
+                  <input
+                    type="text"
+                    value={quoteName}
+                    onChange={(e) => setQuoteName(e.target.value)}
+                    placeholder="Ej: Cumpleaños 20 porciones"
+                    disabled={!isPro}
+                    className={`w-full rounded-lg border px-3 py-2 text-sm ${
+                      isPro
+                        ? "border-brand-rose bg-white"
+                        : "border-slate-300 bg-slate-100 cursor-not-allowed"
+                    }`}
+                  />
 
-              <button
-                type="button"
-                disabled={!isPro || finalPricing.recommendedPrice <= 0}
-                onClick={() => {
-                  const newQuote: SavedQuote = {
-                    id:
-                      isEditingQuote && editingQuoteId
-                        ? editingQuoteId
-                        : crypto.randomUUID(),
-                    name: quoteName || "Presupuesto sin nombre",
-                    createdAt: new Date().toISOString(),
-                    currency,
-                    servings: selectedSize.servings,
-                    recipeName: recipeName || undefined,
+                  <button
+                    type="button"
+                    disabled={!isPro || finalPricing.recommendedPrice <= 0}
+                    onClick={() => {
+                      const newQuote: SavedQuote = {
+                        id:
+                          isEditingQuote && editingQuoteId
+                            ? editingQuoteId
+                            : crypto.randomUUID(),
+                        name: quoteName || "Presupuesto sin nombre",
+                        createdAt: new Date().toISOString(),
+                        currency,
+                        servings: selectedSize.servings,
+                        recipeName: recipeName || undefined,
 
-                    ingredients,
-                    recipeLines,
-                    values,
+                        ingredients,
+                        recipeLines,
+                        values,
 
-                    pricing: {
-                      recommended: finalPricing.recommendedPrice,
-                      delivery: pricing.deliveryFee,
-                      perServing:
-                        finalPricing.recommendedPrice / selectedSize.servings,
-                    },
-                  };
-                  setSavedQuotes((prev) => {
-                    if (isEditingQuote && editingQuoteId) {
-                      return prev.map((q) =>
-                        q.id === editingQuoteId ? newQuote : q,
-                      );
-                    }
+                        pricing: {
+                          recommended: finalPricing.recommendedPrice,
+                          delivery: pricing.deliveryFee,
+                          perServing:
+                            finalPricing.recommendedPrice /
+                            selectedSize.servings,
+                        },
+                      };
+                      setSavedQuotes((prev) => {
+                        if (isEditingQuote && editingQuoteId) {
+                          return prev.map((q) =>
+                            q.id === editingQuoteId ? newQuote : q,
+                          );
+                        }
 
-                    return [...prev, newQuote];
-                  });
+                        return [...prev, newQuote];
+                      });
 
-                  // 🔄 SALIR DEL MODO EDICIÓN
-                  setIsEditingQuote(false);
-                  setEditingQuoteId(null);
+                      // 🔄 SALIR DEL MODO EDICIÓN
+                      setIsEditingQuote(false);
+                      setEditingQuoteId(null);
 
-                  // Limpiar nombre (solo UI)
-                  setQuoteName("");
-                }}
-                className={`w-full rounded-xl px-4 py-3 text-sm font-semibold ${
-                  isPro
-                    ? "bg-brand-slate text-white hover:-translate-y-0.5 hover:shadow-lg"
-                    : "bg-slate-300 text-slate-500 cursor-not-allowed"
-                }`}
-              >
-                {isPro ? copy.quotes.saveButton : copy.client.proBadge}
-              </button>
-            </div>
-            {/* LISTA DE PRESUPUESTOS GUARDADOS (VERSION CON CANDADOS) */}
-            {savedQuotes.length > 0 && (
-              <div className="rounded-2xl border border-slate-200 bg-white p-5 space-y-4">
-                <h3 className="text-sm font-bold text-brand-slate">
-                  📋 {copy.quotes.listTitle}
-                </h3>
-
-                <div className="space-y-3">
-                  {savedQuotes.map((quote) => (
-                    <div
-                      key={quote.id}
-                      className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 p-3"
-                    >
-                      <div>
-                    
-                        <p className="text-sm font-semibold text-slate-700">
-                          {quote.name}
-                        </p>
-                        <p className="text-xs text-slate-500">
-                          {new Date(quote.createdAt).toLocaleDateString()}
-                        </p>
-                      </div> 
-                
-                      <div className="flex gap-2">
-                        {/* BOTÓN USAR */}
-                        <button
-                          disabled={!isPro}
-                          onClick={() => handleUseQuote(quote)}
-                          className={`rounded-lg px-3 py-1 text-xs font-semibold transition ${
-                            isPro
-                              ? "bg-brand-slate text-white hover:bg-slate-800"
-                              : "bg-slate-200 text-slate-400 cursor-not-allowed"
-                          }`}
-                        >
-                          {isPro
-                            ? copy.quotes.useQuote
-                            : `🔒 ${copy.quotes.useQuote}`}
-                        </button>
-
-                        {/* BOTÓN EDITAR */}
-                        <button
-                          disabled={!isPro}
-                          onClick={() => handleEditQuote(quote)}
-                          className={`rounded-lg border px-3 py-1 text-xs font-semibold transition ${
-                            isPro
-                              ? "border-slate-300 bg-white text-slate-600 hover:bg-slate-50"
-                              : "border-slate-200 bg-slate-50 text-slate-400 cursor-not-allowed"
-                          }`}
-                        >
-                          {isPro
-                            ? copy.quotes.editQuote
-                            : `🔒 ${copy.quotes.editQuote}`}
-                        </button>
-
-                        {/* BOTÓN BORRAR */}
-                        <button
-                          disabled={!isPro}
-                          onClick={() => {
-                            if (confirm(copy.recipes.confirmDelete)) {
-                              setSavedQuotes((prev) =>
-                                prev.filter((q) => q.id !== quote.id),
-                              );
-                            }
-                          }}
-                          className={`rounded-lg border px-3 py-1 text-xs font-semibold transition ${
-                            isPro
-                              ? "border-red-300 bg-white text-red-600 hover:bg-red-50"
-                              : "border-slate-200 bg-slate-50 text-slate-400 cursor-not-allowed"
-                          }`}
-                        >
-                          {isPro ? copy.quotes.deleteQuote : "🔒"}
-                        </button>
-                      </div>
-                    </div>
-                  ))}
+                      // Limpiar nombre (solo UI)
+                      setQuoteName("");
+                    }}
+                    className={`w-full rounded-xl px-4 py-3 text-sm font-semibold ${
+                      isPro
+                        ? "bg-brand-slate text-white hover:-translate-y-0.5 hover:shadow-lg"
+                        : "bg-slate-300 text-slate-500 cursor-not-allowed"
+                    }`}
+                  >
+                    {isPro ? copy.quotes.saveButton : copy.client.proBadge}
+                  </button>
                 </div>
-              </div>
-            )}
-              </>
-)}
+                {/* LISTA DE PRESUPUESTOS GUARDADOS (VERSION CON CANDADOS) */}
+                {savedQuotes.length > 0 && (
+                  <div className="rounded-2xl border border-slate-200 bg-white p-5 space-y-4">
+                    <h3 className="text-sm font-bold text-brand-slate">
+                      📋 {copy.quotes.listTitle}
+                    </h3>
 
+                    <div className="space-y-3">
+                      {savedQuotes.map((quote) => (
+                        <div
+                          key={quote.id}
+                          className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 p-3"
+                        >
+                          <div>
+                            <p className="text-sm font-semibold text-slate-700">
+                              {quote.name}
+                            </p>
+                            <p className="text-xs text-slate-500">
+                              {new Date(quote.createdAt).toLocaleDateString()}
+                            </p>
+                          </div>
+
+                          <div className="flex gap-2">
+                            {/* BOTÓN USAR */}
+                            <button
+                              disabled={!isPro}
+                              onClick={() => handleUseQuote(quote)}
+                              className={`rounded-lg px-3 py-1 text-xs font-semibold transition ${
+                                isPro
+                                  ? "bg-brand-slate text-white hover:bg-slate-800"
+                                  : "bg-slate-200 text-slate-400 cursor-not-allowed"
+                              }`}
+                            >
+                              {isPro
+                                ? copy.quotes.useQuote
+                                : `🔒 ${copy.quotes.useQuote}`}
+                            </button>
+
+                            {/* BOTÓN EDITAR */}
+                            <button
+                              disabled={!isPro}
+                              onClick={() => handleEditQuote(quote)}
+                              className={`rounded-lg border px-3 py-1 text-xs font-semibold transition ${
+                                isPro
+                                  ? "border-slate-300 bg-white text-slate-600 hover:bg-slate-50"
+                                  : "border-slate-200 bg-slate-50 text-slate-400 cursor-not-allowed"
+                              }`}
+                            >
+                              {isPro
+                                ? copy.quotes.editQuote
+                                : `🔒 ${copy.quotes.editQuote}`}
+                            </button>
+
+                            {/* BOTÓN BORRAR */}
+                            <button
+                              disabled={!isPro}
+                              onClick={() => {
+                                if (confirm(copy.recipes.confirmDelete)) {
+                                  setSavedQuotes((prev) =>
+                                    prev.filter((q) => q.id !== quote.id),
+                                  );
+                                }
+                              }}
+                              className={`rounded-lg border px-3 py-1 text-xs font-semibold transition ${
+                                isPro
+                                  ? "border-red-300 bg-white text-red-600 hover:bg-red-50"
+                                  : "border-slate-200 bg-slate-50 text-slate-400 cursor-not-allowed"
+                              }`}
+                            >
+                              {isPro ? copy.quotes.deleteQuote : "🔒"}
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
 
             <div className="mt-4 space-y-2">
               <label className="block text-sm font-semibold text-slate-700">
                 📷 {copy.client.cakePhotoLabel}
               </label>
               <div className="space-y-2">
-  {/* Input REAL oculto */}
-  <input
-    id="client-photo-input"
-    type="file"
-    accept="image/*"
-    className="hidden"
-    onChange={(e) => {
-      const file = e.target.files?.[0];
-      if (!file) return;
+                {/* Input REAL oculto */}
+                <input
+                  id="client-photo-input"
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
 
-      setSelectedFileName(file.name);
+                    setSelectedFileName(file.name);
 
-      const reader = new FileReader();
-      reader.onload = () => setClientPhoto(reader.result as string);
-      reader.readAsDataURL(file);
-    }}
-  />
+                    const reader = new FileReader();
+                    reader.onload = () =>
+                      setClientPhoto(reader.result as string);
+                    reader.readAsDataURL(file);
+                  }}
+                />
 
-  {/* Botón visible */}
-  <button
-    type="button"
-    onClick={() =>
-      document.getElementById("client-photo-input")?.click()
-    }
-    className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
-  >
-    📷 {copy.client.uploadButton}
-  </button>
+                {/* Botón visible */}
+                <button
+                  type="button"
+                  onClick={() =>
+                    document.getElementById("client-photo-input")?.click()
+                  }
+                  className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+                >
+                  📷 {copy.client.uploadButton}
+                </button>
 
-  {/* Texto traducible */}
-  <p className="text-xs text-slate-500">
-    {selectedFileName
-      ? `${copy.client.fileSelected}: ${selectedFileName}`
-      : copy.client.noFileSelected}
-  </p>
-</div>
-
+                {/* Texto traducible */}
+                <p className="text-xs text-slate-500">
+                  {selectedFileName
+                    ? `${copy.client.fileSelected}: ${selectedFileName}`
+                    : copy.client.noFileSelected}
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -1273,7 +1277,6 @@ export default function HomePage() {
       {/* CLIENT TAB */}
       {activeTab === "client" ? (
         <section className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
-          
           {/* TARJETA CLIENTE */}
           {pricing.recommendedPrice > 0 ? (
             <div className="quote-print relative mt-6 max-w-[420px] mx-auto rounded-3xl border border-white/60 bg-white/80 p-5 shadow-xl backdrop-blur-xl ring-1 ring-white/70 transition-all duration-300 hover:-translate-y-1">
@@ -1281,20 +1284,20 @@ export default function HomePage() {
                 {copy.client.freeBadge}
               </div>
               {businessLogo && (
-  <div className="mb-2 flex justify-center">
-    <img
-      src={businessLogo}
-      alt={businessName || "Brand logo"}
-      className="h-10 object-contain print:h-8"
-    />
-  </div>
-)}
+                <div className="mb-2 flex justify-center">
+                  <img
+                    src={businessLogo}
+                    alt={businessName || "Brand logo"}
+                    className="h-10 object-contain print:h-8"
+                  />
+                </div>
+              )}
 
-{businessName && (
-  <p className="mb-2 text-center text-xs font-semibold uppercase tracking-wide text-slate-400">
-    {businessName}
-  </p>
-)}
+              {businessName && (
+                <p className="mb-2 text-center text-xs font-semibold uppercase tracking-wide text-slate-400">
+                  {businessName}
+                </p>
+              )}
 
               {clientPhoto ? (
                 <img
@@ -1580,374 +1583,361 @@ export default function HomePage() {
           ) : null}
         </section>
       ) : null}
+      {/* ===================== MI MARCA (PRO) ===================== */}
+{activeTab === "pro" && (
+  <div className="mx-auto max-w-md space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow">
 
-      {/* BRAND TAB */}
-      {activeTab === "brand" ? (
-        <section className="mx-auto max-w-md space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow">
-            <h3 className="mb-1 text-lg font-bold text-brand-slate">
-              {copy.brand.title}
-            </h3>
-            <p className="mb-4 text-sm text-slate-500">
-              {copy.brand.description}
-            </p>
+    <h3 className="mb-1 text-lg font-bold text-brand-slate">
+      🏷️ {copy.brand.title}
+    </h3>
 
-            <div className="mb-4">
-              <label className="mb-1 block text-sm font-semibold text-slate-600">
-                {copy.brand.businessName}
+    <p className="mb-4 text-sm text-slate-500">
+      {copy.brand.description}
+    </p>
+
+    {/* NOMBRE DE MARCA */}
+    <div className="mb-4">
+      <label className="mb-1 block text-sm font-semibold text-slate-600">
+        {copy.brand.businessName}
+      </label>
+
+      <input
+        type="text"
+        value={businessName}
+        onChange={(e) => setBusinessName(e.target.value)}
+        placeholder={copy.brand.businessNamePlaceholder}
+        disabled={!isPro}
+        className={`w-full rounded-xl border p-3 text-sm ${
+          isPro
+            ? "border-brand-rose bg-white text-slate-700"
+            : "border-slate-300 bg-slate-100 text-slate-600 cursor-not-allowed"
+        }`}
+      />
+
+      {!isPro && (
+        <p className="mt-1 text-[11px] text-slate-400">
+          {copy.brand.proOnlyNote}
+        </p>
+      )}
+    </div>
+
+    {/* LOGO */}
+    <div>
+      <label className="mb-1 block text-sm font-semibold text-slate-600">
+        {copy.brand.logo}
+      </label>
+
+      {businessLogo ? (
+        <div className="flex h-32 items-center justify-center rounded-xl border border-slate-200 bg-white">
+          <img
+            src={businessLogo}
+            alt={copy.brand.logo}
+            className="max-h-24 object-contain"
+          />
+        </div>
+      ) : (
+        <div className="flex h-32 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-400">
+          {copy.brand.logoEmpty}
+        </div>
+      )}
+
+      {isPro ? (
+        <input
+          type="file"
+          accept="image/*"
+          className="mt-2 block w-full text-xs"
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = () => {
+              setBusinessLogo(reader.result as string);
+            };
+            reader.readAsDataURL(file);
+          }}
+        />
+      ) : (
+        <div className="mt-4 rounded-xl bg-slate-900/90 p-3 text-center text-xs font-bold uppercase tracking-wide text-white">
+          {copy.client.proBadge}
+        </div>
+      )}
+    </div>
+
+  </div>
+)}
+      {/* PRO intro */}
+      <div className="rounded-3xl bg-white p-6 shadow-card ring-1 ring-brand-rose/20">
+        <h3 className="text-2xl font-black text-brand-slate">
+          ✨ {copy.pro.intro.title}
+        </h3>
+
+        <p className="mt-2 text-sm text-slate-600">
+          {copy.pro.intro.description}
+        </p>
+
+        <ul className="mt-5 space-y-3 text-sm text-slate-700">
+          <li>⚡ {copy.pro.intro.features.energy}</li>
+          <li>🏠 {copy.pro.intro.features.rent}</li>
+          <li>📣 {copy.pro.intro.features.marketing}</li>
+          <li>📦 {copy.pro.intro.features.storage}</li>
+          <li>☁️ {copy.pro.intro.features.cloud}</li>
+        </ul>
+
+        <div className="mt-6 rounded-xl bg-brand-rose/10 p-4 text-sm text-brand-slate">
+          <strong>{copy.pro.intro.includesLabel}</strong>{" "}
+          {copy.pro.intro.includesText}
+        </div>
+      </div>
+
+      {/* PRO toggle */}
+      <div className="rounded-3xl border border-dashed border-brand-rose/30 bg-brand-rose/5 p-5 text-center space-y-2">
+        <p className="text-sm font-semibold text-brand-slate">
+          🔒 {copy.pro.toggle.title}
+        </p>
+
+        <button
+          type="button"
+          onClick={() => {
+            setIsPro(true);
+            alert("🎉 CakePrice Pro unlocked! (Simulated purchase)");
+          }}
+          className="w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:shadow-lg"
+        >
+          🔓 Unlock CakePrice Pro
+        </button>
+        <p className="text-xs text-slate-600">{copy.pro.toggle.note}</p>
+      </div>
+
+      {/* ENERGY */}
+      {isPro && (
+        <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 space-y-4">
+          <h3 className="text-lg font-semibold">🔌 {copy.pro.energy.title}</h3>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.energy.ovenKwh}
               </label>
               <input
-                type="text"
-                value={businessName}
-                onChange={(e) => setBusinessName(e.target.value)}
-                placeholder={copy.brand.businessNamePlaceholder}
-                disabled={!isPro}
-                className={`w-full rounded-xl border p-3 text-sm ${
-                  isPro
-                    ? "border-brand-rose bg-white text-slate-700"
-                    : "border-slate-300 bg-slate-100 text-slate-600 cursor-not-allowed"
-                }`}
+                type="number"
+                value={ovenKwh === 0 ? "" : ovenKwh}
+                onChange={(e) => setOvenKwh(Number(e.target.value) || 0)}
+                className="mt-1 w-full rounded-lg border px-3 py-2"
               />
-              {!isPro && (
-                <p className="mt-1 text-[11px] text-slate-400">
-                  {copy.brand.proOnlyNote}
-                </p>
-              )}
             </div>
 
             <div>
-              <label className="mb-1 block text-sm font-semibold text-slate-600">
-                {copy.brand.logo}
+              <label className="text-sm font-medium">
+                {copy.pro.energy.ovenHours}
               </label>
-
-              {businessLogo ? (
-                <div className="flex h-32 items-center justify-center rounded-xl border border-slate-200 bg-white">
-                  <img
-                    src={businessLogo}
-                    alt={copy.brand.logo}
-                    className="max-h-24 object-contain"
-                  />
-                </div>
-              ) : (
-                <div className="flex h-32 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-400">
-                  {copy.brand.logoEmpty}
-                </div>
-              )}
-
-              {isPro ? (
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="mt-2 block w-full text-xs"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (!file) return;
-
-                    const reader = new FileReader();
-                    reader.onload = () => {
-                      setBusinessLogo(reader.result as string);
-                    };
-                    reader.readAsDataURL(file);
-                  }}
-                />
-              ) : (
-                <div className="mt-4 rounded-xl bg-slate-900/90 p-3 text-center text-xs font-bold uppercase tracking-wide text-white">
-                  {copy.client.proBadge}
-                </div>
-              )}
+              <input
+                type="number"
+                value={ovenHours === 0 ? "" : ovenHours}
+                onChange={(e) => setOvenHours(Number(e.target.value) || 0)}
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
             </div>
-          </div>
-        </section>
-      ) : null}
-      {/* PRO TAB */}
-      {activeTab === "pro" ? (
-        <section className="space-y-6">
-          {/* PRO intro */}
-          <div className="rounded-3xl bg-white p-6 shadow-card ring-1 ring-brand-rose/20">
-            <h3 className="text-2xl font-black text-brand-slate">
-              ✨ {copy.pro.intro.title}
-            </h3>
 
-            <p className="mt-2 text-sm text-slate-600">
-              {copy.pro.intro.description}
-            </p>
-
-            <ul className="mt-5 space-y-3 text-sm text-slate-700">
-              <li>⚡ {copy.pro.intro.features.energy}</li>
-              <li>🏠 {copy.pro.intro.features.rent}</li>
-              <li>📣 {copy.pro.intro.features.marketing}</li>
-              <li>📦 {copy.pro.intro.features.storage}</li>
-              <li>☁️ {copy.pro.intro.features.cloud}</li>
-            </ul>
-
-            <div className="mt-6 rounded-xl bg-brand-rose/10 p-4 text-sm text-brand-slate">
-              <strong>{copy.pro.intro.includesLabel}</strong>{" "}
-              {copy.pro.intro.includesText}
-            </div>
-          </div>
-
-          {/* PRO toggle */}
-          <div className="rounded-3xl border border-dashed border-brand-rose/30 bg-brand-rose/5 p-5 text-center space-y-2">
-            <p className="text-sm font-semibold text-brand-slate">
-              🔒 {copy.pro.toggle.title}
-            </p>
-
-            <button
-              type="button"
-              onClick={() => {
-                setIsPro(true);
-                alert("🎉 CakePrice Pro unlocked! (Simulated purchase)");
-              }}
-              className="w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:shadow-lg"
-            >
-              🔓 Unlock CakePrice Pro
-            </button>
-            <p className="text-xs text-slate-600">{copy.pro.toggle.note}</p>
-          </div>
-
-          {/* ENERGY */}
-          {isPro && (
-            <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 space-y-4">
-              <h3 className="text-lg font-semibold">
-                🔌 {copy.pro.energy.title}
-              </h3>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div>
-                  <label className="text-sm font-medium">
-                    {copy.pro.energy.ovenKwh}
-                  </label>
-                  <input
-                    type="number"
-                    value={ovenKwh === 0 ? "" : ovenKwh}
-                    onChange={(e) => setOvenKwh(Number(e.target.value) || 0)}
-                    className="mt-1 w-full rounded-lg border px-3 py-2"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium">
-                    {copy.pro.energy.ovenHours}
-                  </label>
-                  <input
-                    type="number"
-                    value={ovenHours === 0 ? "" : ovenHours}
-                    onChange={(e) => setOvenHours(Number(e.target.value) || 0)}
-                    className="mt-1 w-full rounded-lg border px-3 py-2"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium">
-                    {copy.pro.energy.energyRate}
-                  </label>
-                  <input
-                    type="number"
-                    value={energyRate === 0 ? "" : energyRate}
-                    onChange={(e) => setEnergyRate(Number(e.target.value) || 0)}
-                    className="mt-1 w-full rounded-lg border px-3 py-2"
-                  />
-                </div>
-              </div>
-
-              <div className="pt-3 border-t text-sm">
-                <strong>{copy.pro.energy.result}:</strong>{" "}
-                {formatCurrency(ovenEnergyCost)}
-              </div>
-            </div>
-          )}
-
-          {/* RENT */}
-          {isPro && (
-            <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 space-y-4">
-              <h3 className="text-lg font-semibold">
-                🏠 {copy.pro.rent.title}
-              </h3>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div>
-                  <label className="text-sm font-medium">
-                    {copy.pro.rent.monthlyRent}
-                  </label>
-                  <input
-                    type="number"
-                    value={monthlyRent === 0 ? "" : monthlyRent}
-                    onChange={(e) =>
-                      setMonthlyRent(Number(e.target.value) || 0)
-                    }
-                    className="mt-1 w-full rounded-lg border px-3 py-2"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium">
-                    {copy.pro.rent.workDays}
-                  </label>
-                  <input
-                    type="number"
-                    value={workDaysPerMonth === 0 ? "" : workDaysPerMonth}
-                    onChange={(e) =>
-                      setWorkDaysPerMonth(Number(e.target.value) || 0)
-                    }
-                    className="mt-1 w-full rounded-lg border px-3 py-2"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium">
-                    {copy.pro.rent.daysUsed}
-                  </label>
-                  <input
-                    type="number"
-                    value={daysUsedForOrder === 0 ? "" : daysUsedForOrder}
-                    onChange={(e) =>
-                      setDaysUsedForOrder(Number(e.target.value) || 0)
-                    }
-                    className="mt-1 w-full rounded-lg border px-3 py-2"
-                  />
-                </div>
-              </div>
-
-              <div className="pt-3 border-t text-sm">
-                <strong>{copy.pro.rent.result}:</strong>{" "}
-                {formatCurrency(rentCostPerOrder)}
-              </div>
-            </div>
-          )}
-
-          {/* UTILITIES */}
-          {isPro && (
-            <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 space-y-4">
-              <h3 className="text-lg font-semibold">
-                💧⚡🌐 {copy.pro.utilities.title}
-              </h3>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div>
-                  <label className="text-sm font-medium">
-                    {copy.pro.utilities.monthlyUtilities}
-                  </label>
-                  <input
-                    type="number"
-                    value={monthlyUtilities === 0 ? "" : monthlyUtilities}
-                    onChange={(e) =>
-                      setMonthlyUtilities(Number(e.target.value) || 0)
-                    }
-                    className="mt-1 w-full rounded-lg border px-3 py-2"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium">
-                    {copy.pro.utilities.workDays}
-                  </label>
-                  <input
-                    type="number"
-                    value={
-                      utilityWorkDaysPerMonth === 0
-                        ? ""
-                        : utilityWorkDaysPerMonth
-                    }
-                    onChange={(e) =>
-                      setUtilityWorkDaysPerMonth(Number(e.target.value) || 0)
-                    }
-                    className="mt-1 w-full rounded-lg border px-3 py-2"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium">
-                    {copy.pro.utilities.daysUsed}
-                  </label>
-                  <input
-                    type="number"
-                    value={
-                      utilityDaysUsedForOrder === 0
-                        ? ""
-                        : utilityDaysUsedForOrder
-                    }
-                    onChange={(e) =>
-                      setUtilityDaysUsedForOrder(Number(e.target.value) || 0)
-                    }
-                    className="mt-1 w-full rounded-lg border px-3 py-2"
-                  />
-                </div>
-              </div>
-
-              <div className="pt-3 border-t text-sm">
-                <strong>{copy.pro.utilities.result}:</strong>{" "}
-                {formatCurrency(utilitiesCostPerOrder)}
-              </div>
-            </div>
-          )}
-
-          {/* MARKETING */}
-          {isPro && (
-            <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 space-y-4">
-              <h3 className="text-lg font-semibold">
-                📣 {copy.pro.marketing.title}
-              </h3>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-medium">
-                    {copy.pro.marketing.monthlyMarketing}
-                  </label>
-                  <input
-                    type="number"
-                    value={monthlyMarketing === 0 ? "" : monthlyMarketing}
-                    onChange={(e) =>
-                      setMonthlyMarketing(Number(e.target.value) || 0)
-                    }
-                    className="mt-1 w-full rounded-lg border px-3 py-2"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium">
-                    {copy.pro.marketing.ordersPerMonth}
-                  </label>
-                  <input
-                    type="number"
-                    value={ordersPerMonth === 0 ? "" : ordersPerMonth}
-                    onChange={(e) =>
-                      setOrdersPerMonth(Number(e.target.value) || 0)
-                    }
-                    className="mt-1 w-full rounded-lg border px-3 py-2"
-                  />
-                </div>
-              </div>
-
-              <div className="pt-3 border-t text-sm">
-                <strong>{copy.pro.marketing.result}:</strong>{" "}
-                {formatCurrency(marketingCostPerOrder)}
-              </div>
-            </div>
-          )}
-
-          {/* INCLUDE PRO COSTS */}
-          {isPro && (
-            <div className="mt-6 rounded-2xl border border-brand-rose/30 bg-brand-rose/10 p-5">
-              <label className="flex items-start gap-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={includeProCosts}
-                  onChange={(e) => setIncludeProCosts(e.target.checked)}
-                  className="mt-1 h-4 w-4 rounded border-slate-300 text-brand-slate focus:ring-brand-rose"
-                />
-                <div className="text-sm">
-                  <p className="font-semibold text-brand-slate">
-                    {copy.pro.includeCosts.title}
-                  </p>
-                  <p className="text-xs text-slate-600">
-                    {copy.pro.includeCosts.description}
-                  </p>
-                </div>
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.energy.energyRate}
               </label>
+              <input
+                type="number"
+                value={energyRate === 0 ? "" : energyRate}
+                onChange={(e) => setEnergyRate(Number(e.target.value) || 0)}
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
             </div>
-          )}
-        </section>
-      ) : null}
+          </div>
+
+          <div className="pt-3 border-t text-sm">
+            <strong>{copy.pro.energy.result}:</strong>{" "}
+            {formatCurrency(ovenEnergyCost)}
+          </div>
+        </div>
+      )}
+
+      {/* RENT */}
+      {isPro && (
+        <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 space-y-4">
+          <h3 className="text-lg font-semibold">🏠 {copy.pro.rent.title}</h3>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.rent.monthlyRent}
+              </label>
+              <input
+                type="number"
+                value={monthlyRent === 0 ? "" : monthlyRent}
+                onChange={(e) => setMonthlyRent(Number(e.target.value) || 0)}
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.rent.workDays}
+              </label>
+              <input
+                type="number"
+                value={workDaysPerMonth === 0 ? "" : workDaysPerMonth}
+                onChange={(e) =>
+                  setWorkDaysPerMonth(Number(e.target.value) || 0)
+                }
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.rent.daysUsed}
+              </label>
+              <input
+                type="number"
+                value={daysUsedForOrder === 0 ? "" : daysUsedForOrder}
+                onChange={(e) =>
+                  setDaysUsedForOrder(Number(e.target.value) || 0)
+                }
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
+            </div>
+          </div>
+
+          <div className="pt-3 border-t text-sm">
+            <strong>{copy.pro.rent.result}:</strong>{" "}
+            {formatCurrency(rentCostPerOrder)}
+          </div>
+        </div>
+      )}
+
+      {/* UTILITIES */}
+      {isPro && (
+        <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 space-y-4">
+          <h3 className="text-lg font-semibold">
+            💧⚡🌐 {copy.pro.utilities.title}
+          </h3>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.utilities.monthlyUtilities}
+              </label>
+              <input
+                type="number"
+                value={monthlyUtilities === 0 ? "" : monthlyUtilities}
+                onChange={(e) =>
+                  setMonthlyUtilities(Number(e.target.value) || 0)
+                }
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.utilities.workDays}
+              </label>
+              <input
+                type="number"
+                value={
+                  utilityWorkDaysPerMonth === 0 ? "" : utilityWorkDaysPerMonth
+                }
+                onChange={(e) =>
+                  setUtilityWorkDaysPerMonth(Number(e.target.value) || 0)
+                }
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.utilities.daysUsed}
+              </label>
+              <input
+                type="number"
+                value={
+                  utilityDaysUsedForOrder === 0 ? "" : utilityDaysUsedForOrder
+                }
+                onChange={(e) =>
+                  setUtilityDaysUsedForOrder(Number(e.target.value) || 0)
+                }
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
+            </div>
+          </div>
+
+          <div className="pt-3 border-t text-sm">
+            <strong>{copy.pro.utilities.result}:</strong>{" "}
+            {formatCurrency(utilitiesCostPerOrder)}
+          </div>
+        </div>
+      )}
+
+      {/* MARKETING */}
+      {isPro && (
+        <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 space-y-4">
+          <h3 className="text-lg font-semibold">
+            📣 {copy.pro.marketing.title}
+          </h3>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.marketing.monthlyMarketing}
+              </label>
+              <input
+                type="number"
+                value={monthlyMarketing === 0 ? "" : monthlyMarketing}
+                onChange={(e) =>
+                  setMonthlyMarketing(Number(e.target.value) || 0)
+                }
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.marketing.ordersPerMonth}
+              </label>
+              <input
+                type="number"
+                value={ordersPerMonth === 0 ? "" : ordersPerMonth}
+                onChange={(e) => setOrdersPerMonth(Number(e.target.value) || 0)}
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
+            </div>
+          </div>
+
+          <div className="pt-3 border-t text-sm">
+            <strong>{copy.pro.marketing.result}:</strong>{" "}
+            {formatCurrency(marketingCostPerOrder)}
+          </div>
+        </div>
+      )}
+
+      {/* INCLUDE PRO COSTS */}
+      {isPro && (
+        <div className="mt-6 rounded-2xl border border-brand-rose/30 bg-brand-rose/10 p-5">
+          <label className="flex items-start gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={includeProCosts}
+              onChange={(e) => setIncludeProCosts(e.target.checked)}
+              className="mt-1 h-4 w-4 rounded border-slate-300 text-brand-slate focus:ring-brand-rose"
+            />
+            <div className="text-sm">
+              <p className="font-semibold text-brand-slate">
+                {copy.pro.includeCosts.title}
+              </p>
+              <p className="text-xs text-slate-600">
+                {copy.pro.includeCosts.description}
+              </p>
+            </div>
+          </label>
+        </div>
+      )}
     </main>
   );
 }
