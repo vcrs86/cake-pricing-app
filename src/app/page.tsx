@@ -1616,17 +1616,16 @@ export default function HomePage() {
   <li>⚡ {copy.pro.intro.features.energy}</li>
   <li>🏠 {copy.pro.intro.features.rent}</li>
   <li>📣 {copy.pro.intro.features.marketing}</li>
-  <li>📦 {copy.pro.intro.features.storage}</li>
   <li>☁️ {copy.pro.intro.features.cloud}</li>
 
   <li className="pt-2 border-t text-slate-600">
-    📋 Guarda tus recetas y presupuestos
+    📋 {copy.pro.intro.extras.saveRecipes}
   </li>
   <li className="text-slate-600">
-    💾 Accede a tus cálculos guardados cuando los necesites
+    💾 {copy.pro.intro.extras.accessQuotes}
   </li>
   <li className="text-slate-600">
-    🎨 Personaliza la app con tu marca y logo
+    🎨 {copy.pro.intro.extras.brandCustomization}
   </li>
 </ul>
       </div>
