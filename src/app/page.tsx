@@ -635,18 +635,19 @@ const finalPricing = useMemo(() => {
   const servingsSafe = safe(selectedSize?.servings);
 
   return {
-    ...pricing,
+  ...pricing,
 
-    recommendedPrice: safe(finalRecommended),
+  recommendedPrice: safe(finalRecommended),
 
-    perServing:
-      servingsSafe > 0 ? safe(finalRecommended) / servingsSafe : 0,
+  perServing:
+    servingsSafe > 0 ? safe(finalRecommended) / servingsSafe : 0,
 
-    // 🔑 CLAVE: restauramos la estructura que ResultCard espera
-    result: {
-      additionalCosts: isPro && includeProCosts ? proOps : 0,
-    },
-  };
+  // 🔑 NORMALIZADO: ResultCard SÍ lo puede leer
+  additionalCost: isPro && includeProCosts ? proOps : 0,
+
+  // (opcional pero seguro, por compatibilidad futura)
+  additionalCosts: isPro && includeProCosts ? proOps : 0,
+};
 }, [
   pricing,
   isPro,
