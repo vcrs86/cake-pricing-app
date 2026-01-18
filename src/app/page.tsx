@@ -1613,10 +1613,22 @@ export default function HomePage() {
         </p>
 
         <ul className="mt-5 space-y-3 text-sm text-slate-700">
-          <li>📋 Guardar recetas</li>
-          <li>💾 Guardar presupuestos</li>
-          <li>🎨 Personalizar con tu marca</li>
-        </ul>
+  <li>⚡ {copy.pro.intro.features.energy}</li>
+  <li>🏠 {copy.pro.intro.features.rent}</li>
+  <li>📣 {copy.pro.intro.features.marketing}</li>
+  <li>📦 {copy.pro.intro.features.storage}</li>
+  <li>☁️ {copy.pro.intro.features.cloud}</li>
+
+  <li className="pt-2 border-t text-slate-600">
+    📋 Guarda tus recetas y presupuestos
+  </li>
+  <li className="text-slate-600">
+    💾 Accede a tus cálculos guardados cuando los necesites
+  </li>
+  <li className="text-slate-600">
+    🎨 Personaliza la app con tu marca y logo
+  </li>
+</ul>
       </div>
     </div>
         {/* ===================== CARD 1 — MI MARCA ===================== */}
@@ -1705,9 +1717,215 @@ export default function HomePage() {
         <h3 className="text-lg font-bold text-brand-slate">
           ⚙️ Costos Operativos
         </h3>
+                {/* ===================== ENERGY ===================== */}
+        <div className="rounded-xl border bg-slate-50 p-4 space-y-4">
+          <h4 className="font-semibold">
+            🔌 {copy.pro.energy.title}
+          </h4>
 
-        {/* 👉 TODO tu bloque de ENERGY / RENT / UTILITIES / MARKETING
-            VA EXACTAMENTE IGUAL AQUÍ (no lo repito para no dañarlo) */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.energy.ovenKwh}
+              </label>
+              <input
+                type="number"
+                value={ovenKwh === 0 ? "" : ovenKwh}
+                onChange={(e) => setOvenKwh(Number(e.target.value) || 0)}
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.energy.ovenHours}
+              </label>
+              <input
+                type="number"
+                value={ovenHours === 0 ? "" : ovenHours}
+                onChange={(e) => setOvenHours(Number(e.target.value) || 0)}
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.energy.energyRate}
+              </label>
+              <input
+                type="number"
+                value={energyRate === 0 ? "" : energyRate}
+                onChange={(e) => setEnergyRate(Number(e.target.value) || 0)}
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
+            </div>
+          </div>
+
+          <div className="pt-3 border-t text-sm">
+            <strong>{copy.pro.energy.result}:</strong>{" "}
+            {formatCurrency(ovenEnergyCost)}
+          </div>
+        </div>
+
+        {/* ===================== RENT ===================== */}
+        <div className="rounded-xl border bg-slate-50 p-4 space-y-4">
+          <h4 className="font-semibold">
+            🏠 {copy.pro.rent.title}
+          </h4>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.rent.monthlyRent}
+              </label>
+              <input
+                type="number"
+                value={monthlyRent === 0 ? "" : monthlyRent}
+                onChange={(e) => setMonthlyRent(Number(e.target.value) || 0)}
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.rent.workDays}
+              </label>
+              <input
+                type="number"
+                value={workDaysPerMonth === 0 ? "" : workDaysPerMonth}
+                onChange={(e) =>
+                  setWorkDaysPerMonth(Number(e.target.value) || 0)
+                }
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.rent.daysUsed}
+              </label>
+              <input
+                type="number"
+                value={daysUsedForOrder === 0 ? "" : daysUsedForOrder}
+                onChange={(e) =>
+                  setDaysUsedForOrder(Number(e.target.value) || 0)
+                }
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
+            </div>
+          </div>
+
+          <div className="pt-3 border-t text-sm">
+            <strong>{copy.pro.rent.result}:</strong>{" "}
+            {formatCurrency(rentCostPerOrder)}
+          </div>
+        </div>
+
+        {/* ===================== UTILITIES ===================== */}
+        <div className="rounded-xl border bg-slate-50 p-4 space-y-4">
+          <h4 className="font-semibold">
+            💧⚡🌐 {copy.pro.utilities.title}
+          </h4>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.utilities.monthlyUtilities}
+              </label>
+              <input
+                type="number"
+                value={monthlyUtilities === 0 ? "" : monthlyUtilities}
+                onChange={(e) =>
+                  setMonthlyUtilities(Number(e.target.value) || 0)
+                }
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.utilities.workDays}
+              </label>
+              <input
+                type="number"
+                value={
+                  utilityWorkDaysPerMonth === 0
+                    ? ""
+                    : utilityWorkDaysPerMonth
+                }
+                onChange={(e) =>
+                  setUtilityWorkDaysPerMonth(Number(e.target.value) || 0)
+                }
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.utilities.daysUsed}
+              </label>
+              <input
+                type="number"
+                value={
+                  utilityDaysUsedForOrder === 0
+                    ? ""
+                    : utilityDaysUsedForOrder
+                }
+                onChange={(e) =>
+                  setUtilityDaysUsedForOrder(Number(e.target.value) || 0)
+                }
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
+            </div>
+          </div>
+
+          <div className="pt-3 border-t text-sm">
+            <strong>{copy.pro.utilities.result}:</strong>{" "}
+            {formatCurrency(utilitiesCostPerOrder)}
+          </div>
+        </div>
+
+        {/* ===================== MARKETING ===================== */}
+        <div className="rounded-xl border bg-slate-50 p-4 space-y-4">
+          <h4 className="font-semibold">
+            📣 {copy.pro.marketing.title}
+          </h4>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.marketing.monthlyMarketing}
+              </label>
+              <input
+                type="number"
+                value={monthlyMarketing === 0 ? "" : monthlyMarketing}
+                onChange={(e) =>
+                  setMonthlyMarketing(Number(e.target.value) || 0)
+                }
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium">
+                {copy.pro.marketing.ordersPerMonth}
+              </label>
+              <input
+                type="number"
+                value={ordersPerMonth === 0 ? "" : ordersPerMonth}
+                onChange={(e) =>
+                  setOrdersPerMonth(Number(e.target.value) || 0)
+                }
+                className="mt-1 w-full rounded-lg border px-3 py-2"
+              />
+            </div>
+          </div>
+
+          <div className="pt-3 border-t text-sm">
+            <strong>{copy.pro.marketing.result}:</strong>{" "}
+            {formatCurrency(marketingCostPerOrder)}
+          </div>
+        </div>
 
         {/* INCLUDE PRO COSTS — PROTEGIDO */}
         <div className="rounded-xl border border-brand-rose/30 bg-brand-rose/10 p-4">
