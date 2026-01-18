@@ -27,7 +27,7 @@ export function ResultCard({
   const perServing =
     servings && servings > 0 ? pricing.recommendedPrice / servings : 0;
 
-  // ✅ Costos adicionales PRO (robusto: por si cambió el nombre)
+  // ✅ Costos adicionales PRO (defensivo)
   const additionalCostRaw =
     (pricing as any).additionalCost ??
     (pricing as any).additionalCosts ??
@@ -37,14 +37,12 @@ export function ResultCard({
   const additionalCost =
     typeof additionalCostRaw === "number" ? additionalCostRaw : 0;
 
-  // ✅ Precio sugerido FINAL (incluye PRO si aplica)
-  const suggestedFinal = pricing.suggestedMinimum + additionalCost;
-
-  // ✅ Label seguro (sin depender de copy.result.additionalCosts)
+  // ✅ Label seguro
   const additionalCostLabel =
-    copy?.resultCard?.rows?.additionalCosts ||
-    copy?.pro?.includeCosts?.title ||
-    "Costos operativos (PRO)";
+    copy?.pro?.includeCosts?.title || "Costos operativos (PRO)";
+
+  // ✅ Totales VISUALES (no rompen pricing)
+  const suggestedFinal = pricing.suggestedMinimum + additionalCost;
 
   return (
     <section className="relative overflow-hidden rounded-3xl bg-white/60 backdrop-blur-xl p-6 shadow-xl ring-1 ring-white/40 sm:p-7">
@@ -77,14 +75,12 @@ export function ResultCard({
           {formatCurrency(pricing.recommendedPrice)}
         </p>
 
-        {/* ✅ Precio por porción */}
         {perServing > 0 && servings ? (
           <p className="mt-1 text-sm text-slate-500">
             {formatCurrency(perServing)} / {servings} {copy.general.servings}
           </p>
         ) : null}
 
-        {/* ✅ Indicador de por qué subió (si aplica) */}
         {additionalCost > 0 ? (
           <div className="mt-3 flex items-center justify-between rounded-xl bg-white/70 px-3 py-2 text-sm text-slate-700 ring-1 ring-slate-200">
             <span className="font-semibold">{additionalCostLabel}</span>
@@ -97,7 +93,7 @@ export function ResultCard({
         </p>
       </div>
 
-      {/* DESGLOSE INTERNO */}
+      {/* DESGLOSE */}
       {hasAnyCost ? (
         <div className="space-y-2">
           {hasIngredients ? (
@@ -124,7 +120,7 @@ export function ResultCard({
             value={formatCurrency(pricing.extrasCost + pricing.deliveryFee)}
           />
 
-          {/* ✅ Aquí mostramos el costo PRO dentro del desglose también */}
+          {/* 👇 PRO EXPLÍCITO */}
           {additionalCost > 0 ? (
             <Row
               label={additionalCostLabel}
@@ -144,13 +140,11 @@ export function ResultCard({
 
           <hr className="my-3 border-dashed" />
 
-          {/* ✅ SUGERIDO ya incluye PRO */}
+          {/* ✅ SUGERIDO FINAL (CUADRA CON ARRIBA) */}
           <Row
-  label={copy.resultCard.rows.suggested}
-  value={formatCurrency(
-    pricing.suggestedMinimum + additionalCost
-  )}
-/>
+            label={copy.resultCard.rows.suggested}
+            value={formatCurrency(suggestedFinal)}
+          />
         </div>
       ) : null}
     </section>
