@@ -619,34 +619,44 @@ export default function HomePage() {
       }));
     }
   };
+const finalPricing = useMemo(() => {
+  // helper ultra-seguro
+  const safe = (n: any) => {
+    const num = Number(n);
+    return Number.isFinite(num) ? num : 0;
+  };
 
-  const finalPricing = useMemo(() => {
-    // Precio base calculado por la app
-    let finalRecommended = pricing.recommendedPrice;
+  // Precio base calculado por la app
+  const baseRecommended = safe(pricing?.recommendedPrice);
 
-    // Si es PRO y se incluyen costos operativos, los sumamos
-    if (isPro && includeProCosts) {
-      finalRecommended += totalProOperationalCost;
-    }
+  // Costos PRO (ya calculados)
+  const proOps = safe(totalProOperationalCost);
 
-    return {
-      ...pricing,
-      recommendedPrice: finalRecommended,
-      perServing:
-        selectedSize.servings > 0
-          ? finalRecommended / selectedSize.servings
-          : 0,
+  // Si es PRO y se incluyen costos operativos, los sumamos
+  const finalRecommended =
+    isPro && includeProCosts ? baseRecommended + proOps : baseRecommended;
 
-      // 👇 AÑADIDO PARA PUNTO 3
-      additionalCost: isPro && includeProCosts ? totalProOperationalCost : 0,
-    };
-  }, [
-    pricing,
-    isPro,
-    includeProCosts,
-    totalProOperationalCost,
-    selectedSize.servings,
-  ]);
+  const servingsSafe = safe(selectedSize?.servings);
+
+  return {
+    ...pricing,
+
+    // ✅ Garantizamos que siempre sea número finito
+    recommendedPrice: safe(finalRecommended),
+
+    // ✅ perServing también protegido
+    perServing: servingsSafe > 0 ? safe(finalRecommended) / servingsSafe : 0,
+
+    // ✅ adicional (PRO)
+    additionalCost: isPro && includeProCosts ? proOps : 0,
+  };
+}, [
+  pricing,
+  isPro,
+  includeProCosts,
+  totalProOperationalCost,
+  selectedSize?.servings,
+]);
 
   return (
     <main className="no-print mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-4 pb-12 pt-10 sm:px-6 lg:px-10">
