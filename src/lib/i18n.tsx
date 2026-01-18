@@ -265,7 +265,6 @@ pro: {
       energy: "Cálculo de gasto de energía (horno, batidoras)",
       rent: "Renta y utilities mensuales",
       marketing: "Costos de marketing",
-      storage: "Guardar recetas y presupuestos",
       cloud: "Guardado automático en la nube",
     },
   
@@ -589,7 +588,6 @@ brand: {
       energy: "Energy cost calculation (oven, mixers)",
       rent: "Rent and monthly utilities",
       marketing: "Marketing costs",
-      storage: "Save recipes and quotes",
       cloud: "Automatic cloud saving",
     },
     includesLabel: "Includes:",
