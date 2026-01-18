@@ -23,13 +23,13 @@ export function ResultCard({
   const hasIngredients = pricing.ingredientsCost > 0;
   const hasAnyCost = pricing.baseCost > 0;
 
-  // ✅ Precio por porción (seguro, sin tocar el tipo)
+  // ✅ Precio por porción (seguro)
   const perServing =
     servings && servings > 0
       ? pricing.recommendedPrice / servings
       : 0;
 
-  // ✅ Costos adicionales PRO (si existen)
+  // ✅ Costos adicionales PRO (inyectados desde Home)
   const additionalCost =
     typeof (pricing as any).additionalCost === "number"
       ? (pricing as any).additionalCost
@@ -65,15 +65,15 @@ export function ResultCard({
         <p className="text-3xl font-black">
           {formatCurrency(pricing.recommendedPrice)}
         </p>
-        
-        {/* ✅ Precio por porción */}
+
+        {/* Precio por porción */}
         {perServing > 0 && servings ? (
           <p className="mt-1 text-sm text-slate-500">
             {formatCurrency(perServing)} / {servings} {copy.general.servings}
           </p>
         ) : null}
 
-        {/* ✅ Indicador de costos adicionales */}
+        {/* Indicador de costos PRO */}
         {additionalCost > 0 ? (
           <div className="mt-3 flex justify-between text-sm text-slate-600">
             <span>{copy.result.additionalCosts}</span>
@@ -97,7 +97,9 @@ export function ResultCard({
           ) : null}
 
           <Row
-            label={`${copy.resultCard.rows.decoration} (x${(Number(pricing.complexityMultiplier) || 0).toFixed(2)})`}
+            label={`${copy.resultCard.rows.decoration} (x${(
+              Number(pricing.complexityMultiplier) || 0
+            ).toFixed(2)})`}
             value={formatCurrency(pricing.decorationAndLabor)}
           />
 
@@ -110,6 +112,14 @@ export function ResultCard({
             label={copy.resultCard.rows.extrasDelivery}
             value={formatCurrency(pricing.extrasCost + pricing.deliveryFee)}
           />
+
+          {/* ✅ COSTOS OPERATIVOS PRO (NUEVO — CLAVE) */}
+          {additionalCost > 0 ? (
+            <Row
+              label={copy.result.additionalCosts}
+              value={`+${formatCurrency(additionalCost)}`}
+            />
+          ) : null}
 
           <Row
             label={copy.resultCard.rows.baseCost}
@@ -127,7 +137,6 @@ export function ResultCard({
             label={copy.resultCard.rows.suggested}
             value={formatCurrency(pricing.suggestedMinimum)}
           />
-
         </div>
       ) : null}
     </section>
