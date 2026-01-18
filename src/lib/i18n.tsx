@@ -268,6 +268,7 @@ pro: {
       storage: "Guardar recetas y presupuestos",
       cloud: "Guardado automático en la nube",
     },
+  
     includesLabel: "Incluye:",
     includesText: "guardado automático · pago único · sin login",
   },
@@ -315,6 +316,11 @@ pro: {
     result: "Marketing por pedido",
   },
 },
+extras: {
+      saveRecipes: "Guarda tus recetas y presupuestos",
+      accessQuotes: "Accede a tus cálculos guardados cuando los necesites",
+      brandCustomization: "Personaliza con tu marca y logo",
+    }
   },
 
   en: {
@@ -633,6 +639,11 @@ brand: {
     result: "Marketing per order",
   },
 },
+extras: {
+      saveRecipes: "Save recipes and quotes",
+      accessQuotes: "Access your saved calculations anytime",
+      brandCustomization: "Customize with your brand and logo",
+    }
   },
 };
 type LanguageContextValue = {
