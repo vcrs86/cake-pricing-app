@@ -35,8 +35,6 @@ export function ResultCard({
   const additionalCost =
     typeof additionalCostRaw === "number" ? additionalCostRaw : 0;
 
-    console.log("RESULT CARD NUEVO CARGADO");
-
   return (
   <section className="relative overflow-hidden rounded-3xl bg-white/60 backdrop-blur-xl p-6 shadow-xl ring-1 ring-white/40 sm:p-7">
     {/* ================= HEADER ================= */}
@@ -154,6 +152,10 @@ export function ResultCard({
       <p className="mt-2 text-xs text-slate-500">
         {copy.resultCard.highlightNote}
       </p>
+      <p className="mt-2 text-[11px] text-slate-500 italic">
+  {copy.resultCard.recommendedNote ||
+    "El precio recomendado puede variar levemente del precio sugerido por redondeo o criterio comercial."}
+</p>
     </div>
   </section>
 );
