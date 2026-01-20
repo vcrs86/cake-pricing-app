@@ -210,6 +210,8 @@ const translations: Record<Language, any> = {
       operationalNote: "Costos operativos del negocio. No generan ganancia.",
       suggestedNote:
         "El precio sugerido refleja el costo real más la ganancia definida.",
+        recommendedNote:
+  "El precio recomendado puede variar levemente del precio sugerido por redondeo o criterio comercial.",
     },
     recipeInfo: {
       title: "Cálculo de ingredientes",
@@ -545,6 +547,8 @@ const translations: Record<Language, any> = {
       operationalNote: "Business operational costs. No profit is applied.",
       suggestedNote:
         "The suggested price reflects the real cost plus the defined profit.",
+        recommendedNote:
+  "The recommended price may differ slightly from the suggested price due to rounding or pricing strategy.",
     },
     recipeInfo: {
       title: "Ingredient calculation",
