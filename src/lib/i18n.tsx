@@ -197,13 +197,19 @@ const translations: Record<Language, any> = {
         laborOnly: "Mano de obra",
         extrasDelivery: "Extras y entrega",
         baseCost: "Costo base",
-        additionalCost: "Costos operativos (energía, renta, utilities",
+        additionalCost: "Costos operativos (energía, renta, utilities)",
         profit: "Ganancia",
         suggested: "Sugerido",
         recommended: "Recomendado",
         perServing: "Por porción",
       },
       footer: "Ajusta los valores según tu criterio profesional.",
+      // --- 🔥 NUEVAS --- //
+      extrasNote:
+        "Extras y delivery se trasladan al cliente y no generan ganancia.",
+      operationalNote: "Costos operativos del negocio. No generan ganancia.",
+      suggestedNote:
+        "El precio sugerido refleja el costo real más la ganancia definida.",
     },
     recipeInfo: {
       title: "Cálculo de ingredientes",
@@ -310,7 +316,7 @@ const translations: Record<Language, any> = {
         energyRate: "Costo por kWh ($)",
         result: "Costo estimado de energía",
         energyHelp:
-    "kWh (kilowatt-hora) es la medida del consumo eléctrico. Por ejemplo, un horno de 3,000 W usado durante 1 hora consume 3 kWh. Ese consumo se multiplica por el costo de tu compañía eléctrica.",
+          "kWh (kilowatt-hora) es la medida del consumo eléctrico. Por ejemplo, un horno de 3,000 W usado durante 1 hora consume 3 kWh. Ese consumo se multiplica por el costo de tu compañía eléctrica.",
       },
 
       rent: {
@@ -526,13 +532,19 @@ const translations: Record<Language, any> = {
         laborOnly: "Labor",
         extrasDelivery: "Extras & delivery",
         baseCost: "Base cost",
-        additionalCost: "Operational costs (energy, rent, utilities",
+        additionalCost: "Operational costs (energy, rent, utilities)",
         profit: "Profit",
         suggested: "Suggested",
         recommended: "Recommended",
         perServing: "Per serving",
       },
       footer: "Adjust values as needed.",
+      // --- 🔥 NEW --- //
+      extrasNote:
+        "Extras and delivery are passed through to the client and do not generate profit.",
+      operationalNote: "Business operational costs. No profit is applied.",
+      suggestedNote:
+        "The suggested price reflects the real cost plus the defined profit.",
     },
     recipeInfo: {
       title: "Ingredient calculation",
@@ -638,7 +650,7 @@ const translations: Record<Language, any> = {
         energyRate: "Cost per kWh ($)",
         result: "Estimated energy cost",
         energyHelp:
-    "kWh (kilowatt-hour) measures electricity usage. For example, a 3,000 W oven used for 1 hour consumes 3 kWh. This usage is multiplied by your electricity rate.",
+          "kWh (kilowatt-hour) measures electricity usage. For example, a 3,000 W oven used for 1 hour consumes 3 kWh. This usage is multiplied by your electricity rate.",
       },
 
       rent: {
@@ -674,7 +686,7 @@ type LanguageContextValue = {
 };
 
 const LanguageContext = createContext<LanguageContextValue | undefined>(
-  undefined,
+  undefined
 );
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
@@ -686,7 +698,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       setLanguage,
       copy: translations[language],
     }),
-    [language],
+    [language]
   );
 
   return (
@@ -698,6 +710,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
 export function useLanguage() {
   const ctx = useContext(LanguageContext);
-  if (!ctx) throw new Error("useLanguage must be used within LanguageProvider");
+  if (!ctx) {
+    throw new Error("useLanguage must be used within LanguageProvider");
+  }
   return ctx;
 }
