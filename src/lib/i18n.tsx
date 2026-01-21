@@ -56,7 +56,11 @@ const translations: Record<Language, any> = {
       noFileSelected: "Ningún archivo seleccionado",
       fileSelected: "Archivo seleccionado",
     },
-
+    success: {
+  title: "PRO activado",
+  message: "Gracias por tu compra. Tu versión PRO está activa.",
+  redirecting: "Redirigiendo a la aplicación…",
+},
     download: {
       label: "Descarga",
       title: "Obtén el proyecto completo en ZIP",
@@ -391,6 +395,11 @@ const translations: Record<Language, any> = {
       noFileSelected: "No file selected",
       fileSelected: "File selected",
     },
+    success: {
+  title: "PRO activated",
+  message: "Thank you for your purchase. Your PRO version is now active.",
+  redirecting: "Redirecting to the app…",
+},
 
     download: {
       label: "Download",
