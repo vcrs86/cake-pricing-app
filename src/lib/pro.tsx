@@ -5,29 +5,59 @@ import { createContext, useContext, useEffect, useState } from "react";
 type ProContextValue = {
   isPro: boolean;
   activatePro: () => void;
+  isReady: boolean;
 };
 
 const ProContext = createContext<ProContextValue | undefined>(undefined);
+const PRO_KEY = "cakeprice_pro";
 
 export function ProProvider({ children }: { children: React.ReactNode }) {
   const [isPro, setIsPro] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
-  // 🔒 Cargar estado desde localStorage
+  // 🔒 ÚNICA lectura inicial (blindada)
   useEffect(() => {
-    const stored = localStorage.getItem("cakeprice_pro");
-    if (stored === "true") {
-      setIsPro(true);
+    const stored = localStorage.getItem(PRO_KEY);
+    const proFromStorage = stored === "true";
+
+    // FORZAR fuente de verdad
+    setIsPro(proFromStorage);
+    setIsReady(true);
+
+    // 🔑 Sincronizar estado viejo (solo si existe)
+    const legacy = localStorage.getItem("cakeAppProState");
+    if (legacy) {
+      try {
+        const parsed = JSON.parse(legacy);
+        if (parsed.isPro !== proFromStorage) {
+          localStorage.setItem(
+            "cakeAppProState",
+            JSON.stringify({ ...parsed, isPro: proFromStorage })
+          );
+        }
+      } catch {}
     }
   }, []);
 
-  // ✅ Activar PRO (temporal, luego Stripe)
   const activatePro = () => {
+    localStorage.setItem(PRO_KEY, "true");
     setIsPro(true);
-    localStorage.setItem("cakeprice_pro", "true");
+
+    // mantener sincronizado el estado viejo
+    const legacy = localStorage.getItem("cakeAppProState");
+    if (legacy) {
+      try {
+        const parsed = JSON.parse(legacy);
+        localStorage.setItem(
+          "cakeAppProState",
+          JSON.stringify({ ...parsed, isPro: true })
+        );
+      } catch {}
+    }
   };
 
   return (
-    <ProContext.Provider value={{ isPro, activatePro }}>
+    <ProContext.Provider value={{ isPro, activatePro, isReady }}>
       {children}
     </ProContext.Provider>
   );

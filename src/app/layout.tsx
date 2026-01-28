@@ -5,6 +5,7 @@ import { LanguageProvider } from "@/lib/i18n";
 import { ProActivation } from "@/components/ProActivation";
 import { ProProvider } from "@/lib/pro";
 
+console.log("🔥 ROOT LAYOUT RENDERED");
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,15 +21,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
-      <body className={inter.className}>
+  <html lang="es">
+    <body className={inter.className}>
+      <ProProvider>
         <LanguageProvider>
-  <ProProvider>
-    {children}
-  </ProProvider>
-</LanguageProvider>
-
-      </body>
-    </html>
-  );
+          {children}
+        </LanguageProvider>
+      </ProProvider>
+    </body>
+  </html>
+);
 }

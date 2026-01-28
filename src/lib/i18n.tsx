@@ -18,6 +18,81 @@ const translations: Record<Language, any> = {
         "Una herramienta de cálculo pensada para decoradores que trabajan con costos reales.",
       mobileFriendly: "Optimizada para móvil",
     },
+      landing: {
+    hero: {
+      title: "Calcula el precio profesional de tus pasteles",
+      subtitle: "Cobra con seguridad. Sin improvisar. Sin perder dinero.",
+      description:
+        "CakePrice te ayuda a calcular precios reales considerando ingredientes, tiempo, complejidad y ganancia.",
+      cta: "Desbloquear CakePrice PRO",
+    },
+
+    problem: {
+      title: "¿Te identificas con esto?",
+      items: [
+        "Trabajas mucho pero sientes que ganas poco",
+        "No sabes si realmente estás cubriendo tus costos",
+        "Cada presupuesto lo haces desde cero",
+      ],
+      conclusion:
+        "CakePrice existe para que cobres como profesional, no por intuición.",
+    },
+
+    solution: {
+      title: "La solución",
+      description: "CakePrice calcula por ti:",
+      items: [
+        "Costos reales de ingredientes",
+        "Tiempo de trabajo",
+        "Complejidad del diseño",
+        "Margen de ganancia claro",
+        "Precio final listo para el cliente",
+      ],
+    },
+
+    comparison: {
+      title: "FREE vs PRO",
+      free: {
+        title: "FREE",
+        features: [
+          "Calcular precios",
+          "Vista para el cliente",
+        ],
+      },
+      pro: {
+        title: "PRO",
+        features: [
+          "Guardar recetas",
+          "Guardar presupuestos",
+          "Reutilizar cotizaciones",
+          "Costos operativos (energía, renta, utilities)",
+          "Personalizar con tu marca y logo",
+        ],
+      },
+    },
+
+    pricing: {
+      title: "Precio de lanzamiento",
+      price: "$39 USD",
+      note: "Pago único · Precio regular $49 · Sin suscripciones",
+      cta: "Desbloquear CakePrice PRO",
+    },
+
+    trust: {
+      title: "Diseñado para reposteras reales",
+      items: [
+        "Sin login",
+        "Sin suscripciones",
+        "Funciona en tu navegador",
+        "Pensado para reposteras independientes",
+      ],
+    },
+
+    finalCta: {
+      title: "Empieza a cobrar como profesional",
+      cta: "Desbloquear CakePrice PRO",
+    },
+  },
     client: {
       quoteTitle: "Presupuesto de pastel",
       servingsLabel: "porciones",
@@ -35,7 +110,7 @@ const translations: Record<Language, any> = {
       freeBadge: "FREE",
 
       clientMessageLabel: "Mensaje para el cliente",
-      clientMessageLocked: "Edición disponible en versión PRO",
+      clientMessageLocked: "Puedes usar mensajes predefinidos. Personalización disponible en PRO",
       proEditActive: "Mensaje editable (PRO activo)",
 
       cakePhotoLabel: "Foto del pastel (opcional)",
@@ -137,7 +212,7 @@ const translations: Record<Language, any> = {
       edit: "Editar",
       delete: "Eliminar",
       confirmDelete: "¿Eliminar esta receta?",
-      proLocked: "Disponible solo en PRO",
+      proLocked: "Guarda tus recetas para reutilizarlas en futuros pedidos. Disponible en PRO",
       searchPlaceholder: "Buscar receta por nombre...",
       noResults: "No se encontraron recetas con ese nombre",
     },
@@ -149,12 +224,15 @@ const translations: Record<Language, any> = {
       date: "Fecha",
       empty: "Aún no has guardado presupuestos.",
       saveTitle: "Guardar presupuesto",
-      saveDescrption: " Guarda este cálculo completo para reutilizarlo",
+      saveDescription: " Guarda este cálculo completo para reutilizarlo, editarlo o enviarlo nuevamente a tus clientes",
       saveButton: " Guardar presupuesto",
       listTitle: "Presupuestos guardados",
       useQuote: "Usar",
       editQuote: "Editar",
       deleteQuote: "Eliminar",
+      confirmDelete: "¿Deseas eliminar este presupuesto?",
+      proLocked: "Guarda presupuestos para reutilizarlos, editarlos y no volver a cotizar desde cero. Disponible en PRO",
+      ProLockedList: "Accede a tus presupuestos guardados y reutilízalos cuando lo necesites con PRO",
     },
     calculatorForm: {
       quickIngredients: "Ingredientes (total)",
@@ -206,6 +284,7 @@ const translations: Record<Language, any> = {
         suggested: "Sugerido",
         recommended: "Recomendado",
         perServing: "Por porción",
+        perServingNote: "Valor estimado por porción según el precio final",
       },
       footer: "Ajusta los valores según tu criterio profesional.",
       // --- 🔥 NUEVAS --- //
@@ -213,9 +292,9 @@ const translations: Record<Language, any> = {
         "Extras y delivery se trasladan al cliente y no generan ganancia.",
       operationalNote: "Costos operativos del negocio. No generan ganancia.",
       suggestedNote:
-        "El precio sugerido refleja el costo real más la ganancia definida.",
+        "El precio sugerido se cálcula a partir de tus costos reales y el margen de ganancia definido",
         recommendedNote:
-  "El precio recomendado puede variar levemente del precio sugerido por redondeo o criterio comercial.",
+  "El precio recomendado es el valor final que se presenta al cliente, ajustado por redondeo o estrategia comercial",
     },
     recipeInfo: {
       title: "Cálculo de ingredientes",
@@ -347,6 +426,19 @@ const translations: Record<Language, any> = {
         ordersPerMonth: "Pedidos promedio al mes",
         result: "Marketing por pedido",
       },
+      // 🔒 Estados PRO (UX)
+active: "PRO activo",
+free: "Versión FREE",
+locked: "Función exclusiva PRO",
+cta: "Desbloquear PRO",
+
+// ⚙️ Costos operativos (UX)
+operationalCosts: {
+  title: "Costos operativos",
+  description:
+    "Configura costos como energía, renta, servicios y marketing para calcular precios más precisos.",
+  lockedDescription: "Costos operativos avanzados",
+},
     },
   },
 
@@ -356,6 +448,82 @@ const translations: Record<Language, any> = {
       tagline: "A pricing tool built for decorators who work with real costs.",
       mobileFriendly: "Mobile optimized",
     },
+    landing: {
+  hero: {
+    title: "Professional cake pricing",
+    subtitle: "Charge with confidence. No guesswork. No underpricing.",
+    description:
+      "CakePrice helps you calculate real prices based on ingredients, labor, complexity, and profit.",
+    cta: "Unlock CakePrice PRO",
+  },
+
+  problem: {
+    title: "Does this sound familiar?",
+    items: [
+      "You work a lot but feel like you earn too little",
+      "You're not sure if you're covering your real costs",
+      "You rebuild every quote from scratch",
+    ],
+    conclusion:
+      "CakePrice helps you price like a professional, not by guesswork.",
+  },
+
+  solution: {
+    title: "The solution",
+    description: "CakePrice calculates:",
+    items: [
+      "Real ingredient costs",
+      "Labor time",
+      "Design complexity",
+      "Clear profit margin",
+      "Client-ready final price",
+    ],
+  },
+
+  comparison: {
+    title: "FREE vs PRO",
+    free: {
+      title: "FREE",
+      features: [
+        "Price calculation",
+        "Client view",
+      ],
+    },
+    pro: {
+      title: "PRO",
+      features: [
+        "Save recipes",
+        "Save quotes",
+        "Reuse calculations",
+        "Operational costs (energy, rent, utilities)",
+        "Brand & logo customization",
+      ],
+    },
+  },
+
+  pricing: {
+    title: "Launch price",
+    price: "$39 USD",
+    note: "One-time payment · Regular price $49 · No subscriptions",
+    cta: "Unlock CakePrice PRO",
+  },
+
+  trust: {
+    title: "Built for real cake decorators",
+    items: [
+      "No login required",
+      "No subscriptions",
+      "Runs in your browser",
+      "Designed for independent decorators",
+    ],
+  },
+
+  finalCta: {
+    title: "Start charging like a professional",
+    cta: "Unlock CakePrice PRO",
+  },
+},
+
     client: {
       quoteTitle: "Cake quote",
       servingsLabel: "servings",
@@ -373,7 +541,7 @@ const translations: Record<Language, any> = {
       freeBadge: "FREE",
 
       clientMessageLabel: "Message for the client",
-      clientMessageLocked: "Editing available in PRO version",
+      clientMessageLocked: "You can use preset messages. Custom messages are available in PRO",
       proEditActive: "Editable message (PRO active)",
 
       cakePhotoLabel: "Cake photo (optional)",
@@ -479,7 +647,7 @@ const translations: Record<Language, any> = {
       delete: "Delete",
       confirmDelete: "Are you sure you want to delete this recipe?",
 
-      proLocked: "Available in PRO only",
+      proLocked: "Save recipes to reuse them in future orders. Available in PRO only",
       searchPlaceholder: "Search recipe by name...",
       noResults: "No recipes found with that name",
     },
@@ -497,6 +665,11 @@ const translations: Record<Language, any> = {
       useQuote: "Use",
       editQuote: "Edit",
       deleteQuote: "Delete",
+      confirmDelete: "Delete this quote?",
+
+      proLocked: "Save quotes to reuse them, edit them and avoid starting from scratch. Available in PRO",
+
+      ProLockedList: "Access your saved quotes and reuse them anytime with PRO",
     },
     calculatorForm: {
       quickIngredients: "Ingredients (total)",
@@ -548,6 +721,7 @@ const translations: Record<Language, any> = {
         suggested: "Suggested",
         recommended: "Recommended",
         perServing: "Per serving",
+        perServingNote: "Estimated price per serving based on the final amount.",
       },
       footer: "Adjust values as needed.",
       // --- 🔥 NEW --- //
@@ -688,6 +862,19 @@ const translations: Record<Language, any> = {
         ordersPerMonth: "Average orders per month",
         result: "Marketing per order",
       },
+      // 🔒 PRO states (UX)
+active: "PRO active",
+free: "FREE version",
+locked: "PRO-only feature",
+cta: "Unlock PRO",
+
+// ⚙️ Operational costs (UX)
+operationalCosts: {
+  title: "Operational costs",
+  description:
+    "Configure costs such as energy, rent, utilities, and marketing for more accurate pricing.",
+  lockedDescription: "Advanced operational costs",
+},
     },
   },
 };
