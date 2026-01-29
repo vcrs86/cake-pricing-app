@@ -842,7 +842,7 @@ const finalPricing = useMemo(() => {
       </div>
 
       {/* --- INICIO DEL BLOQUE RECUPERADO --- */}
-      {mode === "advanced" && (
+      {activeTab === "calculator" && mode === "advanced" && (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
           {/* 1. GESTOR DE INGREDIENTES */}
           <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
