@@ -1548,16 +1548,6 @@ const finalPricing = useMemo(() => {
             </p>
           </div>
 
-          {process.env.NODE_ENV === "development" && (
-            <button
-              type="button"
-              onClick={() => setIsPro((prev) => !prev)}
-              className="mt-2 text-[10px] underline text-slate-400"
-            >
-              {copy.client.devTogglePro}
-            </button>
-          )}
-
           <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-xs leading-relaxed text-slate-600">
             <p className="font-semibold text-brand-slate">
               {copy.recipeInfo.title}
