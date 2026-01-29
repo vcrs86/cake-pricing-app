@@ -1580,8 +1580,10 @@ const finalPricing = useMemo(() => {
         <button
           type="button"
           onClick={() => {
-            activatePro();
-          }}
+  window.location.href =
+    "https://buy.stripe.com/dRm28r7h56Vp7vT6uP2cg0N";
+}}
+
           className="w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:shadow-lg"
         >
           🔓 Unlock CakePrice Pro
