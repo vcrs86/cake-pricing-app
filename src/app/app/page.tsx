@@ -803,6 +803,44 @@ const finalPricing = useMemo(() => {
         )}
       </section>
 
+      {/* TABS */}
+      <div className="flex gap-2 rounded-2xl bg-slate-100 p-2">
+        <button
+          onClick={() => setActiveTab("calculator")}
+          className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
+            activeTab === "calculator"
+              ? "bg-white shadow text-brand-slate"
+              : "text-slate-500 hover:bg-white/60"
+          }`}
+        >
+          🧮 {copy.tabs.calculator}
+        </button>
+
+        <button
+          onClick={() => setActiveTab("client")}
+          className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
+            activeTab === "client"
+              ? "bg-white shadow text-brand-slate"
+              : "text-slate-500 hover:bg-white/60"
+          }`}
+        >
+          🎨 {copy.tabs.client}
+        </button>
+
+        <button
+  onClick={() => setActiveTab("pro")}
+  className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
+    activeTab === "pro"
+      ? "bg-white shadow text-brand-slate"
+      : "text-slate-500 hover:bg-white/60"
+  }`}
+>
+  <span className="mr-1">✨</span>
+  {copy.tabs.pro}
+</button>
+
+      </div>
+
       {/* --- INICIO DEL BLOQUE RECUPERADO --- */}
       {mode === "advanced" && (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -1034,43 +1072,7 @@ const finalPricing = useMemo(() => {
         )
       )}
 
-      {/* TABS */}
-      <div className="flex gap-2 rounded-2xl bg-slate-100 p-2">
-        <button
-          onClick={() => setActiveTab("calculator")}
-          className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
-            activeTab === "calculator"
-              ? "bg-white shadow text-brand-slate"
-              : "text-slate-500 hover:bg-white/60"
-          }`}
-        >
-          🧮 {copy.tabs.calculator}
-        </button>
-
-        <button
-          onClick={() => setActiveTab("client")}
-          className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
-            activeTab === "client"
-              ? "bg-white shadow text-brand-slate"
-              : "text-slate-500 hover:bg-white/60"
-          }`}
-        >
-          🎨 {copy.tabs.client}
-        </button>
-
-        <button
-  onClick={() => setActiveTab("pro")}
-  className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
-    activeTab === "pro"
-      ? "bg-white shadow text-brand-slate"
-      : "text-slate-500 hover:bg-white/60"
-  }`}
->
-  <span className="mr-1">✨</span>
-  {copy.tabs.pro}
-</button>
-
-      </div>
+      
 
       {/* CALCULATOR TAB */}
       {activeTab === "calculator" ? (
