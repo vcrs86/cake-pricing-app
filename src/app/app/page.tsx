@@ -71,6 +71,8 @@ type SavedQuote = {
 };
 export default function HomePage() {
   const { copy, language, setLanguage } = useLanguage();
+  const { isPro, activatePro, isReady } = usePro();
+
   const formatCurrency = (value: number) => {
   const safeValue = Number.isFinite(Number(value)) ? Number(value) : 0;
 
@@ -251,7 +253,6 @@ export default function HomePage() {
   const [businessName, setBusinessName] = useState("");
   const [businessLogo, setBusinessLogo] = useState<string | null>(null);
   const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
-  const [isPro, setIsPro] = useState(false);
 
   // PRO – Energy cost (oven)
   const [ovenKwh, setOvenKwh] = useState(0);
@@ -289,7 +290,6 @@ export default function HomePage() {
     try {
       const data = JSON.parse(saved);
 
-      setIsPro(!!data.isPro);
       setIncludeProCosts(!!data.includeProCosts);
       setCurrency(data.currency || "USD");
 
@@ -1590,8 +1590,7 @@ const finalPricing = useMemo(() => {
         <button
           type="button"
           onClick={() => {
-            setIsPro(true);
-            alert("🎉 CakePrice Pro unlocked! (Simulated purchase)");
+            activatePro();
           }}
           className="w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:shadow-lg"
         >
