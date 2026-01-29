@@ -901,7 +901,7 @@ const finalPricing = useMemo(() => {
 
       {/* ADVANCED HELPERS */}
       {/* SAVED RECIPES (PRO) */}
-      {mode === "advanced" && (
+      {activeTab === "calculator" && mode === "advanced" && (
         <button
           type="button"
           onClick={() => setShowSavedRecipes((prev) => !prev)}
@@ -1012,7 +1012,7 @@ const finalPricing = useMemo(() => {
         </div>
       )}
       {/* SAVE RECIPE (PRO) */}
-      {mode === "advanced" && (
+      {activeTab === "calculator" && mode === "advanced" && (
         !isPro ? (
           <ProLockedOverlay
           description={copy.recipes.proLocked}
@@ -1569,8 +1569,6 @@ const finalPricing = useMemo(() => {
             </ul>
           </div>
 
-          <ProFeatures />
-
           {!hasCalculated ? (
             <p className="text-xs text-slate-500">{copy.recipeInfo.cta}</p>
           ) : null}
@@ -1583,6 +1581,7 @@ const finalPricing = useMemo(() => {
     <div className="space-y-4">
 
       {/* PRO TOGGLE */}
+      {!isPro && (
       <div className="rounded-3xl border border-dashed border-brand-rose/30 bg-brand-rose/5 p-5 text-center space-y-2">
         <p className="text-sm font-semibold text-brand-slate">
           🔒 {copy.pro.toggle.title}
@@ -1603,6 +1602,7 @@ const finalPricing = useMemo(() => {
           {copy.pro.toggle.note}
         </p>
       </div>
+      )}
 
       {/* PRO INTRO */}
       <div className="rounded-3xl bg-white p-6 shadow-card ring-1 ring-brand-rose/20">
