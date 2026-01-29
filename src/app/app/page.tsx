@@ -673,6 +673,13 @@ const finalPricing = useMemo(() => {
           <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
             {/* LEFT */}
             <div className="space-y-3">
+              <div className="flex items-center gap-2">
+  <img
+    src="/brand/logo-primary.png"
+    alt="CakePRICE"
+    className="h-20 sm:h-24 w-auto"
+  />
+</div>
               <h1 className="text-3xl font-black text-brand-slate sm:text-4xl">
                 {copy.general.appTitle}
               </h1>
@@ -688,28 +695,28 @@ const finalPricing = useMemo(() => {
                 <span>{copy.languageToggle.label}</span>
 
                 <button
-                  type="button"
-                  onClick={() => setLanguage("es")}
-                  className={`rounded-full px-2 py-1 text-xs font-bold ${
-                    language === "es"
-                      ? "bg-brand-rose text-brand-slate shadow"
-                      : "hover:bg-slate-100"
-                  }`}
-                >
-                  ES
-                </button>
+  type="button"
+  onClick={() => setLanguage("es")}
+  className={`flex items-center gap-1 rounded-full px-2 py-1 text-xs font-bold ${
+    language === "es"
+      ? "bg-brand-rose text-brand-slate shadow"
+      : "hover:bg-slate-100"
+  }`}
+>
+  🇪🇸 <span>ES</span>
+</button>
 
-                <button
-                  type="button"
-                  onClick={() => setLanguage("en")}
-                  className={`rounded-full px-2 py-1 text-xs font-bold ${
-                    language === "en"
-                      ? "bg-brand-rose text-brand-slate shadow"
-                      : "hover:bg-slate-100"
-                  }`}
-                >
-                  EN
-                </button>
+<button
+  type="button"
+  onClick={() => setLanguage("en")}
+  className={`flex items-center gap-1 rounded-full px-2 py-1 text-xs font-bold ${
+    language === "en"
+      ? "bg-brand-rose text-brand-slate shadow"
+      : "hover:bg-slate-100"
+  }`}
+>
+  🇺🇸 <span>EN</span>
+</button>
               </div>
 
               <div className="flex items-center gap-3 self-start rounded-full bg-brand-peach/50 px-4 py-2 text-xs font-semibold text-brand-slate shadow-sm ring-1 ring-white/60">
