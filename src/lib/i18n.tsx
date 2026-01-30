@@ -132,17 +132,30 @@ const translations: Record<Language, any> = {
       fileSelected: "Archivo seleccionado",
     },
     success: {
-  title: "PRO activado",
+  title: "¡CakePrice Pro está activo!",
+  subtitle: "Bienvenida a la versión profesional 🎉",
+  description:
+    "Tu pago se procesó correctamente y ahora tienes acceso completo a todas las funciones PRO de CakePrice.",
+
+  featuresTitle: "¿Qué puedes hacer ahora?",
+  features: [
+    "Incluir costos operativos reales (energía, renta, marketing)",
+    "Guardar y reutilizar recetas",
+    "Crear presupuestos más precisos y profesionales",
+    "Personalizar tu marca para mostrarla a tus clientes",
+  ],
+
+  backButton: "Ir a la app",
+  note:
+    "El acceso PRO se guarda en este navegador. Si borras los datos del navegador, el acceso se perderá.",
+    supportText: "¿Tienes alguna duda o sugerencia? Escríbenos a",
+
+  // 🔒 Compatibilidad con el success viejo (por si acaso)
   message: "Gracias por tu compra. Tu versión PRO está activa.",
   redirecting: "Redirigiendo a la aplicación…",
+  footer:
+    "Gracias por apoyar el desarrollo de CakePrice 💕",
 },
-    download: {
-      label: "Descarga",
-      title: "Obtén el proyecto completo en ZIP",
-      description:
-        "Descarga el proyecto completo con código y configuraciones para usarlo localmente o en Vercel.",
-      button: "Descargar ZIP",
-    },
     modes: {
       label: "Modo de cálculo",
       title: "Selecciona cómo deseas calcular",
@@ -564,17 +577,28 @@ operationalCosts: {
       fileSelected: "File selected",
     },
     success: {
-  title: "PRO activated",
-  message: "Thank you for your purchase. Your PRO version is now active.",
+  title: "CakePrice Pro is now active!",
+  subtitle: "Welcome to the professional version 🎉",
+  description:
+    "Your payment was successful and you now have full access to all CakePrice Pro features.",
+
+  featuresTitle: "What can you do now?",
+  features: [
+    "Include real operational costs (energy, rent, marketing)",
+    "Save and reuse recipes",
+    "Create more accurate, professional quotes",
+    "Customize your brand for client-facing views",
+  ],
+
+  backButton: "Go to the app",
+  note:
+    "Pro access is saved in this browser. Clearing browser data will remove access.",
+     supportText: "Questions or feedback? Email us at",
+
+  // Backward compatibility
+  message: "Thank you for your purchase. Your PRO version is active.",
   redirecting: "Redirecting to the app…",
 },
-
-    download: {
-      label: "Download",
-      title: "Get the full project ZIP",
-      description: "Download the complete project with code and configs.",
-      button: "Download ZIP",
-    },
     modes: {
       label: "Calculation mode",
       title: "Choose how you want to calculate",
