@@ -1950,6 +1950,18 @@ const finalPricing = useMemo(() => {
         </div>
       </div>
     )}
+    {isPro && (
+  <div className="pt-4 border-t text-center text-xs text-slate-500">
+    {copy.pro.support.text}{" "}
+    {copy.pro.support.emailLabel}{" "}
+    <a
+      href="mailto:cakepriceapp@gmail.com"
+      className="font-semibold text-brand-slate underline hover:text-brand-rose"
+    >
+      cakepriceapp@gmail.com
+    </a>
+  </div>
+)}
   </div>
 )}
     </main>

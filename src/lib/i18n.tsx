@@ -70,7 +70,6 @@ const translations: Record<Language, any> = {
         ],
       },
     },
-
     pricing: {
       title: "Precio de lanzamiento",
       price: "$39 USD",
@@ -372,6 +371,10 @@ const translations: Record<Language, any> = {
       pro: "PRO",
     },
     pro: {
+      support: {
+    text: "¿Tienes dudas o sugerencias?",
+    emailLabel: "Escríbenos a",
+  },
       intro: {
         title: "Versión PRO",
         description:
@@ -511,6 +514,12 @@ operationalCosts: {
         "Operational costs (energy, rent, utilities)",
         "Brand & logo customization",
       ],
+  support: {
+    text: "Questions or feedback?",
+    emailLabel: "Contact us at",
+  },
+}
+
     },
   },
 
@@ -535,7 +544,7 @@ operationalCosts: {
     title: "Start charging like a professional",
     cta: "Unlock CakePrice PRO",
   },
-},
+
 
     client: {
       quoteTitle: "Cake quote",
@@ -819,6 +828,10 @@ operationalCosts: {
       pro: "PRO",
     },
     pro: {
+      support: {
+    text: "Questions or feedback?",
+    emailLabel: "Contact us at",
+  },
       intro: {
         title: "PRO Version",
         description:
@@ -830,7 +843,7 @@ operationalCosts: {
           marketing: "Marketing costs",
           cloud: "Automatic cloud saving",
         },
-
+        
         includesLabel: "Includes:",
         includesText: "auto save · one-time payment · no login",
 
