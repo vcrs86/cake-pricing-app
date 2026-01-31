@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   themeColor: "#CCB3C0",
   appleWebApp: {
     capable: true,
-    statusBarStyle: "default",
+    statusBarStyle: "black-translucent",
     title: "CakePrice",
   },
   icons: {
