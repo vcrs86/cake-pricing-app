@@ -662,14 +662,14 @@ const finalPricing = useMemo(() => {
   return (
     <main className="no-print mx-auto flex min-h-[100svh] sm:min-h-screen max-w-6xl flex-col gap-8 px-4 pb-12 pt-10 sm:px-6 lg:px-10">
       {/* LOGO ANCLA */}
-<div className="flex justify-center mb-2 sm:mb-3">
+<div className="flex justify-center mb-2 sm:mb-1">
   <img
     src="/brand/logo-primary.png"
     alt="CakePRICE"
-    className="h-36 sm:h-28 w-auto"
+    className="h-48 sm:h-40 w-auto"
   />
 </div>
-<div className="mb-4 flex justify-end sm:mb-3">
+<div className="mb-4 flex justify-end sm:mb-1">
   <ProStatusBadge />
 </div>
 
