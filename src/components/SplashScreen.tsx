@@ -16,7 +16,7 @@ export function SplashScreen() {
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#CCB3C0]">
+    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#E8DDE3]">
       <img
         src="/brand/logo-primary.png"
         alt="CakePrice"
