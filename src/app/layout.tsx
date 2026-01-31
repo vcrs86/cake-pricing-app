@@ -10,10 +10,21 @@ console.log("🔥 ROOT LAYOUT RENDERED");
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Cake Pricing Calculator",
+  title: "CakePrice",
   description:
-    "Mobile-friendly calculator that helps cake decorators price custom cakes confidently.",
+    "Professional cake pricing calculator for decorators who work with real costs.",
+  manifest: "/manifest.json",
+  themeColor: "#CCB3C0",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "CakePrice",
+  },
+  icons: {
+    apple: "/icons/apple-touch-icon.png",
+  },
 };
+
 
 export default function RootLayout({
   children,
