@@ -661,7 +661,15 @@ const finalPricing = useMemo(() => {
 
   return (
     <main className="no-print mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-4 pb-12 pt-10 sm:px-6 lg:px-10">
-      <div className="mb-4 flex justify-end">
+      {/* LOGO ANCLA */}
+<div className="flex justify-center mb-2 sm:mb-3">
+  <img
+    src="/brand/logo-primary.png"
+    alt="CakePRICE"
+    className="h-24 sm:h-28 w-auto"
+  />
+</div>
+      <div className="mb-4 flex justify-end sm:mb-3">
   <ProStatusBadge />
 </div>
       <section className="relative overflow-hidden rounded-3xl bg-white/60 backdrop-blur-xl shadow-xl ring-1 ring-white/40 p-7 sm:p-10">
@@ -672,21 +680,12 @@ const finalPricing = useMemo(() => {
         <div className="relative z-10">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
             {/* LEFT */}
-            <div className="space-y-2 sm:space-y-3">
+            <div className="space-y-3 sm:space-y-4">
 
   {/* BADGE */}
   <span className="inline-flex items-center rounded-full bg-brand-rose/20 px-3 py-1 text-[11px] font-semibold text-brand-slate">
     🎂 {copy.general.badge}
   </span>
-
-  {/* LOGO */}
-  <div className="flex items-center gap-2 mb-1 sm:mb-0">
-    <img
-      src="/brand/logo-primary.png"
-      alt="CakePRICE"
-      className="h-24 sm:h-24 w-auto"
-    />
-  </div>
 
   {/* TITLE */}
   <h1 className="text-3xl font-black text-brand-slate sm:text-4xl">
