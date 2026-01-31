@@ -13,11 +13,14 @@ type Language = "es" | "en";
 const translations: Record<Language, any> = {
   es: {
     general: {
-      appTitle: "Calcula el precio profesional de tu pastel",
-      tagline:
-        "Una herramienta de cálculo pensada para decoradores que trabajan con costos reales.",
-      mobileFriendly: "Optimizada para móvil",
-    },
+  appTitle: "Calcula el precio profesional de tu pastel",
+  tagline:
+    "Una herramienta de cálculo pensada para decoradores que trabajan con costos reales.",
+  mobileFriendly: "Optimizada para móvil",
+
+  badge: "Herramienta profesional de precios",
+  trustNote: "Usada por reposteras independientes",
+},
       landing: {
     hero: {
       title: "Calcula el precio profesional de tus pasteles",
@@ -460,10 +463,13 @@ operationalCosts: {
 
   en: {
     general: {
-      appTitle: "Professional cake pricing",
-      tagline: "A pricing tool built for decorators who work with real costs.",
-      mobileFriendly: "Mobile optimized",
-    },
+  appTitle: "Professional cake pricing",
+  tagline: "A pricing tool built for decorators who work with real costs.",
+  mobileFriendly: "Mobile optimized",
+
+  badge: "Professional pricing tool",
+  trustNote: "Trusted by independent cake decorators",
+},
     landing: {
   hero: {
     title: "Professional cake pricing",

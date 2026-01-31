@@ -672,22 +672,38 @@ const finalPricing = useMemo(() => {
         <div className="relative z-10">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
             {/* LEFT */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-2">
-  <img
-    src="/brand/logo-primary.png"
-    alt="CakePRICE"
-    className="h-20 sm:h-24 w-auto"
-  />
-</div>
-              <h1 className="text-3xl font-black text-brand-slate sm:text-4xl">
-                {copy.general.appTitle}
-              </h1>
+            <div className="space-y-2 sm:space-y-3">
 
-              <p className="max-w-2xl text-sm leading-relaxed text-slate-600">
-                {copy.general.tagline}
-              </p>
-            </div>
+  {/* BADGE */}
+  <span className="inline-flex items-center rounded-full bg-brand-rose/20 px-3 py-1 text-[11px] font-semibold text-brand-slate">
+    🎂 {copy.general.badge}
+  </span>
+
+  {/* LOGO */}
+  <div className="flex items-center gap-2 mb-1 sm:mb-0">
+    <img
+      src="/brand/logo-primary.png"
+      alt="CakePRICE"
+      className="h-24 sm:h-24 w-auto"
+    />
+  </div>
+
+  {/* TITLE */}
+  <h1 className="text-3xl font-black text-brand-slate sm:text-4xl">
+    {copy.general.appTitle}
+  </h1>
+
+  {/* TAGLINE */}
+  <p className="max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-sm text-[13px]">
+    {copy.general.tagline}
+  </p>
+
+  {/* TRUST NOTE */}
+  <p className="text-[11px] sm:text-xs text-slate-500 italic">
+    {copy.general.trustNote}
+  </p>
+
+</div>
 
             {/* RIGHT */}
             <div className="flex flex-col items-end gap-3 self-start">
