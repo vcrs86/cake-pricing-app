@@ -1,3 +1,4 @@
+import { SplashScreen } from "@/components/SplashScreen";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
@@ -34,6 +35,8 @@ export default function RootLayout({
   return (
   <html lang="es">
     <body className={inter.className}>
+      <SplashScreen />
+      
       <ProProvider>
         <LanguageProvider>
           {children}
