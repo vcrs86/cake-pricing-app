@@ -1025,64 +1025,65 @@ const handleOpenPdfQuote = () => {
       </section>
 
       {/* TABS */}
-      <div className="flex w-full gap-2 overflow-hidden rounded-2xl bg-slate-100 p-2">
-        <button
-          onClick={() => setActiveTab("calculator")}
-          className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
-            activeTab === "calculator"
-              ? "bg-white shadow text-brand-slate"
-              : "text-slate-500 hover:bg-white/60"
-          }`}
-        >
-          🧮 {copy.tabs.calculator}
-        </button>
+<div className="flex w-full gap-2 overflow-hidden rounded-2xl bg-slate-100 p-2">
 
-        <button
-          onClick={() => setActiveTab("recipes")}
-          className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
-            activeTab === "recipes"
-              ? "bg-white shadow text-brand-slate"
-              : "text-slate-500 hover:bg-white/60"
-          }`}
-        >
-          📚 {copy.tabs.recipes}
-        </button>
+  <button
+    onClick={() => setActiveTab("calculator")}
+    className={`flex-1 min-w-0 rounded-xl px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center truncate transition ${
+      activeTab === "calculator"
+        ? "bg-white shadow text-brand-slate"
+        : "text-slate-500 hover:bg-white/60"
+    }`}
+  >
+    🧮 {copy.tabs.calculator}
+  </button>
 
-        <button
-          onClick={() => setActiveTab("client")}
-          className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
-            activeTab === "client"
-              ? "bg-white shadow text-brand-slate"
-              : "text-slate-500 hover:bg-white/60"
-          }`}
-        >
-          🎨 {copy.tabs.client}
-        </button>
+  <button
+    onClick={() => setActiveTab("recipes")}
+    className={`flex-1 min-w-0 rounded-xl px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center truncate transition ${
+      activeTab === "recipes"
+        ? "bg-white shadow text-brand-slate"
+        : "text-slate-500 hover:bg-white/60"
+    }`}
+  >
+    📚 {copy.tabs.recipes}
+  </button>
 
-        <button
-          onClick={() => setActiveTab("pro")}
-          className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
-            activeTab === "pro"
-              ? "bg-white shadow text-brand-slate"
-              : "text-slate-500 hover:bg-white/60"
-          }`}
-        >
-          <span className="mr-1">✨</span>
-          {copy.tabs.pro}
-        </button>
-        
-        <button
-  onClick={() => setActiveTab("help")}
-  className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
-    activeTab === "help"
-      ? "bg-white shadow text-brand-slate"
-      : "text-slate-500 hover:bg-white/60"
-  }`}
->
-  ❓ {copy.tabs.help}
-</button>
+  <button
+    onClick={() => setActiveTab("client")}
+    className={`flex-1 min-w-0 rounded-xl px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center truncate transition ${
+      activeTab === "client"
+        ? "bg-white shadow text-brand-slate"
+        : "text-slate-500 hover:bg-white/60"
+    }`}
+  >
+    🎨 {copy.tabs.client}
+  </button>
 
-      </div>
+  <button
+    onClick={() => setActiveTab("pro")}
+    className={`flex-1 min-w-0 rounded-xl px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center truncate transition ${
+      activeTab === "pro"
+        ? "bg-white shadow text-brand-slate"
+        : "text-slate-500 hover:bg-white/60"
+    }`}
+  >
+    ✨ {copy.tabs.pro}
+  </button>
+
+  <button
+    onClick={() => setActiveTab("help")}
+    className={`flex-1 min-w-0 rounded-xl px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center truncate transition ${
+      activeTab === "help"
+        ? "bg-white shadow text-brand-slate"
+        : "text-slate-500 hover:bg-white/60"
+    }`}
+  >
+    ❓ {copy.tabs.help}
+  </button>
+
+</div>
+
       {activeTab === "recipes" && (
   <>
     {/* Help Button - SOLO PRO + TIER */}
