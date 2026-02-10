@@ -360,6 +360,7 @@ tieredAdvancedOnly: {
       rent: "Renta y utilities",
       marketing: "Costos de marketing",
       cloud: "Guardado local seguro",
+      tiered: "Cálculo de pasteles por niveles (Tiered Cake)",
     },
 
     includesLabel: "Incluye:",
@@ -1053,6 +1054,7 @@ currency: {
       rent: "Rent and utilities",
       marketing: "Marketing expenses",
       cloud: "Secure local storage",
+      tiered: "Tiered cake calculation (multi-tier cakes)",
     },
 
     includesLabel: "Includes:",
