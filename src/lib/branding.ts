@@ -1,9 +1,12 @@
-export type Branding = {
-  businessName: string;
-  logoUrl?: string;
+export type ProFeatureKey = {
+  key: string;
+  icon: string;
 };
 
-export const BRANDING: Branding = {
-  businessName: "Amaretto",
-  // logoUrl: "/logo-amaretto.png", // ← descomentarlo cuando tengas el logo
-};
+export const BRANDING: ProFeatureKey[] = [
+  { key: "saveRecipes", icon: "💾" },
+  { key: "saveQuotes", icon: "📋" },
+  { key: "brandCustomization", icon: "🎨" },
+  { key: "operationalCosts", icon: "⚙️" },
+  { key: "proSupport", icon: "🚀" },
+];

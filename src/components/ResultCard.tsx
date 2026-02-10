@@ -156,6 +156,9 @@ export function ResultCard({
   {copy.resultCard.recommendedNote ||
     "El precio recomendado puede variar levemente del precio sugerido por redondeo o criterio comercial."}
 </p>
+<p className="mt-2 text-xs text-slate-500 text-center">
+  💡 {copy.resultCard.profitHint}
+</p>
     </div>
   </section>
 );

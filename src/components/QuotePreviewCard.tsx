@@ -7,6 +7,9 @@ type QuotePreviewProps = {
   deliveryFee?: number;
   imageUrl?: string;
   message?: string;
+
+  businessName?: string;
+  businessLogo?: string | null;
 };
 
 export function QuotePreviewCard({
@@ -15,20 +18,35 @@ export function QuotePreviewCard({
   deliveryFee,
   imageUrl,
   message,
+  businessName,
+  businessLogo,
 }: QuotePreviewProps) {
+
   const { copy } = useLanguage();
 
   if (!finalPrice || finalPrice <= 0) return null;
 
   return (
     <section className="quote-print mt-6 mx-auto max-w-md rounded-3xl border border-slate-200 bg-white p-6 shadow-lg print:shadow-none">
-      
-      {/* BRAND */}
-      {BRANDING?.businessName ? (
-        <p className="mb-2 text-center text-xs font-semibold uppercase tracking-wide text-slate-400">
-          {BRANDING.businessName}
-        </p>
-      ) : null}
+      {/* BRANDING — SOLO SI EXISTE */}
+{(businessName || businessLogo) && (
+  <div className="mb-4 flex flex-col items-center justify-center text-center">
+    {businessLogo && (
+      <img
+        src={businessLogo}
+        alt={businessName || "Brand"}
+        className="mb-2 max-h-14 max-w-[180px] object-contain"
+      />
+    )}
+
+    {businessName && (
+      <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+        {businessName}
+      </p>
+    )}
+  </div>
+)}
+
 
       {/* IMAGE */}
       {imageUrl ? (
@@ -52,19 +70,17 @@ export function QuotePreviewCard({
       </p>
 
       {/* PRICES */}
-      <div className="mt-4 space-y-2 text-sm">
-        {deliveryFee && deliveryFee > 0 ? (
-          <div className="flex justify-between">
-            <span>{copy.resultCard.rows.extrasDelivery}</span>
-            <span>${(Number(deliveryFee) || 0).toFixed(2)}</span>
-          </div>
-        ) : null}
+      {/* TOTAL — HERO */}
+<div className="mt-6 rounded-3xl bg-brand-cream/40 p-6 text-center ring-1 ring-brand-rose/20">
+  <p className="text-xs font-bold uppercase tracking-widest text-slate-500">
+    {copy.client.totalLabel}
+  </p>
 
-        <div className="flex justify-between text-lg font-bold">
-          <span>{copy.general.total}</span>
-          <span>${(Number(finalPrice) || 0).toFixed(2)}</span>
-        </div>
-      </div>
+  <p className="mt-2 text-4xl sm:text-5xl font-extrabold tracking-tight text-brand-slate">
+    ${Number(finalPrice || 0).toFixed(2)}
+  </p>
+</div>
+
 
       {/* MESSAGE */}
       {message ? (

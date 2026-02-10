@@ -54,6 +54,19 @@ export type PricingBreakdown = {
   recommendedPrice: number;
   pricePerServing?: number;
 };
+export type TieredPricingTier = {
+  size: string;
+  servings: number;
+  factor: number;
+  cost: number;
+};
+
+export type TieredPricingResult = {
+  tiers: TieredPricingTier[];
+  totalCost: number;
+  totalPrice: number;
+  combinedPricing: PricingBreakdown;
+};
 
 const toCurrency = (value: number) => Math.round(value * 100) / 100;
 
@@ -94,5 +107,91 @@ export function calculatePricing(inputs: PricingInputs): PricingBreakdown {
     suggestedMinimum: toCurrency(suggestedMinimum),
     recommendedPrice: toCurrency(recommendedPrice),
     pricePerServing: pricePerServing ? toCurrency(pricePerServing) : undefined,
+  };
+}
+
+export function calculateTieredPricing({
+  baseInputs,
+  tiers,
+  baseServings,
+  deliveryFee,
+}: {
+  baseInputs: PricingInputs;
+  tiers: Array<{ size: string; servings: number }>;
+  baseServings: number;
+  deliveryFee: number;
+}): TieredPricingResult {
+  const safeBaseServings = Math.max(baseServings, 0);
+
+  const tierResults = tiers.map((tier) => {
+    const safeServings = Math.max(tier.servings, 0);
+    const factor = safeBaseServings > 0 ? safeServings / safeBaseServings : 0;
+
+    const scaledPricing = calculatePricing({
+      ...baseInputs,
+      ingredientsCost: baseInputs.ingredientsCost * factor,
+      decorationCost: baseInputs.decorationCost * factor,
+      decorationExtras: baseInputs.decorationExtras * factor,
+      hoursWorked: baseInputs.hoursWorked * factor,
+      setupHours: baseInputs.setupHours * factor,
+      deliveryFee: 0,
+      servings: safeServings || undefined,
+    });
+
+    return {
+      size: tier.size,
+      servings: safeServings,
+      factor,
+      cost: scaledPricing.recommendedPrice,
+      pricing: scaledPricing,
+    };
+  });
+
+  const combinedPricing = tierResults.reduce<PricingBreakdown>(
+    (acc, tier) => ({
+      ingredientsCost: acc.ingredientsCost + tier.pricing.ingredientsCost,
+      decorationAndLabor: acc.decorationAndLabor + tier.pricing.decorationAndLabor,
+      laborCost: acc.laborCost + tier.pricing.laborCost,
+      complexityMultiplier: acc.complexityMultiplier,
+      extrasCost: acc.extrasCost + tier.pricing.extrasCost,
+      deliveryFee: 0,
+      baseCost: acc.baseCost + tier.pricing.baseCost,
+      profitAmount: acc.profitAmount + tier.pricing.profitAmount,
+      suggestedMinimum: acc.suggestedMinimum + tier.pricing.suggestedMinimum,
+      recommendedPrice: acc.recommendedPrice + tier.pricing.recommendedPrice,
+      pricePerServing: undefined,
+    }),
+    {
+      ingredientsCost: 0,
+      decorationAndLabor: 0,
+      laborCost: 0,
+      complexityMultiplier:
+        COMPLEXITY_MULTIPLIER[baseInputs.decorationComplexity] ?? 1,
+      extrasCost: 0,
+      deliveryFee: 0,
+      baseCost: 0,
+      profitAmount: 0,
+      suggestedMinimum: 0,
+      recommendedPrice: 0,
+      pricePerServing: undefined,
+    }
+  );
+
+  const totalCost = toCurrency(combinedPricing.baseCost + Math.max(deliveryFee, 0));
+  const totalPrice = toCurrency(combinedPricing.recommendedPrice + Math.max(deliveryFee, 0));
+
+  return {
+    tiers: tierResults.map(({ pricing, ...tier }) => tier),
+    totalCost,
+    totalPrice,
+    combinedPricing: {
+      ...combinedPricing,
+      deliveryFee: toCurrency(Math.max(deliveryFee, 0)),
+      baseCost: toCurrency(combinedPricing.baseCost + Math.max(deliveryFee, 0)),
+      suggestedMinimum: toCurrency(
+        combinedPricing.suggestedMinimum + Math.max(deliveryFee, 0)
+      ),
+      recommendedPrice: totalPrice,
+    },
   };
 }
