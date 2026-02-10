@@ -1539,6 +1539,8 @@ const handleOpenPdfQuote = () => {
                 <li>🏠 {copy.pro.intro.features.rent}</li>
                 <li>📣 {copy.pro.intro.features.marketing}</li>
                 <li>☁️ {copy.pro.intro.features.cloud}</li>
+                <li>🎂 {copy.pro.intro.features.tiered}</li>
+
 
                 <li className="pt-2 border-t text-slate-600">
                   📋 {copy.pro.intro.extras.saveRecipes}
