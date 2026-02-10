@@ -647,7 +647,7 @@ help: {
 
   en: {
     general: {
-  appTitle: "CakePrice",
+  appTitle: "Professional cake pricing",
 
   tagline: "A pricing tool built for decorators who work with real costs.",
 
