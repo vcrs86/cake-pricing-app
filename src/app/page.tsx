@@ -1025,7 +1025,7 @@ const handleOpenPdfQuote = () => {
       </section>
 
       {/* TABS */}
-      <div className="flex gap-2 rounded-2xl bg-slate-100 p-2">
+      <div className="flex w-full gap-2 overflow-hidden rounded-2xl bg-slate-100 p-2">
         <button
           onClick={() => setActiveTab("calculator")}
           className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
@@ -1070,6 +1070,7 @@ const handleOpenPdfQuote = () => {
           <span className="mr-1">✨</span>
           {copy.tabs.pro}
         </button>
+        
         <button
   onClick={() => setActiveTab("help")}
   className={`flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition ${
