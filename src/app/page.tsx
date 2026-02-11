@@ -1474,6 +1474,8 @@ const handleOpenPdfQuote = () => {
   deliveryFee={pricing.deliveryFee}
   imageUrl={clientPhoto || undefined}
   message={clientMessage}
+  businessName={isPro ? businessName : ""}
+  businessLogo={isPro ? businessLogo : null}
 />
 
     {/* BOTONES SOLO EN CLIENT */}
