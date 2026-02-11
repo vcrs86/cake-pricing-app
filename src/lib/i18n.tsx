@@ -895,8 +895,8 @@ proFeatures: {
 },
 
     client: {
-  quoteTitle: "Cake quote",
-   servingsLabel: "Servings",
+  quoteTitle: "Cake Quote",
+  servingsLabel: "Portions",
   totalLabel: "Total",
   deliveryLabel: "Delivery",
 
