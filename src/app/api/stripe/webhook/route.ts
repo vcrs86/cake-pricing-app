@@ -28,14 +28,15 @@ export async function POST(req: Request) {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
 
-    const token = crypto.randomUUID();
+const token = session.id; // usamos el session id
 
-    const email = session.customer_email || "";
+const email = session.customer_email || "";
 
-    await supabase.from("pro_users").insert({
-      token,
-      email,
-    });
+await supabase.from("pro_users").insert({
+  token,
+  email,
+});
+
   }
 
   return new Response("OK", { status: 200 });

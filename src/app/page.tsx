@@ -1572,15 +1572,30 @@ const handleOpenPdfQuote = () => {
                 </p>
 
                 <button
-                  type="button"
-                  onClick={() => {
-                    window.location.href =
-                      "https://buy.stripe.com/dRm28r7h56Vp7vT6uP2cg0N";
-                  }}
-                  className="w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:shadow-lg"
-                >
-                  🔓 Unlock CakePrice Pro
-                </button>
+  type="button"
+  onClick={async () => {
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+      });
+
+      const data = await res.json();
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert("Error creating checkout session");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Checkout failed");
+    }
+  }}
+  className="w-full rounded-xl bg-brand-slate px-4 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:shadow-lg"
+>
+  🔓 Unlock CakePrice Pro
+</button>
+
 
                 <p className="text-xs text-slate-600">{copy.pro.toggle.note}</p>
               </div>
