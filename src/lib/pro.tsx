@@ -4,56 +4,42 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 type ProContextValue = {
   isPro: boolean;
-  activatePro: () => void;
+  activatePro: (token: string) => void;
   isReady: boolean;
 };
 
 const ProContext = createContext<ProContextValue | undefined>(undefined);
-const PRO_KEY = "cakeprice_pro";
+
+const PRO_TOKEN_KEY = "cakeprice_pro_token";
 
 export function ProProvider({ children }: { children: React.ReactNode }) {
   const [isPro, setIsPro] = useState(false);
   const [isReady, setIsReady] = useState(false);
 
-  // 🔒 ÚNICA lectura inicial (blindada)
+  // 🔍 Validar PRO desde servidor
   useEffect(() => {
-    const stored = localStorage.getItem(PRO_KEY);
-    const proFromStorage = stored === "true";
+    const token = localStorage.getItem(PRO_TOKEN_KEY);
 
-    // FORZAR fuente de verdad
-    setIsPro(proFromStorage);
-    setIsReady(true);
-
-    // 🔑 Sincronizar estado viejo (solo si existe)
-    const legacy = localStorage.getItem("cakeAppProState");
-    if (legacy) {
-      try {
-        const parsed = JSON.parse(legacy);
-        if (parsed.isPro !== proFromStorage) {
-          localStorage.setItem(
-            "cakeAppProState",
-            JSON.stringify({ ...parsed, isPro: proFromStorage })
-          );
-        }
-      } catch {}
+    if (!token) {
+      setIsReady(true);
+      return;
     }
+
+    fetch(`/api/validate-pro?token=${token}`)
+      .then((r) => r.json())
+      .then((data) => {
+        setIsPro(data.valid);
+        setIsReady(true);
+      })
+      .catch(() => {
+        setIsReady(true);
+      });
   }, []);
 
-  const activatePro = () => {
-    localStorage.setItem(PRO_KEY, "true");
+  // 🔑 Activar PRO con token real
+  const activatePro = (token: string) => {
+    localStorage.setItem(PRO_TOKEN_KEY, token);
     setIsPro(true);
-
-    // mantener sincronizado el estado viejo
-    const legacy = localStorage.getItem("cakeAppProState");
-    if (legacy) {
-      try {
-        const parsed = JSON.parse(legacy);
-        localStorage.setItem(
-          "cakeAppProState",
-          JSON.stringify({ ...parsed, isPro: true })
-        );
-      } catch {}
-    }
   };
 
   return (
@@ -65,8 +51,10 @@ export function ProProvider({ children }: { children: React.ReactNode }) {
 
 export function usePro() {
   const ctx = useContext(ProContext);
+
   if (!ctx) {
     throw new Error("usePro must be used within ProProvider");
   }
+
   return ctx;
 }
