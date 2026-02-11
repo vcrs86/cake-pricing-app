@@ -1477,6 +1477,66 @@ const handleOpenPdfQuote = () => {
   businessName={isPro ? businessName : ""}
   businessLogo={isPro ? businessLogo : null}
 />
+{/* CLIENT MESSAGES */}
+<div className="no-print mx-auto max-w-md space-y-3 mt-6">
+
+  <p className="text-sm font-semibold text-slate-700">
+    💬 {copy.client.quickMessages}
+  </p>
+
+  {/* PRESET BUTTONS */}
+  <div className="flex flex-wrap gap-2">
+    {(copy.client.quickMessagePresets || []).map((msg: string, i: number) => (
+      <button
+        key={i}
+        type="button"
+        onClick={() => setClientMessage(msg)}
+        className="rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-medium text-slate-600 hover:bg-slate-100"
+      >
+        {msg}
+      </button>
+    ))}
+  </div>
+
+  {/* CUSTOM MESSAGE */}
+  <div className="space-y-1">
+
+    <label className="block text-xs font-semibold text-slate-600">
+      {copy.client.clientMessageLabel}
+    </label>
+
+    <textarea
+      rows={3}
+      value={clientMessage}
+      onChange={(e) => setClientMessage(e.target.value)}
+      disabled={!isPro}
+      placeholder={
+        isPro
+          ? copy.client.customMessageLabel
+          : copy.client.clientMessageLocked
+      }
+      className={`w-full rounded-xl border p-3 text-sm resize-none ${
+        isPro
+          ? "border-brand-rose bg-white text-slate-700"
+          : "border-slate-300 bg-slate-100 text-slate-500 cursor-not-allowed"
+      }`}
+    />
+
+    {!isPro && (
+      <p className="text-[11px] text-slate-400">
+        🔒 {copy.client.clientMessageLocked}
+      </p>
+    )}
+
+    {isPro && (
+      <p className="text-[11px] text-brand-slate">
+        ✅ {copy.client.proEditActive}
+      </p>
+    )}
+
+  </div>
+
+</div>
 
     {/* BOTONES SOLO EN CLIENT */}
     <div className="no-print mx-auto mt-4 max-w-md space-y-2">
