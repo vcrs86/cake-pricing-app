@@ -64,10 +64,11 @@ export function QuotePreviewCard({
 
       {/* SERVINGS */}
       <p className="mt-1 text-sm text-slate-500">
-        {servings
-          ? `${servings} ${copy.general.servings}`
-          : copy.client.customQuote}
-      </p>
+  {servings
+    ? `${servings} ${copy.client.servingsLabel}`
+    : ""}
+</p>
+
 
       {/* PRICES */}
       {/* TOTAL — HERO */}
