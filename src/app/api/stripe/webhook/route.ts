@@ -30,6 +30,11 @@ export async function POST(req: Request) {
   // ✅ Cuando el pago se completa
   if (event.type === "checkout.session.completed") {
   const session = event.data.object as Stripe.Checkout.Session;
+console.log("✅ WEBHOOK TRIGGERED");
+console.log("EMAIL RAW:", session.customer_email);
+console.log("EMAIL DETAILS:", session.customer_details?.email);
+console.log("LANG:", session.metadata?.language);
+console.log("HAS RESEND KEY:", !!process.env.RESEND_API_KEY);
 
   const token = session.id;
 
