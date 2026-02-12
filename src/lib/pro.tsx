@@ -18,27 +18,38 @@ export function ProProvider({ children }: { children: React.ReactNode }) {
 
   // 🔍 Validar PRO desde servidor
   useEffect(() => {
-    const token = localStorage.getItem(PRO_TOKEN_KEY);
+  let token = localStorage.getItem(PRO_TOKEN_KEY);
 
-    if (!token) {
-      setIsReady(true);
-      return;
+  // 🔄 Si no hay en localStorage, buscar en cookie (iOS PWA fix)
+  if (!token) {
+    const match = document.cookie.match(/(^| )cakeprice_pro_token=([^;]+)/);
+
+    if (match) {
+      token = match[2];
+      localStorage.setItem(PRO_TOKEN_KEY, token);
     }
+  }
 
-    fetch(`/api/validate-pro?token=${token}`)
-      .then((r) => r.json())
-      .then((data) => {
-        setIsPro(data.valid);
-        setIsReady(true);
-      })
-      .catch(() => {
-        setIsReady(true);
-      });
-  }, []);
+  if (!token) {
+    setIsReady(true);
+    return;
+  }
+
+  fetch(`/api/validate-pro?token=${token}`)
+    .then((r) => r.json())
+    .then((data) => {
+      setIsPro(data.valid);
+      setIsReady(true);
+    })
+    .catch(() => {
+      setIsReady(true);
+    });
+}, []);
 
   // 🔑 Activar PRO con token real
   const activatePro = (token: string) => {
     localStorage.setItem(PRO_TOKEN_KEY, token);
+document.cookie = `cakeprice_pro_token=${token}; path=/; max-age=31536000; secure; samesite=lax`;
     setIsPro(true);
   };
 
