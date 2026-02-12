@@ -30,7 +30,11 @@ export async function POST(req: Request) {
 
 const token = session.id; // usamos el session id
 
-const email = session.customer_email || "";
+const email =
+  session.customer_email ||
+  session.customer_details?.email ||
+  "";
+
 
 await supabase.from("pro_users").insert({
   token,
