@@ -117,6 +117,38 @@ const [showMarketingHelp, setShowMarketingHelp] = useState(false);
     return `${currency} ${formatted}`;
   };
   const [mode, setMode] = useState<"basic" | "advanced">("basic");
+  const [showRestore, setShowRestore] = useState(false);
+  const [restoreEmail, setRestoreEmail] = useState("");
+
+  const { activatePro } = usePro();
+const handleLoginPro = async () => {
+  if (!restoreEmail) return;
+
+  try {
+    const res = await fetch("/api/restore-pro", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: restoreEmail }),
+    });
+
+    const data = await res.json();
+
+    if (data.ok && data.token) {
+      activatePro(data.token);
+      setShowRestore(false);
+      alert("✅ PRO restored successfully!");
+    } else {
+      alert("❌ No purchase found for this email.");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("⚠️ Restore failed. Try again.");
+  }
+};
+
+
   const [values, setValues] = useState<CalculatorFormState>(DEFAULT_STATE);
   const [hasCalculated, setHasCalculated] = useState<boolean>(false);
   const [ingredients, setIngredients] =
@@ -880,9 +912,18 @@ const handleOpenPdfQuote = () => {
           className="h-48 sm:h-40 w-auto"
         />
       </div>
-      <div className="mb-4 flex justify-end sm:mb-1">
-        <ProStatusBadge />
-      </div>
+      <div className="mb-4 flex items-center justify-between sm:mb-1">
+  <ProStatusBadge />
+
+  <button
+    type="button"
+    onClick={() => setShowRestore(true)}
+    className="text-xs font-semibold text-brand-rose hover:underline"
+  >
+    🔐 Login PRO
+  </button>
+</div>
+
 
       <section className="relative overflow-hidden rounded-3xl bg-white/60 backdrop-blur-xl shadow-xl ring-1 ring-white/40 p-5 sm:p-10">
         {/* Decorative blobs */}
@@ -2070,7 +2111,50 @@ const handleOpenPdfQuote = () => {
     onClose={() => setShowMarketingHelp(false)}
   />
 )}
+{/* LOGIN PRO MODAL */}
+{showRestore && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+    <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl">
 
+      <h3 className="text-lg font-bold text-brand-slate">
+        🔐 Login PRO
+      </h3>
+
+      <p className="mt-1 text-sm text-slate-600">
+        Enter the email you used when you purchased PRO.
+      </p>
+
+      <input
+  type="email"
+  placeholder="your@email.com"
+  value={restoreEmail}
+  onChange={(e) => setRestoreEmail(e.target.value)}
+  className="mt-4 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+/>
+
+
+      <div className="mt-5 flex gap-2">
+        <button
+          type="button"
+          onClick={() => setShowRestore(false)}
+          className="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50"
+        >
+          Cancel
+        </button>
+
+        <button
+  type="button"
+  onClick={handleLoginPro}
+  className="flex-1 rounded-lg bg-brand-rose px-3 py-2 text-sm font-semibold text-white hover:opacity-90"
+>
+  Login
+</button>
+
+      </div>
+
+    </div>
+  </div>
+)}
     </main>
   );
 }
