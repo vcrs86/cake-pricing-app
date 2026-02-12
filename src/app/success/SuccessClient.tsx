@@ -14,10 +14,24 @@ export default function SuccessClient() {
   const token = searchParams.get("token");
 
   useEffect(() => {
-    if (token && !isPro) {
-      activatePro(token);
-    }
-  }, [token, isPro, activatePro]);
+  if (!token || isPro) return;
+
+  const save = async () => {
+    // Guardar cookie en servidor (iOS fix)
+    await fetch("/api/set-pro-cookie", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token }),
+    });
+
+    activatePro(token);
+  };
+
+  save();
+}, [token, isPro, activatePro]);
+
 
   return (
     <main className="mx-auto flex min-h-[70vh] max-w-md flex-col items-center justify-center px-6 text-center">
