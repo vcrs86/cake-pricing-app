@@ -105,7 +105,7 @@ console.log("HAS RESEND KEY:", !!process.env.RESEND_API_KEY);
 `;
 
       await resend.emails.send({
-        from: "CakePrice <onboarding@resend.dev>",
+        from: "CakePrice <no-reply@resend.dev>",
         to: email,
         subject,
         html,
