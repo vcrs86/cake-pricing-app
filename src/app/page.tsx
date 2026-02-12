@@ -1615,10 +1615,17 @@ const handleOpenPdfQuote = () => {
                 <button
   type="button"
   onClick={async () => {
-    try {
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-      });
+  try {
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        language: language,
+      }),
+    });
+
 
       const data = await res.json();
 
