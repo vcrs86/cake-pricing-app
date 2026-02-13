@@ -73,7 +73,7 @@ type SavedQuote = {
 };
 export default function HomePage() {
   const { copy, language, setLanguage } = useLanguage();
-  const { isPro } = usePro();
+  const { isPro, isReady } = usePro();
   const [isTieredCake, setIsTieredCake] = useState(false);
   const [showRecipeHelp, setShowRecipeHelp] = useState(false);
   const [showRentHelp, setShowRentHelp] = useState(false);
@@ -151,8 +151,36 @@ const handleLoginPro = async () => {
 
   const [values, setValues] = useState<CalculatorFormState>(DEFAULT_STATE);
   const [hasCalculated, setHasCalculated] = useState<boolean>(false);
-  const [ingredients, setIngredients] =
-    useState<Ingredient[]>(DEFAULT_INGREDIENTS);
+  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+// 🔹 Cargar ingredientes guardados (solo PRO)
+useEffect(() => {
+  if (!isReady) return;
+
+  if (isPro) {
+    const saved = localStorage.getItem("cakeprice_pro_ingredients");
+
+    if (saved) {
+      try {
+        setIngredients(JSON.parse(saved));
+        return;
+      } catch {}
+    }
+  }
+
+  // Si no hay guardados → usar defaults
+  setIngredients(DEFAULT_INGREDIENTS);
+}, [isPro, isReady]);
+
+// 🔹 Guardar ingredientes automáticamente (solo PRO)
+useEffect(() => {
+  if (!isPro) return;
+
+  localStorage.setItem(
+    "cakeprice_pro_ingredients",
+    JSON.stringify(ingredients)
+  );
+}, [ingredients, isPro]);
+
   const [recipeLines, setRecipeLines] = useState<RecipeLineInput[]>([]);
   // --- PUENTE DE DATOS ---
   // Este bloque permite que la receta encuentre la información (precio/peso)
