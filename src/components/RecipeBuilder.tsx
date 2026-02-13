@@ -1,7 +1,7 @@
 "use client";
 
 import { type Ingredient, type RecipeLineCost, type UnitType } from "@/lib/ingredients";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useLanguage } from "@/lib/i18n";
 import { ListChecks } from "lucide-react";
 
@@ -31,7 +31,16 @@ export function RecipeBuilder({
   totalCost,
 }: RecipeBuilderProps) {
   const { copy } = useLanguage();
-  
+  const [searchTerm, setSearchTerm] = useState("");
+const [openId, setOpenId] = useState<string | null>(null);
+
+const filteredIngredients = useMemo(() => {
+  return ingredients.filter((i) =>
+    i.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+}, [ingredients, searchTerm]);
+
+ 
   // Memorizamos la lista para búsqueda rápida
   const ingredientLookup = useMemo(() => 
     new Map(ingredients.map((i) => [i.id, i])), 
@@ -70,39 +79,59 @@ export function RecipeBuilder({
                 key={line.id}
                 className="grid grid-cols-1 gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 shadow-sm sm:grid-cols-12 sm:items-center"
               >
-                {/* SELECTOR DE INGREDIENTE */}
-                <div className="sm:col-span-4">
-                  <label className="space-y-1 text-xs font-semibold text-slate-600">
-                    <span>{copy.recipeBuilder.ingredient}</span>
-                    <select
-                      className="w-full rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-sm font-semibold text-slate-800 shadow-sm focus:border-brand-rose focus:outline-none"
-                      value={line.ingredientId}
-                      onChange={(event) => onChangeLine(line.id, { ingredientId: event.target.value })}
-                    >
-                      <option value="">{copy.recipeBuilder.ingredient}</option>
-                      {ingredients.map((option) => {
-                        // Buscamos el costo por unidad para mostrarlo en el menú
-                        const p = Number(
-  (option as any).packageCost ?? 0
-);
+                <div className="sm:col-span-4 relative">
+  <label className="space-y-1 text-xs font-semibold text-slate-600">
+    <span>{copy.recipeBuilder.ingredient}</span>
 
-const s = Number(
-  (option as any).packageSize ?? 1
-);
+    <input
+      type="text"
+      placeholder="Search ingredient..."
+      value={
+        ingredient
+          ? ingredient.name
+          : ""
+      }
+      onChange={(e) => {
+        onChangeLine(line.id, {
+          ingredientId: "",
+        });
 
-const cpu = s > 0 ? p / s : 0;
+        setSearchTerm(e.target.value);
+        setOpenId(line.id);
+      }}
+      onFocus={() => setOpenId(line.id)}
+      className="w-full rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-sm font-semibold text-slate-800 shadow-sm focus:border-brand-rose focus:outline-none"
+    />
+  </label>
 
+  {openId === line.id && (
+    <div className="absolute z-20 mt-1 max-h-40 w-full overflow-auto rounded-lg border border-slate-200 bg-white shadow-lg">
+      {filteredIngredients.map((opt) => (
+        <button
+          key={opt.id}
+          type="button"
+          onClick={() => {
+            onChangeLine(line.id, {
+              ingredientId: opt.id,
+            });
 
-                        
-                        return (
-                          <option key={option.id} value={option.id}>
-                            {option.name} (${cpu.toFixed(4)} {copy.recipeBuilder.per} {option.unit})
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </label>
-                </div>
+            setOpenId(null);
+          }}
+          className="block w-full px-3 py-2 text-left text-sm hover:bg-brand-rose/10"
+        >
+          {opt.name}
+        </button>
+      ))}
+
+      {filteredIngredients.length === 0 && (
+        <div className="px-3 py-2 text-xs text-slate-400">
+          No results
+        </div>
+      )}
+    </div>
+  )}
+</div>
+
 
                 {/* ENTRADA DE CANTIDAD */}
                 <div className="sm:col-span-3">
