@@ -80,6 +80,9 @@ export default function HomePage() {
 const [showUtilitiesHelp, setShowUtilitiesHelp] = useState(false);
 const [showEnergyHelp, setShowEnergyHelp] = useState(false);
 const [showMarketingHelp, setShowMarketingHelp] = useState(false);
+const [openSection, setOpenSection] = useState<
+  "ingredients" | "recipes" | "result"
+>("ingredients");
 
 
   const [levels, setLevels] = useState<CakeLevel[]>([
@@ -1169,38 +1172,61 @@ const handleOpenPdfQuote = () => {
     )}
 
     {/* RecipesTab SIEMPRE visible */}
-    <RecipesTab
-      ingredients={ingredients}
-      recipeLines={recipeLines}
-      onAddIngredient={(newIng) =>
-        setIngredients((prev) => [...prev, newIng])
-      }
-      onUpdateIngredient={(id, patch) =>
-        setIngredients((prev) =>
-          prev.map((ing) =>
-            ing.id === id ? { ...ing, ...patch } : ing,
-          ),
-        )
-      }
-      onDeleteIngredient={handleDeleteIngredient}
-      onAddLine={handleAddLine}
-      onChangeLine={handleChangeLine}
-      onRemoveLine={handleRemoveLine}
-      lineCosts={lineCosts}
-      totalIngredientsCost={totalIngredientsCost}
-      recipeName={recipeName}
-      setRecipeName={setRecipeName}
-      onSaveRecipe={handleSaveRecipe}
-      savedRecipes={savedRecipes}
-      isPro={isPro}
-      formatCurrency={formatCurrency}
-      currency={currency}
-      onUseRecipe={handleUseRecipe}
-      onDeleteRecipe={handleDeleteRecipe}
-      recipeSearchTerm={recipeSearchTerm}
-      setRecipeSearchTerm={setRecipeSearchTerm}
-      onUpgrade={() => setActiveTab("pro")}
-    />
+    {/* RECIPES + INGREDIENTS SECTION */}
+<div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+  <button
+    type="button"
+    onClick={() =>
+      setOpenSection(
+        openSection === "recipes" ? "result" : "recipes"
+      )
+    }
+    className="flex w-full items-center justify-between px-4 py-3 text-sm font-bold text-brand-slate"
+  >
+    🧂 Ingredientes & Recetas
+    <span>{openSection === "recipes" ? "−" : "+"}</span>
+  </button>
+
+  {openSection === "recipes" && (
+    <div className="p-4 border-t border-slate-100">
+
+      <RecipesTab
+        ingredients={ingredients}
+        recipeLines={recipeLines}
+        onAddIngredient={(newIng) =>
+          setIngredients((prev) => [...prev, newIng])
+        }
+        onUpdateIngredient={(id, patch) =>
+          setIngredients((prev) =>
+            prev.map((ing) =>
+              ing.id === id ? { ...ing, ...patch } : ing
+            )
+          )
+        }
+        onDeleteIngredient={handleDeleteIngredient}
+        onAddLine={handleAddLine}
+        onChangeLine={handleChangeLine}
+        onRemoveLine={handleRemoveLine}
+        lineCosts={lineCosts}
+        totalIngredientsCost={totalIngredientsCost}
+        recipeName={recipeName}
+        setRecipeName={setRecipeName}
+        onSaveRecipe={handleSaveRecipe}
+        savedRecipes={savedRecipes}
+        isPro={isPro}
+        formatCurrency={formatCurrency}
+        currency={currency}
+        onUseRecipe={handleUseRecipe}
+        onDeleteRecipe={handleDeleteRecipe}
+        recipeSearchTerm={recipeSearchTerm}
+        setRecipeSearchTerm={setRecipeSearchTerm}
+        onUpgrade={() => setActiveTab("pro")}
+      />
+
+    </div>
+  )}
+</div>
   </>
 )}
       {/* CALCULATOR TAB */}
