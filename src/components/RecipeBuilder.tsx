@@ -61,21 +61,21 @@ export function RecipeBuilder({
           {copy.recipeBuilder.empty}
         </p>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-2">
           {lines.map((line) => {
             const ingredient = ingredientLookup.get(line.ingredientId);
             
             return (
               <div
                 key={line.id}
-                className="grid grid-cols-1 gap-3 rounded-xl border border-slate-200 bg-white px-3 py-3 shadow-sm sm:grid-cols-12 sm:items-center"
+                className="grid grid-cols-1 gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 shadow-sm sm:grid-cols-12 sm:items-center"
               >
                 {/* SELECTOR DE INGREDIENTE */}
                 <div className="sm:col-span-4">
                   <label className="space-y-1 text-xs font-semibold text-slate-600">
                     <span>{copy.recipeBuilder.ingredient}</span>
                     <select
-                      className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-800 shadow-sm focus:border-brand-rose focus:outline-none"
+                      className="w-full rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-sm font-semibold text-slate-800 shadow-sm focus:border-brand-rose focus:outline-none"
                       value={line.ingredientId}
                       onChange={(event) => onChangeLine(line.id, { ingredientId: event.target.value })}
                     >
@@ -118,7 +118,7 @@ const cpu = s > 0 ? p / s : 0;
                 <div className="sm:col-span-3">
                   <div className="space-y-1 text-xs font-semibold text-slate-600">
                     <span>{copy.recipeBuilder.lineCost}</span>
-                    <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50 px-3 py-3 text-sm font-bold text-brand-slate">
+                    <div className="rounded-lg border border-dashed border-slate-200 bg-slate-50 px-3 py-2 text-sm font-bold text-brand-slate">
                       {(() => {
                         if (!ingredient || !line.quantity) return "$0.00";
 
