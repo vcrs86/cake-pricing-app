@@ -1,11 +1,7 @@
 import Stripe from "stripe";
 import { supabase } from "@/lib/supabase";
-import crypto from "crypto";
-import { Resend } from "resend";
-
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   const body = await req.text();
@@ -29,39 +25,39 @@ export async function POST(req: Request) {
 
   // ✅ Cuando el pago se completa
   if (event.type === "checkout.session.completed") {
-  const session = event.data.object as Stripe.Checkout.Session;
-console.log("✅ WEBHOOK TRIGGERED");
-console.log("EMAIL RAW:", session.customer_email);
-console.log("EMAIL DETAILS:", session.customer_details?.email);
-console.log("LANG:", session.metadata?.language);
-console.log("HAS RESEND KEY:", !!process.env.RESEND_API_KEY);
+    const session = event.data.object as Stripe.Checkout.Session;
 
-  const token = session.id;
+    console.log("✅ WEBHOOK TRIGGERED");
+    console.log("EMAIL RAW:", session.customer_email);
+    console.log("EMAIL DETAILS:", session.customer_details?.email);
+    console.log("LANG:", session.metadata?.language);
 
-  const email =
-    session.customer_email ||
-    session.customer_details?.email ||
-    "";
+    const token = session.id;
 
-  const language = session.metadata?.language || "en";
+    const email =
+      session.customer_email ||
+      session.customer_details?.email ||
+      "";
 
-  // Guardar en Supabase
-  await supabase.from("pro_users").insert({
-    token,
-    email,
-  });
+    const language = session.metadata?.language || "en";
 
-  // Enviar email automático
-  if (email) {
-    try {
-      const subject =
-        language === "es"
-          ? "🎂 ¡Bienvenida a CakePrice PRO!"
-          : "🎂 Welcome to CakePrice PRO!";
+    // Guardar en Supabase
+    await supabase.from("pro_users").insert({
+      token,
+      email,
+    });
 
-      const html =
-        language === "es"
-          ? `
+    // Enviar email con Brevo
+    if (email) {
+      try {
+        const subject =
+          language === "es"
+            ? "🎂 ¡Bienvenida a CakePrice PRO!"
+            : "🎂 Welcome to CakePrice PRO!";
+
+        const html =
+          language === "es"
+            ? `
 <div style="font-family: Arial, sans-serif; line-height: 1.6;">
   <h2>🎂 ¡Bienvenida a CakePrice PRO!</h2>
 
@@ -82,7 +78,7 @@ console.log("HAS RESEND KEY:", !!process.env.RESEND_API_KEY);
   </p>
 </div>
 `
-          : `
+            : `
 <div style="font-family: Arial, sans-serif; line-height: 1.6;">
   <h2>🎂 Welcome to CakePrice PRO!</h2>
 
@@ -104,17 +100,28 @@ console.log("HAS RESEND KEY:", !!process.env.RESEND_API_KEY);
 </div>
 `;
 
-      await resend.emails.send({
-        from: "CakePrice <no-reply@resend.dev>",
-        to: email,
-        subject,
-        html,
-      });
-    } catch (err) {
-      console.error("EMAIL ERROR:", err);
+        await fetch("https://api.brevo.com/v3/smtp/email", {
+          method: "POST",
+          headers: {
+            accept: "application/json",
+            "content-type": "application/json",
+            "api-key": process.env.BREVO_API_KEY!,
+          },
+          body: JSON.stringify({
+            sender: {
+              name: "CakePrice",
+              email: "hello@amarettobakery.com",
+            },
+            to: [{ email }],
+            subject,
+            htmlContent: html,
+          }),
+        });
+      } catch (err) {
+        console.error("EMAIL ERROR:", err);
+      }
     }
   }
-}
 
   return new Response("OK", { status: 200 });
 }
