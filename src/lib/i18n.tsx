@@ -13,6 +13,10 @@ export const translations = {
 
   trustNote: "Usado por reposteras independientes",
 },
+accordion: {
+  recipes: "Ingredientes y Recetas",
+},
+
     tabs: {
       calculator: "Calculadora",
       recipes: "Recetas",
@@ -95,7 +99,7 @@ recipeInfo: {
     },
 ingredientManager: {
   badge: "Ingredientes",
-  title: "Costos base",
+  title: "Costos individuales de ingredientes",
   helper:
     "Edita los ingredientes según tus costos reales.",
   name: "Nombre",
@@ -136,7 +140,7 @@ recipeBuilder: {
   badge: "Receta",
   title: "Costo de la receta",
   addLine: "Agregar ingrediente",
-  empty: "Agrega ingredientes y cantidades.",
+  empty: "Construye tu receta completa: Agrega ingredientes y cantidades, también añade fondant, cubiertas y rellenos.",
   per: "por",
   ingredient: "Ingrediente",
   quantity: "Cantidad",
@@ -657,7 +661,9 @@ help: {
 
   trustNote: "Trusted by independent cake decorators",
 },
-
+accordion: {
+  recipes: "Ingredients & Recipes",
+},
     tabs: {
       calculator: "Calculator",
       recipes: "Recipes",
@@ -811,7 +817,7 @@ recipeBuilder: {
 
   addLine: "Add ingredient",
 
-  empty: "Add ingredients and quantities.",
+  empty: "Build your recipe: Add ingredients and quantities, add fondant, buttercream, fillings.",
 
   per: "per",
 
@@ -1362,19 +1368,29 @@ export function LanguageProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [language, setLanguage] = useState<Language>(() => {
-  if (typeof window !== "undefined") {
-    const saved = localStorage.getItem("cakeprice-language");
-    if (saved === "es" || saved === "en") return saved;
-  }
-  return "en";
-});
-useEffect(() => {
-  if (typeof window !== "undefined") {
-    localStorage.setItem("cakeprice-language", language);
-  }
-}, [language]);
+  const [language, setLanguage] = useState<Language>("en");
+  const [mounted, setMounted] = useState(false);
 
+  // Leer idioma solo en cliente
+  useEffect(() => {
+    const saved = localStorage.getItem("cakeprice-language");
+
+    if (saved === "es" || saved === "en") {
+      setLanguage(saved);
+    }
+
+    setMounted(true);
+  }, []);
+
+  // Guardar cambios
+  useEffect(() => {
+    if (!mounted) return;
+
+    localStorage.setItem("cakeprice-language", language);
+  }, [language, mounted]);
+
+  // ⛔ No renderizar hasta montar
+  if (!mounted) return null;
 
   const value: LanguageContextValue = {
     language,

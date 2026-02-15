@@ -1184,7 +1184,7 @@ const handleOpenPdfQuote = () => {
     }
     className="flex w-full items-center justify-between px-4 py-3 text-sm font-bold text-brand-slate"
   >
-    🧂 Ingredientes & Recetas
+    🧂 📓 {copy.accordion.recipes}
     <span>{openSection === "recipes" ? "−" : "+"}</span>
   </button>
 
