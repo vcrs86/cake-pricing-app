@@ -13,17 +13,12 @@ export async function POST(req: Request) {
       payment_method_types: ["card"],
 
       line_items: [
-        {
-          price_data: {
-            currency: "usd",
-            product_data: {
-              name: "CakePrice PRO Lifetime",
-            },
-            unit_amount: 3900, // $39.00
-          },
-          quantity: 1,
-        },
-      ],
+  {
+    price: process.env.STRIPE_PRICE_PRO!,
+    quantity: 1,
+  },
+],
+
       metadata: {
   language: language || "en",
 },
