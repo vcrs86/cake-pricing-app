@@ -19,7 +19,7 @@ export async function POST(req: Request) {
             product_data: {
               name: "CakePrice PRO Lifetime",
             },
-            unit_amount: 100, // $39.00
+            unit_amount: 3900, // $39.00
           },
           quantity: 1,
         },
