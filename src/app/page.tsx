@@ -73,17 +73,20 @@ type SavedQuote = {
 };
 export default function HomePage() {
   const { copy, language, setLanguage } = useLanguage();
+const { isPro, isReady, activatePro } = usePro();
 
-  if (!copy) return null;
-
-  const [mounted, setMounted] = useState(false);
+const [mounted, setMounted] = useState(false);
 
 useEffect(() => {
   setMounted(true);
 }, []);
 
-if (!mounted) return null;
-  const { isPro, isReady, activatePro } = usePro();
+// ⛔ NO cortar antes de hooks
+const isReadyToRender = mounted && copy && isReady;
+
+if (!isReadyToRender) {
+  return <div className="p-6 text-center text-slate-400">Loading...</div>;
+}
   const [isTieredCake, setIsTieredCake] = useState(false);
   const [showRecipeHelp, setShowRecipeHelp] = useState(false);
   const [showRentHelp, setShowRentHelp] = useState(false);
