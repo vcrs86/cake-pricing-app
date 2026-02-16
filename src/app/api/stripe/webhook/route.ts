@@ -55,48 +55,116 @@ export async function POST(req: Request) {
             ? "🎂 ¡Bienvenida a CakePrice PRO!"
             : "🎂 Welcome to CakePrice PRO!";
 
-        const html =
-          language === "es"
-            ? `
-<div style="font-family: Arial, sans-serif; line-height: 1.6;">
-  <h2>🎂 ¡Bienvenida a CakePrice PRO!</h2>
+        const appUrl = "https://cakeprice.amarettobakery.com";
 
-  <p>Tu acceso PRO ya está activo.</p>
+const html =
+  language === "es"
+    ? `
+<div style="font-family: Arial, sans-serif; background:#fafafa; padding:20px; line-height:1.6;">
+  <div style="max-width:600px;margin:auto;background:#ffffff;border-radius:12px;padding:24px;">
 
-  <p>
-    Ya puedes comenzar a usar todas las funciones premium.
-  </p>
+    <div style="text-align:center;margin-bottom:20px;">
+      <img src="${appUrl}/brand/logo-primary.png" height="60" alt="CakePrice" />
+    </div>
 
-  <p>
-    Si necesitas restaurar tu acceso en otro dispositivo,
-    solo utiliza este mismo email en la opción <strong>Login PRO</strong>.
-  </p>
+    <h2>🎂 ¡Bienvenida a CakePrice PRO!</h2>
 
-  <p style="margin-top: 20px;">
-    Gracias por apoyar CakePrice 💗<br/>
-    — Vanessa
-  </p>
+    <p>Tu acceso PRO ya está activo.</p>
+
+    <p>
+      Ya puedes comenzar a usar todas las funciones premium.
+    </p>
+
+    <hr style="margin:24px 0;" />
+
+    <h3>🔐 Recuperar tu acceso</h3>
+
+    <p>
+      Si necesitas restaurar tu acceso en otro dispositivo,
+      solo utiliza este mismo email en la opción
+      <strong>Login PRO</strong>.
+    </p>
+
+    <hr style="margin:24px 0;" />
+
+    <h3>📲 Instalar la app</h3>
+
+    <p><strong>iPhone (Safari):</strong></p>
+    <ul>
+      <li>Abre CakePrice en Safari</li>
+      <li>Pulsa el botón Compartir ⬆️</li>
+      <li>Selecciona “Agregar a inicio”</li>
+    </ul>
+
+    <p><strong>Android (Chrome):</strong></p>
+    <ul>
+      <li>Abre CakePrice en Chrome</li>
+      <li>Pulsa el menú ⋮</li>
+      <li>Agregar a pantalla principal</li>
+    </ul>
+
+    <hr style="margin:24px 0;" />
+
+    <p style="font-size:14px;color:#777;margin-top:20px;">
+      Gracias por apoyar CakePrice 💗<br/>
+      — Vanessa
+    </p>
+
+  </div>
 </div>
 `
-            : `
-<div style="font-family: Arial, sans-serif; line-height: 1.6;">
-  <h2>🎂 Welcome to CakePrice PRO!</h2>
+    : `
+<div style="font-family: Arial, sans-serif; background:#fafafa; padding:20px; line-height:1.6;">
+  <div style="max-width:600px;margin:auto;background:#ffffff;border-radius:12px;padding:24px;">
 
-  <p>Your PRO access is now active.</p>
+    <div style="text-align:center;margin-bottom:20px;">
+      <img src="${appUrl}/brand/logo-primary.png" height="60" alt="CakePrice" />
+    </div>
 
-  <p>
-    You can now start using all premium features.
-  </p>
+    <h2>🎂 Welcome to CakePrice PRO!</h2>
 
-  <p>
-    If you ever need to restore your access on another device,
-    just use this same email in <strong>Login PRO</strong>.
-  </p>
+    <p>Your PRO access is now active.</p>
 
-  <p style="margin-top: 20px;">
-    Thank you for supporting CakePrice 💗<br/>
-    — Vanessa
-  </p>
+    <p>
+      You can now start using all premium features.
+    </p>
+
+    <hr style="margin:24px 0;" />
+
+    <h3>🔐 Restore access</h3>
+
+    <p>
+      If you need to restore your access on another device,
+      just use this same email in
+      <strong>Login PRO</strong>.
+    </p>
+
+    <hr style="margin:24px 0;" />
+
+    <h3>📲 Install the app</h3>
+
+    <p><strong>iPhone (Safari):</strong></p>
+    <ul>
+      <li>Open CakePrice in Safari</li>
+      <li>Tap Share ⬆️</li>
+      <li>Select “Add to Home Screen”</li>
+    </ul>
+
+    <p><strong>Android (Chrome):</strong></p>
+    <ul>
+      <li>Open CakePrice in Chrome</li>
+      <li>Open menu ⋮</li>
+      <li>Add to Home Screen</li>
+    </ul>
+
+    <hr style="margin:24px 0;" />
+
+    <p style="font-size:14px;color:#777;margin-top:20px;">
+      Thank you for supporting CakePrice 💗<br/>
+      — Vanessa
+    </p>
+
+  </div>
 </div>
 `;
 

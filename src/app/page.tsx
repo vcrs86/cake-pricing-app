@@ -73,6 +73,13 @@ type SavedQuote = {
 };
 export default function HomePage() {
   const { copy, language, setLanguage } = useLanguage();
+  const [mounted, setMounted] = useState(false);
+
+useEffect(() => {
+  setMounted(true);
+}, []);
+
+if (!mounted) return null;
   const { isPro, isReady } = usePro();
   const [isTieredCake, setIsTieredCake] = useState(false);
   const [showRecipeHelp, setShowRecipeHelp] = useState(false);
