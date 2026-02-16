@@ -287,12 +287,14 @@ useEffect(() => {
     setIsEditingQuote(true);
   };
 
-  const [clientMessage, setClientMessage] = useState(
-    copy.client.quickMessagePresets[0],
-  );
+  const [clientMessage, setClientMessage] = useState("");
+
   useEffect(() => {
+  if (copy?.client?.quickMessagePresets?.length) {
     setClientMessage(copy.client.quickMessagePresets[0]);
-  }, [language]);
+  }
+}, [copy, language]);
+
   // LOAD SAVED QUOTES (PRO)
   useEffect(() => {
     if (typeof window === "undefined") return;
