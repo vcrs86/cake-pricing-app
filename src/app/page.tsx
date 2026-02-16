@@ -73,6 +73,9 @@ type SavedQuote = {
 };
 export default function HomePage() {
   const { copy, language, setLanguage } = useLanguage();
+
+  if (!copy) return null;
+
   const [mounted, setMounted] = useState(false);
 
 useEffect(() => {
@@ -80,7 +83,7 @@ useEffect(() => {
 }, []);
 
 if (!mounted) return null;
-  const { isPro, isReady } = usePro();
+  const { isPro, isReady, activatePro } = usePro();
   const [isTieredCake, setIsTieredCake] = useState(false);
   const [showRecipeHelp, setShowRecipeHelp] = useState(false);
   const [showRentHelp, setShowRentHelp] = useState(false);
@@ -130,7 +133,7 @@ const [openSection, setOpenSection] = useState<
   const [showRestore, setShowRestore] = useState(false);
   const [restoreEmail, setRestoreEmail] = useState("");
 
-  const { activatePro } = usePro();
+
 const handleLoginPro = async () => {
   if (!restoreEmail) return;
 
