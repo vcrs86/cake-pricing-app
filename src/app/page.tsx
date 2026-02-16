@@ -81,12 +81,6 @@ useEffect(() => {
   setMounted(true);
 }, []);
 
-// ⛔ NO cortar antes de hooks
-const isReadyToRender = mounted && copy && isReady;
-
-if (!isReadyToRender) {
-  return <div className="p-6 text-center text-slate-400">Loading...</div>;
-}
   const [isTieredCake, setIsTieredCake] = useState(false);
   const [showRecipeHelp, setShowRecipeHelp] = useState(false);
   const [showRentHelp, setShowRentHelp] = useState(false);
@@ -947,6 +941,10 @@ const handleOpenPdfQuote = () => {
   const displayServings = isTieredCake
     ? totalTierServings
     : selectedSize.servings;
+    if (!mounted || !isReady) {
+  return <div className="p-6 text-center text-slate-400">Loading...</div>;
+}
+
 
   return (
     <main className="no-print mx-auto flex min-h-[100svh] sm:min-h-screen max-w-6xl flex-col gap-8 px-4 pb-12 pt-10 sm:px-6 lg:px-10">
