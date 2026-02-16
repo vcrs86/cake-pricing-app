@@ -84,6 +84,43 @@ export default function SuccessClient() {
         {copy?.success?.note ||
           "Tu acceso PRO está asociado a tu compra y puede usarse en varios dispositivos."}
       </p>
+      {/* INSTALL APP TIP */}
+<div className="mt-8 w-full rounded-2xl border border-brand-rose/20 bg-brand-rose/5 p-4 text-left text-sm text-slate-700">
+
+  <h3 className="font-bold text-brand-slate mb-1">
+    {copy.success.installTip.title}
+  </h3>
+
+  <p className="mb-3 text-xs text-slate-600">
+    {copy.success.installTip.description}
+  </p>
+
+  {/* iOS */}
+  <div className="mb-3">
+    <p className="font-semibold text-xs mb-1">
+      {copy.success.installTip.iosTitle}
+    </p>
+
+    <ul className="list-disc pl-5 space-y-0.5 text-xs">
+      {copy.success.installTip.iosSteps.map((step: string) => (
+        <li key={step}>{step}</li>
+      ))}
+    </ul>
+  </div>
+
+  {/* Android */}
+  <div>
+    <p className="font-semibold text-xs mb-1">
+      {copy.success.installTip.androidTitle}
+    </p>
+
+    <ul className="list-disc pl-5 space-y-0.5 text-xs">
+      {copy.success.installTip.androidSteps.map((step: string) => (
+        <li key={step}>{step}</li>
+      ))}
+    </ul>
+  </div>
+</div>
     </main>
   );
 }

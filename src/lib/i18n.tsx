@@ -273,6 +273,26 @@ proFeatures: {
   redirecting: "Redirigiendo a la aplicación…",
   footer:
     "Gracias por apoyar el desarrollo de CakePrice 💕",
+
+    installTip: {
+  title: "📲 Instala CakePrice en tu teléfono",
+  description:
+    "Para evitar perder tu acceso PRO, te recomendamos instalar la app en tu pantalla de inicio.",
+
+  iosTitle: "En iPhone (Safari):",
+  iosSteps: [
+    "Abre esta página en Safari",
+    "Pulsa el botón compartir (⬆️)",
+    "Selecciona “Agregar a inicio”",
+  ],
+
+  androidTitle: "En Android (Chrome):",
+  androidSteps: [
+    "Abre esta página en Chrome",
+    "Pulsa los tres puntos (⋮)",
+    "Selecciona “Agregar a pantalla principal”",
+  ],
+},
 },
 
 languageToggle: {
@@ -968,6 +988,26 @@ success: {
   redirecting: "Redirecting to the app…",
 
   footer: "Thank you for supporting CakePrice development 💕",
+
+  installTip: {
+  title: "📲 Install CakePrice on your phone",
+  description:
+    "To avoid losing your PRO access, we recommend installing the app on your home screen.",
+
+  iosTitle: "On iPhone (Safari):",
+  iosSteps: [
+    "Open this page in Safari",
+    "Tap the Share button (⬆️)",
+    "Select “Add to Home Screen”",
+  ],
+
+  androidTitle: "On Android (Chrome):",
+  androidSteps: [
+    "Open this page in Chrome",
+    "Tap the three dots (⋮)",
+    "Select “Add to Home Screen”",
+  ],
+},
 },
 
 languageToggle: {
