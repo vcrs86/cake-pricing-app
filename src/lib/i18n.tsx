@@ -1408,7 +1408,7 @@ export function LanguageProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [language, setLanguage] = useState<Language | null>(null);
+  const [language, setLanguage] = useState<Language>("en");
 const [mounted, setMounted] = useState(false);
 
   // Leer idioma solo en cliente
@@ -1417,24 +1417,18 @@ const [mounted, setMounted] = useState(false);
 
   if (saved === "es" || saved === "en") {
     setLanguage(saved);
-  } else {
-    setLanguage("en"); // fallback real
   }
 
   setMounted(true);
 }, []);
 
-
   // Guardar cambios
   useEffect(() => {
-  if (!mounted || !language) return;
+  if (!mounted) return;
 
   localStorage.setItem("cakeprice-language", language);
 }, [language, mounted]);
 
-
-  // ⛔ No renderizar hasta montar
-  if (!mounted || !language) return null;
 
 
   const value: LanguageContextValue = {
