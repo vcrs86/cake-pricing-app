@@ -15,6 +15,7 @@ import {
   calculateTieredPricing,
   type TieredPricingResult,
 } from "@/lib/pricing";
+import { trackEvent } from "@/lib/analytics";
 import {
   buildIngredient,
   calculateRecipeCost,
@@ -79,6 +80,17 @@ const [mounted, setMounted] = useState(false);
 
 useEffect(() => {
   setMounted(true);
+}, []);
+
+useEffect(() => {
+  if (typeof window === "undefined") return;
+
+  // evita doble conteo en dev mode
+  if (sessionStorage.getItem("app_opened_tracked")) return;
+
+  sessionStorage.setItem("app_opened_tracked", "1");
+
+  trackEvent("app_opened");
 }, []);
 
   const [isTieredCake, setIsTieredCake] = useState(false);
@@ -1113,7 +1125,10 @@ const handleOpenPdfQuote = () => {
 <div className="flex w-full gap-2 overflow-hidden rounded-2xl bg-slate-100 p-2">
 
   <button
-    onClick={() => setActiveTab("calculator")}
+    onClick={() => {
+  setActiveTab("calculator");
+  trackEvent("tab_opened", { tab: "calculator", isPro });
+}}
     className={`flex-1 min-w-0 rounded-xl px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center truncate transition ${
       activeTab === "calculator"
         ? "bg-white shadow text-brand-slate"
@@ -1124,7 +1139,10 @@ const handleOpenPdfQuote = () => {
   </button>
 
   <button
-    onClick={() => setActiveTab("recipes")}
+    onClick={() => {
+  setActiveTab("recipes");
+  trackEvent("tab_opened", { tab: "recipes", isPro });
+}}
     className={`flex-1 min-w-0 rounded-xl px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center truncate transition ${
       activeTab === "recipes"
         ? "bg-white shadow text-brand-slate"
@@ -1135,7 +1153,10 @@ const handleOpenPdfQuote = () => {
   </button>
 
   <button
-    onClick={() => setActiveTab("client")}
+    onClick={() => {
+  setActiveTab("client");
+  trackEvent("tab_opened", { tab: "client", isPro });
+}}
     className={`flex-1 min-w-0 rounded-xl px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center truncate transition ${
       activeTab === "client"
         ? "bg-white shadow text-brand-slate"
@@ -1146,7 +1167,10 @@ const handleOpenPdfQuote = () => {
   </button>
 
   <button
-    onClick={() => setActiveTab("pro")}
+    onClick={() => {
+  setActiveTab("pro");
+  trackEvent("tab_opened", { tab: "pro", isPro });
+}}
     className={`flex-1 min-w-0 rounded-xl px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center truncate transition ${
       activeTab === "pro"
         ? "bg-white shadow text-brand-slate"
@@ -1157,7 +1181,10 @@ const handleOpenPdfQuote = () => {
   </button>
 
   <button
-    onClick={() => setActiveTab("help")}
+    onClick={() => {
+  setActiveTab("help");
+  trackEvent("tab_opened", { tab: "help", isPro });
+}}
     className={`flex-1 min-w-0 rounded-xl px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center truncate transition ${
       activeTab === "help"
         ? "bg-white shadow text-brand-slate"
@@ -1234,7 +1261,10 @@ const handleOpenPdfQuote = () => {
         onDeleteRecipe={handleDeleteRecipe}
         recipeSearchTerm={recipeSearchTerm}
         setRecipeSearchTerm={setRecipeSearchTerm}
-        onUpgrade={() => setActiveTab("pro")}
+        onUpgrade={() => {
+  trackEvent("upgrade_clicked", { source: "recipes_tab" });
+  setActiveTab("pro");
+}}
       />
 
     </div>
@@ -1252,10 +1282,13 @@ const handleOpenPdfQuote = () => {
 {!isPro ? (
   /* CASO 1: NO ES PRO */
   <ProLockedOverlay
-    title={copy.pro.features.tieredCake.title}
-    description={copy.pro.features.tieredCake.description}
-    onUpgrade={() => setActiveTab("pro")}
-  />
+  title={copy.pro.features.tieredCake.title}
+  description={copy.pro.features.tieredCake.description}
+  onUpgrade={() => {
+    trackEvent("upgrade_clicked", { source: "tiered_overlay" });
+    setActiveTab("pro");
+  }}
+/>
 
 ) : mode !== "advanced" ? (
 
@@ -1276,11 +1309,20 @@ const handleOpenPdfQuote = () => {
   <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-4">
     <label className="flex items-start gap-3 cursor-pointer">
       <input
-        type="checkbox"
-        checked={isTieredCake}
-        onChange={(e) => setIsTieredCake(e.target.checked)}
-        className="mt-1 h-4 w-4 rounded border-slate-300 text-brand-slate"
-      />
+  type="checkbox"
+  checked={isTieredCake}
+  onChange={(e) => {
+    const checked = e.target.checked;
+    setIsTieredCake(checked);
+
+    trackEvent("tiered_toggled", {
+      checked,
+      mode,
+      isPro,
+    });
+  }}
+  className="mt-1 h-4 w-4 rounded border-slate-300 text-brand-slate"
+/>
 
       <div className="text-sm">
         <p className="font-semibold text-brand-slate">
@@ -1362,8 +1404,16 @@ const handleOpenPdfQuote = () => {
               onChange={(field, value) =>
                 setValues((prev) => ({ ...prev, [field]: value }))
               }
-              onSubmit={() => setHasCalculated(true)}
-            />
+              onSubmit={() => {
+  setHasCalculated(true);
+  trackEvent("price_calculated", {
+    mode,
+    isPro,
+    currency,
+    isTieredCake,
+  });
+}}
+/>
           </div>
           <div className="lg:col-span-1 space-y-3">
             <ResultCard
@@ -1378,10 +1428,13 @@ const handleOpenPdfQuote = () => {
                 {/* Guardar presupuesto (PRO) o Lock (FREE) */}
                 {!isPro ? (
                   <ProLockedOverlay
-                    title={copy.pro.features.saveQuotes.title}
-                    description={copy.pro.features.saveQuotes.description}
-                    onUpgrade={() => setActiveTab("pro")}
-                  />
+  title={copy.pro.features.saveQuotes.title}
+  description={copy.pro.features.saveQuotes.description}
+  onUpgrade={() => {
+    trackEvent("upgrade_clicked", { source: "save_quotes_overlay" });
+    setActiveTab("pro");
+  }}
+/>
                 ) : (
                   <div className="mx-auto w-full max-w-sm rounded-xl border border-dashed border-brand-rose/30 bg-brand-rose/5 p-3 space-y-2">
                     <h3 className="text-xs font-semibold text-brand-slate uppercase tracking-wide">
@@ -1682,6 +1735,7 @@ const handleOpenPdfQuote = () => {
                 <button
   type="button"
   onClick={async () => {
+  trackEvent("unlock_pro_clicked", { location: "pro_tab", language });
   try {
     const res = await fetch("/api/checkout", {
       method: "POST",
