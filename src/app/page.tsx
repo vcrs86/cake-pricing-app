@@ -329,7 +329,15 @@ useEffect(() => {
   const [activeTab, setActiveTab] = useState<
   "calculator" | "recipes" | "client" | "pro" | "help"
 >("calculator");
+useEffect(() => {
+  if (typeof window === "undefined") return;
 
+  const params = new URLSearchParams(window.location.search);
+
+  if (params.get("tab") === "pro") {
+    setActiveTab("pro");
+  }
+}, []);
 
   const [businessName, setBusinessName] = useState("");
   const [businessLogo, setBusinessLogo] = useState<string | null>(null);
