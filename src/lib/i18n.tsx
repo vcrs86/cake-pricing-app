@@ -66,7 +66,7 @@ accordion: {
       highlightNote: "Calculado según costos, tiempo y margen.",
       rows: {
         ingredients: "Ingredientes",
-        decoration: "Decoración",
+        decoration: "Decoración, extras & mano de obra",
         laborOnly: "Mano de obra",
         extrasDelivery: "Extras y entrega",
         baseCost: "Costo base",
@@ -734,7 +734,7 @@ resultCard: {
       highlightNote: "Calculated from costs, labor and margin.",
       rows: {
         ingredients: "Ingredients",
-        decoration: "Decoration",
+        decoration: "Decoration, extras & labor",
         laborOnly: "Labor",
         extrasDelivery: "Extras & delivery",
         baseCost: "Base cost",
