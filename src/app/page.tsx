@@ -664,28 +664,34 @@ useEffect(() => {
     () => calculatePricing(basePricingInputs),
     [basePricingInputs],
   );
+const tierBaseServings = useMemo(() => {
+  if (!isTieredCake) return selectedSize.servings;
 
-  const tieredPricing = useMemo<TieredPricingResult | null>(() => {
-    if (!isTieredCake) return null;
-    const tiers = levels.map((level) => ({
-      size: formatTierSize(level),
-      servings: Number(level.servings) || 0,
-    }));
+  const firstLevelServings = Number(levels[0]?.servings) || 0;
+  return firstLevelServings > 0 ? firstLevelServings : selectedSize.servings;
+}, [isTieredCake, levels, selectedSize.servings]);
 
-    return calculateTieredPricing({
-      baseInputs: basePricingInputs,
-      tiers,
-      baseServings: selectedSize.servings,
-      deliveryFee: deliveryFeeValue,
-    });
-  }, [
-    isTieredCake,
-    levels,
-    basePricingInputs,
-    selectedSize.servings,
-    deliveryFeeValue,
-    cakeLevelsCopy,
-  ]);
+ const tieredPricing = useMemo<TieredPricingResult | null>(() => {
+  if (!isTieredCake) return null;
+
+  const tiers = levels.map((level) => ({
+    size: formatTierSize(level),
+    servings: Number(level.servings) || 0,
+  }));
+
+  return calculateTieredPricing({
+    baseInputs: basePricingInputs,
+    tiers,
+    baseServings: tierBaseServings,
+    deliveryFee: deliveryFeeValue,
+  });
+}, [
+  isTieredCake,
+  levels,
+  basePricingInputs,
+  tierBaseServings,
+  deliveryFeeValue,
+]);
 
   const totalTierServings = useMemo(
     () => levels.reduce((sum, level) => sum + (Number(level.servings) || 0), 0),

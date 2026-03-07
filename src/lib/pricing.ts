@@ -16,7 +16,11 @@ export const CAKE_SIZES: CakeSize[] = [
   { id: "half-sheet", label: "Half sheet (50 servings)", servings: 50 },
 ];
 
-export type ComplexityLevel = "basic" | "intermediate" | "advanced" | "very_complex";
+export type ComplexityLevel =
+  | "basic"
+  | "intermediate"
+  | "advanced"
+  | "very_complex";
 
 export const COMPLEXITY_MULTIPLIER: Record<ComplexityLevel, number> = {
   basic: 1,
@@ -54,6 +58,7 @@ export type PricingBreakdown = {
   recommendedPrice: number;
   pricePerServing?: number;
 };
+
 export type TieredPricingTier = {
   size: string;
   servings: number;
@@ -71,26 +76,40 @@ export type TieredPricingResult = {
 const toCurrency = (value: number) => Math.round(value * 100) / 100;
 
 export function calculatePricing(inputs: PricingInputs): PricingBreakdown {
-  const recipeCost = inputs.recipe && inputs.ingredientCatalog
-    ? calculateRecipeCost(inputs.ingredientCatalog, inputs.recipe).total
-    : 0;
+  const recipeCost =
+    inputs.recipe && inputs.ingredientCatalog
+      ? calculateRecipeCost(inputs.ingredientCatalog, inputs.recipe).total
+      : 0;
 
-  const ingredientCost = toCurrency(Math.max(inputs.ingredientsCost, 0) + recipeCost);
+  const ingredientCost = toCurrency(
+    Math.max(inputs.ingredientsCost, 0) + recipeCost
+  );
+
   const extrasCost = Math.max(inputs.decorationExtras, 0);
+
   const laborCost =
     Math.max(inputs.hoursWorked, 0) * Math.max(inputs.hourlyRate, 0) +
     Math.max(inputs.setupHours, 0) * Math.max(inputs.setupRate, 0);
 
-  const decorationAndLabor = Math.max(inputs.decorationCost, 0) + extrasCost + laborCost;
-  const complexityMultiplier = COMPLEXITY_MULTIPLIER[inputs.decorationComplexity] ?? 1;
+  const decorationAndLabor =
+    Math.max(inputs.decorationCost, 0) + extrasCost + laborCost;
+
+  const complexityMultiplier =
+    COMPLEXITY_MULTIPLIER[inputs.decorationComplexity] ?? 1;
+
   const adjustedDecorAndLabor = decorationAndLabor * complexityMultiplier;
 
-  const baseCost = ingredientCost + adjustedDecorAndLabor + Math.max(inputs.deliveryFee, 0);
+  const baseCost =
+    ingredientCost +
+    adjustedDecorAndLabor +
+    Math.max(inputs.deliveryFee, 0);
+
   const profitAmount = baseCost * (Math.max(inputs.profitMargin, 0) / 100);
   const suggestedMinimum = baseCost + profitAmount;
 
   const contingency = baseCost * 0.07;
   const recommendedPrice = suggestedMinimum + contingency;
+
   const pricePerServing = inputs.servings
     ? recommendedPrice / Math.max(inputs.servings, 1)
     : undefined;
@@ -121,77 +140,113 @@ export function calculateTieredPricing({
   baseServings: number;
   deliveryFee: number;
 }): TieredPricingResult {
-  const safeBaseServings = Math.max(baseServings, 0);
+  const safeBaseServings = Math.max(baseServings, 1);
+  const complexityMultiplier =
+    COMPLEXITY_MULTIPLIER[baseInputs.decorationComplexity] ?? 1;
 
   const tierResults = tiers.map((tier) => {
     const safeServings = Math.max(tier.servings, 0);
-    const factor = safeBaseServings > 0 ? safeServings / safeBaseServings : 0;
+    const factor = safeServings / safeBaseServings;
 
-    const scaledPricing = calculatePricing({
-      ...baseInputs,
-      ingredientsCost: baseInputs.ingredientsCost * factor,
-      decorationCost: baseInputs.decorationCost * factor,
-      decorationExtras: baseInputs.decorationExtras * factor,
-      hoursWorked: baseInputs.hoursWorked * factor,
-      setupHours: baseInputs.setupHours * factor,
-      deliveryFee: 0,
-      servings: safeServings || undefined,
-    });
+    const recipeCost =
+      baseInputs.recipe && baseInputs.ingredientCatalog
+        ? calculateRecipeCost(
+            baseInputs.ingredientCatalog,
+            baseInputs.recipe
+          ).total * factor
+        : 0;
+
+    const ingredientsCost = toCurrency(
+      Math.max(baseInputs.ingredientsCost, 0) * factor + recipeCost
+    );
+
+    const baseCost = toCurrency(ingredientsCost);
 
     return {
       size: tier.size,
       servings: safeServings,
       factor,
-      cost: scaledPricing.recommendedPrice,
-      pricing: scaledPricing,
+      cost: baseCost,
+      pricing: {
+        ingredientsCost,
+        decorationAndLabor: 0,
+        laborCost: 0,
+        complexityMultiplier: 1,
+        extrasCost: 0,
+        deliveryFee: 0,
+        baseCost,
+        profitAmount: 0,
+        suggestedMinimum: baseCost,
+        recommendedPrice: baseCost,
+        pricePerServing:
+          safeServings > 0 ? toCurrency(baseCost / safeServings) : undefined,
+      },
     };
   });
 
-  const combinedPricing = tierResults.reduce<PricingBreakdown>(
-    (acc, tier) => ({
-      ingredientsCost: acc.ingredientsCost + tier.pricing.ingredientsCost,
-      decorationAndLabor: acc.decorationAndLabor + tier.pricing.decorationAndLabor,
-      laborCost: acc.laborCost + tier.pricing.laborCost,
-      complexityMultiplier: acc.complexityMultiplier,
-      extrasCost: acc.extrasCost + tier.pricing.extrasCost,
-      deliveryFee: 0,
-      baseCost: acc.baseCost + tier.pricing.baseCost,
-      profitAmount: acc.profitAmount + tier.pricing.profitAmount,
-      suggestedMinimum: acc.suggestedMinimum + tier.pricing.suggestedMinimum,
-      recommendedPrice: acc.recommendedPrice + tier.pricing.recommendedPrice,
-      pricePerServing: undefined,
-    }),
-    {
-      ingredientsCost: 0,
-      decorationAndLabor: 0,
-      laborCost: 0,
-      complexityMultiplier:
-        COMPLEXITY_MULTIPLIER[baseInputs.decorationComplexity] ?? 1,
-      extrasCost: 0,
-      deliveryFee: 0,
-      baseCost: 0,
-      profitAmount: 0,
-      suggestedMinimum: 0,
-      recommendedPrice: 0,
-      pricePerServing: undefined,
-    }
+  const ingredientsTotal = toCurrency(
+    tierResults.reduce((sum, tier) => sum + tier.pricing.ingredientsCost, 0)
   );
 
-  const totalCost = toCurrency(combinedPricing.baseCost + Math.max(deliveryFee, 0));
-  const totalPrice = toCurrency(combinedPricing.recommendedPrice + Math.max(deliveryFee, 0));
+  const laborCost = toCurrency(
+    Math.max(baseInputs.hoursWorked, 0) * Math.max(baseInputs.hourlyRate, 0)
+  );
+
+  const setupCost = toCurrency(
+    Math.max(baseInputs.setupHours, 0) * Math.max(baseInputs.setupRate, 0)
+  );
+
+  const extrasCost = toCurrency(Math.max(baseInputs.decorationExtras, 0));
+  const decorationCost = toCurrency(Math.max(baseInputs.decorationCost, 0));
+
+  const decorationAndLaborRaw =
+    decorationCost + extrasCost + laborCost + setupCost;
+
+  const decorationAndLabor = toCurrency(
+    decorationAndLaborRaw * complexityMultiplier
+  );
+
+  const deliveryCost = toCurrency(Math.max(deliveryFee, 0));
+
+  const baseCost = toCurrency(
+    ingredientsTotal + decorationAndLabor + deliveryCost
+  );
+
+  const profitAmount = toCurrency(
+    baseCost * (Math.max(baseInputs.profitMargin, 0) / 100)
+  );
+
+  const suggestedMinimum = toCurrency(baseCost + profitAmount);
+
+  const contingency = toCurrency(baseCost * 0.07);
+
+  const recommendedPrice = toCurrency(suggestedMinimum + contingency);
+
+  const totalServings = tierResults.reduce(
+    (sum, tier) => sum + tier.servings,
+    0
+  );
 
   return {
-    tiers: tierResults.map(({ pricing, ...tier }) => tier),
-    totalCost,
-    totalPrice,
+    tiers: tierResults.map(({ pricing, ...tier }) => ({
+      ...tier,
+      cost: pricing.baseCost,
+    })),
+    totalCost: baseCost,
+    totalPrice: recommendedPrice,
     combinedPricing: {
-      ...combinedPricing,
-      deliveryFee: toCurrency(Math.max(deliveryFee, 0)),
-      baseCost: toCurrency(combinedPricing.baseCost + Math.max(deliveryFee, 0)),
-      suggestedMinimum: toCurrency(
-        combinedPricing.suggestedMinimum + Math.max(deliveryFee, 0)
-      ),
-      recommendedPrice: totalPrice,
+      ingredientsCost: ingredientsTotal,
+      decorationAndLabor,
+      laborCost: toCurrency(laborCost + setupCost),
+      complexityMultiplier,
+      extrasCost,
+      deliveryFee: deliveryCost,
+      baseCost,
+      profitAmount,
+      suggestedMinimum,
+      recommendedPrice,
+      pricePerServing:
+        totalServings > 0 ? toCurrency(recommendedPrice / totalServings) : undefined,
     },
   };
 }
