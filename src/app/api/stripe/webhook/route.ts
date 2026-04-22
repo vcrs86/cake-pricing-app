@@ -26,6 +26,10 @@ export async function POST(req: Request) {
   // ✅ Cuando el pago se completa
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
+    if (session.metadata?.app !== "cakeprice") {
+  console.log("Ignoring non-CakePrice session:", session.id, session.metadata);
+  return new Response("Ignored non-CakePrice session", { status: 200 });
+}
 
     console.log("✅ WEBHOOK TRIGGERED");
     console.log("EMAIL RAW:", session.customer_email);

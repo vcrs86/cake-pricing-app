@@ -22,6 +22,7 @@ export async function POST(req: Request) {
 ],
 
       metadata: {
+        app: "cakeprice",
   language: language || "en",
 },
 
